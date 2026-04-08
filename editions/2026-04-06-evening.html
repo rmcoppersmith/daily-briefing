@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Monday, April 6, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Monday, April 6, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- TICKER BAR -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- ==================== AI & TECHNOLOGY ==================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Afternoon developments in AI and tech</span>
+  </div>
+
+  <!-- Lead: Claude Code Leak -->
+  <article class="lead-story">
+    <h2><a href="https://venturebeat.com/technology/claude-codes-source-code-appears-to-have-leaked-heres-what-we-know" target="_blank">Anthropic's Leaked Source Code Reveals Internal Secrets: Autonomous Daemon Mode, Model Codenames, and 44 Hidden Feature Flags</a></h2>
+    <p class="story-summary">Anthropic accidentally shipped 512,000 lines of Claude Code's internal source code to the public npm registry via a misconfigured debug file on March 31, and analysts have been mining it ever since. The leak exposes KAIROS — an autonomous daemon mode that lets Claude Code operate as an always-on background agent — along with internal model codenames (Capybara for a Claude 4.6 variant, Fennec for Opus 4.6, unreleased Numbat), and 44 hidden feature flags. Tech Brew flagged the story today under the headline "Amodei's secret notes."</p>
+    <div class="story-expanded" id="story-1">
+      <p>The leak stemmed from a packaging error: a 59.8 MB JavaScript source map file (.map), intended for internal debugging, was inadvertently included in version 2.1.88 of the @anthropic-ai/claude-code npm package. Within hours of being spotted at 4:23 AM ET on March 31, the codebase was mirrored across GitHub and dissected by thousands of developers. Anthropic stated that "no sensitive customer data or credentials were involved" and called it "a release packaging issue caused by human error." But the technical community had already catalogued significant internal details: KAIROS appears over 150 times in the source, suggesting a major product shift toward persistent background agent behavior. The leak also revealed that Claude tracks user language style, scoring "negative" language patterns — a detail flagged by Futurism as evidence of behavioral profiling.</p>
+      <p>Separately, Anthropic's shareholders are now alarmed. Following Dario Amodei's leaked internal memo (which called OpenAI's Pentagon deal "80% safety theater" and accused Altman of giving Trump "dictator-style praise"), investors are privately questioning whether Amodei is suited to steer the $380B company through its current turbulence. Anthropic sued the Pentagon in March and secured a preliminary injunction on March 26; the case continues. The compound of the code leak, shareholder unease, and the Pentagon dispute creates unusual pressure even as Anthropic raises at a 50% valuation premium to its last round.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Tech Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://venturebeat.com/technology/claude-codes-source-code-appears-to-have-leaked-heres-what-we-know" target="_blank">venturebeat.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <!-- Microsoft MAI Models -->
+    <article class="story-card">
+      <h3><a href="https://microsoft.ai/news/today-were-announcing-3-new-world-class-mai-models-available-in-foundry/" target="_blank">Microsoft Steps Out of OpenAI's Shadow with Three New MAI Models</a></h3>
+      <p class="story-summary">Microsoft launched MAI-Transcribe-1, MAI-Voice-1, and MAI-Image-2 on Microsoft Foundry — its most direct challenge yet to OpenAI's model dominance. MAI-Transcribe-1 tops speech-to-text benchmarks across 25 languages and runs 2.5x faster than Azure's existing offering, beating OpenAI Whisper and Google Gemini. MAI-Voice-1 clones a custom voice from seconds of audio, generating 60 seconds of speech in under one second. MAI-Image-2 debuted at #3 on Arena.ai's image leaderboard, generating images twice as fast as competitors.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The MAI models are already live in Microsoft's own products — Copilot, Bing, PowerPoint, and Azure Speech — meaning this is a production release with immediate commercial impact, not a preview. The announcement is widely read as Microsoft signaling independence from its OpenAI partnership: rather than reselling OpenAI models, Microsoft is now building and shipping its own at competitive benchmarks. Satya Nadella shared the models directly on X. OpenAI capitalized on Anthropic's same-day third-party restriction by pointing out that ChatGPT Plus still supports OpenClaw, OpenCode, and Cline — but the broader narrative is shifting toward enterprises running multi-model stacks rather than single-vendor dependency.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://microsoft.ai/news/today-were-announcing-3-new-world-class-mai-models-available-in-foundry/" target="_blank">microsoft.ai &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Sam Altman Superintelligence New Deal -->
+    <article class="story-card">
+      <h3><a href="https://www.axios.com/2026/04/06/behind-the-curtain-sams-superintelligence-new-deal" target="_blank">Sam Altman Proposes a "Superintelligence New Deal" — AI Tax, Public Wealth Fund, and Auto-Triggering Safety Net</a></h3>
+      <p class="story-summary">OpenAI released a white paper calling for a sweeping new social contract around AI, on the scale of the Progressive Era and the New Deal. It floats taxes on automated labor, shifting the tax base from payroll to capital gains and corporate income, and a nationally managed wealth fund — seeded by AI companies — that gives every American a direct stake in AI-driven economic growth. Auto-triggering safety net mechanisms would kick in when AI displacement metrics hit preset thresholds. Altman told Axios superintelligence is close enough to require action now.</p>
+      <div class="story-expanded" id="story-3">
+        <p>The white paper's three stated aims: share prosperity broadly, mitigate risks, and democratize access and agency. The auto-trigger mechanism is one of the novel policy ideas: when AI displacement metrics hit preset thresholds, support measures (unemployment benefits, wage insurance, cash assistance) kick in automatically and phase out when conditions stabilize — removing the response from partisan gridlock. The proposal's timing is notable: it comes the same week OpenAI's CFO has privately raised concerns about Altman's spending pace and his push to IPO this year, and the same week a leaked cap table showed early OpenAI investors sitting on 43X returns. Critics note the social safety net framing may also be designed to deflect political pressure over AI-driven labor displacement.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.axios.com/2026/04/06/behind-the-curtain-sams-superintelligence-new-deal" target="_blank">axios.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Forward-Deployed Engineers -->
+    <article class="story-card">
+      <h3><a href="https://www.wsj.com/cio-journal/the-hottest-job-in-tech-isnt-very-glamorous-dc29ab3e" target="_blank">Tech's Fastest-Growing Role Has a Trust Problem: Forward-Deployed Engineers Aren't Biting</a></h3>
+      <p class="story-summary">Job postings for "forward-deployed engineer" — a role that embeds technical staff directly with enterprise customers to get AI working in production — have spiked 10x over the past year, with companies like Salesforce building out entire FDE teams. Only 10% of engineers express interest, per WSJ reporting. Many see it as high-stress consulting with zero coding and too much client management. One developer quit after four weeks, citing "no engineering substance."</p>
+      <div class="story-expanded" id="story-4">
+        <p>The role barely existed outside Palantir until 2025. Now it's everywhere — and the title overpromises in most cases. FDEs at OpenAI or Ramp actually build core products; elsewhere it amounts to sales support that requires writing code for legacy systems in messy enterprise environments. Engineers typically spot the gap during the interview or shortly after starting. The underlying tension: enterprise AI needs far more human hand-holding than vendor demos suggest. Bridging the gap between a controlled proof-of-concept and production is genuinely difficult, and the skills are scarce. Until these roles offer real engineering substance and a credible career path, the talent gap will widen even as demand grows.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.wsj.com/cio-journal/the-hottest-job-in-tech-isnt-very-glamorous-dc29ab3e" target="_blank">wsj.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Anything text-to-app -->
+    <article class="story-card">
+      <h3><a href="https://x.com/anything/status/2039804472281477597" target="_blank">"Anything" Launches Text-to-App over iMessage After Apple Removes It from the App Store</a></h3>
+      <p class="story-summary">Vibe-coding platform Anything launched "text-to-app" — build apps by texting back and forth over iMessage — as a forced pivot after Apple delisted its native app. The launch generated 4M+ views. Users describe building working app prototypes through a conversational back-and-forth over text, without touching any IDE or code editor.</p>
+      <div class="story-expanded" id="story-5">
+        <p>The Apple delisting pushed Anything off its primary distribution channel, and the iMessage pivot is a clever workaround that uses Apple's own messaging infrastructure to reach users without an App Store listing. The 4M+ viral view count suggests strong demand for zero-friction app building that bypasses the standard developer toolchain entirely. The story is part of a broader pattern: as AI app builders proliferate, Apple's app review process is becoming a chokepoint that drives developers to find alternative access mechanisms — using SMS, web apps, or messaging integrations to maintain user reach outside the App Store ecosystem.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/anything/status/2039804472281477597" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- OpenAI IPO Tension -->
+    <article class="story-card">
+      <h3><a href="https://x.com/anissagardizy8/status/2040894109817393240" target="_blank">OpenAI's CFO Is Privately Raising Concerns Over Altman's Spending Pace and IPO Push</a></h3>
+      <p class="story-summary">OpenAI's chief financial officer has privately raised concerns about Sam Altman's aggressive capital deployment and his campaign to take the company public this year, according to reporting from The Code newsletter today. The tension adds internal friction to an already complex picture: Altman is simultaneously proposing a public "New Deal" for AI while managing growing internal skepticism about financial discipline.</p>
+      <div class="story-expanded" id="story-6">
+        <p>The CFO's concerns reportedly center on infrastructure spending pace and the feasibility of an IPO timeline against current cash burn and competitive pressures. The context is stark: sellers attempted to offload $600M in OpenAI shares on secondary markets last week and found no buyers, while Anthropic simultaneously attracted $1.6B in demand at a 50% premium valuation. An IPO under these conditions would require a credible profitability path. The disclosure adds to a pattern of senior OpenAI executive departures in recent weeks: Fidji Simo (medical leave), Brad Lightcap (moved to special projects), and CMO Kate Rouch (stepping down). Internal CFO concern is a different category of friction — more structural and less easily explained.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/anissagardizy8/status/2040894109817393240" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Karpathy personal knowledge engines -->
+    <article class="story-card">
+      <h3><a href="https://x.com/karpathy/status/2040572272944324650" target="_blank">Karpathy: Skip the Code, Share the Concept — LLMs as Personal Knowledge Engines</a></h3>
+      <p class="story-summary">Andrej Karpathy shared a new framework for building and sharing knowledge: instead of shipping code, describe the concept and let an AI agent build it for you. His first working example uses LLMs to generate interconnected Markdown knowledge bases stored locally, viewable in Obsidian — no cloud, no subscription, any AI provider. Builders like Farza Majeed are already creating personal wikis from thousands of diary entries. The setup attracted 1M views.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Karpathy's 7-step setup: local folders, text files, and a schema — no proprietary SaaS tool, no vendor lock-in. The philosophy is that the knowledge base is the program and the model is the interpreter — inverting the typical "AI app" model where user data lives on a vendor's servers. This connects to Karpathy's broader "software 2.0" thesis and is getting traction among developers who want AI capabilities without the dependency risk. The approach also creates portability: the same Markdown knowledge base works with any AI provider, meaning you're not locked to a specific model or platform as the technology evolves.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/karpathy/status/2040572272944324650" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in AI... -->
+  <ul class="bullet-stories">
+    <li><strong>OpenAI GPT-Image-2 Appears to Have Leaked</strong> — Early viewers say the next OpenAI image model looks even better than GPT-Image-1. 1M+ views on the initial thread. <a href="https://x.com/levelsio/status/2040333489476681758" target="_blank">X &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>Claude Now Connects Directly to Microsoft Outlook, OneDrive, and More</strong> — New Microsoft tool integrations expand Claude's enterprise utility significantly for Microsoft 365 users. 3.9M views. <a href="https://x.com/claudeai/status/2040086268562842097" target="_blank">X &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>AI Agent Traps — Google Maps 6 Attack Types Targeting Autonomous Agents</strong> — As AI agents browse the web, they're encountering hidden malicious content built to trick or exploit them. Google researchers catalogued six distinct attack patterns. <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6372438" target="_blank">SSRN &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Auto Apply: Open-Source Agent Scans Career Pages and Submits Applications</strong> — Scans company career pages, rewrites your CV for each role, and fills out applications automatically. One developer used it for 700+ submissions and landed a job (1.8M views). <a href="https://x.com/Hesamation/status/2040820834428658008" target="_blank">X &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>15 Ways Vibe-Coded Apps Fail in Production</strong> — A widely shared thread covers the most common failure points when AI-generated code hits the real world: missing error handling, auth gaps, database schema issues, and more. <a href="https://x.com/hartdrawss/status/2040723680246833544" target="_blank">X &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Supply Chain Attack Compromises Axios npm Package</strong> — Attackers slipped a trojan into the most popular HTTP client library in the npm ecosystem. The maintainer posted a detailed postmortem on how the package was compromised (1.5M views). <a href="https://x.com/flaviocopes/status/2039973060158095827" target="_blank">X &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Turn Figma Designs into Code with Codex</strong> — A workflow uses Codex's Figma and Playwright skills to pull design context from Figma's MCP server, generate components matching your repo's patterns, then visually validate against the original design automatically. Nothing to install. <a href="https://developers.openai.com/codex/use-cases/figma-designs-to-code" target="_blank">OpenAI Developers &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Ship iOS Apps Without Xcode</strong> — A Codex command-line workflow builds and submits iOS apps entirely from the terminal. One developer completed a full submission in under 7 minutes. <a href="https://x.com/PaulSolt/status/2040132557983936772" target="_blank">X &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Stanford CS153 First Lecture — Free</strong> — Stanford publicly released the full first lecture of its new AI systems course. <a href="https://x.com/AnjneyMidha/status/2040294388098814412" target="_blank">X &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Agent Skills Repo — Production-Grade AI Coding Agent Patterns</strong> — Google Cloud AI Director Addy Osmani released a repo of packaged workflows and quality gates forcing coding agents to follow senior engineering standards throughout the development cycle. <a href="https://github.com/addyosmani/agent-skills" target="_blank">GitHub &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Spec-Driven Development with AI Agents — Full Tutorial</strong> — A video walkthrough covers how to write clear specs, set strict constraints, and break down complex features into manageable agent tasks for more predictable AI-generated code. <a href="https://www.youtube.com/watch?v=RhaF4LVAVng" target="_blank">YouTube &rarr;</a> <span class="source-badge">The Code</span></li>
+  </ul>
+
+
+  <!-- ==================== BUSINESS & MARKETS ==================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Afternoon moves in tech business and policy</span>
+  </div>
+
+  <!-- Lead: China Bitchat -->
+  <article class="lead-story">
+    <h2><a href="https://www.coindesk.com/tech/2026/04/06/china-orders-apple-to-pull-dorsey-s-bitchat-the-messaging-app-used-during-iran-protests" target="_blank">China Orders Apple to Remove Jack Dorsey's Bitchat — The Mesh-Network App Used During Iran Protests</a></h2>
+    <p class="story-summary">China's Cyberspace Administration (CAC) ordered Apple to remove Bitchat from its China App Store, citing violations of rules for services with "social mobilization capabilities." The Bluetooth-based mesh networking app — which works without internet access and has been widely used by protesters during the US-Iran conflict — has 3M+ total downloads, with 92,000+ in the past week alone. The removal is effective February 28. This is the second time China has targeted a Jack Dorsey-backed decentralized app; Damus was banned in 2023.</p>
+    <div class="story-expanded" id="story-8">
+      <p>Bitchat's architecture is the reason China moved against it: the app uses Bluetooth and mesh networking to enable encrypted peer-to-peer communication without any internet infrastructure, making it effectively immune to the Great Firewall and conventional censorship mechanisms. Its documented use during the Iran protests — where internet disruptions have been frequent — gave Beijing direct visibility into its disruptive potential. Apple complied with the CAC removal demand, effective February 28, though the app remains available everywhere else globally. The removal echoes Apple's long-running pattern of compliance with Chinese regulatory demands that critics call incompatible with the company's stated privacy principles. Block CEO Jack Dorsey has not publicly commented on the removal.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Techpresso</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.coindesk.com/tech/2026/04/06/china-orders-apple-to-pull-dorsey-s-bitchat-the-messaging-app-used-during-iran-protests" target="_blank">coindesk.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <!-- LinkedIn BrowserGate -->
+    <article class="story-card">
+      <h3><a href="https://www.bleepingcomputer.com/news/security/linkedin-secretly-scans-for-6-000-plus-chrome-extensions-collects-data/" target="_blank">LinkedIn "BrowserGate": Secret Script Scans 6,167 Chrome Extensions and Fingerprints Your Device</a></h3>
+      <p class="story-summary">A security investigation found that LinkedIn injects a 2.7 MB JavaScript bundle that silently scans every visitor's browser for 6,167 specific Chrome extensions, assembles a hardware fingerprint, and transmits the result to LinkedIn's servers — none of which is disclosed in the privacy policy. The tracked list includes job search tools, political orientation markers, disability indicators, and 200+ direct competitor products (Apollo, ZoomInfo, Hunter.io). The list grew 1,252% since 2024.</p>
+      <div class="story-expanded" id="story-9">
+        <p>LinkedIn started scanning for 38 extensions in 2017, expanded to 461 by 2024, and reached 6,167 by February 2026 — a pattern of systematic expansion rather than targeted anti-scraping measures. The tracking includes 509 job search tools and markers for religious beliefs, political orientation, and neurodivergent status — categories that would raise significant GDPR concerns if used for inference. LinkedIn's stated defense: it looks for extensions that "scrape data without members' consent" and doesn't use data to "infer sensitive information." Critics note the denial leaves open what the data is actually used for. The investigation comes as parent company Microsoft aggressively expands its AI capabilities, with LinkedIn's professional identity dataset forming a significant part of that data infrastructure.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.bleepingcomputer.com/news/security/linkedin-secretly-scans-for-6-000-plus-chrome-extensions-collects-data/" target="_blank">bleepingcomputer.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- OpenAI investor 43X -->
+    <article class="story-card">
+      <h3><a href="https://x.com/Doomerzoomer/status/2040131671077585239/photo/1" target="_blank">Movie-Star-Turned-Investor Is Up 43X on OpenAI Stake, Per Leaked Cap Table</a></h3>
+      <p class="story-summary">A leaked OpenAI cap table circulating online shows a prominent movie-star investor sitting on a 43X return on their OpenAI stake — generating 1.8M views and renewed discussion about the concentration of AI wealth gains. The disclosure lands the same week OpenAI secondary sellers couldn't find buyers for $600M in shares, while Anthropic simultaneously attracted $1.6B in new demand at a 50% premium valuation.</p>
+      <div class="story-expanded" id="story-10">
+        <p>The cap table is unverified but widely circulated and not publicly disputed. The contrast it creates is pointed: early, well-connected OpenAI investors are sitting on enormous gains at a moment when the secondary market has cooled and the CFO is raising internal alarms about spending. The 43X return implies an entry price far below the current implied valuation — reflecting the explosive multiple expansion from early-stage to now. The irony noted by commentators: the same week Altman proposes a public wealth fund so all Americans can participate in AI gains, a leaked document shows those gains are highly concentrated among a handful of early insiders.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/Doomerzoomer/status/2040131671077585239/photo/1" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+
+  <!-- ==================== SCIENCE ==================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-science">Science</span>
+    <span class="section-name">Breaking: humans at the farthest distance from Earth in 56 years</span>
+  </div>
+
+  <!-- Lead: Artemis II -->
+  <article class="lead-story">
+    <h2><a href="https://www.nasa.gov/blogs/missions/2026/04/06/artemis-ii-flight-day-6-crew-ready-for-lunar-flyby/" target="_blank">Artemis II Is Flying Around the Moon Right Now — Crew Breaks 56-Year Distance Record</a></h2>
+    <p class="story-summary">Today — Flight Day 6 of the Artemis II mission — four astronauts (Reid Wiseman, Victor Glover, Christina Koch, Jeremy Hansen) are executing the first crewed lunar flyby since Apollo 17 in 1972. At 1:57 PM ET today, the crew broke the record for the farthest distance any human has traveled from Earth, surpassing Apollo 13's mark from April 1970. Maximum distance of 252,760 miles occurs at 7:07 PM ET. The lunar flyby window runs 2:45–9:40 PM ET. Tech Brew flagged the mission in today's afternoon edition.</p>
+    <div class="story-expanded" id="story-11">
+      <p>Orion entered the lunar sphere of influence at 12:37 AM EDT today, at the end of Flight Day 5. The ten-day mission launched from Kennedy Space Center on April 1, with the crew spending the transit period conducting suit demonstrations, deep-space systems operations, and preparing for the flyby. The spacecraft swings around the far side of the Moon before beginning the return journey to Earth, with splashdown expected in approximately 4 days. NASA is broadcasting the flyby live on NASA+. This is not a landing mission — Artemis III carries that mandate — but it marks the first time humans have been in the vicinity of the Moon in over 50 years, the farthest any person has traveled from Earth since the Apollo era, and a critical validation mission for Orion's systems ahead of lunar landing.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Tech Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.nasa.gov/blogs/missions/2026/04/06/artemis-ii-flight-day-6-crew-ready-for-lunar-flyby/" target="_blank">nasa.gov &rarr;</a></span>
+    </div>
+  </article>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Tech Brew</span>
+      <span>The Code</span>
+      <span>Techpresso</span>
+      <span>Superhuman</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Monday, April 6, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
