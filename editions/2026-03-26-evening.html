@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Thursday, March 26, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Thursday, March 26, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,591.90</span><span class="ticker-change ticker-up">+0.54%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,929.83</span><span class="ticker-change ticker-up">+0.77%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,429.49</span><span class="ticker-change ticker-up">+0.66%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$70,940</span><span class="ticker-change ticker-up">+1.30%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://arcprize.org/arc-agi/3" target="_blank">ARC-AGI-3 Resets Frontier AI Scoreboard — Every Model Scores Under 1%</a></h2>
+  <p class="story-summary">The ARC Prize Foundation released ARC-AGI-3, a new interactive reasoning benchmark where AI agents must explore unfamiliar environments and solve puzzles with zero instructions. Human testers solved 100% of tasks on the first try, while every frontier model scored under 1% — Gemini Pro led at just 0.37%, followed by GPT 5.4 High (0.26%), Claude Opus 4.6 (0.25%), and Grok 4.20 (0%).</p>
+  <div class="story-expanded" id="story-1">
+    <p>A $2M prize competition is live on Kaggle. Labs had previously pushed ARC-AGI-2 scores from 3% to around 50% in under a year by spending millions training on earlier versions. ARC founder François Chollet argues that today's models only perform well when humans build elaborate scaffolding — specific prompts, custom harnesses, and thinking tricks — meaning the scaffolding is the human intelligence, and the model is just executing it. Critics counter that the scoring methodology, which uses a squared efficiency penalty, was designed to produce low scores. The benchmark tests 135 novel environments with roughly 1,000 levels.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://arcprize.org/arc-agi/3" target="_blank">arcprize.org &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.theneurondaily.com/p/play-the-puzzle-that-broke-every-ai-model" target="_blank">OpenAI Shuts Down Sora, Blindsides Disney</a></h3>
+  <p class="story-summary">OpenAI has killed its Sora video generation product, reportedly blindsiding Disney — which found out just 30 minutes after a joint meeting. The shutdown marks a significant retreat from one of OpenAI's highest-profile consumer AI products.</p>
+  <div class="story-expanded" id="story-2">
+    <p>The abrupt shutdown suggests OpenAI is consolidating resources around its core products and next-generation models. The manner of the Disney notification has raised questions about OpenAI's enterprise partnership management.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.theneurondaily.com/p/play-the-puzzle-that-broke-every-ai-model" target="_blank">theneurondaily.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/" target="_blank">Google's TurboQuant Shrinks AI Memory 6x With Zero Accuracy Loss</a></h3>
+  <p class="story-summary">Google Research introduced TurboQuant, an algorithm that compresses AI model memory over 6x without retraining — while delivering up to 8x speed gains on Nvidia H100 chips and losing almost zero accuracy. The paper will be presented at ICLR 2026 in April.</p>
+  <div class="story-expanded" id="story-3">
+    <p>Despite being first published in April 2025, the official release rattled memory stocks, with shares of Micron, Western Digital, and SanDisk dropping 3-5%. TurboQuant also topped rival methods in vector search — the tech search engines use to match similar results. One compression paper won't crater memory demand overnight, but the selloff shows Wall Street is pricing in a world where smarter software cuts into the premium AI memory commands.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/" target="_blank">research.google &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://claude.com/blog/auto-mode" target="_blank">Claude Code Adds "Auto Mode" for Autonomous Agent Actions</a></h3>
+  <p class="story-summary">Anthropic launched "auto mode" as a research preview for Claude Code, letting the agent decide which actions are safe to run on its own and which need user approval — eliminating the "babysit every step or let it run wild" tradeoff for developers. Free for existing Claude Code users.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The feature represents a step toward more autonomous coding agents that can self-regulate their permission needs. Separately, Anthropic published research finding no material job displacement from AI yet, but a growing skills gap where power users who provide better context are pulling dramatically ahead of everyone else.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://claude.com/blog/auto-mode" target="_blank">claude.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.reddit.com/user/spez/comments/1s3ezrc/humans_welcome_bots_must_wear_name_tags/" target="_blank">Reddit Unveils Plan to Label AI Bots Across the Platform</a></h3>
+  <p class="story-summary">Reddit CEO Steve Huffman outlined a plan to separate humans from bots, including labeling automated accounts with an [App] tag, flagging suspicious users for verification via passkeys or World ID, and letting sub-communities self-police without mass ID checks.</p>
+  <div class="story-expanded" id="story-5">
+    <p>AI-written content won't be banned outright — Huffman called it "annoying" but said communities can set their own rules. Government IDs would be used only as a last resort where laws require it. The move comes as rival platform Digg recently folded after being overrun with bots, and Cloudflare data shows automated traffic on pace to surpass humans by 2027.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.reddit.com/user/spez/comments/1s3ezrc/humans_welcome_bots_must_wear_name_tags/" target="_blank">reddit.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.macrumors.com/2026/03/25/apple-google-gemini-distill-models/" target="_blank">Apple Gets Full Access to Google's Gemini to Power On-Device Siri</a></h3>
+  <p class="story-summary">Apple has gained full access to Google's Gemini and can now distill it into smaller models that run Siri's AI features on iPhones without needing an internet connection — a significant step toward making Apple's AI assistant more capable while keeping data local.</p>
+  <div class="story-expanded" id="story-6">
+    <p>The deal allows Apple to shrink Gemini into lightweight on-device models, balancing the performance of a frontier model with Apple's privacy-first design philosophy. This could dramatically improve Siri's contextual understanding and task completion abilities in upcoming iOS updates.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.macrumors.com/2026/03/25/apple-google-gemini-distill-models/" target="_blank">macrumors.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.nature.com/articles/s41586-026-10265-5" target="_blank">Sakana AI's Autonomous "AI Scientist" Published in Nature</a></h3>
+  <p class="story-summary">Sakana AI's "AI Scientist" — a pipeline that invents research ideas, runs experiments, writes papers, and passed peer review at a top machine learning conference — has been published in Nature, marking a milestone for autonomous scientific research systems.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The publication in Nature, one of the world's most prestigious scientific journals, lends significant credibility to the concept of AI-driven research automation. The system represents a complete scientific workflow from hypothesis generation through experimental validation to paper writing.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.nature.com/articles/s41586-026-10265-5" target="_blank">nature.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Sanders and AOC Propose Banning New Data Center Construction</h3>
+  <p class="story-summary">Senators Bernie Sanders and Alexandria Ocasio-Cortez have proposed legislation to ban all new data center construction until AI regulation is passed — a dramatic intervention that would directly impact the infrastructure buildout powering the AI boom.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The proposal ties data center expansion to broader AI governance, arguing that the infrastructure enabling AI development should not outpace the regulatory framework governing its use. The bill faces long odds in Congress but signals growing political tension around AI's physical footprint and energy demands.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://techcrunch.com/2026/03/25/google-launches-lyria-3-pro-music-generation-model/" target="_blank">Google Lyria 3 Pro Generates Full 3-Minute Songs With Verses and Choruses</a></h3>
+  <p class="story-summary">Google upgraded its music AI model to Lyria 3 Pro, which can now generate complete 3-minute songs with intros, verses, and choruses. The model is rolling out across Gemini, Vertex AI, and Google Vids.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The upgrade represents a significant leap in AI music generation, moving from short clips to full-length compositions with proper song structure. The rollout across Google's enterprise and consumer products positions it as a direct competitor to dedicated music AI startups.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://techcrunch.com/2026/03/25/google-launches-lyria-3-pro-music-generation-model/" target="_blank">techcrunch.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Granola Raises $125M at $1.5B Valuation</strong> — The meeting notetaker expands into a full enterprise AI app with agent support after a 6x valuation jump. <a href="https://techcrunch.com/2026/03/25/granola-raises-125m-hits-1-5b-valuation-as-it-expands-from-meeting-notetaker-to-enterprise-ai-app/" target="_blank">TechCrunch &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Harvey Raises $200M at $11B Valuation</strong> — Legal AI startup Harvey closes a massive round as Sequoia triples down, joined by a16z and Kleiner Perkins. <a href="https://techcrunch.com/2026/03/25/harvey-confirms-11b-valuation-sequoia-triples-down/" target="_blank">TechCrunch &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>OpenAI Raising Another $10B</strong> — The record funding round pushes past $120B with Microsoft, a16z, and T. Rowe Price joining. <a href="https://www.cnbc.com/2026/03/24/openai-secures-an-extra-10-billion-in-record-funding-round-cfo-friar-says.html" target="_blank">CNBC &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Sierra's Ghostwriter Builds AI Agents That Build AI Agents</strong> — Bret Taylor's company introduced an AI agent that creates customer service bots across voice, chat, and 30+ languages. <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>US Dept. of Labor Launches "Make America AI-Ready"</strong> — A free 7-day AI literacy course delivered entirely over text message to promote AI upskilling. <a href="https://www.dol.gov/newsroom/releases/osec/osec20260324" target="_blank">dol.gov &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Luma Launches Uni-1</strong> — A unified model that reasons and generates across text and images. <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Cursor Ships Composer 2</strong> — A powerful, cost-effective coding model from the popular AI code editor. <span class="source-badge">The Rundown AI</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Companies, finance &amp; the economy</span>
+</div>
+
+<article class="lead-story">
+  <h2>Meta and YouTube Lose Landmark Social Media Addiction Trial</h2>
+  <p class="story-summary">In what could be social media's Big Tobacco moment, a California jury found Meta and YouTube negligent for running platforms that harmed adolescents and failing to warn the public about the danger of features like infinite scroll. Meta was ordered to pay $4.2 million and YouTube $1.8 million to the plaintiff, a 20-year-old who said she became addicted as a child.</p>
+  <div class="story-expanded" id="story-10">
+    <p>This was a bellwether case testing the waters for thousands of similar lawsuits in the pipeline. Critically, Section 230 — which protects platforms from liability for user-posted content — didn't shield them this time, as plaintiffs focused on platform design rather than content. Both companies plan to appeal. Separately, a New Mexico jury ordered Meta to pay $375 million for failing to protect young users from sexually explicit content and trafficking, following a sting operation where investigators set up decoy minor accounts that were overwhelmed with predator solicitations. More state and federal trials are coming this year.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>SCOTUS Rules Internet Provider Not Liable for Users' Music Piracy</h3>
+  <p class="story-summary">The Supreme Court unanimously ruled that Cox Communications cannot be held liable for its users' music piracy in a case that once involved a $1 billion judgment. Justice Thomas wrote that "a company is not liable as a copyright infringer for merely providing a service to the general public with knowledge that it will be used by some to infringe copyrights."</p>
+  <div class="story-expanded" id="story-11">
+    <p>A ruling against Cox could have upended the internet as we know it. Instead, providers gained new protections as long as they aren't actively encouraging illegal activity — a significant win for the telecommunications industry and internet infrastructure providers.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Clear App Downloads Surge 3x as TSA Lines Stretch to Four Hours</h3>
+  <p class="story-summary">The Clear app has been downloaded 289,000 times since the beginning of March — more than 3x the rate from a year ago — as TSA agents call in sick during the partial government shutdown. Clear's stock has risen about 60% over the past month. Houston's Bush Intercontinental saw four-hour security lines with 40% of TSA staff absent.</p>
+  <div class="story-expanded" id="story-12">
+    <p>Most TSA workers at Houston's airport have long commutes, making it expensive to come to work with rising gas prices and no paychecks. The Senate is working on a potential deal to restore TSA funding, but it lacks President Trump's support. The shutdown has become an unexpected windfall for private security expediting services.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Zuckerberg, Huang, and Ellison Named to Trump Tech Advisory Council</h3>
+  <p class="story-summary">Mark Zuckerberg, Jensen Huang, and Larry Ellison were among the major tech executives named to the Trump administration's new technology advisory panel that will help shape AI regulation and policy.</p>
+  <div class="story-expanded" id="story-13">
+    <p>The appointment of the three most powerful figures in AI infrastructure — Meta's social and AI platform, Nvidia's chip dominance, and Oracle's cloud and enterprise AI — to a government advisory role signals the administration's approach to industry-led AI governance. The panel's recommendations could directly influence the regulatory framework for AI development in the United States.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>NBA Votes Unanimously to Expand to Seattle and Las Vegas</h3>
+  <p class="story-summary">The NBA's board of governors voted unanimously to begin vetting a 31st and 32nd franchise in Las Vegas and Seattle for the 2028-29 season. The new clubs will be expected to pay the NBA $7 billion to $10 billion in entrance fees.</p>
+  <div class="story-expanded" id="story-14">
+    <p>The announcement comes amid challenges: next year's salary cap is rising by $10 million but still about $1 million below projections due to declining local media revenue. Tanking remains a persistent issue, and expansion teams historically struggle early. But the NHL's recent success with Vegas (Stanley Cup Final in year one) and Seattle (playoffs in year two) suggests tweaked expansion draft rules could help. Overall NBA viewership was up through February's All-Star break.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Meta Lays Off Hundreds Including Reality Labs Staff</h3>
+  <p class="story-summary">Meta laid off hundreds of employees yesterday, including in its Reality Labs division responsible for VR and AR hardware, as the company continues to redirect spending toward AI development.</p>
+  <div class="story-expanded" id="story-15">
+    <p>The layoffs in Reality Labs are notable given Meta's massive investment in the metaverse and mixed reality. The cuts suggest continued prioritization of AI over hardware, even as Apple's Vision Pro has intensified the spatial computing competition.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>USPS Raising Prices 8%</strong> — Mailing packages will get more expensive as the Postal Service increases rates to cover rising fuel costs. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Pop Mart Shares Tank</strong> — Investors fret that the company can't sustain the Labubu craze. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Musk Asks Judge to Recuse From Tesla Cases</strong> — Elon Musk said a Delaware judge showed bias by appearing to support a LinkedIn post critical of Musk with an emoji. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Stellantis Ticketing Employees for Driving Competitors' Cars</strong> — The automaker is issuing parking tickets to employees who drive cars from rival manufacturers to work. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Conflict, diplomacy &amp; global affairs</span>
+</div>
+
+<article class="lead-story">
+  <h2>Iran Rejects US 15-Point Ceasefire Plan, Counters With Own Demands</h2>
+  <p class="story-summary">Iran dismissed the Trump administration's 15-point ceasefire proposal — which involved rolling back US sanctions and Iran's nuclear program and reopening the Strait of Hormuz — and countered with its own five-point plan demanding reparations and sovereignty over the Strait. Markets rallied on earlier hopes that peace talks were imminent, but Iran's rejection dashes near-term prospects.</p>
+  <div class="story-expanded" id="story-16">
+    <p>Iran's demand for Strait of Hormuz sovereignty would be unacceptable to the US and its Gulf allies, making the counterproposal a non-starter in its current form. Stocks still rose on the day as investors bet on the mere existence of a diplomatic framework, with the S&amp;P 500 up 0.54%, Nasdaq up 0.77%, and Dow up 0.66%. This updates the morning's reporting that Iran had rejected direct US talks — the new detail is the specific terms of both proposals.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<!-- ============================================================ -->
+<!-- ENTERTAINMENT & CULTURE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+  <span class="section-name">Media, arts &amp; trends</span>
+</div>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Stephen Colbert to Co-Write Lord of the Rings Film</h3>
+  <p class="story-summary">Stephen Colbert, a noted Tolkien superfan, will co-write <em>The Lord of the Rings: Shadow of the Past</em> with his son and a writer from previous films in the series. The film is currently in development with Warner Bros.</p>
+  <div class="story-expanded" id="story-17">
+    <p>Colbert will have time for the project as The Late Show, which has been canceled, ends in May. While he hasn't developed a major film before, his deep knowledge of Tolkien lore is well-documented — he once out-trivia'd Peter Jackson himself on the subject.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>AI-Generated "Fruit Love Island" Goes Viral Then Gets Deleted</h3>
+  <p class="story-summary">A TikTok account churning out AI parodies of Love Island starring anthropomorphized fruit amassed 3.3 million followers in weeks before being removed from the platform. Fans made parody videos of the parodies with real fruit, and celebrities like Zara Larson posted about watching the chaotic mini-episodes.</p>
+  <div class="story-expanded" id="story-18">
+    <p>The videos can be traced back to Object Talk, a customized permutation of ChatGPT, whose company offers tutorials on how to make what it refers to on its own website as "AI Slop." Copycats and compilations have already popped up on TikTok and YouTube. The phenomenon illustrates both the viral potential and content moderation challenges of AI-generated entertainment.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Rundown AI</span>
+      <span>Morning Brew</span>
+      <span>The Neuron</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Thursday, March 26, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
