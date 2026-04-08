@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Sunday, March 22, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Sunday, March 22, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+</div>
+
+<main class="container">
+
+  <!-- SCIENCE SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-science">Science</span>
+      <span class="section-name">Science</span>
+    </div>
+
+    <article class="lead-story">
+      <h2><a href="https://interestingengineering.com/science/engineered-bacteria-convert-plastic-parkinsons-drug" target="_blank">Engineered Bacteria Turn Plastic Waste Into Parkinson's Medication</a></h2>
+      <p class="story-summary">Scientists at the University of Edinburgh have engineered E. coli bacteria to convert plastic waste into L-DOPA, a key drug used to treat Parkinson's disease, potentially transforming a major pollution problem into a pharmaceutical supply chain.</p>
+      <div class="story-expanded" id="story-1">
+        <p>The process breaks plastic down into terephthalic acid, which is then metabolized by the engineered bacteria to produce L-DOPA. Researchers say the same approach could be adapted to manufacture fragrances, food flavorings, and industrial dyes from plastic feedstock. If scalable, this biotechnology could simultaneously address plastic pollution and reduce pharmaceutical manufacturing costs, creating a circular economy pathway from waste to medicine.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://interestingengineering.com/science/engineered-bacteria-convert-plastic-parkinsons-drug" target="_blank">interestingengineering.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <div class="stories-grid">
+      <article class="story-card">
+        <h3><a href="https://www.nytimes.com/2026/03/18/science/comet-fragments-hubble-telescope.html" target="_blank">Hubble Catches a Comet Exploding in Real Time</a></h3>
+        <p class="story-summary">In an extraordinary stroke of luck, NASA's Hubble Space Telescope captured a comet shattering into four or five pieces in November. Scientists say the odds of witnessing a comet breaking up live through Hubble are "vanishingly small."</p>
+        <div class="story-expanded" id="story-2">
+          <p>The footage could help solve a long-standing mystery: why long-period comets are more susceptible to catastrophic fragmentation than their short-period counterparts. The observation provides rare data on the mechanics of cometary disintegration, offering insights into the composition and structural integrity of these ancient solar system objects. Researchers plan to analyze the debris trail to determine what triggered the breakup.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Superhuman</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+          <span class="story-url"><a href="https://www.nytimes.com/2026/03/18/science/comet-fragments-hubble-telescope.html" target="_blank">nytimes.com &rarr;</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="https://www.sciencedaily.com/releases/2026/03/260317064507.htm" target="_blank">Man Survives 48 Hours Without Lungs in Medical First</a></h3>
+        <p class="story-summary">A flu that spiraled into bacterial pneumonia left a patient's lungs so badly infected they were actively killing him. Surgeons removed both lungs and kept him alive on an artificial system for 48 hours until donor lungs became available.</p>
+        <div class="story-expanded" id="story-3">
+          <p>The surgical team's last-ditch effort to remove both lungs entirely and sustain the patient on extracorporeal support represents a potential new lifeline for critically ill patients awaiting organ transplants. The case demonstrates that bilateral lung removal can be survived long enough to bridge to transplantation, expanding the options available to physicians treating end-stage pulmonary infections where the organs themselves become the source of fatal sepsis.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Superhuman</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+          <span class="story-url"><a href="https://www.sciencedaily.com/releases/2026/03/260317064507.htm" target="_blank">sciencedaily.com &rarr;</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="https://www.sciencedaily.com/releases/2026/03/260321012702.htm" target="_blank">Harvard Scientists Build a Chip That Can Twist and Control Light</a></h3>
+        <p class="story-summary">Scientists from Harvard have built a tiny chip that can actively twist, tune, and control how light spins on the fly by stacking two photonic crystal layers, distinguishing between left- and right-circularly polarized light with near-perfect precision.</p>
+        <div class="story-expanded" id="story-4">
+          <p>The breakthrough has potentially massive implications ranging from identifying dangerous pharmaceutical compounds to powering faster data networks. The device's ability to dynamically manipulate circular polarization states of light on a compact chip could enable new applications in drug safety screening, optical communications, and quantum computing. The photonic crystal approach offers a scalable manufacturing pathway compared to existing bulky optical setups.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Superhuman</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+          <span class="story-url"><a href="https://www.sciencedaily.com/releases/2026/03/260321012702.htm" target="_blank">sciencedaily.com &rarr;</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="https://www.sciencedaily.com/releases/2026/03/260321012659.htm" target="_blank">New Oral Drug Cuts LDL Cholesterol by 60%, Matching Injectable Therapies</a></h3>
+        <p class="story-summary">An experimental pill called enlicitide posted phase three trial results showing it can reduce LDL cholesterol by around 60%, matching the effectiveness of injectable therapies that most patients never end up using.</p>
+        <div class="story-expanded" id="story-5">
+          <p>For patients who cannot reach safe cholesterol levels on statins alone, enlicitide could represent a significant step forward in heart disease prevention. The oral delivery method addresses one of the biggest barriers to PCSK9-class treatments: patient reluctance to self-inject. If approved, the pill could reshape how doctors treat one of the world's leading killers by making powerful cholesterol reduction accessible in a simple daily tablet form.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Superhuman</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+          <span class="story-url"><a href="https://www.sciencedaily.com/releases/2026/03/260321012659.htm" target="_blank">sciencedaily.com &rarr;</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="https://www.sciencefocus.com/wellbeing/some-experts-botox-powerful-antidepressant" target="_blank">Growing Evidence That Botox Can Reduce Depression and Anxiety</a></h3>
+        <p class="story-summary">A growing body of research suggests Botox can meaningfully reduce symptoms of depression and anxiety by paralyzing the facial muscles that express sadness, breaking the brain's feedback loop that reinforces negative emotions.</p>
+        <div class="story-expanded" id="story-6">
+          <p>Studies show reduced anxiety and higher happiness scores even in non-depressed patients receiving Botox treatments. The mechanism is rooted in the facial feedback hypothesis: by preventing the physical expression of sadness, the brain receives fewer signals to maintain the emotional state. While not yet approved as a mental health treatment, the accumulating clinical evidence is building a compelling case for investigating the world's most popular cosmetic procedure as a potential psychiatric intervention.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Superhuman</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+          <span class="story-url"><a href="https://www.sciencefocus.com/wellbeing/some-experts-botox-powerful-antidepressant" target="_blank">sciencefocus.com &rarr;</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="https://interestingengineering.com/health/wearable-fluid-buildup-compression-sleeve" target="_blank">Wearable Compression Sleeve Replaces $3,000 Lymphedema Machines</a></h3>
+        <p class="story-summary">Scientists have compressed hours-long compression therapy hardware into a wearable sleeve the size of a smartphone, with an 8-hour battery for fully mobile treatment of painful fluid buildup in cancer recovery patients.</p>
+        <div class="story-expanded" id="story-7">
+          <p>Patients recovering from cancer often deal with lymphedema — painful fluid accumulation that currently requires being tethered to expensive, bulky compression machines. The new wearable device aims to cut treatment costs by 50% by simplifying the system and scaling production. Early patient testing is already underway in Ottawa, with commercialization on the horizon. The device could dramatically improve quality of life for cancer survivors by enabling treatment during normal daily activities.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Superhuman</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+          <span class="story-url"><a href="https://interestingengineering.com/health/wearable-fluid-buildup-compression-sleeve" target="_blank">interestingengineering.com &rarr;</a></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- AI & TECHNOLOGY SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+      <span class="section-name">Latest in artificial intelligence</span>
+    </div>
+
+    <ul class="bullet-stories">
+      <li><strong>Taya: AI Necklace That Doubles as a Private Journal</strong> — An intelligent necklace that records and transcribes conversations, attaches time and location data, and organizes everything into searchable notes. <a href="https://tayanecklace.com" target="_blank">tayanecklace.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+      <li><strong>Nosh One: Countertop Robot Chef</strong> — A countertop robot that cooks full meals once you load the ingredients, automatically adjusting heat, stirring, and timing across 500+ recipes. <a href="https://www.kickstarter.com/projects/noshone/noshone-ai-robo-chef-get-fresh-and-healthy-meals-effortlessly" target="_blank">kickstarter.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+      <li><strong>Fort Wearable for Strength Training</strong> — A wearable device that automatically detects exercises, counts reps, and tracks every set during weight training sessions. <a href="https://fort.cx/" target="_blank">fort.cx &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    </ul>
+  </section>
+
+  <!-- ENTERTAINMENT & CULTURE SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+      <span class="section-name">Entertainment &amp; Culture</span>
+    </div>
+
+    <ul class="bullet-stories">
+      <li><strong>Idris Elba's Wax Figure Unlocks His Phone</strong> — Idris Elba reportedly discovered that his new Madame Tussauds wax figure was realistic enough to unlock his iPhone via Face ID. <a href="https://www.reddit.com/r/Damnthatsinteresting/comments/1rwarqp/idris_elbas_madame_tussauds_wax_figure_opens_his/" target="_blank">reddit.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+      <li><strong>Suspected Meteor Lights Up Ohio and Pennsylvania Skies</strong> — A suspected meteor streaked across the skies over Ohio and Pennsylvania, triggering loud booms as it likely broke the sound barrier. CCTV footage captured the dramatic trail. <a href="https://www.youtube.com/watch?v=HQMxQu1AGzU" target="_blank">youtube.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+      <li><strong>Most Detailed Image of the Sun's Surface Released</strong> — A stunning new image from the Daniel K. Inouye Solar Telescope reveals the most detailed view of the Sun's surface ever captured, gaining major traction on social media. <a href="https://x.com/CuriosityonX/status/2034322636839264609" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+      <li><strong>Deep-Sea "Disco" Jellyfish Footage Goes Viral</strong> — Footage from the E/V Nautilus captured the deep-sea Halitrephes maasi jellyfish glowing like fireworks at 1,200 meters depth, blowing up on social media. <a href="https://x.com/wonderofscience/status/2034245180870824209" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+      <li><strong>Mars Pyramid Rock Sparks Online Alien Debate</strong> — A resurfaced NASA image of a pyramid-like rock on Mars is fueling online debate about extraterrestrial construction, though scientists have proposed simpler geological explanations. <a href="https://x.com/nypost/status/2034271780018258344" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Sunday, March 22, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
