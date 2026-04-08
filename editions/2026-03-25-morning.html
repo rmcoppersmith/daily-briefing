@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Wednesday, March 25, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Wednesday, March 25, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,556.37</span><span class="ticker-change ticker-down">-0.37%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,761.90</span><span class="ticker-change ticker-down">-0.84%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,124.06</span><span class="ticker-change ticker-down">-0.18%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$87.51</span><span class="ticker-change ticker-down">-0.6%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$69,421</span><span class="ticker-change ticker-down">-1.89%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">26.95</span><span class="ticker-change ticker-up">+3.1%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://variety.com/2026/digital/news/openai-shutting-down-sora-video-platform-1236698277/" target="_blank">OpenAI Kills Sora, Loses Disney Deal, and Preps New 'Spud' Model</a></h2>
+  <p class="story-summary">OpenAI is shutting down its Sora AI video generator entirely — app and API — to free up compute for "Spud," a new major model that Sam Altman says will be ready in weeks. The move torpedoes Disney's $1B investment and 200-character licensing agreement, with Disney saying it "respects OpenAI's decision to exit the video generation business."</p>
+  <div class="story-expanded" id="story-1">
+    <p>Employees reportedly called Sora a "drag" on GPU resources during intense competition with Anthropic and Google. Sora head Bill Peebles said the team will now pursue "world simulation" for robotics, calling the prize "automating the physical economy." Altman also handed off safety and security oversight to Mark Chen, to focus on raising capital, supply chains, and building data centers at unprecedented scale. Fidji Simo's division is being renamed to "AGI Deployment."</p>
+    <p>In addition, ChatGPT's shopping feature "Instant Checkout" is being scaled back after users largely ignored it, and OpenAI is raising another $10B, bringing its latest round to ~$120B total. The OpenAI Foundation, now sitting on ~$130B in equity, committed $1B+ this year to AI-driven scientific discovery, job displacement, and societal resilience, with co-founder Wojciech Zaremba joining as Head of AI Resilience.</p>
+    <p>This looks like one story: OpenAI is pruning everything that isn't ChatGPT ahead of its IPO. The Sora shutdown validates what Anthropic bet on — focus compute on text and code, not flashy demos.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://variety.com/2026/digital/news/openai-shutting-down-sora-video-platform-1236698277/" target="_blank">variety.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.cnbc.com/2026/03/24/arm-launches-its-own-cpu-with-meta-as-first-customer.html" target="_blank">Arm Unveils First-Ever In-House Chip After 35 Years, Meta as Launch Customer</a></h3>
+  <p class="story-summary">Arm unveiled the AGI CPU, its first-ever in-house chip after 35 years of only licensing designs. The 136-core processor is designed for AI inference, with Meta as launch customer and OpenAI, Cerebras, and Cloudflare also signed up.</p>
+  <div class="story-expanded" id="story-2">
+    <p>The move marks a dramatic pivot for the company that has powered virtually every smartphone chip through licensing. By designing its own silicon for the data center AI inference market, Arm is positioning to capture more value from the AI boom. The chip is optimized for running trained models rather than training new ones — the part of AI that's scaling fastest as deployment accelerates.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnbc.com/2026/03/24/arm-launches-its-own-cpu-with-meta-as-first-customer.html" target="_blank">cnbc.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.bloomberg.com/news/articles/2026-03-24/ios-27-features-apple-ai-reboot-with-siri-app-new-interface-ask-siri-button" target="_blank">Apple Testing Standalone Siri App and 'Ask Siri' Chatbot for iOS 27</a></h3>
+  <p class="story-summary">Apple is testing a standalone Siri app alongside a new "Ask Siri" chatbot experience for iOS 27 and macOS 27, slated for WWDC on June 8. Siri will reportedly read across iMessages, emails, and notes to build context, and execute actions inside third-party apps.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The assistant gets its own dedicated app for the first time, along with a redesigned interface for typed or spoken requests. Apple is branding the experience "Ask Siri," positioning it as chatbot-style rather than rigid voice commands. This Gemini-powered revamp is probably Apple's last chance to define Siri before users default to ChatGPT or Claude for everything, following a lackluster reception to Apple Intelligence last year.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.bloomberg.com/news/articles/2026-03-24/ios-27-features-apple-ai-reboot-with-siri-app-new-interface-ask-siri-button" target="_blank">bloomberg.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://x.com/adcock_brett/status/2036461258443202810" target="_blank">Figure AI Founder Launches 'Hark,' a $100M Stealth AI Device Startup</a></h3>
+  <p class="story-summary">Brett Adcock launched Hark, a new AI startup aiming to create a "new interface to AGI" via personalized AI paired with dedicated hardware. He put $100M of his own money in, targeting the most advanced personal AI ever built.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The 45-person team pulls from Apple, Google, Meta, and Tesla, with hardware design led by Abidur Chowdhury, who previously designed the iPhone Air. Hark is working on a "family of devices for yourself and the home" with systems that "begin to think like you, and sometimes ahead of you." The company signed a deal for thousands of NVIDIA B200 GPUs arriving in April, with first AI models and software planned this summer.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/adcock_brett/status/2036461258443202810" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.axios.com/2026/03/24/judge-pentagon-anthropic-troubling" target="_blank">Federal Judge Calls Pentagon's Actions Against Anthropic 'Troubling'</a></h3>
+  <p class="story-summary">A federal judge called the Pentagon's actions against Anthropic "troubling," saying "it looks like an attempt to cripple Anthropic." The case highlights growing tensions between the AI industry and the U.S. defense establishment.</p>
+  <div class="story-expanded" id="story-5">
+    <p>The judicial rebuke comes amid broader concerns about how the Department of Defense is engaging with AI companies that have expressed reservations about certain military applications. The ruling could have significant implications for the relationship between Silicon Valley AI labs and the Pentagon's AI procurement strategy.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.axios.com/2026/03/24/judge-pentagon-anthropic-troubling" target="_blank">axios.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://claude.com/blog/dispatch-and-computer-use" target="_blank">Anthropic Ships Claude Dispatch for Remote Computer Control</a></h3>
+  <p class="story-summary">Anthropic's Claude can now control your Mac while you're away and run tasks from your phone via a new feature called Dispatch. Users can hand Claude a task from their phone and have it finish the work on their PC in the background.</p>
+  <div class="story-expanded" id="story-6">
+    <p>Dispatch pairs with the Claude mobile app and desktop app, enabling tasks like cleaning up emails, organizing files, or completing work while you step away. The feature is included in Pro ($20/mo) and Max plans. Claude Cowork also now gives Claude access to local files and apps for autonomous task completion.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://claude.com/blog/dispatch-and-computer-use" target="_blank">claude.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://futuresearch.ai/blog/litellm-pypi-supply-chain-attack/" target="_blank">Supply Chain Attack Discovered in Popular AI Library LiteLLM</a></h3>
+  <p class="story-summary">A supply chain attack was discovered in LiteLLM, a popular AI library with 97 million monthly downloads. A malicious file harvested SSH keys and cloud credentials on every Python startup, with Andrej Karpathy signal-boosting the warning.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The attack underscores growing security risks in the AI software supply chain as more organizations rush to integrate AI tools. The malicious package was uploaded to PyPI and could have compromised developers' credentials at scale before being detected.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://futuresearch.ai/blog/litellm-pypi-supply-chain-attack/" target="_blank">futuresearch.ai &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.bloomberg.com/news/articles/2026-03-24/amazon-acquires-fauna-robotics-entering-consumer-humanoid-market" target="_blank">Amazon Acquires Fauna Robotics, Enters Consumer Humanoid Market</a></h3>
+  <p class="story-summary">Amazon acquired Fauna Robotics, officially entering the consumer humanoid robot market. The deal signals Amazon's intent to bring humanoid robots from warehouses into homes.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The acquisition builds on Amazon's existing investments in warehouse robotics and positions the company to compete in the emerging consumer humanoid market. The move joins a wave of activity in the humanoid space, including Brett Adcock's Figure AI and various Chinese robotics startups.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.bloomberg.com/news/articles/2026-03-24/amazon-acquires-fauna-robotics-entering-consumer-humanoid-market" target="_blank">bloomberg.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--wsj-gray);margin:24px 0 8px;">Also in AI &amp; Technology</h4>
+<ul class="bullet-stories">
+  <li><strong>Microsoft AI Poaches Allen Institute Researchers</strong> — Three top researchers including former CEO Ali Farhadi join Mustafa Suleyman's Superintelligence team. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7441971584610803712/" target="_blank">LinkedIn &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Figma Opens Design Canvas to AI Agents</strong> — Tools like Claude Code can now create and edit designs directly using a team's existing components and brand standards via a new MCP bridge. <a href="https://www.figma.com/blog/the-figma-canvas-is-now-open-to-agents/" target="_blank">figma.com &rarr;</a> <span class="source-badge">The Rundown AI</span> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Cloudflare Launches Dynamic Workers</strong> — New tool lets AI agents run code they write on the fly in lightweight isolates that are 100x faster than containers. Free for paid Workers users during beta. <a href="https://blog.cloudflare.com/dynamic-workers" target="_blank">cloudflare.com &rarr;</a> <span class="source-badge">The Rundown AI</span> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Roche Launches AI Factory</strong> — Pharma giant deploying 3,500+ Nvidia Blackwell GPUs to speed up drug discovery and manufacturing. <a href="https://www.forbes.com/sites/amyfeldman/2026/03/16/roche-bought-thousands-of-nvidia-ai-chips-to-speed-up-drug-development/" target="_blank">forbes.com &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Halter, AI Cow Collar Startup, Raises $220M</strong> — The New Zealand-based company making AI-powered collars for cattle management attracted significant new funding. <a href="https://www.bloomberg.com/news/articles/2026-03-24/ai-cow-collar-startup-halter-raises-220-million-in-latest-deal" target="_blank">bloomberg.com &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Baltimore First U.S. City to Sue xAI Over Grok Deepfake Porn</strong> — The lawsuit targets xAI's Grok model for generating nonconsensual deepfake pornographic content. <a href="https://www.cnbc.com/2026/03/24/musk-xai-sued-baltimore-grok-deepfake-porn.html" target="_blank">cnbc.com &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>ElevenLabs Music Finetunes</strong> — New tool lets users upload tracks to fine-tune ElevenLabs' Music model for vocals, instruments, or full tracks that stay true to your sound. <span class="source-badge">The Neuron</span></li>
+  <li><strong>Claude Code Gets Auto Mode</strong> — New hands-free coding permission system for Anthropic's coding agent. <span class="source-badge">The Rundown AI</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Conflict, diplomacy, and global affairs</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://app.sitdeck.com/briefing/d6f9b662-9f43-4d5f-9690-9658e32a0ff5" target="_blank">Israel-Iran War Escalating Sharply: Strikes on Tehran, Missiles Toward Eilat, Hormuz Closed</a></h2>
+  <p class="story-summary">The Israel-Iran direct conflict is escalating sharply, with fresh Israeli airstrikes on Tehran infrastructure and Iranian ballistic missiles striking toward Eilat. Iran has declared the Strait of Hormuz closed to "hostile" nations — a move threatening ~20% of global oil supply. The U.S. is actively considering seizure of Kharg Island, Iran's primary oil export terminal.</p>
+  <div class="story-expanded" id="story-9">
+    <p>Israeli Air Force launched new strikes targeting "regime infrastructure" in Tehran, killing 12 in south Tehran. Iran responded with ballistic missile salvos toward Eilat (intercepted) and cluster munitions that wounded nine in Bnei Brak. The UK's Starmer is working with partners to keep the Strait of Hormuz open.</p>
+    <p>BlackRock's CEO warned that $150 oil could trigger a global recession. WTI at $87.51 appears significantly underpriced given the Hormuz closure. Gold surged 4.4% to $4,597 and silver jumped 7.7% — the disconnect between oil and precious metals pricing is anomalous and likely corrects upward in oil.</p>
+    <p>Polymarket gives only an 18.5% chance of a ceasefire before month's end. Meanwhile, Omani FM cited "significant progress" in US-Iran nuclear talks, with a 15-point U.S. proposal reportedly on the table — running parallel to active kinetic operations.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/d6f9b662-9f43-4d5f-9690-9658e32a0ff5" target="_blank">sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Pentagon Deploying 3,000 Troops from 82nd Airborne to Middle East</h3>
+  <p class="story-summary">The Defense Department plans to deploy 3,000 soldiers from the 82nd Airborne Division to support the operation against Iran, according to the Wall Street Journal. A decision to put boots on the ground in Iran hasn't been made, but the deployment gives President Trump several strategic options.</p>
+  <div class="story-expanded" id="story-10">
+    <p>Marine F-35Cs are actively repositioning toward the Middle East theater alongside USS Abraham Lincoln (CVN-72) positioned near Tripoli, Lebanon. Pakistan offered to mediate talks between the US and Iran, though the New York Times reported that Saudi Crown Prince Mohammed bin Salman is pushing Trump to continue the war. Saudi Arabia is reportedly being courted for a nuclear enrichment deal by the Trump administration — a potentially destabilizing proliferation dynamic.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Senate Nears Deal to Fund DHS, End TSA Delays</h3>
+  <p class="story-summary">The Senate and White House are close to a deal to fund the Department of Homeland Security that could improve airport delays due to TSA staffing shortages, CNBC reported. The DHS has been shut down since February, leading to hourslong security lines at several major airports.</p>
+  <div class="story-expanded" id="story-11">
+    <p>The deal would fund all of the DHS except ICE, which Democrats have refused to bankroll until reforms are made following the killings of two US citizens by immigration enforcement officers in Minneapolis. Republicans would then seek to fund ICE through a separate process that would not need Democratic support.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Global Fuel Shortage Crisis Spreading</h3>
+  <p class="story-summary">The Philippines declared a national emergency over dwindling fuel supplies and Indian police are managing panic lines at fuel stations. Both are directly linked to the Hormuz disruption and Operation Epic Fury fallout.</p>
+  <div class="story-expanded" id="story-12">
+    <p>The crisis underscores the real-world consequences of the Strait of Hormuz closure declaration. With ~20% of global oil supply transiting through the strait, countries with less strategic petroleum reserves are feeling the impact first. Analysts warn the situation could worsen rapidly if the closure is actively enforced.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--wsj-gray);margin:24px 0 8px;">Also in Geopolitics &amp; World</h4>
+<ul class="bullet-stories">
+  <li><strong>Drone Strike on Erbil Hotel Housing U.S. Personnel</strong> — Footage confirmed a drone struck a hotel in Erbil, Iraqi Kurdistan; casualty status unclear. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Japan Scrambles Fighters Over East China Sea</strong> — Japan Air Self Defense Force scrambled aircraft for suspected Chinese airspace intrusion, while preparing its largest-ever Balikatan exercise deployment to the Philippines. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Ukraine Conflict 'Worse Than Ever'</strong> — UN Political Affairs chief describes worsening situation; Ukrainian forces made tactical advances in Slovyansk direction and Zaporizhia. <span class="source-badge">SitDeck</span></li>
+  <li><strong>US Drone Incursions Over Domestic Bases</strong> — Unknown actors have conducted drone incursions over at least two key U.S. air bases since Operation Epic Fury launched. Counter-UAS contract awarded under "Domestic Shield." <span class="source-badge">SitDeck</span></li>
+  <li><strong>"No Kings" Protests Across U.S. Cities</strong> — Demonstrations reported in Philadelphia, St. Paul, Boston, and other cities. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Wildfires Burning Across Oklahoma, Texas, Nebraska, South Dakota</strong> — Multiple active wildfire disaster declarations remain uncontrolled. Flood warnings active in Minnesota and Hawaii. <span class="source-badge">SitDeck</span></li>
+  <li><strong>NASA Cancels Lunar Orbit Station, Will Build Moon Base Instead</strong> — The agency will build a $20 billion base on the moon rather than put a space station in lunar orbit, chief Jared Isaacman said. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Markets, finance, and industry</span>
+</div>
+
+<article class="lead-story">
+  <h2>Private Credit in Crisis: Apollo and Ares Limit Payouts as Investors Rush for the Exits</h2>
+  <p class="story-summary">Investment giants Apollo Global Management and Ares are limiting payouts to shareholders in their private credit funds as investor withdrawal requests soar across the $1.8 trillion industry. Moody's downgraded a KKR/Future Standard private credit fund to "junk" after more borrowers stopped paying loans.</p>
+  <div class="story-expanded" id="story-13">
+    <p>Last quarter, investors in Apollo's and Ares's funds asked to exchange over 11% of their shares for cash — both companies said they'll pay out less than half to keep total payouts under 5% of fund value. Meanwhile, Blackstone and Blue Owl Capital have sought to calm investors by allowing more withdrawals than guaranteed minimums.</p>
+    <p>JPMorgan estimates software companies account for 30% of private credit loans, fueling fears that AI disruption could pummel the industry. Banks like JPMorgan are now letting clients bet against private credit, though many private credit lenders are also bank borrowers — meaning banks could get caught in the turmoil.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.cnbc.com/2026/03/24/jury-reaches-verdict-in-meta-child-safety-trial-in-new-mexico.html" target="_blank">Meta Ordered to Pay $375M in New Mexico Child Safety Case</a></h3>
+  <p class="story-summary">A jury found Meta violated New Mexico state law and must pay $375 million in damages for failing to protect users from child predators on its platforms.</p>
+  <div class="story-expanded" id="story-14">
+    <p>The verdict is one of the largest child safety penalties against a tech company. Separately, Baltimore became the first U.S. city to sue xAI over Grok-generated deepfake pornographic content, signaling growing legal pressure on AI companies around harmful content generation.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnbc.com/2026/03/24/jury-reaches-verdict-in-meta-child-safety-trial-in-new-mexico.html" target="_blank">cnbc.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>United Airlines Unveils Premium Upgrades Including Lie-Flat 'Relax Row'</h3>
+  <p class="story-summary">United Airlines announced upgrades to its fleet of 250 new airplanes: more legroom, lie-flat seats, and the "Polaris Studio" private hub with wine pairings and caviar. Next year, a "Relax Row" will transform three economy seats into a bed.</p>
+  <div class="story-expanded" id="story-15">
+    <p>The "Coastliner" will also provide lie-flat seats for the first time on transcontinental flights. CEO Scott Kirby warned ticket prices might increase by 20% if jet fuel costs stay elevated due to the Iran conflict. Premium revenue jumped 11% last year, while basic economy revenue fell 5% — underscoring the airline industry's pivot toward higher-paying customers.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Epic Games Lays Off 1,000 Employees Amid Fortnite Slowdown</h3>
+  <p class="story-summary">Epic Games announced it's laying off 1,000 workers amid a decline in Fortnite engagement. "We're spending significantly more than we're making," CEO Tim Sweeney wrote. Epic was valued at more than $30 billion as of 2024.</p>
+  <div class="story-expanded" id="story-16">
+    <p>The layoffs come after years of massive spending on the Fortnite ecosystem, the Epic Games Store, and Unreal Engine development. The engagement decline that started last year suggests the battle royale genre may have peaked, even as Epic continues to invest heavily in its broader platform and metaverse ambitions.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--wsj-gray);margin:24px 0 8px;">Also in Business &amp; Markets</h4>
+<ul class="bullet-stories">
+  <li><strong>Salesforce Stock Drops 6.23%</strong> — Investors forcefully sold amid ongoing worries that AI could upend software companies. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Apple Maps Will Show Ads This Summer</strong> — Apple confirmed the move, adding a new revenue stream to its maps platform. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Sen. Warren Sends 12-Page Letter to MrBeast</strong> — The senator requested details about the YouTuber's plans to expand into financial services. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Nintendo Cuts Switch 2 Production</strong> — The gaming giant reportedly reduced manufacturing due to weakening demand for the console. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Zoox Expanding Robotaxi to Miami and Austin</strong> — Amazon's self-driving car unit plans to bring its robotaxi service to both cities this year. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Spotify Launches SongDNA Feature</strong> — New feature lets users learn more about a song and track its connections to other artists. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- ENTERTAINMENT & CULTURE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+  <span class="section-name">Media, entertainment, and trends</span>
+</div>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Reality TV in Decline: Unscripted Series Premieres Plunge 15%</h3>
+  <p class="story-summary">The number of unscripted US series premieres plunged by 15% last year, and by a third since 2022, according to Luminate data. No genre is spared — cooking, crime, home design, and travel shows are all dwindling.</p>
+  <div class="story-expanded" id="story-17">
+    <p>Reality TV was supposed to be relatively insulated from the end of "Peak TV" because it's cheaper to produce. But media consolidation and relentless ratings declines have now come for unscripted programming too, as network executives rethink how many shows they greenlight. The decline marks the end of an era that saw reality programming dominate pop culture for over two decades.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Research and discovery</span>
+</div>
+
+<article class="lead-story">
+  <h2>CERN Successfully Transports Antimatter on a Truck for the First Time</h2>
+  <p class="story-summary">Researchers at CERN successfully transported 92 antiprotons on a truck with a specially designed tank that kept the antimatter from touching matter. The 30-minute spin around the campus is a first step toward an eight-hour drive to Heinrich Heine University in D&uuml;sseldorf for precision measurements.</p>
+  <div class="story-expanded" id="story-18">
+    <p>Despite what science fiction would suggest, no danger was posed — the 92 antiprotons were so small that no damage would result from a matter collision. The big bang theory posits that equal parts matter and antimatter were created in the universe's origin; studying antimatter could explain why matter dominates. HHU won't be ready to accept the delivery until 2029 at the earliest.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.latent.space/p/materials" target="_blank">AI-Designed Polymers Turn Out 4x Tougher Than Expected</a></h3>
+  <p class="story-summary">MIT professor Heather Kulik's team used AI to design new polymers that turned out to be four times tougher than expected. The AI discovered a purely quantum mechanical effect that surprised even the lab scientists who synthesized them.</p>
+  <div class="story-expanded" id="story-19">
+    <p>The breakthrough highlights the potential of AI-guided materials science, where computational tools can identify properties that human intuition would miss. However, Kulik notes a reality check: LLMs still can't design a 22-atom ligand that any chemistry expert could sketch in seconds. The wins are real, but only with deep domain expertise integration.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-19', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.latent.space/p/materials" target="_blank">latent.space &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--wsj-gray);margin:24px 0 8px;">Also in Science (via Science X)</h4>
+<ul class="bullet-stories">
+  <li><strong>A Protein May Help Revive Exhausted T Cells in Cancer Immunotherapy</strong> — New research identifies a potential mechanism for reinvigorating immune cells that have stopped fighting tumors. <span class="source-badge">Science X</span></li>
+  <li><strong>Spinel Crystal Structure Exhibits Unusual Pressure-Induced Superconductivity</strong> — An unexpected superconducting behavior discovered under pressure conditions. <span class="source-badge">Science X</span></li>
+  <li><strong>Europe's Late Neanderthals Descended from a Single Population</strong> — DNA analysis reveals the last Neanderthals shared a surprisingly narrow genetic lineage. <span class="source-badge">Science X</span></li>
+  <li><strong>Trapped Subsurface Heat May Have Triggered Antarctica's Sea Ice Loss</strong> — Researchers point to heat buildup beneath the surface as a driver of the continent's sudden ice decline. <span class="source-badge">Science X</span></li>
+  <li><strong>New Bifacial Solar Cells Yield Efficiencies Above 32%</strong> — A significant milestone for solar technology that captures light from both sides. <span class="source-badge">Science X</span></li>
+  <li><strong>Sunken Soviet Submarine Shows Ongoing Radioactive Leakage</strong> — Continued monitoring confirms leaking but with little environmental impact so far. <span class="source-badge">Science X</span></li>
+  <li><strong>Nanoparticles Enable Large-Scale Production of Advanced Cell Therapies</strong> — Breakthrough could make cell-based treatments more scalable and affordable. <span class="source-badge">Science X</span></li>
+  <li><strong>Surgical Stitches Could Release Anti-Inflammatory Drugs for Weeks</strong> — Drug-eluting sutures that deliver medication directly at wound sites. <span class="source-badge">Science X</span></li>
+  <li><strong>Vivid Dreaming Makes Sleep Feel Deeper</strong> — Researchers discover a link between dream vividness and perceived sleep quality. <span class="source-badge">Science X</span></li>
+  <li><strong>Severe Infections May Raise Dementia Risk</strong> — Large-scale study suggests a connection between serious infections and later cognitive decline. <span class="source-badge">Science X</span></li>
+  <li><strong>Stolen Chloroplasts Maintained by Host Proteins Offer Clues to Plant Cell Origins</strong> — New insights into how chloroplasts were originally incorporated into plant cells. <span class="source-badge">Science X</span></li>
+  <li><strong>Weedkiller-Exposed Soils May Breed Hospital 'Superbugs'</strong> — Agricultural soils treated with controversial herbicides could be an unexpected breeding ground for antibiotic-resistant bacteria. <span class="source-badge">Science X</span></li>
+  <li><strong>Snow Flies Produce Heat Bursts to Avoid Freezing</strong> — Insects generate sudden bursts of heat and proteins as an anti-freeze mechanism. <span class="source-badge">Science X</span></li>
+  <li><strong>More Sensitive Fentanyl Detection Strip Developed</strong> — Physics-based approach creates a much more accurate fentanyl testing method. <span class="source-badge">Science X</span></li>
+  <li><strong>ER Triage for Children's Mental Health Misses the Mark</strong> — Study suggests emergency room screening tools for children's mental health are inaccurate more often than not. <span class="source-badge">Science X</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Rundown AI</span>
+      <span>Morning Brew</span>
+      <span>The Neuron</span>
+      <span>SitDeck</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Wednesday, March 25, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
