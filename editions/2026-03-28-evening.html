@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Saturday, March 28, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Saturday, March 28, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER — Saturday close (markets closed) -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,368.85</span><span class="ticker-change ticker-down">-1.67%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">20,948.36</span><span class="ticker-change ticker-down">-2.15%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">45,166.64</span><span class="ticker-change ticker-down">-1.73%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">~$110</span><span class="ticker-change ticker-up">+7%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$65,969.61</span><span class="ticker-change ticker-down">-4.19%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">31.00</span><span class="ticker-change ticker-up">+13.2%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Robotics surge, brain AI, and Silicon Valley intrigue</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.reuters.com/world/us/robot-joins-melania-trump-white-house-event-tout-ai-teachers-2026-03-25/" target="_blank">Figure 03 Becomes First Humanoid Robot to Enter the White House</a></h2>
+  <p class="story-summary">In a historic first, Figure's 03 humanoid robot walked the White House hallways at the "Fostering the Future Together" global summit, cementing robotics as a core US government priority. The robot greeted attendees in 11 languages as officials made the case for AI-powered personalized education — describing a future of humanoid teachers tailored to each student.</p>
+  <div class="story-expanded" id="story-1">
+    <p>The moment was captured on video and widely shared — watch Figure 03 walk the White House halls <a href="https://x.com/adcock_brett/status/2036832028960923917" target="_blank">here</a>. The summit's framing positioned humanoid robots not merely as industrial tools but as partners in public services, particularly education. The event signals that the current administration sees physical AI as a strategic priority alongside software AI, and sets the stage for expanded federal procurement and deployment of humanoid systems.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.reuters.com/world/us/robot-joins-melania-trump-white-house-event-tout-ai-teachers-2026-03-25/" target="_blank">reuters.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.bloomberg.com/news/articles/2026-03-24/amazon-acquires-fauna-robotics-entering-consumer-humanoid-market" target="_blank">Amazon Acquires Fauna Robotics, Entering Consumer Humanoid Market</a></h3>
+  <p class="story-summary">Amazon has acquired Fauna Robotics, the New York startup behind Sprout — a child-sized, $50,000 household humanoid that went viral earlier this year. Fauna's team joins Amazon's Personal Robotics Group while the Sprout brand lives on, putting Amazon in direct competition with Tesla, Figure AI, and Boston Dynamics for consumer home robotics.</p>
+  <div class="story-expanded" id="story-2">
+    <p>Watch Sprout's unique design in action <a href="https://www.youtube.com/watch?v=4zMbX1OEOSE" target="_blank">here</a>. The acquisition reflects a broader shift in Big Tech strategy: where software AI agents are still largely experimental, consumer humanoids offer a tangible, hardware-anchored product with clear monetization. Amazon's logistics and Prime ecosystem could give Sprout a distribution advantage that pure-play robotics startups lack.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.bloomberg.com/news/articles/2026-03-24/amazon-acquires-fauna-robotics-entering-consumer-humanoid-market" target="_blank">bloomberg.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sg.news.yahoo.com/china-putting-openclaw-robots-073319123.html" target="_blank">China Deploys OpenClaw AI Across Multiple Robot Platforms</a></h3>
+  <p class="story-summary">While the West still debates AI agents in software, China is already deploying them in physical robots. Ecovacs has debuted Bajie, a household robot powered by OpenClaw, while developers have integrated the model into Unitree's G1 humanoid for real-time spatial navigation. AgileX Robotics has published a guide for natural-language arm control, and Xiaomi is testing its own variant across smartphones and smart home devices.</p>
+  <div class="story-expanded" id="story-3">
+    <p>OpenClaw's rapid spread across China's robotics ecosystem underscores a strategic gap: Chinese companies are collapsing the distance between AI model releases and physical-world deployment far faster than their Western counterparts. The simultaneous rollout across consumer, industrial, and home robotics platforms suggests a coordinated push rather than organic adoption — and signals that physical AI leadership may shift eastward faster than many analysts expected.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sg.news.yahoo.com/china-putting-openclaw-robots-073319123.html" target="_blank">news.yahoo.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/" target="_blank">Meta Unveils TRIBE v2: AI Model That Predicts How the Human Brain Reacts to Stimuli</a></h3>
+  <p class="story-summary">Meta's Fundamental AI Research team has released TRIBE v2, a foundation model that predicts how the human brain responds to images, audio, and video. Trained on fMRI data from over 700 volunteers watching movies and listening to podcasts, it achieves a 70x resolution increase over previous systems — and can generalize to new individuals and unseen languages without retraining.</p>
+  <div class="story-expanded" id="story-4">
+    <p>Meta released the full model, codebase, research paper, and an interactive demo publicly. The "in-silico neuroscience" capability allows researchers to simulate neural responses to new stimuli without requiring new brain scans — dramatically reducing the cost and time of neuroscience research. Potential applications span brain-computer interfaces, neurological disorder treatment, and using brain insights to improve AI architectures themselves. The move continues Meta's pattern of releasing foundational research as open infrastructure.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://ai.meta.com/blog/tribe-v2-brain-predictive-foundation-model/" target="_blank">ai.meta.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://techcrunch.com/2026/03/28/mark-zuckerberg-texted-elon-musk-to-offer-help-with-doge/" target="_blank">Court Docs Reveal Zuckerberg Texted Musk to Offer DOGE Help — and Floated Joint OpenAI Bid</a></h3>
+  <p class="story-summary">Text messages between Mark Zuckerberg and Elon Musk — published Friday in court documents from Musk's lawsuit against Sam Altman and OpenAI — show Zuckerberg praising DOGE's "progress" and offering Meta's full team to take down any content threatening Musk's staff. Musk responded by asking if Zuckerberg would be open to bidding on OpenAI's IP together, to which Zuckerberg offered to discuss live.</p>
+  <div class="story-expanded" id="story-5">
+    <p>The texts, dated February 3, 2025, reveal a strikingly warm relationship between two rivals who had once been on the verge of a cage fight. Zuckerberg wrote: "I've got our teams on alert to take down content doxxing or threatening the people on your team. Let me know if there's anything else I can do to help." Musk reacted with a heart and pitched the joint OpenAI bid — Zuckerberg ultimately never joined that consortium, but the exchange shows how quickly the early Trump administration reshuffled Silicon Valley alliances and rivalries.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://techcrunch.com/2026/03/28/mark-zuckerberg-texted-elon-musk-to-offer-help-with-doge/" target="_blank">techcrunch.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://interestingengineering.com/ai-robotics/mcdonalds-humanoid-robots-deliver-food" target="_blank">McDonald's in Shanghai Deploys Humanoid Robots in Customer-Facing Roles</a></h3>
+  <p class="story-summary">A McDonald's in Shanghai is now partly staffed by Keenon Robotics humanoids dressed in the chain's signature red-and-yellow uniforms — greeting customers and delivering food to tables. Fast food has long been an early adopter of back-of-house automation, but deploying humanoids in direct customer-facing roles marks a new threshold for the industry.</p>
+  <div class="story-expanded" id="story-6">
+    <p>Watch the robots work their shifts <a href="https://www.youtube.com/watch?v=SK-K9nSscGU" target="_blank">here</a>. The pilot at this Shanghai location positions McDonald's as an early adopter of customer-service humanoids in quick-service restaurants. If successful, it sets a precedent for broader rollout — first in labor-constrained Asian markets, then potentially globally. For robotics companies, a McDonald's deployment is a significant proof-of-concept given the chain's brand recognition and scale.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://interestingengineering.com/ai-robotics/mcdonalds-humanoid-robots-deliver-food" target="_blank">interestingengineering.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.prnewswire.com/news-releases/brinc-unveils-guardian-launching-the-next-era-of-drone-as-first-responder-302723095.html" target="_blank">Sam Altman-Backed BRINC Unveils Guardian Drone for First Responders</a></h3>
+  <p class="story-summary">BRINC, backed by Sam Altman, has unveiled Guardian — a drone designed to reach emergency scenes before first responders arrive. Built around Starlink connectivity and swappable payloads including defibrillators and Narcan, Guardian can operate around the clock and respond to calls up to 8 miles away, potentially transforming emergency response times for cardiac and overdose emergencies.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The "drone as first responder" model addresses one of emergency medicine's most stubborn bottlenecks: the gap between when a call comes in and when a human responder arrives. By using drones to deliver life-saving interventions autonomously — applying a defibrillator or Narcan within minutes rather than the average 7–12 minutes for EMS — Guardian could materially improve outcomes for time-critical emergencies. Altman's backing adds to growing AI investment in autonomous emergency infrastructure.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.prnewswire.com/news-releases/brinc-unveils-guardian-launching-the-next-era-of-drone-as-first-responder-302723095.html" target="_blank">prnewswire.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://interestingengineering.com/ai-robotics/us-airport-humanoid-robot-assist-passengers" target="_blank">Humanoid Robot José Kicks Off First Shift at San José Airport Ahead of FIFA World Cup</a></h3>
+  <p class="story-summary">José, an AI-powered humanoid built by local startup IntBot, has begun a four-month pilot at San José Mineta International Airport — greeting travelers, answering questions, and providing real-time airport information in more than 50 languages. The timing targets the FIFA World Cup, when the airport expects a surge of international visitors needing multilingual assistance.</p>
+  <div class="story-expanded" id="story-8">
+    <p>Watch José help travelers <a href="https://www.youtube.com/watch?v=vYTToM42O1U" target="_blank">here</a>. Unlike service robots that are confined to specific routes or tasks, José is designed for open-ended conversational interaction with the public — a more demanding test of social robot capabilities. A successful World Cup deployment, with high international visitor density and multilingual demand, could accelerate humanoid adoption across US airport infrastructure ahead of what is expected to be one of the most-watched events in sports history.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://interestingengineering.com/ai-robotics/us-airport-humanoid-robot-assist-passengers" target="_blank">interestingengineering.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://us.letsnosh.io/" target="_blank">Nosh One: Countertop Robot Cooks Full Meals Autonomously from Ingredients You Load In</a></h3>
+  <p class="story-summary">Nosh has unveiled the Nosh One, a countertop appliance that cooks complete meals autonomously after users load in raw ingredients. Equipped with a built-in camera, it monitors food in real time — adjusting heat, stirring, and timing as it cooks — and supports over 500 recipes, bringing fully autonomous kitchen cooking to the consumer market.</p>
+  <div class="story-expanded" id="story-9">
+    <p>Watch Nosh One in action <a href="https://www.youtube.com/watch?v=qhV1lXGUOsQ" target="_blank">here</a>. The Nosh One sits at the intersection of consumer hardware and AI automation — a category that has seen many failed attempts (from the Thermomix to various "smart kitchen" devices) but has never had access to the level of real-time vision and AI-driven process control that makes Nosh One's approach viable. If the execution matches the demo, it could represent a genuine breakthrough in the long-promised autonomous kitchen.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://us.letsnosh.io/" target="_blank">letsnosh.io &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Zoox Expanding Robotaxi Testing to Austin and Miami</strong> — The Amazon subsidiary is widening its steering-wheel-less robotaxi footprint beyond Las Vegas and San Francisco as it gears up for a broader public rollout. <a href="https://www.reuters.com/technology/zoox-widen-us-robotaxi-footprint-with-san-francisco-vegas-expansion-2026-03-24/" target="_blank">Reuters &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Bipartisan Bill Would Ban Federal Use of Chinese-Made Robots</strong> — US lawmakers are pushing legislation to ban Chinese-manufactured robots from federal use over national security concerns, citing risks similar to those that drove the TikTok and Huawei debates. <a href="https://mashable.com/article/united-states-chinese-robot-ban-cotton-schumer" target="_blank">Mashable &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Agile Robots Partners with Google DeepMind to Deploy Gemini-Powered Robots</strong> — The partnership deepens Big Tech's push into physical AI, deploying Gemini-powered systems across industrial sectors. <a href="https://techcrunch.com/2026/03/24/agile-robots-becomes-the-latest-robotics-company-to-partner-with-google-deepmind/" target="_blank">TechCrunch &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Lucid Bots Raises $20M for Window-Washing Drones</strong> — The startup is scaling its industrial drone fleet to keep up with demand for its automated building-exterior cleaning service, betting on unglamorous real-world utility over humanoid hype. <a href="https://techcrunch.com/2026/03/25/lucid-bots-raises-20m-to-keep-up-with-demand-for-its-window-washing-drones/" target="_blank">TechCrunch &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>X Square Robot Launches China's First Home-Cleaning Robot Service</strong> — Partnering with 58.com, X Square has launched an on-demand home-cleaning robot service in Shenzhen, bringing embodied AI into everyday Chinese households for the first time at scale. <a href="https://www.prnewswire.com/news-releases/x-square-robot-and-58com-launch-chinas-first-home-cleaning-robot-service-in-shenzhen-302717188.html" target="_blank">PR Newswire &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Unitree Humanoid Spotted Running &amp; Playing with Kids on NYC Streets</strong> — A Unitree humanoid robot was filmed interacting with children on New York City sidewalks, going viral as a glimpse of robots in everyday public spaces. <a href="https://x.com/dom_lucre/status/2037435538731344297" target="_blank">Watch on X &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Disney's Robotic Olaf Takes the Stage at NVIDIA GTC with Jensen Huang</strong> — A robotic version of the beloved Frozen snowman surprised the crowd when it appeared alongside NVIDIA CEO Jensen Huang at last week's GTC keynote. <a href="https://www.youtube.com/shorts/L1Hm3qq6ebM" target="_blank">Watch &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>BBC's Secret Weapon: Robot Cameras for Wildlife Close-Ups</strong> — Wondering how the BBC gets jaw-dropping close-ups in wildlife documentaries? The answer involves covert robot camera rigs disguised as animals — a social media moment that's breaking through this week. <a href="https://x.com/positivityofx/status/2036848793598255330" target="_blank">Watch on X &rarr;</a> <span class="source-badge">Superhuman</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Iran conflict spills into US cyber landscape</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://edition.cnn.com/2026/03/27/politics/iran-linked-hackers-fbi-director-patel" target="_blank">Iran-Linked Hackers Breach FBI Director Kash Patel's Personal Email, Publish 300+ Documents</a></h2>
+  <p class="story-summary">An Iran-linked hacking group breached the personal email account of FBI Director Kash Patel and published over 300 messages, photographs, and documents online on March 27. The FBI confirmed the breach but stated no government information was obtained. The attack is one of three separate FBI-related hacks in March 2026 alone, and comes as the US-Israeli military campaign against Iran enters its second week.</p>
+  <div class="story-expanded" id="story-10">
+    <p>The Iranian hacking group's decision to publicly dump Patel's personal communications appears designed for maximum psychological and political effect — a form of information warfare timed to the escalating "Operation Epic Fury" military campaign. The breach follows earlier March hacks: a suspected Chinese-government attack on FBI wiretap and surveillance infrastructure (March 7), and the disclosure that a foreign actor had accessed Epstein investigation files on an FBI server back in 2023. The concentration of FBI cyber incidents in a single month raises serious questions about federal executive personal communications security and the degree to which Iran is escalating in the cyber domain even as it faces kinetic strikes. <a href="https://edition.cnn.com/2026/03/27/politics/iran-linked-hackers-fbi-director-patel" target="_blank">Full story via CNN &rarr;</a> | <a href="https://www.aljazeera.com/news/2026/3/27/fbi-director-kash-patels-emails-photos-hacked-by-iran-linked-group" target="_blank">Al Jazeera &rarr;</a></p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://edition.cnn.com/2026/03/27/politics/iran-linked-hackers-fbi-director-patel" target="_blank">cnn.com &rarr;</a></span>
+  </div>
+</article>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>Techpresso</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Saturday, March 28, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
