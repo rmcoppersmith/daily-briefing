@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Monday, March 16, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* BULLET STORIES */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Monday, March 16, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">← All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- AI & TECHNOLOGY SECTION -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <h2 class="section-name">AI &amp; Technology</h2>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://www.theneurondaily.com/p/over-2b-in-ai-funding-hit-in-a-single-news-cycle" target="_blank">Over $2 Billion in AI Funding Hit in a Single Cycle</a></h2>
+    <p class="story-summary">The past week saw unprecedented AI funding concentration across enterprise agents, infrastructure, and creative tools. Agent platform companies raised massive rounds for AI-powered sales, procurement, and customer service automation, while infrastructure startups focused on agent governance, memory, and vector search pulled in significant capital.</p>
+    <div class="story-expanded" id="story-1">
+      <p>Major fundings included: Rox AI at $1.2B valuation (sales agents), Wonderful at $2B (customer service agents in 30+ languages), Gumloop at $50M (agent-building tools), Qdrant at $50M (vector search), and PixVerse at $300M unicorn valuation (video generation). The funding pattern reveals that boring enterprise verticals are winning the biggest checks, infrastructure is the new cloud, and the creative AI arms race is truly global.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">The Neuron</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More ▾</button>
+      <span class="story-url"><a href="https://www.theneurondaily.com/" target="_blank">theneurondaily.com →</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/03/12/bumble-to-launch-an-ai-dating-assistant-bee/" target="_blank">Bumble and Tinder Launch AI Dating Assistants</a></h3>
+      <p class="story-summary">Bumble introduced "Bee," an AI dating assistant that writes profiles, generates conversation starters, and plans dates, while Tinder held its first product keynote announcing IRL events and virtual speed dating alongside a safety-focused LLM.</p>
+      <div class="story-expanded" id="story-2">
+        <p>Both companies announced major AI features within the same week, signaling that conversation and matching are now core AI functions. Bumble's Bee can plan entire outings, while Tinder's "Does This Bother You?" safety LLM uses AI to flag problematic interactions. The moves suggest the industry recognizes that meaningful connections require AI mediation.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://techcrunch.com/" target="_blank">techcrunch.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.therundown.ai/p/musk-takes-xai-into-a-full-rebuild" target="_blank">Elon Musk's xAI Overhaul Underway After Co-Founder Exodus</a></h3>
+      <p class="story-summary">Elon Musk admitted xAI "was not built right" and is being rebuilt from the foundations up. Nine of the original 11 co-founders have departed, and the company is actively recruiting senior coding talent to help Grok catch up with industry leaders.</p>
+      <div class="story-expanded" id="story-3">
+        <p>The exodus comes as xAI struggles with Grok's competitive positioning, particularly in coding. Musk hired Andrew Milich and Jason Ginsberg from Cursor to lead the overhaul. Zihang Dai and Guodong Zhang were the latest departures, with Zhang reportedly blamed for Grok's coding shortfalls before leaving. This massive reorganization coincides with SpaceX's IPO preparations, adding pressure to demonstrate progress.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Rundown AI</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://www.therundown.ai/" target="_blank">therundown.ai →</a></span>
+      </div>
+    </article>
+  </div>
+
+  <!-- HEALTH & SCIENCE SECTION -->
+  <div class="section-header">
+    <span class="section-tag section-tag-science">Science</span>
+    <h2 class="section-name">Science &amp; Health</h2>
+  </div>
+
+  <article class="lead-story">
+    <h2>AI-Designed Cancer Vaccine Shrinks Rescue Dog's Tumor</h2>
+    <p class="story-summary">Sydney data engineer Paul Conyngham used ChatGPT, AlphaFold, and Grok to design a personalized mRNA cancer vaccine for his rescue dog Rosie, who was diagnosed with mast cell cancer. After the first injection in December, her tennis-ball-sized tumor shrank by 50%, and she is now chasing rabbits again.</p>
+    <div class="story-expanded" id="story-4">
+      <p>Conyngham spent tens of thousands of dollars to sequence Rosie's tumor DNA, use AlphaFold to model mutated proteins, identify drug targets, and partner with UNSW's RNA Institute to synthesize a custom mRNA vaccine. The effort represents a powerful proof of concept for citizen science: a non-biologist outside traditional labs used widely available AI tools to solve a complex medical problem in months rather than years. UNSW researchers called it stunning and are exploring how this approach could translate to human cancer trials.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">The Neuron</span>
+      <span class="source-badge">The Rundown AI</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More ▾</button>
+      <span class="story-url"><a href="https://www.theaustralian.com.au/" target="_blank">theaustralian.com.au →</a></span>
+    </div>
+  </article>
+
+  <ul class="bullet-stories">
+    <li><strong>AI Chatbots May Fuel Delusional Thinking</strong> — King's College London study found that chatbots can validate and amplify grandiose, paranoid, and romantic delusions, especially in vulnerable populations. <span class="source-badge">The Neuron</span></li>
+  </ul>
+
+  <!-- BUSINESS & MARKETS SECTION -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <h2 class="section-name">Business &amp; Markets</h2>
+  </div>
+
+  <div class="stories-grid">
+    <article class="story-card">
+      <h3>Dick's Sporting Goods Doubles Sales Over Decade</h3>
+      <p class="story-summary">Dick's Sporting Goods has roughly doubled sales in the past 10 years, driven by the explosive growth of youth sports spending. The retailer acquired GameChanger, a score-keeping app, and is rolling out "Houses of Sport" megastores and "Fast Break" smaller concept stores to capture market share.</p>
+      <div class="story-expanded" id="story-5">
+        <p>Youth sports have become a $40 billion annual market in the US, with average family spending jumping 46% from 2019 to 2024 and baseball spending rising nearly 70% in the same period. Dick's invested in technology through the GameChanger acquisition, which generates nearly $150M in annual revenue, and is leveraging the youth market boom with optimized store concepts and enhanced apps featuring loyalty point rewards and reservation systems.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More ▾</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+  </div>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Neuron</span>
+      <span>The Rundown AI</span>
+      <span>Morning Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Monday, March 16, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More ▾';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse ▴';
+  }
+}
+</script>
+</body>
+</html>
