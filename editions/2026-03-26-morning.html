@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Thursday, March 26, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Thursday, March 26, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">25.33</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Conflict, diplomacy &amp; global affairs</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">Operation Epic Fury Enters Day 25 With No Ceasefire in Sight</a></h2>
+  <p class="story-summary">CENTCOM confirms combat operations against Iran are "on or ahead of plan" as Iran's foreign minister publicly rejects direct U.S. talks. Egypt has offered to host de-escalation talks — the most concrete diplomatic opening available — while Iran's parliamentary speaker and top diplomat have been temporarily removed from U.S. targeting lists for 4–5 days to create diplomatic space.</p>
+  <div class="story-expanded" id="story-1">
+    <p>Markets are responding with extreme fear — the CNN Fear &amp; Greed Index sits at 10. Gold has surged nearly 3% to $4,526 and VIX remains elevated at 25.33. Trump claims Iran wants a deal "so badly" but fears retaliation; the Omani channel that cited "significant progress" in late February appears stalled. Tehran issued a fresh warning to an unnamed regional neighbor against occupying Iranian islands — likely directed at the UAE over the Abu Musa/Tunbs dispute — suggesting Iran is managing multiple pressure fronts simultaneously.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">Israel Expands Ground Operations Into Lebanon, Seizes Eight Settlements</a></h3>
+  <p class="story-summary">Israeli forces have taken control of eight settlements in southern Lebanon, advancing from Taybeh toward Deir Seryan and the Litani River — territory Israel last held in 2006. Hezbollah responded by striking Israel's Defense Ministry compound in Tel Aviv with "missiles of various types," marking an escalation in targeting symbology.</p>
+  <div class="story-expanded" id="story-2">
+    <p>Russia's ambassador to Lebanon claims Moscow is making "diplomatic efforts to contain escalation." Moscow also believes the Iran crisis may pressure Kyiv toward more pragmatic ceasefire terms by diverting Western financial attention — a notable intersection of the Middle East and Ukraine conflicts.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">Israeli Air Force Strikes Iranian Navy at Caspian Sea</a></h3>
+  <p class="story-summary">The Israeli Air Force struck Iranian Navy vessels at Bandar Anzali on the Caspian Sea, reportedly destroying a corvette, four missile boats, and auxiliary craft. This represents a significant geographic expansion of strike operations into a previously untouched theater.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The strike on the Caspian Sea is notable because it extends the geographic footprint of the conflict well beyond the Persian Gulf and Arabian Sea, hitting Iran's naval assets in an area that borders Russia, Azerbaijan, Kazakhstan, and Turkmenistan. This expansion could draw in broader geopolitical tensions.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">Trump Announces May 14–15 Beijing Summit With Xi Jinping</a></h3>
+  <p class="story-summary">Trump announced a summit with President Xi in Beijing for May 14–15, explicitly noting it was delayed due to the Iran operation. The announcement signals Washington is managing escalation optics with Beijing and attempting to compartmentalize U.S.–China trade tensions from the Iran conflict.</p>
+  <div class="story-expanded" id="story-4">
+    <p>Any Chinese statements on Iran, Taiwan posture shifts, or trade negotiation freeze/thaw in response to the summit announcement will indicate Beijing's strategic calculus. South Korea also rolled out its first series-produced KF-21 Boramae fighter jet — a milestone for indigenous defense capability that will reduce Seoul's reliance on U.S. platforms over time.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">Ukraine Drones Damage Russian Arctic Patrol Ship Under Construction</a></h3>
+  <p class="story-summary">Ukrainian drones damaged the Russian Project 23550 icebreaker <em>Purga</em> under construction at Vyborg Shipyard in St. Petersburg — a significant long-range strike on Arctic-capable naval assets demonstrating continued Ukrainian deep-strike capability.</p>
+  <div class="story-expanded" id="story-5">
+    <p>The strike on an Arctic patrol vessel in St. Petersburg represents a continuation of Ukraine's strategy to project force deep into Russian territory, targeting military-industrial assets far from the front lines. This complements other ongoing Ukrainian operations against Russian infrastructure.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">Pentagon Announces Major Missile Production Surge</a></h3>
+  <p class="story-summary">The DoD announced a major increase in missile production capacity, with emphasis on systems countering aerial threats and one-way attack drones. The surge is a direct response to Epic Fury consumption rates, signaling supply chain stress that will pressure defense-sector raw material costs.</p>
+  <div class="story-expanded" id="story-6">
+    <p>The missile production surge points to concerns about the rate of munitions consumption during Operation Epic Fury. Copper and rare earth materials — key inputs for defense manufacturing — are likely to see upward price pressure. The announcement also underscores the broader trend of Western nations investing in domestic defense production capacity.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">Saudi Nuclear Deal Pathway Raises Proliferation Concerns</a></h3>
+  <p class="story-summary">Reports confirm the Trump administration is pursuing a civil nuclear deal with Saudi Arabia that would permit enrichment — a proliferation concern that intersects directly with the Iran campaign. The deal adds a long-term proliferation premium to regional risk assets.</p>
+  <div class="story-expanded" id="story-7">
+    <p>Permitting Saudi enrichment would represent a significant shift in U.S. nonproliferation policy and could accelerate a nuclear arms race in the Middle East. The timing — amid active military operations against Iran's nuclear-capable regime — makes this particularly consequential for the region's strategic balance.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/58c36be2-e4e6-4993-bb0b-38870d76e685" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Sustained Airstrikes Documented in Shiraz</strong> — Open-source footage captures ongoing airstrikes in Iran's fourth-largest city, signaling continued pressure on civilian-adjacent infrastructure. <span class="source-badge">SitDeck</span></li>
+  <li><strong>USS Gerald R. Ford in Souda Bay for Repair</strong> — CSG-12 is in port at Crete for maintenance, reducing NATO/Eastern Mediterranean carrier strike capacity. USS Abraham Lincoln remains in the Arabian Sea. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Critical Internet Outages Across Africa</strong> — Zimbabwe and Ethiopia are experiencing critical BGP-level internet disruptions (24-hour duration), with Chad showing additional anomalies. Ethiopia is simultaneously managing flood/landslide recovery. <span class="source-badge">SitDeck</span></li>
+  <li><strong>U.S. Wildfires and Flooding Active</strong> — Multiple wildfire emergencies in Oklahoma (Jumping Juniper, Dibble Creek, Buck Horn), evacuation orders in Riverside County, CA (Almond Fire), and snowmelt flooding along the Snake River and Minnesota/North Dakota border. <span class="source-badge">SitDeck</span></li>
+  <li><strong>South Korea Rolls Out First Series-Produced KF-21 Fighter</strong> — A milestone for indigenous defense capability that will reduce Seoul's reliance on U.S. platforms over time. <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://phys.org/news/2026-03-ai-approach-uncovers-dozens-hidden.html" target="_blank">AI Approach Uncovers Dozens of Hidden Planets in NASA's TESS Data</a></h2>
+  <p class="story-summary">Astronomers at the University of Warwick have validated over 100 exoplanets — including 31 newly detected worlds — using a new AI pipeline called RAVEN applied to data from NASA's Transiting Exoplanet Survey Satellite. The tool analyzed observations of over 2.2 million stars collected during TESS's first four years of operations.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The researchers focused on planets orbiting close to their stars with periods under 16 days, providing the most accurate assessment of how common these short-period worlds are. Using RAVEN, they validated 118 new planets and identified over 2,000 high-quality planet candidates — nearly 1,000 of them entirely new. This complements NASA's ExoMiner++ system, a new version of the AI model trained on both Kepler and TESS data.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://phys.org/news/2026-03-ai-approach-uncovers-dozens-hidden.html" target="_blank">phys.org &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KgSlguR4ioAIa519IeS6hKn_tMnrK7Z1AAlJB4NYgVKKxfXjRL1bYKmLWY0x1DqUyO4VOO9f84OV7L1ic3hAUjo0NeMkudtkmBqJTuHEPjTY_hAtTt6jwKC9HXOAuCWSCkTlIhUcWgDp2wgJwfUetBjvhaw_y5bVUcl5YpGYBKLrwPCXMT2PZfxuo&s=1089593b99563221" target="_blank">Asking AI to Act Like an Expert Can Make It Less Reliable</a></h3>
+  <p class="story-summary">New research finds that prompting AI systems to adopt expert personas — a widely recommended prompting technique — can actually decrease the reliability and accuracy of their outputs, challenging conventional wisdom about how to get the best results from large language models.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The study suggests that role-playing prompts may cause AI systems to over-commit to certain response patterns associated with the assigned persona, potentially introducing biases and reducing the system's ability to acknowledge uncertainty or provide balanced assessments.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KgSlguR4ioAIa519IeS6hKn_tMnrK7Z1AAlJB4NYgVKKxfXjRL1bYKmLWY0x1DqUyO4VOO9f84OV7L1ic3hAUjo0NeMkudtkmBqJTuHEPjTY_hAtTt6jwKC9HXOAuCWSCkTlIhUcWgDp2wgJwfUetBjvhaw_y5bVUcl5YpGYBKLrwPCXMT2PZfxuo&s=1089593b99563221" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVLLBZXjRMmbYGlbDU0BgL4Vab4VrG7_k-S1_B1TA1jUtguUpYLl6WrRyZr9fZBUvrG4_4Uu7z5CAUTsGeOyONXTmgSklgSoypMJm5ndgES7pBl-1W3ab-IQtyx8I4JIBRKroSXydWlL1CmquV1AVS4laGvgeCsbhgGmDF0TY8wQp4-A8Jdg3O&s=6da0adb543283c5e" target="_blank">Adversarial AI Framework Reveals Mechanisms Behind Impaired Consciousness</a></h3>
+  <p class="story-summary">Researchers have developed an adversarial AI framework that sheds light on the neural mechanisms underlying impaired states of consciousness, potentially opening pathways to new therapeutic interventions for patients with disorders of consciousness.</p>
+  <div class="story-expanded" id="story-10">
+    <p>The framework uses competing AI models to probe and map the boundaries of consciousness states, offering insights that could help clinicians better understand conditions like coma, vegetative states, and minimally conscious states — and potentially develop targeted therapies.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVLLBZXjRMmbYGlbDU0BgL4Vab4VrG7_k-S1_B1TA1jUtguUpYLl6WrRyZr9fZBUvrG4_4Uu7z5CAUTsGeOyONXTmgSklgSoypMJm5ndgES7pBl-1W3ab-IQtyx8I4JIBRKroSXydWlL1CmquV1AVS4laGvgeCsbhgGmDF0TY8wQp4-A8Jdg3O&s=6da0adb543283c5e" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KgSlguR4ioAIa519IeS6hKn_tMnrK7Z1AAlJB4IIlXOKdOVSJM1bMKlq-QxRRVqkWZ71bV5eUhB0HI2ngnhFY-vVtSMFrWrBuZsMbEBUvYV5X5TdLltjsRQcHXITGTHjigQmQrWpytGpnhnNwQT-sCj_hS7uPqOBZMzcQ7aYVZJLhWFihIlKEbgLmLzUMetBXJuUP84fk2Dg2Wlnl00wh_4g&s=2b56fe939c317f3d" target="_blank">Thousands of Websites Are Accidentally Broadcasting Sensitive Data</a></h3>
+  <p class="story-summary">A new study finds that thousands of websites are inadvertently exposing sensitive user data through misconfigured systems and hidden data leaks, posing significant privacy and security risks to millions of internet users worldwide.</p>
+  <div class="story-expanded" id="story-11">
+    <p>The researchers identified systemic vulnerabilities in web configurations that allow personal and financial data to be broadcast unintentionally. The findings highlight the gap between security best practices and real-world implementation across the internet's vast ecosystem of sites.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KgSlguR4ioAIa519IeS6hKn_tMnrK7Z1AAlJB4IIlXOKdOVSJM1bMKlq-QxRRVqkWZ71bV5eUhB0HI2ngnhFY-vVtSMFrWrBuZsMbEBUvYV5X5TdLltjsRQcHXITGTHjigQmQrWpytGpnhnNwQT-sCj_hS7uPqOBZMzcQ7aYVZJLhWFihIlKEbgLmLzUMetBXJuUP84fk2Dg2Wlnl00wh_4g&s=2b56fe939c317f3d" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Research &amp; discovery</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://phys.org/news/2026-03-jwst-reveals-distant-red-galaxy.html" target="_blank">JWST Reveals Most Distant Red Galaxy Yet at Redshift 11.45</a></h2>
+  <p class="story-summary">Using the James Webb Space Telescope, astronomers have discovered the most distant red galaxy ever detected — designated EGS-z11-R0 — at a redshift of approximately 11.45, meaning it existed just 400 million years after the Big Bang. Unlike typical high-redshift galaxies with blue UV slopes, this one shows significant dust attenuation and mature stellar populations.</p>
+  <div class="story-expanded" id="story-12">
+    <p>The galaxy was serendipitously identified by analyzing JWST's Near Infrared Spectrograph data in the CEERS field. EGS-z11-R0 has a stellar mass of 1.6–4 billion solar masses and a star-formation rate of 10–40 solar masses per year. Its rising or approximately constant star-formation history suggests sustained growth rather than a short-lived burst, challenging models of early galaxy evolution and indicating dust-enriched environments existed surprisingly early in cosmic history.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://phys.org/news/2026-03-jwst-reveals-distant-red-galaxy.html" target="_blank">phys.org &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmNBROzMIwO41XKq0CXjBWnKEBl7nUyBBO7kCU6RLG4fl4BV_NzjB6iUwguBBOMlKntwCBrprUTEjwSJ_4S9TyrSASQPvOMDCITSDpSlYnVpTiGoCxptIQS_dFk-tRjOTqPApUic0iOIRMObFdR3QHy_VcwaC00ANF7wTIuRORsrtnUA&s=90738639f04106bd" target="_blank">Archaeology Preserves Evidence of the Yahidne War Crime</a></h3>
+  <p class="story-summary">Researchers are using archaeological methods to systematically document and preserve evidence of the war crime committed by Russian forces in the basement of a school in Yahidne, Ukraine, where civilians were held captive. The work ensures accountability through rigorous forensic documentation.</p>
+  <div class="story-expanded" id="story-13">
+    <p>The archaeological approach brings scientific rigor to the documentation of conflict-related atrocities, creating an evidence base that can withstand legal scrutiny in international courts. The methodology represents an important intersection of academic archaeology and human rights work.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmNBROzMIwO41XKq0CXjBWnKEBl7nUyBBO7kCU6RLG4fl4BV_NzjB6iUwguBBOMlKntwCBrprUTEjwSJ_4S9TyrSASQPvOMDCITSDpSlYnVpTiGoCxptIQS_dFk-tRjOTqPApUic0iOIRMObFdR3QHy_VcwaC00ANF7wTIuRORsrtnUA&s=90738639f04106bd" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmOA9O1sw5NZJdP6cCWCdPmaYDkfGQ3xVP8U2e-V7dreY6CkjH1jkxkhUku0FIaFeMqQPLqY3cLlXoUYjvWozu_DkDWdDGJ3KUTCCLQl4iVo2pUpGxmNgdAPJQl9Nc0O37NA9Kyp4xNYhUNPlBTCpajLAKhqDLiUIXtBGGwV7D4-N1VBiIg2dk0w4&s=31064f26fb802caa" target="_blank">First Microlasers Capable of Detecting Individual Molecules and Ions</a></h3>
+  <p class="story-summary">Scientists have developed the first microlasers capable of detecting individual molecules and ions, a breakthrough in sensing technology that could one day aid medical diagnosis by identifying biomarkers at the single-molecule level.</p>
+  <div class="story-expanded" id="story-14">
+    <p>The miniaturized laser sensors represent a significant advance in photonic sensing technology. By detecting single molecules, these devices could enable earlier and more precise diagnosis of diseases, environmental monitoring, and fundamental research into molecular interactions.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmOA9O1sw5NZJdP6cCWCdPmaYDkfGQ3xVP8U2e-V7dreY6CkjH1jkxkhUku0FIaFeMqQPLqY3cLlXoUYjvWozu_DkDWdDGJ3KUTCCLQl4iVo2pUpGxmNgdAPJQl9Nc0O37NA9Kyp4xNYhUNPlBTCpajLAKhqDLiUIXtBGGwV7D4-N1VBiIg2dk0w4&s=31064f26fb802caa" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVK7BOFjRanKEcnbuXnB9T81aT-Fbe7qU9EkDInCAgjGc-u1pJJVrFqhiYuY3FFFShUY7hYNzl7zwTQJnGODWIVGuhW1YZXJmpH5W1nt9MQuZNlvUS3_fnMBJZwdEpZtkLfOcaRwteiqcH1O7MnVEUtxbM&s=681ee0c05211174a" target="_blank">FDA Should Consider Redesign of Proposed Nutrition Labels, Study Finds</a></h3>
+  <p class="story-summary">New research suggests that the FDA's proposed nutrition label redesign may not achieve its intended goal of helping consumers make healthier choices, recommending alternative approaches to food labeling that better communicate nutritional information.</p>
+  <div class="story-expanded" id="story-15">
+    <p>The study evaluated consumer comprehension and decision-making under different label designs, finding that the currently proposed format may fall short of the FDA's public health objectives. The researchers recommend specific design modifications to improve effectiveness.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVK7BOFjRanKEcnbuXnB9T81aT-Fbe7qU9EkDInCAgjGc-u1pJJVrFqhiYuY3FFFShUY7hYNzl7zwTQJnGODWIVGuhW1YZXJmpH5W1nt9MQuZNlvUS3_fnMBJZwdEpZtkLfOcaRwteiqcH1O7MnVEUtxbM&s=681ee0c05211174a" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVLLBHX2tSnaAGl72N2B5IqkeS5VPV6OQ6AgDU0Cw3iVc-vVwVLkuVqFCBqJTuAknyVpnpAt_35zASWcHRcyGVVRK5Sl8vSpX5Cpm9kN1XU_NJpe9e3PDqPAFDmcc0PY1BYLpYVyNLjKEdiO7BgkAVsli37U3S6KtnUwGEkWVm1w&s=91892de473960503" target="_blank">ADHD Medication in Childhood May Reduce Later Psychosis Risk</a></h3>
+  <p class="story-summary">A new study finds that ADHD medication taken during childhood may be associated with a reduced risk of developing psychosis later in life, suggesting a potentially protective neurological effect of stimulant treatment during critical developmental periods.</p>
+  <div class="story-expanded" id="story-16">
+    <p>The findings add nuance to ongoing debates about the long-term effects of stimulant medication prescribed during childhood, suggesting benefits that extend beyond symptom management into broader mental health outcomes.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVLLBHX2tSnaAGl72N2B5IqkeS5VPV6OQ6AgDU0Cw3iVc-vVwVLkuVqFCBqJTuAknyVpnpAt_35zASWcHRcyGVVRK5Sl8vSpX5Cpm9kN1XU_NJpe9e3PDqPAFDmcc0PY1BYLpYVyNLjKEdiO7BgkAVsli37U3S6KtnUwGEkWVm1w&s=91892de473960503" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Tooth Enamel Reveals What Early Mesopotamians Really Ate</strong> — New analysis of ancient tooth enamel provides the first direct dietary evidence from early Mesopotamian populations, revealing their actual food consumption patterns. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmMQ9DysYneZVXIqBHFiNRmakKmPGL1AdD5kiJoVrQ8ucsSEXQzjlrlEwgi1xUM02boVKaq5XUBVLiVtz5S9zf5jACRNHOaDGMWSS4CU4yUqenDpmsmNgWSLpAm-VTyK3lIgpI0NcwJp0KdeceCHNDtaUdl7TZg0QKpxbKvgk&s=60ec0d1653ea4284" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Tiny Fossil Eggs Provide First Evidence of Cretaceous Bird-Like Dinosaurs in Korea</strong> — Newly discovered fossil eggs offer the first physical evidence that bird-like dinosaurs inhabited the Korean Peninsula during the Cretaceous period. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmIQ9D3Y4zO5JLJLgCXiFYi-kfnKWK2BJH6wmf-lbV5eU2AwPM1zg43k05uXBIKUqKpwrJso7dFFLzQYiqSsXt1DgDSc3WOGmEVSy9Qx0zS5WbDJWxidAYQekZnu1W3fmmOxFBwdchMZNEf-wcCnUKhIkOhr-RkUMTqwTIvA2H&s=53020fdf164671d8" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>From Stillage to Storage: Turning Bourbon Byproducts Into Supercapacitors</strong> — Researchers have found a way to convert bourbon distillery waste (stillage) into high-performance supercapacitor materials, creating value from an industrial byproduct. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KgSlguR4ioAIa519IeS6hKn_tMnrK7Z1AAlJB4J5VRIbhOXCMSi7AAhr2e1FxE6FGI7lDfreksFl_LxyA3lUtgp1pLI02bpR-Vv5DFHlT0CpL4Ut2__iELctfMICaCXXC6WFcjS4yhHdKpjdwuS-JAk_lSjOXmNA9BgtYhOb5bLLlfWi9YlvkLlbWVyFxI8Eif-EvU8vdnXh6VkGAorFk_t0cbdArU5F3E7s8&s=ec1e5ad245b669ce" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Immune Response to Cancer May Cause Autoimmune Disorders</strong> — Research reveals that the body's immune response to cancer can trigger autoimmune disorders, including anti-NMDA receptor encephalitis, shedding light on the complex relationship between cancer immunity and autoimmunity. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVJLlCTiha1bYKh6yW3wJDqkeb4lzU8qY0E1nLyjg5lFYo-UtSNVCKoAqGr9fZBUvrG4_4Uu7z5CAUTsGeOyONXTmgSklgSoypMJm5ndgES7pBl-1W3ab-IQtyx8I4JIBRKroSXydWlL1CmquV1AVS4laGvgeCsbhgGmDF0TY8wQp4-A8Jdg3O&s=2b772e36bb419559" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Combining Algae and Oyster Shells for Biodiesel Born in the Bayou</strong> — Scientists have developed a method using algae combined with oyster shells to produce biodiesel, turning abundant Gulf Coast resources into sustainable fuel. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmNglAxso7PY9fYLVDXCda1asWh6icw1xV70GW4Eyc4uI6AkTB0DA4z1A5uUMEM0uVmxybqYvSFBvpU5bpS8Xl-XMTWcn8ODGFUTi5El4rXpGoSYGolO4SR-pUm-VY373vNA9B3Y47I41dOaBKSToNwPdex-mF_BBU5EzavgqdoLllVBs&s=6a7cb72b3d6fa1d1" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>The Hidden Cost of Sperm Storage</strong> — A study across the animal kingdom finds that stored ejaculates deteriorate over time, revealing a previously underappreciated biological cost of sperm storage in reproductive biology. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmPQ9JwMY7eZJIKKZCFjVLl7YOk7nU1BtH5FGW7UvU86YxA1nB0Tw7k1k5sQFTMlKU-xqAsabCHlP1R5-xUcbs7iESSNaFICCMZyCxS1IzUsWhApW1lZcEUup7me1SweHiMggQwMI8OJgVI6NDXjJLnbYTxuTKgEIT-2mb_lzZoLlgSg2Wk2di&s=e323e7959088ce3c" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>SitDeck</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Thursday, March 26, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
