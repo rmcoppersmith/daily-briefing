@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Sunday, April 5, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Sunday, April 5, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- GEOPOLITICS & WORLD -->
+  <div class="section-header">
+    <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+    <span class="section-name">U.S. strikes Iran as Hormuz crisis escalates</span>
+  </div>
+
+  <article class="lead-story">
+    <h2>U.S. Conducts Airstrikes on Tehran and Isfahan Military Installations</h2>
+    <p class="story-summary">The United States has carried out airstrikes on military installations in Tehran and Isfahan, marking a dramatic escalation in the Iran-Israel-U.S. conflict that has been building since Wave 91. President Trump simultaneously issued a 48-hour ultimatum demanding Iran open the Strait of Hormuz unconditionally — an ultimatum Iran has publicly rejected.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The strikes on Tehran and Isfahan represent the first direct U.S. military action on Iranian soil since the current war cycle began, dramatically raising the stakes for all parties. Isfahan is home to key Iranian nuclear research facilities and air defense infrastructure; Tehran strikes targeted IRGC command and control nodes. Iran's rejection of the Hormuz ultimatum — delivered through its foreign minister within hours — signals that a negotiated off-ramp is not imminent. The Strait of Hormuz carries approximately 20% of global oil supply, and even a partial closure would send energy markets into shock. Planet Labs, the commercial satellite imagery provider, has blacked out imagery over Iran, suggesting either a government request or proactive compliance ahead of anticipated activity.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">SitDeck</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Iran Rejects Trump's 48-Hour Hormuz Ultimatum; Planet Labs Blacks Out Satellite Imagery Over Iran</h3>
+      <p class="story-summary">Iran's government formally rejected President Trump's demand to open the Strait of Hormuz within 48 hours, with the foreign minister calling the ultimatum "an act of aggression." Simultaneously, Planet Labs — the commercial satellite imagery company — has ceased publishing imagery over Iranian territory, a move widely interpreted as either government-compelled or self-imposed compliance during active operations.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The Planet Labs blackout is significant because commercial satellite imagery has played an unprecedented role in the current conflict — providing journalists, researchers, and intelligence agencies with real-time visibility into troop movements, infrastructure damage, and military buildups. A blackout over Iran denies this transparency layer precisely at the moment when independent verification of strike damage is most critical. The imagery blackout precedent was set during the early days of the Ukraine war, when Maxar Technologies faced pressure to limit imagery resolution over certain areas. Whether Planet Labs acted under a classified request or proactively is not confirmed.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Iran Breaching Israeli Missile Defenses; Soleimani Relatives Arrested</h3>
+      <p class="story-summary">Iranian ballistic and cruise missile salvos have begun penetrating Israeli missile defense systems in certain corridors, according to SitDeck reporting — a troubling development that suggests Iran is successfully mapping and exploiting gaps in the Iron Dome, David's Sling, and Arrow layered defense architecture. Separately, Israeli forces have arrested relatives of Qasem Soleimani in a move analysts describe as psychological pressure.</p>
+      <div class="story-expanded" id="story-3">
+        <p>Missile defense saturation has been a known vulnerability since the conflict began — Israel's layered systems are effective but not infinite, and Iran has been experimenting with simultaneous multi-vector attacks (ballistic missiles + cruise missiles + drones from different azimuths) to overwhelm intercept capacity. Reports of successful penetration in specific corridors — reportedly in northern Israel — mark a qualitative change in the threat. The Soleimani relative arrests carry significant symbolic weight inside Iran, where the late IRGC commander remains a martyr figure, and could be intended to provoke or to signal Israeli willingness to escalate on non-military dimensions.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>PMF Forces Strike Salah al-Din Province in Iraq as Regional Front Widens</h3>
+      <p class="story-summary">Iran-aligned Popular Mobilization Forces (PMF) have conducted strikes in Iraq's Salah al-Din province, opening a new front in the broader regional conflict and underscoring the risk of Iraq being drawn into direct hostilities it has tried to avoid since the conflict began.</p>
+      <div class="story-expanded" id="story-4">
+        <p>Salah al-Din province, north of Baghdad, is strategically sensitive — it contains key oil infrastructure and is a corridor for both U.S. military logistics and Iranian-backed militia movement. PMF strikes in this area are a departure from the militia's prior strategy of targeting U.S. bases in western Iraq. Iraq's government has been walking a difficult line: it hosts both U.S. forces and Iranian-aligned militias, and has been trying to prevent its territory from becoming a launch pad for escalation. These strikes suggest Iranian proxy forces are willing to act independently of Baghdad's preferences as the broader conflict intensifies.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Gold Falls, Silver Surges — Markets Send Counterintuitive Signals Amid War Escalation</h3>
+      <p class="story-summary">In a counterintuitive market development, gold — the traditional safe-haven asset during geopolitical crises — has softened while silver has surged, defying the historical pattern where both metals rise together in wartime. Analysts are pointing to industrial demand signals from China's manufacturing sector and a technical breakout in silver futures as explanations.</p>
+      <div class="story-expanded" id="story-5">
+        <p>The gold-silver ratio has historically compressed during risk-off periods, but the current move — silver outperforming despite gold weakness — is unusual. One explanation: China's manufacturing sector, a massive silver consumer for photovoltaic solar panels and electronics, has been signaling production acceleration, providing an industrial demand bid for silver that gold doesn't benefit from. Another factor: large commodity funds have been rotating out of gold ETFs into silver, possibly on the thesis that silver has more upside if a ceasefire is brokered and markets normalize. The divergence is being closely watched as a potential leading indicator of market expectations about conflict duration.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- SCIENCE -->
+  <div class="section-header">
+    <span class="section-tag section-tag-science">Science</span>
+    <span class="section-name">Physics, space, medicine, and the ancient world</span>
+  </div>
+
+  <article class="lead-story">
+    <h2>Graphene Bone Scaffold Regenerates Fractures by Stimulating Natural Repair</h2>
+    <p class="story-summary">Researchers have developed a graphene-based scaffold that, when implanted at fracture sites, actively stimulates bone regeneration through electrical signaling — accelerating natural repair processes without requiring drugs or growth factors. Early animal studies show complete fracture bridging in timeframes significantly shorter than with current standard-of-care approaches.</p>
+    <div class="story-expanded" id="story-6">
+      <p>The scaffold leverages graphene's unique property of being electrically conductive while biocompatible and biodegradable under the right conditions. Bone repair is a piezoelectric process — bones naturally generate small electrical signals under mechanical stress, which helps coordinate osteoblast activity. The graphene scaffold mimics and amplifies this signaling, accelerating the cascade that deposits new bone matrix. The researchers report that the scaffold degrades gradually as new bone grows, leaving no permanent implant. If clinical trials replicate the animal results, this technology could transform treatment of complex fractures, delayed unions, and non-union injuries that currently require multiple surgeries or lengthy immobilization.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Science X</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Helium Atoms Placed in Quantum Superposition of Two Locations Simultaneously</h3>
+      <p class="story-summary">Physicists have achieved quantum superposition with helium atoms — placing individual atoms in a state where they exist in two distinct spatial locations at once, then observing interference patterns that confirm the quantum state held. The result extends superposition demonstrations beyond photons and electrons into neutral atoms with practical measurement implications.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Quantum superposition with neutral atoms is particularly valuable for precision sensing applications — atomic interferometers can measure gravitational fields, rotation, and acceleration with extreme precision. Helium, being lighter and simpler than heavier atoms previously used in such experiments, offers advantages in coherence time and controllability. The researchers used laser cooling to bring atoms to near absolute zero, then used precisely timed laser pulses to create and maintain the superposition. The interference patterns observed upon measurement match theoretical predictions to high precision, confirming the quantum mechanical treatment. This work advances the field of matter-wave interferometry used in next-generation inertial navigation and fundamental physics tests.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>30 New Verses of Empedocles Found in Cairo Papyrus — Rewriting Greek Philosophy History</h3>
+      <p class="story-summary">Classicists have identified 30 previously unknown verses from the pre-Socratic philosopher Empedocles embedded in a papyrus held in the Cairo Museum, dramatically expanding the surviving corpus of one of ancient philosophy's most influential thinkers. Empedocles, who proposed that all matter consists of four elements (earth, water, fire, air), is known primarily through fragments — making this discovery exceptional.</p>
+      <div class="story-expanded" id="story-8">
+        <p>Empedocles (~490–430 BCE) developed the four-element theory that dominated Western natural philosophy through the medieval period. Only fragments of his two major poems — "On Nature" and "Purifications" — have survived, making every new verse a significant addition to classical scholarship. The Cairo papyrus, which had been held in storage without full scholarly analysis, was re-examined using multispectral imaging techniques that revealed text invisible to the naked eye. The 30 new verses deal with cosmology and the nature of love and strife as opposing forces — themes central to Empedocles' philosophy. Scholars are now analyzing how these verses fit into the known fragments and whether they revise current understanding of his system.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Hubble Constant Measured to 1% Accuracy — 5-Sigma Tension with CMB Remains</h3>
+      <p class="story-summary">A new measurement of the Hubble constant — the rate at which the universe is expanding — has achieved 1% accuracy, the most precise direct measurement to date. The result deepens rather than resolves the Hubble tension: the measured value remains in strong disagreement (5-sigma) with the Hubble constant derived from the cosmic microwave background, suggesting either new physics or unidentified systematic errors.</p>
+      <div class="story-expanded" id="story-9">
+        <p>The Hubble tension has been one of cosmology's most pressing puzzles for a decade. Measurements based on the local universe (using standard candles like Cepheid variable stars and Type Ia supernovae) consistently yield a faster expansion rate (~73 km/s/Mpc) than measurements derived from the early universe's CMB (yielding ~67 km/s/Mpc). At 5-sigma, the discrepancy is well beyond what statisticians attribute to chance. Proposed solutions include: new physics (early dark energy, decaying dark matter, extra neutrino species), systematic errors in the distance ladder, or flaws in the standard cosmological model (ΛCDM). The new 1% measurement tightens the local constraint, making instrument error a less plausible explanation and strengthening the case that the tension reflects genuine new physics.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Gravitational Waves May Be the Origin of Dark Matter, New Theory Proposes</h3>
+      <p class="story-summary">A new theoretical framework proposes that dark matter particles could have been produced by gravitational waves in the early universe — a novel mechanism that would link two of cosmology's biggest mysteries and could be testable with next-generation gravitational wave detectors like LISA and Einstein Telescope.</p>
+      <div class="story-expanded" id="story-10">
+        <p>The standard cosmological model requires dark matter to account for ~27% of the universe's energy content, but its particle nature remains unknown after decades of direct detection experiments. The new proposal — gravitational particle production — suggests that the violent gravitational wave background from events like inflation or first-order phase transitions could have created massive particles that now constitute dark matter. The mechanism doesn't require new fundamental forces beyond gravity, making it theoretically economical. The critical test: if gravitational waves produced dark matter, the gravitational wave background from the early universe should have a specific spectrum that LISA (launching ~2035) could detect and potentially correlate with dark matter abundance measurements.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Vera Rubin Observatory Catalogues 11,000+ New Asteroids in First Science Run</h3>
+      <p class="story-summary">The Vera Rubin Observatory's Legacy Survey of Space and Time (LSST) has identified more than 11,000 previously unknown asteroids in its first operational science run — demonstrating the telescope's extraordinary capability for solar system surveillance and foreshadowing what is expected to be a revolution in asteroid discovery over the coming decade.</p>
+      <div class="story-expanded" id="story-11">
+        <p>The Vera Rubin Observatory in Chile is designed to image the entire southern sky every few nights, enabling it to detect moving objects like asteroids, comets, and near-Earth objects through their apparent motion between exposures. The 11,000+ asteroid discoveries in a single science run far outpaces historical discovery rates — for comparison, it took decades to catalogue the first 10,000 asteroids. Scientists expect Rubin to discover millions of new solar system objects over its 10-year survey, including near-Earth asteroids smaller than 140 meters (the threshold for objects that could cause regional devastation) that current surveys largely miss. Planetary defense agencies at NASA and ESA are integrating Rubin's data feeds into their hazard assessment pipelines.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Aerosol Models Show Mars Terraforming Could Raise Temperatures by 10°C Within Decades</h3>
+      <p class="story-summary">New climate modeling suggests that seeding the Martian atmosphere with engineered aerosol particles designed to absorb infrared radiation could raise average surface temperatures by up to 10°C within decades — enough to begin sublimating polar ice caps and thicken the atmosphere, though far short of full habitability without additional interventions.</p>
+      <div class="story-expanded" id="story-12">
+        <p>The proposed aerosols are not greenhouse gases but rather solid particles with optical properties tuned to trap outgoing infrared radiation on Mars. Unlike Earth, where CO₂ is the primary greenhouse concern, Mars's atmosphere is too thin to trap meaningful heat regardless of composition — so the approach focuses on creating a particulate layer that acts as a thermal blanket. The 10°C warming estimate, while significant, would bring average Martian temperatures to approximately -40°C — still far below what most Earth organisms can tolerate. A full terraforming scenario would require not just warming but also atmospheric pressure increase, water cycle activation, and protection against solar radiation (Mars lacks a magnetosphere). The researchers note the aerosol approach could be a useful first step in a multi-century process.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Pristine Star 80,000 Light-Years Away Is Among the Oldest Known — Formed 13 Billion Years Ago</h3>
+      <p class="story-summary">Astronomers have identified a star located 80,000 light-years from Earth that formed approximately 13 billion years ago, making it one of the oldest known stars in the Milky Way. Its chemical composition — extremely low in heavy elements — is a direct record of the universe's metal-poor early epoch, providing a snapshot of stellar nucleosynthesis before most heavy elements were forged.</p>
+      <div class="story-expanded" id="story-13">
+        <p>Stars formed in the early universe are called metal-poor or "extremely metal-poor" (EMP) because "metals" in astronomy refers to all elements heavier than helium. The first stars formed from pure hydrogen and helium; all heavier elements were forged in stellar interiors and supernovae. A star with exceptionally low metal content is essentially a direct chemical fossil from the earliest epoch of galaxy formation. This star's position — 80,000 light-years away, in the Milky Way's outer halo — is consistent with the hypothesis that the galaxy's halo contains remnants of ancient dwarf galaxies consumed in mergers. Its spectrum allows researchers to study what nuclear processes were occurring in the universe's first billion years.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Mystery of 1950s "Sky Flashes" Solved — Atmospheric Electrical Phenomena Confirmed</h3>
+      <p class="story-summary">Scientists have finally explained a category of strange luminous flashes photographed by aircraft crews and ground observers in the 1950s that baffled researchers for decades. New analysis confirms these events were a previously unclassified category of transient luminous event (TLE) — related to but distinct from sprites and elves — caused by unusual atmospheric electrical discharge geometry.</p>
+      <div class="story-expanded" id="story-14">
+        <p>The 1950s observations, dismissed for decades as photographic artifacts or misidentified phenomena, have been validated by comparison with modern high-speed imaging and atmospheric electrical measurements from the International Space Station. The newly classified TLE type appears to require a specific combination of thunderstorm cell geometry, wind shear, and charge distribution that is relatively rare, explaining why the phenomenon wasn't systematically observed again until high-resolution imaging became routine. TLEs like sprites (red columns above storms), elves (expanding rings of light), and blue jets are now known to be regular features of severe thunderstorms, but their full classification — and the physics driving them — remains an active research area.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Fossil Trove in Morocco Pushes Back Origin of Complex Animal Life by 20 Million Years</h3>
+      <p class="story-summary">A newly described fossil bed in Morocco contains exquisitely preserved soft-bodied animals dating to approximately 540 million years ago — pushing back the earliest confirmed evidence of complex multicellular animal life by roughly 20 million years and challenging existing models of the Cambrian Explosion's timing and pace.</p>
+      <div class="story-expanded" id="story-15">
+        <p>The Cambrian Explosion — the period roughly 538–520 million years ago when most major animal body plans first appear in the fossil record — has long been debated in terms of whether it was a genuine evolutionary acceleration or an artifact of improved preservation conditions. The Morocco fossils, preserved in fine-grained sediment that captured soft tissue outlines, show differentiated tissues, possible nervous system precursors, and locomotion structures in animals predating the canonical Cambrian boundary. If confirmed, this would suggest the explosion was less of a sudden event and more of a drawn-out process with deep Ediacaran roots — reframing one of evolutionary biology's most iconic episodes.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div>
+
+  <h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--wsj-gray);margin:24px 0 8px;">Also in Science</h4>
+  <ul class="bullet-stories">
+    <li><strong>Cannabis and Tobacco Use Linked to Distinct Brain Volume Changes</strong> — A large neuroimaging study finds that cannabis and tobacco use are associated with different patterns of regional brain volume reduction, with cannabis showing stronger effects on areas tied to memory and motivation and tobacco affecting regions linked to attention and impulse control. <span class="source-badge">Science X</span></li>
+    <li><strong>Gut Bacteria Composition Found to Influence Social Behavior in Animal Models</strong> — Research in rodents demonstrates that manipulating gut microbiome composition alters social approach behavior and anxiety responses, strengthening the gut-brain axis hypothesis and raising questions about the role of microbiome health in human social cognition. <span class="source-badge">Science X</span></li>
+    <li><strong>Spin-3/2 Particle Discovery Could Imply the Existence of Gravity as an Emergent Force</strong> — Theoretical physicists propose that if a spin-3/2 particle (gravitino-like) exists at accessible energy scales, it would imply that gravity is an emergent phenomenon rather than a fundamental force — a finding that would require significant revision of the Standard Model extension frameworks. <span class="source-badge">Science X</span></li>
+    <li><strong>Dark Radiation Theory: Early Universe Neutrino Lookalikes May Explain Cosmic Anomalies</strong> — A new model proposes that a form of "dark radiation" — particles that behaved like neutrinos in the early universe but interacted only gravitationally — could explain several cosmological anomalies simultaneously, including the Hubble tension and the matter power spectrum discrepancy. <span class="source-badge">Science X</span></li>
+  </ul>
+
+  <!-- ENTERTAINMENT & CULTURE -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">America's impersonator economy is booming</span>
+  </div>
+
+  <article class="lead-story">
+    <h2>Elvis Impersonators Earn Up to $129K/Year as America's 250th Birthday Drives a Celebrity Lookalike Boom</h2>
+    <p class="story-summary">Morning Brew's Sunday feature profiles America's thriving professional impersonator industry — a niche economy where skilled performers can earn six-figure incomes, driven by the United States' approaching 250th birthday and an insatiable demand for experiential nostalgia at corporate events, weddings, and tourist attractions.</p>
+    <div class="story-expanded" id="story-16">
+      <p>The impersonator economy operates at a surprisingly professional level: top-tier Elvis performers can command $129,000 per year in fees, princess party operators run multi-employee businesses serving children's events, and historical character actors are booked months in advance for America's semiquincentennial celebrations in 2026. Colonial Williamsburg alone is projecting 2.1 million visitors this year — up significantly from prior years — with costumed historical interpreters as the primary draw. The platform Cameo has also seen a rise in impersonator bookings, as fans seek personalized celebrity-adjacent video messages when the real celebrity is out of reach. Analysts note the industry benefits from a structural trend: as authentic celebrity access becomes more exclusive and AI-generated content more common, human impersonators provide something neither can — a live, interactive, embodied experience.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Morning Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Ben Franklin Impersonator Charges $1,776 Per Keynote — America's 250th Unlocks Premium Pricing</h3>
+      <p class="story-summary">A professional Benjamin Franklin character actor has set his speaking fee at $1,776 — the year of American independence — a pricing quirk that has become a marketing asset as corporate clients book historical American figures for America's 250th birthday events. The performer notes that bookings are up more than 40% year-over-year.</p>
+      <div class="story-expanded" id="story-17">
+        <p>Historical character impersonators occupying the intersection of entertainment and education — portraying figures like Franklin, Washington, Lincoln, and Harriet Tubman — have carved out a sustainable niche in the corporate events and museum sector. Unlike celebrity impersonators who track a living person's evolving image and mannerisms, historical character actors must research and maintain period-accurate dress, speech patterns, and knowledge bases. The $1,776 fee is deliberately symbolic and has generated significant press coverage, effectively serving as marketing for future bookings. Several universities and museums are commissioning custom historical character performances for their semiquincentennial programming.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Colonial Williamsburg Projects 2.1 Million Visitors for 2026 — A Semiquincentennial Record</h3>
+      <p class="story-summary">Colonial Williamsburg, the living history museum in Virginia, is projecting 2.1 million visitors in 2026 — what would be a record year driven entirely by America's 250th birthday. The site has expanded its costumed interpreter program and added evening events to capture both educational tourism and adult entertainment markets.</p>
+      <div class="story-expanded" id="story-18">
+        <p>Colonial Williamsburg's 2.1M visitor projection represents a significant step-up from its post-pandemic recovery numbers and reflects broader momentum in heritage tourism. The site has invested in updating its historical interpretation to include a broader range of colonial-era perspectives — including those of enslaved people, women, and Indigenous communities — which has both broadened its audience and attracted some controversy from those preferring traditional patriotic framing. The semiquincentennial creates a once-in-a-generation marketing moment: school field trips, family vacations, and civic programming all converge on 1776-themed destinations in a way that will not recur for another 50 years.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>SitDeck</span>
+      <span>Science X</span>
+      <span>Morning Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Sunday, April 5, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
