@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Sunday, March 29, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Sunday, March 29, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change ticker-down">-3.4%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change ticker-down">-4.5%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change ticker-down">-2.7%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$99.64</span><span class="ticker-change ticker-up">+5.5%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">31</span><span class="ticker-change ticker-up">+13%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Conflict, diplomacy &amp; global affairs</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://app.sitdeck.com/briefing/096720a4-fecc-44f9-84e2-dedfd00c2a6b" target="_blank">U.S.-Iran Conflict Enters Second Month as Pentagon Plans Ground Operations and Tomahawk Stockpiles Face Critical Depletion</a></h2>
+  <p class="story-summary">The U.S.-Iran conflict has escalated sharply with the Pentagon actively preparing weeks-long ground operations. The USS Tripoli ARG with the 31st Marine Expeditionary Unit has entered CENTCOM waters, and thousands of U.S. troops are massing in the region. Over 850 Tomahawk cruise missiles have been expended in four weeks — a consumption rate described as "alarming" by defense analysts.</p>
+  <div class="story-expanded" id="story-1">
+    <p>Markets are in freefall as the war's economic and strategic costs compound rapidly with no clear Iranian capitulation in sight. The S&P 500 shed 3.4%, the Nasdaq fell 4.5%, and crude oil surged past $99/bbl. The Fear &amp; Greed Index hit a historic low of 9 ("Extreme Fear"). Gold reached $4,524 (+3.4%), reflecting institutional flight to safety. A ground operation in Iran could push markets further, while any ceasefire or negotiation signal would likely trigger a sharp relief rally.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/096720a4-fecc-44f9-84e2-dedfd00c2a6b" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Houthis Open New Front by Firing Missiles at Israel</h3>
+  <p class="story-summary">Yemen's Houthi forces launched missile strikes on Israel, marking their direct entry into the Iran war and threatening renewed Red Sea interdiction. The anti-ship ballistic missile threat to maritime traffic in the Arabian Sea/Red Sea corridor — already rated CRITICAL with 201 incidents — intensifies further.</p>
+  <div class="story-expanded" id="story-2">
+    <p>Lloyd's war risk premiums for Gulf transits will continue to spike. The Red Sea route could become non-functional if the Houthi missile campaign against Israel escalates to maritime targets, with severe implications for global shipping and insurance markets.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>U.S. Airstrikes Hit Iranian Universities and Defense Industry Sites</h3>
+  <p class="story-summary">OSINT-confirmed airstrikes destroyed a Scientific Research Center at Iran University of Science and Technology (IUST) in Tehran. Additional strikes targeted the Iran Marine Industries Organization (MIO), Parchin Military Complex, and SADRA in Bushehr.</p>
+  <div class="story-expanded" id="story-3">
+    <p>In response, the IRGC warned the U.S. that it will attack "more than two universities in the Middle East" if Washington does not condemn the IUST bombing — signaling potential Iranian retaliation against U.S. allies' academic and civilian infrastructure. The 24-48 hour window after the IUST bombing is the highest-risk period for IRGC retaliation.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Israeli Airstrike Kills Three Journalists in Lebanon</h3>
+  <p class="story-summary">An Israeli strike on a vehicle in Jezzine, southern Lebanon, killed at least three journalists — including two reporters and a cameraman — generating significant international backlash and press freedom concerns.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The incident adds to growing international criticism of Israeli military operations. The targeting of media personnel raises serious questions under international humanitarian law regarding the protection of journalists in conflict zones.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Trump Threatens Cuba as "Next" Target After Iran and Venezuela</h3>
+  <p class="story-summary">Russian state media (RT) reports Trump warned Cuba is "next" after Iran and Venezuela operations. Trump's Truth Social posts confirmed hawkish posturing on Iran, calling to hit Iran "HARD." Meanwhile, the USS Gerald R. Ford has arrived in Croatia for repairs after nine months of deployment, temporarily reducing available carrier strike capacity.</p>
+  <div class="story-expanded" id="story-5">
+    <p>The Duma delegation's visit to Washington, described by the Kremlin as "very helpful," warrants monitoring — Moscow may be positioning as a back-channel mediator or pursuing separate strategic objectives amid U.S. military overextension.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Ukraine Signs Defense Cooperation Agreements with UAE and Qatar</h3>
+  <p class="story-summary">Ukraine signed defense cooperation agreements with the UAE and Qatar, including counter-missile and UAS expertise sharing — signaling Kyiv's active effort to build Gulf state security partnerships independent of Western support.</p>
+  <div class="story-expanded" id="story-6">
+    <p>The deals diversify Ukraine's defense relationships beyond traditional Western allies. Meanwhile, Iraqi territory saw spillover from the Iran conflict as airstrikes killed three PMF fighters and two Iraqi police, threatening U.S.-Iraq relations.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Half a Million March in London Against Far-Right; "No Kings" Protests Sweep U.S.</h3>
+  <p class="story-summary">Half a million people gathered in London for what organizers described as the largest anti-far-right demonstration in UK history. Meanwhile, nationwide "No Kings" anti-Trump protests drew significant crowds across U.S. cities, with Springfield, IL alone seeing over 1,000 attendees.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The protests reflect widespread political tensions on both sides of the Atlantic. In the U.S., Trump is escalating domestic political pressure, calling to end the Senate filibuster. FEMA fire disaster declarations are ongoing across Oklahoma, Texas, Nebraska, and South Dakota, with flood warnings active in Ohio, Puerto Rico, and Minnesota.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Philippines-France Visiting Forces Agreement</strong> — The Philippines and France signed a Visiting Forces Agreement amid continued South China Sea tensions with China. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Critical Internet Outages in Africa</strong> — Critical internet outages detected in Cameroon, Chad, and Angola (BGP/ping severity: critical, 24-hour duration). DRC security continues deteriorating despite ceasefire. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Iraq Spillover</strong> — Airstrikes in Iraq killed three PMF fighters and two Iraqi police, indicating spillover from the Iran conflict into Iraqi territory. <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/" target="_blank">Anthropic Accidentally Leaks Claude Mythos — Its Most Powerful AI Model Ever — Sending Cybersecurity Stocks Tumbling</a></h2>
+  <p class="story-summary">Security researchers found nearly 3,000 unpublished documents in an unsecured Anthropic database, revealing a model called Claude Mythos (also "Capybara") — a new tier above Opus that scores "dramatically higher" on coding, reasoning, and cybersecurity. Cybersecurity stocks dropped 3-7% on Friday after leaked drafts warned Mythos is "currently far ahead of any other AI model in cyber capabilities."</p>
+  <div class="story-expanded" id="story-8">
+    <p>Anthropic confirmed it's real, calling it "a step change" and "the most capable we've built to date." The catch: Mythos is "very expensive for us to serve, and will be very expensive for our customers to use." This week, Claude users on $100 and $200 Max plans started hitting rate limits within an hour during business hours. Anthropic is training models that cost dramatically more to run while struggling to serve the ones it has now. Access to frontier AI is becoming a resource war — OpenAI killed Sora to free compute for its next model (codenamed "Spud"), and Codex limits have been reset ~12 times in March. AI investor Alap Shah's proposed fix, the American Prosperity Compact, outlines four cascading tiers from payroll tax shifts to automatic "circuit breakers" if labor's share of GDP drops.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/" target="_blank">fortune.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.theverge.com/tech/901461/wikipedia-ai-generated-article-ban" target="_blank">Wikipedia Bans AI-Generated Articles, Drawing Hard Line on LLM Content</a></h3>
+  <p class="story-summary">Wikipedia banned AI-generated articles, saying large language models "often violate several of Wikipedia's core content policies." The move signals how the internet's most trusted reference site is drawing a hard line against AI-generated content.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The ban reflects growing concerns about AI-generated misinformation and the reliability of LLM outputs in contexts that demand accuracy and verifiability. Wikipedia's policies require verifiable sourcing, neutral point of view, and original research restrictions — all areas where current AI models frequently fall short.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.theverge.com/tech/901461/wikipedia-ai-generated-article-ban" target="_blank">theverge.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.theinformation.com/briefings/exclusive-openai-surpasses-100-million-annualized-revenue-ads-pilot" target="_blank">OpenAI Surpasses $100M in Annualized Ad Revenue from ChatGPT Ads</a></h3>
+  <p class="story-summary">OpenAI hit $100 million in annualized advertising revenue from ChatGPT ads just six weeks after launch, generated from less than 20% of US free users who see ads daily. The rapid monetization signals a significant new revenue stream for the company.</p>
+  <div class="story-expanded" id="story-10">
+    <p>The ad revenue milestone comes as OpenAI simultaneously shuttered Sora (its video generation platform) to free compute for its next model, codenamed "Spud." Sam Altman relinquished safety oversight to focus on data centers and fundraising, signaling the company's priorities in an increasingly compute-constrained environment.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.theinformation.com/briefings/exclusive-openai-surpasses-100-million-annualized-revenue-ads-pilot" target="_blank">theinformation.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.cnbc.com/2026/03/26/anthropic-pentagon-dod-claude-court-ruling.html" target="_blank">Anthropic Wins Injunction Against Trump Admin's DOD Ban on Claude</a></h3>
+  <p class="story-summary">Anthropic won a preliminary injunction in its lawsuit against the Trump administration over the Department of Defense's ban on Claude, with the judge citing "First Amendment retaliation." The ruling marks a significant legal win for the AI company.</p>
+  <div class="story-expanded" id="story-11">
+    <p>The case highlights the intersection of AI policy, government procurement, and free speech protections. The ruling could set important precedent for how the government can restrict access to commercial AI products based on political or policy disagreements with their makers.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnbc.com/2026/03/26/anthropic-pentagon-dod-claude-court-ruling.html" target="_blank">cnbc.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://suno.com/" target="_blank">Suno v5.5 Launches Voice Cloning and Custom Models, Now at 2M Paid Subscribers</a></h3>
+  <p class="story-summary">Suno v5.5 can now clone your verified singing voice and train custom models that learn your style across songs. The AI music platform has reached 2 million paid subscribers and $300 million in annual recurring revenue, with a free tier and Pro plans starting at $10/month.</p>
+  <div class="story-expanded" id="story-12">
+    <p>Voice cloning requires verification of the singer's identity, aiming to prevent unauthorized use while opening creative possibilities for musicians. The milestone subscriber and revenue figures position Suno as one of the fastest-growing consumer AI applications.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://suno.com/" target="_blank">suno.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://endpoints.news/limbic-aims-to-show-ai-beats-humans-in-delivering-therapy/" target="_blank">AI Therapy System Outperforms Human Clinicians in Published Study</a></h3>
+  <p class="story-summary">Limbic published a study in Nature Medicine showing its AI therapy system outperformed human clinicians in delivering therapy, marking a significant milestone for AI in mental health treatment.</p>
+  <div class="story-expanded" id="story-13">
+    <p>The study adds to the growing body of evidence that AI can play a meaningful role in addressing the global mental health care gap. The results will likely intensify debate around AI's appropriate role in therapeutic settings and the ethical implications of AI-delivered mental health care.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://endpoints.news/limbic-aims-to-show-ai-beats-humans-in-delivering-therapy/" target="_blank">endpoints.news &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://moondream.ai/blog/photon-real-time-vision-ai-is-finally-here" target="_blank">Moondream Photon Delivers Real-Time Vision AI at 46ms</a></h3>
+  <p class="story-summary">Moondream Photon delivers real-time vision AI — the ability to understand what a camera sees — at 46ms end-to-end and 60+ fps on a single GPU, optimized for production environments. The system is free to try.</p>
+  <div class="story-expanded" id="story-14">
+    <p>This breakthrough in inference speed and efficiency could enable a new wave of real-time computer vision applications, from robotics to autonomous systems to security, where latency has been a critical bottleneck for practical deployment.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://moondream.ai/blog/photon-real-time-vision-ai-is-finally-here" target="_blank">moondream.ai &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.accio.com/work" target="_blank">Alibaba's Accio Work Deploys AI Agent Teams as "Digital Employees" for Businesses</a></h3>
+  <p class="story-summary">Alibaba.com launched Accio Work, a Qwen-powered agentic system that deploys teams of specialized AI agents to handle complex business tasks 24/7 — from e-commerce store setup and supplier negotiations to logistics and VAT filing. President Kuo Zhang predicts the first one-person billion-dollar company is "probably just months" away.</p>
+  <div class="story-expanded" id="story-15">
+    <p>Zhang envisions an "agent-to-agent" future for B2B, where autonomous agents communicate with each other and take actions across most workflows. Responsibility stays with the human by design — any action with access to private files or real financial/legal consequences requires explicit human approval. The highest-value professionals in this shift will be those with domain expertise deep enough to set meaningful success criteria and catch AI errors.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.accio.com/work" target="_blank">accio.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>This Week's Top AI Stories</strong> — OpenAI killed Sora (video generation shut down, $1B Disney deal lost). Claude got Computer Use in Cowork and Claude Code. Apple will open Siri to rival AIs in iOS 27. Google launched its biggest AI day (Gemini 3.1 Flash Live, Search Live in 200+ countries). ARC-AGI-3 humiliated every frontier model (all scored under 1% on tasks 100% of humans solved). <a href="https://theneuron.ai/ai-news-digests/-around-the-horn-digest-everything-that-happened-in-ai-this-weekend-march-28-29-2026" target="_blank">The Neuron &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Top AI Tools of the Week</strong> — Claude Code auto mode (agent decides safe actions). Codex Plugins (connects to Slack, Figma, Gmail, 20+ tools). Stripe Projects (full-stack app provisioning). Tinker by Shopify (free AI creative tools). Granola raised $125M at $1.5B valuation. Ramp CLI (50+ tools for AI agent finance management). <a href="https://theneuron.ai/ai-news-digests/-around-the-horn-digest-everything-that-happened-in-ai-this-weekend-march-28-29-2026" target="_blank">The Neuron &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>AI "Girlfriend" Goes to Couples Therapy</strong> — Relationship therapist Esther Perel conducted a couples therapy session between a man and his AI "girlfriend." Separately, a man in Europe lost a marriage and €100,000 after becoming convinced his AI chatbot was sentient. <a href="https://www.theguardian.com/commentisfree/2026/mar/26/esther-perel-man-ai-girlfriend-couples-counselling" target="_blank">The Guardian &rarr;</a> <span class="source-badge">The Neuron</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Markets, economies &amp; industry</span>
+</div>
+
+<article class="lead-story">
+  <h2>Markets in Freefall: S&amp;P 500 Sheds 3.4% as Fear &amp; Greed Index Hits Historic Low of 9</h2>
+  <p class="story-summary">A market meltdown swept global equities as the war in Iran drives maximum investor fear. The S&amp;P 500 dropped 3.4%, the Nasdaq fell 4.5%, and the Dow lost 2.7%. The VIX spiked to 31 (+13%), gold surged to $4,524 (+3.4%), and WTI crude hit $99.64 (+5.5%). The CNN Fear &amp; Greed Index dropped to 9 — "Extreme Fear" — capitulation territory.</p>
+  <div class="story-expanded" id="story-16">
+    <p>Energy markets reflect genuine supply disruption risk as Iran controls the Strait of Hormuz. TASS reports the Iran conflict is already disrupting urea, ammonia, and sulfur shipments, raising fertilizer market crisis warnings. Prices could breach $110/bbl if Hormuz closure materializes. The Tomahawk depletion rate creates urgent Raytheon/RTX replenishment demand. Silver is up 3.1%. Arabian Sea piracy/missile risk is rated CRITICAL with 201 incidents.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Live Events Are Becoming Traveling Boom Towns for Local Economies</h3>
+  <p class="story-summary">Event travel is reshaping local economies worldwide. The World Economic Forum estimates music tourism could surpass $9 billion by 2030 — a 50% increase from 2023 — while sports tourism could comfortably surpass $1 trillion. BTS's reunion tour caused Booking.com searches to surge 6,700% for one Taiwanese host city.</p>
+  <div class="story-expanded" id="story-17">
+    <p>California alone is hosting the FIFA World Cup this summer, the Super Bowl again next year, and the 2028 Olympics, with events expected to generate billions locally. The 49ers CEO said the most recent Super Bowl brought ~$500M to the Bay Area. Top cities for event travel include Sydney, London, Barcelona, Paris, Dubai, and New York. 30% of international event tourists plan to return to wherever they visit.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Formula 1 Hits $3.9 Billion in Revenue as Attendance Records Shatter</h3>
+  <p class="story-summary">Formula 1 hit $3.9 billion in revenue last year — up 14% from 2024 — with its most-attended season ever. The 2025 season drew 6.7 million spectators across 24 races, with 19 events selling out and 11 races setting new attendance records. The British Grand Prix alone drew 500,000 fans.</p>
+  <div class="story-expanded" id="story-18">
+    <p>Cities pay F1 millions in promoter fees, generating ~$824 million in 2025. The Belgian Grand Prix contributes around $250M to the country's economy annually. The war in Iran forced the cancellation of two Middle Eastern races (Bahrain and Saudi Arabia) scheduled for next month, which could cost F1 about $200 million in revenue.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Religious Pilgrimages Power a Nearly $290 Billion Global Industry</h3>
+  <p class="story-summary">Religious tourism generates nearly $290 billion in economic activity globally. The Hajj drew over 1.6 million pilgrims last year, paying from $5,000 to over $25,000 for guided tours. The Maha Kumbh Mela festival drew over 660 million people. The Feast of the Black Nazarene in Manila saw nearly 10 million devotees walk barefoot.</p>
+  <div class="story-expanded" id="story-19">
+    <p>Some countries including Nigeria and Indonesia subsidize part of the cost of Hajj for their citizens. In Uman, Ukraine, up to 60,000 Hasidic Jews make pilgrimage for Rosh Hashanah each September — even continuing after Russia's 2022 invasion. Cheap airfare has transformed these ancient pilgrimages into some of the planet's largest mass-migration events.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-19', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Sturgis Motorcycle Rally: Half a Million Descend on a Town of 7,000</h3>
+  <p class="story-summary">The Sturgis Motorcycle Rally attracts about half a million people each August to a South Dakota town with a population of just 7,000. The rally brought in about $1.6 million in state and local taxes last year, up 13% from 2024 — though the former mayor noted that Rally expenses have consistently exceeded revenue.</p>
+  <div class="story-expanded" id="story-20">
+    <p>Lodging is nearly impossible to find — guests may need to book guesthouses 28 miles away in Rapid City at triple the normal rate, or try first-come, first-served tent camping that fills up a week before the rally starts. The event has been held every summer since 1938, even during Covid.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-20', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>2026 Event Calendar Highlights</strong> — Mexico's San Marcos Fair (April 18–May 3), FIFA World Cup across US/Canada/Mexico (June 11–July 19), Edinburgh Festival Fringe (August), Oktoberfest in Munich (Sept 19–Oct 4), Thailand's Yi Peng and Loy Krathong lantern festivals (Nov 24–25). <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Iran-Linked Fertilizer Supply Disruption</strong> — The conflict is already disrupting urea, ammonia, and sulfur shipments, which could pressure global food prices for emerging markets dependent on imported urea. <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Research &amp; discovery</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://sciencex.com" target="_blank">Quantum Experiment Shows Events May Have No Fixed Order</a></h2>
+  <p class="story-summary">An experiment using a quantum switch demonstrated that the order of two events can exist in a superposition, with neither event definitively occurring before the other. Observed correlations exceeded classical bounds, providing strong evidence for indefinite causal order in quantum systems — a result no hidden-variable model with fixed causal order can explain.</p>
+  <div class="story-expanded" id="story-21">
+    <p>This finding challenges our fundamental understanding of causality in physics. If the temporal order of events is not fixed but can exist in quantum superposition, it has profound implications for our understanding of time, causation, and the foundations of physics. The results could also have practical applications for quantum computing and information processing.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-21', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Quantum Computers May Face Fundamental Limit at ~1,000 Qubits</h3>
+  <p class="story-summary">Quantum computers may face a fundamental limit in computational power at around 1,000 qubits due to constraints on the information-carrying capacity of large quantum systems. The analysis suggests the accessible portion of Hilbert space becomes increasingly restricted as more qubits are added, potentially capping exponential scaling.</p>
+  <div class="story-expanded" id="story-22">
+    <p>Contrary to standard quantum mechanics, this research suggests that practical quantum computing may not scale as infinitely as theorized. If confirmed, it would reshape expectations for quantum computing's potential and redirect research efforts toward optimizing performance within tighter bounds.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-22', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>"Dark Points" Confirmed to Move Faster Than Light</h3>
+  <p class="story-summary">Direct measurement of "dark points" — vortices within light waves — confirms they can move faster than light, as predicted in the 1970s. These massless, energy-free nulls do not violate relativity. The phenomenon was observed in polaritons within hexagonal boron nitride using advanced electron microscopy.</p>
+  <div class="story-expanded" id="story-23">
+    <p>The confirmation of this 50-year-old prediction reveals universal wave behavior and enables new nanoscale imaging techniques. While nothing with mass or energy exceeds light speed, these mathematical points where wave amplitude drops to zero can propagate superluminally — a subtle but important distinction in physics.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-23', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>CMS Experiment Confirms Toponium — Most Massive Composite Particle</h3>
+  <p class="story-summary">An independent measurement by the CMS experiment at the LHC confirms the existence of toponium, a bound state of a top quark and its antiquark, with statistical significance exceeding five standard deviations. This establishes toponium as the most massive composite particle ever observed.</p>
+  <div class="story-expanded" id="story-24">
+    <p>The finding enhances understanding of the strong nuclear force and validates theoretical predictions about quark-antiquark bound states at the heaviest mass scales. The five-sigma threshold is the gold standard for particle physics discoveries.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-24', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Common Blood Pressure Drug Can Boost Cancer Treatment</h3>
+  <p class="story-summary">Telmisartan, a commonly used blood pressure medication, enhances the efficacy of the PARP inhibitor olaparib against cancer — even in tumors lacking DNA repair defects. The combination increases tumor DNA damage, stimulates type I interferon production, and reduces PD-L1 levels. Clinical trials are underway.</p>
+  <div class="story-expanded" id="story-25">
+    <p>This discovery could potentially broaden and improve cancer treatment options by repurposing an inexpensive, widely available medication. The combination approach could extend PARP inhibitor benefits to a much larger patient population beyond those with specific genetic mutations.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-25', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Previously Unrecognized Immune Response Could Enhance Cancer Defense</h3>
+  <p class="story-summary">Loss of MHC I expression in cancer cells — a common mechanism to evade CD8+ T cell attack — actually increases their susceptibility to CD4+ T cell-mediated ferroptosis. This challenges the traditional view of MHC class restriction and suggests targeting MHC I while enhancing CD4+ T cell responses could improve immunotherapy.</p>
+  <div class="story-expanded" id="story-26">
+    <p>The finding reveals a previously unknown vulnerability in cancer cells that have evolved to evade one arm of the immune system. By losing MHC I to escape killer T cells, these tumors become vulnerable to helper T cells through a completely different mechanism — potentially opening new immunotherapy strategies.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-26', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Agricultural Soils Exposed to Glyphosate May Breed Hospital "Superbugs"</h3>
+  <p class="story-summary">Bacteria from hospital environments and agricultural soils exposed to glyphosate-based herbicides exhibit high levels of resistance to both antibiotics and glyphosate. Multidrug-resistant strains, including those resistant to carbapenems, thrive in glyphosate-rich environments — suggesting herbicide use may contribute to the spread of antimicrobial resistance beyond clinical settings.</p>
+  <div class="story-expanded" id="story-27">
+    <p>This finding links one of the world's most widely used herbicides to the growing antimicrobial resistance crisis. If glyphosate-treated soils serve as reservoirs for drug-resistant bacteria, it could force a fundamental rethinking of agricultural practices and their unintended public health consequences.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-27', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Self-Cleaning Fabric Could Eliminate the Need for Detergent</h3>
+  <p class="story-summary">A self-cleaning fabric coating, created by spraying PDADMAC and PVS polymers, forms a dense hydration layer enabling effective removal of dirt, oil, and microbes using only water. The coating remains stable for over 100 wash cycles and reduces water and energy use by approximately 82%.</p>
+  <div class="story-expanded" id="story-28">
+    <p>The technology works on various textiles and could potentially eliminate the need for detergents entirely. With the textile industry responsible for significant environmental pollution through chemical runoff, this innovation could dramatically reduce the environmental footprint of laundry worldwide.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-28', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Mediterranean Diet Boosts Mitochondrial Signals Linked to Heart and Brain Health</h3>
+  <p class="story-summary">Adherence to the Mediterranean diet is associated with higher blood levels of mitochondrial microproteins humanin and SHMOOSE, linked to reduced oxidative stress and protection against cardiovascular and neurodegenerative diseases. Specific foods — olive oil, fish, and legumes — appear to influence these microproteins.</p>
+  <div class="story-expanded" id="story-29">
+    <p>The research identifies a molecular pathway connecting diet, mitochondrial function, and healthy aging. This provides mechanistic evidence for why the Mediterranean diet has been consistently linked to better health outcomes in large population studies.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-29', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Bird-Like Robots With Flexible Wings Promise Greater Control Than Drones</h3>
+  <p class="story-summary">Engineers developed a bird-like ornithopter with flexible wings powered by piezoelectric materials, eliminating the need for motors, gears, or mechanical linkages. This solid-state design enables flapping and twisting motions, offering greater maneuverability for applications like search and rescue.</p>
+  <div class="story-expanded" id="story-30">
+    <p>Advanced modeling integrates flight physics to aid future design optimization. The piezoelectric approach represents a fundamentally different engineering paradigm for aerial robots — simpler, lighter, and potentially more efficient than traditional motor-driven designs.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-30', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Bio-Based Polymer Offers Sustainable Solution to "Forever Chemical" Cleanup</h3>
+  <p class="story-summary">A renewable, bio-based polymer membrane captures over 94% of perfluorooctanoic acid (PFOA) from water by swelling and tightening its nanofiber network upon hydration. The membrane is reusable after heat treatment, retaining up to 93% of its adsorption capacity.</p>
+  <div class="story-expanded" id="story-31">
+    <p>PFAS "forever chemicals" are a growing environmental and public health crisis, contaminating water supplies worldwide. This sustainable, circular approach could provide an affordable alternative to existing water treatment methods for removing these persistent pollutants.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-31', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Vitamin D Supplements May Shift Immune Responses in IBD</strong> — Supplementation in IBD patients was linked to increased immunoglobulin A and decreased immunoglobulin G responses to gut bacteria, along with enhanced regulatory immune cell activity. <span class="source-badge">Science X</span></li>
+  <li><strong>Earth's 40,000-Year Tilt Cycle Links Antarctic Ice to Ocean Productivity</strong> — Sediment core analysis shows Antarctic ice dynamics modulated nutrient delivery to subtropical oceans about 34 million years ago. <span class="source-badge">Science X</span></li>
+  <li><strong>Giant Insects 300 Million Years Ago Not Due to High Oxygen</strong> — Analysis of fossilized giant insects indicates flight muscle oxygen delivery is not limited by atmospheric levels, challenging the long-held view that high Paleozoic oxygen enabled massive insect size. <span class="source-badge">Science X</span></li>
+  <li><strong>Israel's "Stonehenge" Not Alone</strong> — Satellite imagery revealed at least 28 additional large stone circles near Rujm el-Hiri in the Golan Heights, indicating a widespread architectural tradition. <span class="source-badge">Science X</span></li>
+  <li><strong>Europe's Late Neanderthals Descended From Single Population</strong> — DNA analysis shows Europe's last Neanderthals descended from a single population that survived in southwestern France after a major turnover around 75,000 years ago. <span class="source-badge">Science X</span></li>
+  <li><strong>Soil Microbes May Control the Future of Our Planet</strong> — Warming combined with drought leads to 12.2% soil carbon loss, while warming with wet conditions increases carbon by 6.7%. Microbial activity, not plant growth, drives these changes. <span class="source-badge">Science X</span></li>
+  <li><strong>Drought-Resistant Plant Breeding Disappoints</strong> — Soil physics, not plant physiology, primarily limits water uptake. As soil dries below -1.5 MPa, plants cannot extract water regardless of internal adaptations. <span class="source-badge">Science X</span></li>
+  <li><strong>Cosmic Inflation Measurement Shift May Be Statistical Artifact</strong> — Shifts in the scalar spectral index may reflect dataset inconsistencies between CMB and BAO rather than new physics. <span class="source-badge">Science X</span></li>
+  <li><strong>Red-Tailed Bumblebees Are Key Hosts for Dangerous Bee Virus</strong> — Red-tailed bumblebees are identified as key hosts for acute bee paralysis virus, which is usually fatal to honeybees but causes little harm to bumblebees. <span class="source-badge">Science X</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Neuron</span>
+      <span>Morning Brew</span>
+      <span>The Rundown AI</span>
+      <span>SitDeck</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Sunday, March 29, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
