@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Monday, April 6, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Monday, April 6, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- TICKER BAR -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change ticker-up">+0.83%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change ticker-up">+1.34%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">&gt;$110</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- ==================== GEOPOLITICS & WORLD ==================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+    <span class="section-name">Global situation and conflict intelligence</span>
+  </div>
+
+  <!-- Lead: US-Iran Escalation -->
+  <article class="lead-story">
+    <h2><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">US-Iran War Escalates Overnight: Airstrikes Hit Tehran, Iranian Missiles Reach Gulf States</a></h2>
+    <p class="story-summary">The US-Iran conflict surged dramatically overnight with heavy American and Israeli airstrikes confirmed across Tehran, Shiraz, and Qom, while Iranian ballistic missile salvos forced UAE and Kuwait to activate air defense systems — a historic first expansion of the conflict's kinetic footprint into GCC territory. Iran's Supreme Leader Mojtaba Khamenei has publicly rejected Trump's Tuesday, April 7 deadline to reopen the Strait of Hormuz.</p>
+    <div class="story-expanded" id="story-1">
+      <p>US Special Operations Forces rescued the weapons systems officer from a downed F-15E after a firefight inside Iranian territory, though at least one AH-6 Little Bird helicopter was destroyed at the forward landing site during extraction — confirming direct US combat losses on Iranian soil. Trump declared "victory" while acknowledging persistent threats to ongoing operations. Iran has adapted tactically, employing high-altitude cluster warhead releases to penetrate Israeli ballistic missile defenses — a development being closely watched by adversaries worldwide. CENTCOM publicly posted imagery of HIMARS systems being prepared under Operation Epic Fury.</p>
+      <p>Markets are in an unusual split: the CNN Fear &amp; Greed Index sits at 13 (Extreme Fear) while equity indices posted modest gains (S&amp;P 500 +0.83%, Nasdaq +1.34%, Russell 2000 +1.35%). Gold holds at $4,651/oz as the primary geopolitical hedge, and WTI crude at $111.96 (+0.38%) with Brent exceeding $110/barrel reflects deep risk premium in physical assets. DXY is essentially flat at 100.03 — unusual for this level of conflict intensity — suggesting no dollar flight-to-safety surge has materialized yet. Any confirmed Hormuz closure or strike on Gulf energy infrastructure could drive oil toward $130+.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">SitDeck</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">app.sitdeck.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <!-- Hormuz Deadline -->
+    <article class="story-card">
+      <h3><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">Iran Rejects Trump's Hormuz Ultimatum — Tuesday at 8 PM ET Is the Final Deadline</a></h3>
+      <p class="story-summary">Iran's Supreme Leader Mojtaba Khamenei publicly rejected Trump's extended deadline for Iran to cease interference with the Strait of Hormuz, set for Tuesday, April 7 at 8:00 PM ET after apparent back-channel contact. Iran's parliament speaker warned of consequences for "ordinary Americans." The deadline was previously extended from an earlier cutoff.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The Strait of Hormuz remains the central strategic chokepoint of the conflict — roughly 20% of global oil supply transits the strait. WTI crude at $111.96 and Brent exceeding $110/barrel confirm the risk premium is priced in but not at panic levels. Any confirmed closure or direct strike on Gulf energy infrastructure would drive oil sharply higher — estimates point toward $130+ per barrel. War-risk insurance premiums for Gulf transits are expected to remain prohibitive. The USS Abraham Lincoln (CVN-72) is positioned in the Arabian Sea; the USS Gerald R. Ford (CVN-78) is in the Eastern Mediterranean.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">app.sitdeck.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Gulf Air Defenses -->
+    <article class="story-card">
+      <h3><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">UAE and Kuwait Activate Air Defenses as Iranian Missiles Enter Gulf Airspace</a></h3>
+      <p class="story-summary">UAE and Kuwait confirmed activation of air defense systems to intercept incoming Iranian missiles and drones — the first confirmed expansion of the conflict's kinetic footprint into GCC territory. Downstream risk to Gulf energy infrastructure, including Aramco facilities, LNG terminals, and desalination plants, is now materially elevated.</p>
+      <div class="story-expanded" id="story-3">
+        <p>A successful Iranian strike on Gulf energy infrastructure would be a catastrophic escalation trigger with immediate global economic consequences. Analysts are watching for damage assessments from UAE and Kuwait in the next 6–12 hours. The Arabian Sea and Red Sea remain critical conflict-risk zones for shipping, with war-risk insurance premiums rising accordingly. Iran's demonstrated ability to penetrate Israeli TMD using high-altitude cluster warhead releases is a tactically significant development with broad implications for future peer conflict.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">app.sitdeck.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- US SOF Rescue -->
+    <article class="story-card">
+      <h3><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">US Special Forces Rescue F-15E Crew Inside Iran; AH-6 Little Bird Confirmed Destroyed</a></h3>
+      <p class="story-summary">The weapons systems officer from a downed US F-15E was rescued by US Special Operations Forces after a fierce firefight inside Iranian territory. At least one AH-6 Little Bird helicopter was destroyed at a forward landing site during the extraction, confirming direct US materiel losses on Iranian soil. Trump declared "victory" but acknowledged ongoing threats to US operations.</p>
+      <div class="story-expanded" id="story-4">
+        <p>The destroyed Little Bird(s) represent confirmed US materiel losses in hostile territory — a politically sensitive threshold the administration has now crossed. Additional SOF operations or further extractions remain possible, and any further casualty announcements would intensify domestic political pressure. CENTCOM's public posting of HIMARS imagery signals continued ground-based strike capability posturing in the theater. The F-15E pilot's status has not been separately confirmed in available reporting.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">app.sitdeck.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Geopolitics bullets -->
+  <ul class="bullet-stories">
+    <li><strong>China Amphibious Drills Timed to US-Iran Focus</strong> — OSINT documents Shuiqiao-class landing platform barges conducting exercises at Hepu Dasha Beach, Nantong — assessed as rehearsal for amphibious operations exploiting diminished US attention. Watch for any movement toward the Taiwan Strait or Spratly Islands. <a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">SitDeck &rarr;</a> <span class="source-badge">SitDeck</span></li>
+    <li><strong>Ukraine Signs Military Pact with Syria</strong> — President Zelenskyy announced a security cooperation agreement with Syria including exchanges of operational experience — a notable strategic realignment with implications for Russian influence in Damascus. <a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">SitDeck &rarr;</a> <span class="source-badge">SitDeck</span></li>
+    <li><strong>NPT Review Conference Opens Amid Active Iran Nuclear Operations</strong> — Nations gather for the 11th Non-Proliferation Treaty Review Conference as US and Israeli strikes target Iranian nuclear infrastructure; North Korea seeking nuclear-armed state recognition as a condition for US talks — a dangerous precedent signal. <a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">SitDeck &rarr;</a> <span class="source-badge">SitDeck</span></li>
+    <li><strong>UK Protest Arrests Near US RAF Base</strong> — Seven protesters arrested near an RAF base used by US forces, reflecting growing European domestic pressure over the Iran operation. Secretary Rubio's recent remarks have amplified NATO pessimism in European capitals. <a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">SitDeck &rarr;</a> <span class="source-badge">SitDeck</span></li>
+    <li><strong>Drone Strike in Northern Iraq</strong> — Footage of a drone strike in Sulaymaniyah Province, northern Iraq — likely linked to Iranian proxy activity or counter-operations targeting Kurdish-Iranian opposition groups. <a href="https://app.sitdeck.com/briefing/acf26670-b926-48ca-b291-b2f60f03a0ac" target="_blank">SitDeck &rarr;</a> <span class="source-badge">SitDeck</span></li>
+  </ul>
+
+
+  <!-- ==================== AI & TECHNOLOGY ==================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Latest in artificial intelligence</span>
+  </div>
+
+  <!-- Lead: Anthropic / OpenClaw -->
+  <article class="lead-story">
+    <h2><a href="https://x.com/bcherny/status/2040206440556826908" target="_blank">Anthropic Boots Third-Party Agent Platforms from Claude Subscription Plans</a></h2>
+    <p class="story-summary">Anthropic has blocked agent platforms like OpenClaw from running on Claude subscription plans, requiring users to pay separately via usage add-ons or API keys. The company says agent tools hit Claude with nonstop requests that flat-rate plans were never built to absorb. OpenClaw creator Peter Steinberger was blunt: "First they copy popular features into their closed harness, then they lock out open source."</p>
+    <div class="story-expanded" id="story-5">
+      <p>Anthropic's Boris Cherny announced the change, framing it as "managing growth to continue to serve our customers sustainably long-term." Anthropic is offering credits worth a month's subscription, discounting usage add-ons up to 30%, and providing refunds to canceling users. The policy begins with OpenClaw and will roll out to all third-party harnesses soon. The move comes at a delicate moment: OpenAI is aggressively courting the same developer audience, and Anthropic was already under fire over tighter rate limits — walling off agentic power users won't help the goodwill problem.</p>
+      <p>Despite the friction, investor sentiment diverges sharply from developer sentiment: investors rushed to unload $600M in OpenAI shares on secondary markets with no takers, while Anthropic attracted over $1.6B in demand at a valuation 50% higher than its last round. Separately, Anthropic acquired drug-discovery startup Coefficient Bio for roughly $400M, folding the team into its healthcare and life sciences group.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">The Rundown AI</span>
+      <span class="source-badge">The Neuron</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://x.com/bcherny/status/2040206440556826908" target="_blank">x.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <!-- Netflix VOID -->
+    <article class="story-card">
+      <h3><a href="https://void-model.github.io/" target="_blank">Netflix Open-Sources VOID: AI That Rewrites Physics When Removing Video Objects</a></h3>
+      <p class="story-summary">Netflix Research released VOID, an open-source framework for removing objects from video while simulating the physical consequences of those edits — going well beyond existing tools that simply paint over backgrounds. The model distinguishes what to erase, what's physically affected, and what to preserve, then uses a judge model to chart downstream scene consequences.</p>
+      <div class="story-expanded" id="story-6">
+        <p>VOID handles physics it was never trained on: demos show a balloon floating when its holder is removed and blocks remaining stable when one in a chain is erased. In head-to-head evaluations, 25 judges compared VOID against six baseline models including Runway, preferring Netflix's results nearly two-thirds of the time. This is Netflix Research's first public AI release — a sign that video production tools are moving beyond object erasure toward full simulation of real-world physics for precision production work.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Rundown AI</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://void-model.github.io/" target="_blank">void-model.github.io &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Medvi $1.8B Solo Founder -->
+    <article class="story-card">
+      <h3><a href="https://www.theneurondaily.com/p/ai-did-what-for-20k" target="_blank">Solo Founder Built a $1.8 Billion Telehealth Company with Two Employees and AI</a></h3>
+      <p class="story-summary">Matthew Gallagher launched Medvi — a GLP-1 weight-loss drug telehealth platform — from his LA home in September 2024 with $20,000 and a stack of AI tools: ChatGPT, Claude, Grok, Midjourney, Runway, and ElevenLabs. Eighteen months later, Medvi is on track for $1.8B in annual sales with a 16.2% net margin — vs. 5.5% at public competitor Hims &amp; Hers, which employs 2,400+ people. His only hire was his younger brother.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Gallagher plugged into "telehealth-in-a-box" platforms (CareValidate and OpenLoop Health) to handle the medical side — doctors, pharmacies, prescriptions, and shipping — freeing himself to focus entirely on AI-driven marketing and customer experience. He built AI agents to connect his software systems, tested AI voice for customer calls, and even cloned his own voice for personal scheduling. The business generated $401M in revenue in its first full year (2025) on 250,000 customers, after starting with 300 in month one. Early ads were, by his own admission, "AI slop" — he upgraded to real customer photos as revenue grew. Sam Altman, who had predicted a solo $1B founder in 2024, said he wants to "meet the guy."</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.theneurondaily.com/p/ai-did-what-for-20k" target="_blank">theneurondaily.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Microsoft Copilot Disclaimer -->
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/04/05/copilot-is-for-entertainment-purposes-only-according-to-microsofts-terms-of-service/" target="_blank">Microsoft's Terms of Service Call Copilot "For Entertainment Purposes Only"</a></h3>
+      <p class="story-summary">Buried in Microsoft's Copilot terms of service (last updated October 2025): "Copilot is for entertainment purposes only. It can make mistakes, and it may not work as intended. Don't rely on Copilot for important advice." A Microsoft spokesperson told PCMag the language is "legacy" and will be updated. OpenAI and xAI carry similar disclaimers warning users not to treat AI outputs as "the truth."</p>
+      <div class="story-expanded" id="story-8">
+        <p>The disclaimer applies to the same Copilot Microsoft sells to enterprises at premium prices — exposing the fundamental tension between legal liability protection and aggressive AI marketing. The pattern across major AI vendors of "don't trust our AI" disclaimers running alongside "transform your business with AI" pitches is becoming increasingly difficult to sustain as enterprise adoption deepens and regulators pay closer attention to AI reliability claims.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/04/05/copilot-is-for-entertainment-purposes-only-according-to-microsofts-terms-of-service/" target="_blank">techcrunch.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in AI... -->
+  <ul class="bullet-stories">
+    <li><strong>Japan Targets 30% of Global Physical AI Market by 2040</strong> — Japan's government set an ambitious target driven by a labor shortage so severe that one investor described it as "industrial survival." <a href="https://techcrunch.com/2026/04/05/japan-is-proving-experimental-physical-ai-is-ready-for-the-real-world/" target="_blank">TechCrunch &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>China Greenlights AI Facial Monitoring in Classrooms</strong> — China's Ministry of Education released a white paper approving AI that monitors student facial expressions, screens for psychological problems, and builds behavioral profiles; universal deployment in all primary and secondary schools targeted by 2030. <a href="https://www.chinatalk.media/p/chinas-ai-education-experiment" target="_blank">ChinaTalk &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>Investors Dump $600M OpenAI Shares — No Takers</strong> — Secondary market sellers found no buyers for $600M in OpenAI shares, while Anthropic simultaneously attracted over $1.6B in demand at a valuation 50% above its last round. <a href="https://www.latimes.com/business/story/2026-04-01/openais-shocking-fall-from-grace-as-investors-race-to-anthropic" target="_blank">LA Times &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>Anthropic Acquires Coefficient Bio for ~$400M</strong> — The healthcare AI startup joins Anthropic's life sciences group focused on drug discovery. <a href="https://www.theinformation.com/articles/anthropic-acquires-startup-coefficient-bio-400-million" target="_blank">The Information &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>Mercor Hit by 4 TB Data Breach via LiteLLM</strong> — An attack on open-source library LiteLLM gave hackers claimed access to up to 4 TB of data from the $10B AI training startup. <a href="https://fortune.com/2026/04/02/mercor-ai-startup-security-incident-10-billion/" target="_blank">Fortune &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>OpenAI Leadership Reshuffle</strong> — Fidji Simo is on medical leave, COO Brad Lightcap moved to special projects, and CMO Kate Rouch is stepping down for cancer recovery — three senior departures in rapid succession. <a href="https://www.cnbc.com/2026/04/03/openai-fidji-simo-medical-leave-executive-changes.html" target="_blank">CNBC &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>Living Rat Neurons Perform Machine Learning</strong> — Researchers at Tohoku University trained living rat brain cells to generate sine waves, square waves, and chaotic signals — the first time biological neurons have been used as a computing resource for ML tasks. <a href="https://www.tohoku.ac.jp/en/press/living_brain_cells_enable_machine_learning_computations.html" target="_blank">Tohoku University &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>ChatGPT Now in Apple CarPlay</strong> — OpenAI rolled out Voice Mode for hands-free use in supported vehicles; requires iOS 26.4+. <a href="https://x.com/OpenAI/status/2039748699350532097" target="_blank">X &rarr;</a> <span class="source-badge">The Rundown AI</span> <span class="source-badge">The Neuron</span></li>
+    <li><strong>PikaStream 1.0 Beta</strong> — Pika Labs' real-time model lets AI agents join Google Meet calls as video avatars with voice cloning and live conversation. <a href="https://x.com/pika_labs/status/2039804583862796345" target="_blank">X &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>Gemma 4 Runs Locally on MacBook — Free</strong> — Google's 26B-parameter model (only 4B parameters active at once) runs at 51 words/second via LM Studio with no cloud, no subscription, and no data leaving your machine. <span class="source-badge">The Neuron</span></li>
+    <li><strong>Cursor 3 Launches</strong> — Cursor's new agent-first interface supports parallel coding agents running simultaneously. <a href="https://www.rundown.ai/tools/cursor-3" target="_blank">Rundown.ai &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>Caveman Claude Plugin</strong> — A one-line Claude Code plugin that rewrites responses in stripped-down language, cutting output tokens by an average of 65% while preserving all technical detail. <a href="https://github.com/JuliusBrussee/caveman" target="_blank">GitHub &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>AI Notes on Any Phone Call (iPhone)</strong> — The Granola app records and transcribes both outbound and inbound phone calls automatically. Pro tip: check your state's recording consent laws before enabling. <a href="https://app.therundown.ai/guides/how-to-take-ai-notes-on-phone-calls" target="_blank">Rundown Guide &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>Chinese Workers Build "Anti-Distillation" Files</strong> — After reports of Chinese workers creating "colleagues.skill" files to make coworkers replaceable by AI, someone built an "anti-distillation.skill" file to strip out real knowledge before handing the file over. <a href="https://x.com/stevehou/status/2040228565476585909" target="_blank">X &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  </ul>
+
+
+  <!-- ==================== BUSINESS & MARKETS ==================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Economy, trade, and markets</span>
+  </div>
+
+  <div class="stories-grid">
+
+    <!-- US Plastics Tariff Winners -->
+    <article class="story-card">
+      <h3><a href="https://www.morningbrew.com/issues/material-costs" target="_blank">For US Plastics Makers, Tariffs Are the Best of Times</a></h3>
+      <p class="story-summary">While most industries struggle with tariff-driven cost increases, US domestic plastics manufacturers are in an unusual position of competitive advantage: protected from cheaper foreign plastic imports by the same Section 122 tariff framework that's hurting other sectors. Morning Brew flagged the dynamic as a rare tariff-era bright spot for American industrial producers.</p>
+      <div class="story-expanded" id="story-9">
+        <p>The current 10% universal import surcharge under Section 122 of the Trade Act of 1974 — effective since February 24, 2026 for 150 days — exempts USMCA-compliant goods but applies broadly to other foreign plastic products. US domestic producers effectively operate tariff-free relative to competitors importing finished plastic goods from outside the USMCA zone. The Iran war's upward pressure on crude oil (WTI at $111.96) does raise feedstock costs for domestic plastics producers, partially offsetting the competitive benefit — but the structural trade dynamic still favors US-based manufacturers. Note: Morning Brew email body was stripped; story reconstructed from snippet and web research.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.morningbrew.com/issues/material-costs" target="_blank">morningbrew.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+
+  <!-- ==================== ENTERTAINMENT & CULTURE ==================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">Media, pop culture, and society</span>
+  </div>
+
+  <div class="stories-grid">
+
+    <!-- Malcolm in the Middle Revival -->
+    <article class="story-card">
+      <h3><a href="https://deadline.com/2026/04/malcolm-in-the-middle-revival-erik-per-sullivan-refused-1236779992/" target="_blank">Malcolm in the Middle Is Back — Hulu Revival Premieres April 10</a></h3>
+      <p class="story-summary">Malcolm in the Middle: Life's Still Unfair premieres April 10 on Hulu, reuniting Bryan Cranston, Jane Kaczmarek, Frankie Muniz, Justin Berfield, and Christopher Masterson for four 30-minute episodes set nearly 20 years after the original series. One notable absence: Erik Per Sullivan, who played Dewey, turned down "buckets of money" to return, per Jane Kaczmarek. Morning Brew flagged the premiere this week.</p>
+      <div class="story-expanded" id="story-10">
+        <p>The new series follows Malcolm living with his daughter and girlfriend — having distanced himself from his family — until a visit home for his parents' 40th wedding anniversary. Dewey is recast with Caleb Ellsworth-Clark. The project was originally pitched as a two-hour movie before being restructured into four 30-minute episodes for Hulu. Director Ken Kwapis, who helmed episodes of the original run, returns to direct all four new episodes.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://deadline.com/2026/04/malcolm-in-the-middle-revival-erik-per-sullivan-refused-1236779992/" target="_blank">deadline.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>SitDeck</span>
+      <span>The Rundown AI</span>
+      <span>The Neuron</span>
+      <span>Morning Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Monday, April 6, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
