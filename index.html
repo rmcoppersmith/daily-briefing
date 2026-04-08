@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:wght@300;400;600&family=Inter:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: #faf9f6;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .landing {
+    text-align: center;
+    max-width: 600px;
+    padding: 40px 20px;
+  }
+  .landing h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 8vw, 52px);
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .landing .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+  .landing h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+  .editions-list {
+    list-style: none;
+  }
+  .editions-list li {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+  }
+  .editions-list a {
+    display: block;
+    flex: 1;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #111;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(14px, 3.5vw, 18px);
+    transition: background 0.2s;
+    text-align: left;
+    line-height: 1.35;
+  }
+  .editions-list a:hover {
+    background: #f0efe9;
+  }
+  .editions-list .date {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #888;
+  }
+  .delete-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #ccc;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    transition: color 0.2s;
+    flex-shrink: 0;
+  }
+  .delete-btn:hover { color: #ef4444; }
+
+  /* DELETED STATE */
+  .editions-list li.deleted {
+    background: #fef2f2;
+  }
+  .editions-list li.deleted a {
+    color: #999;
+    text-decoration: line-through;
+  }
+  .editions-list li.deleted .delete-btn {
+    display: none;
+  }
+  .undo-btn {
+    display: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #0274b6;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .editions-list li.deleted .undo-btn { display: inline-block; }
+  .undo-btn:hover { text-decoration: underline; }
+
+  /* SAVE BAR */
+  .save-bar {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 20px;
+    background: #fffbeb;
+    border: 1px solid #f59e0b;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .save-bar.visible { display: block; }
+  .save-bar p {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #92400e;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .save-bar button {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 24px;
+    background: #f59e0b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .save-bar button:hover { background: #d97706; }
+
+  /* LATEST EDITION CARD */
+  .latest-card {
+    display: block;
+    background: #111;
+    color: #fff;
+    border-radius: 6px;
+    padding: 18px 20px;
+    text-decoration: none;
+    margin-bottom: 28px;
+    text-align: left;
+    transition: background 0.2s;
+  }
+  .latest-card:hover { background: #222; }
+  .latest-card .lc-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 5px;
+  }
+  .latest-card .lc-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(15px, 3.5vw, 18px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .latest-card .lc-arrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #888;
+    margin-top: 6px;
+  }
+
+  /* CATCH-UP SECTION */
+  .catchup {
+    margin-top: 36px;
+    padding: 20px 24px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+  }
+  .catchup h2 {
+    margin-bottom: 8px;
+  }
+  .catchup-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+  .catchup-task {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0274b6;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="landing">
+  <h1>The Daily Briefing</h1>
+  <p class="subtitle">Your Newsletter Intelligence Report</p>
+  <a class="latest-card" id="latestCard" href="#">
+    <div class="lc-label">Latest Edition</div>
+    <div class="lc-title" id="latestTitle">Loading...</div>
+    <div class="lc-arrow">Read now →</div>
+  </a>
+  <h2>Recent Editions</h2>
+  <ul class="editions-list" id="editionsList">
+    <li data-file="editions/2026-04-07-evening.html"><a href="editions/2026-04-07-evening.html">Tuesday, April 7, 2026 — Evening Brief · 5:00 PM ET <span class="date">— Latest</span></a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-07-morning.html"><a href="editions/2026-04-07-morning.html">Tuesday, April 7, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-06-evening.html"><a href="editions/2026-04-06-evening.html">Monday, April 6, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-06-morning.html"><a href="editions/2026-04-06-morning.html">Monday, April 6, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-05-evening.html"><a href="editions/2026-04-05-evening.html">Sunday, April 5, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-05-morning.html"><a href="editions/2026-04-05-morning.html">Sunday, April 5, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-04-evening.html"><a href="editions/2026-04-04-evening.html">Saturday, April 4, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-04-morning.html"><a href="editions/2026-04-04-morning.html">Saturday, April 4, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-03-evening.html"><a href="editions/2026-04-03-evening.html">Friday, April 3, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-03-morning.html"><a href="editions/2026-04-03-morning.html">Friday, April 3, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-02-evening.html"><a href="editions/2026-04-02-evening.html">Thursday, April 2, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-02-morning.html"><a href="editions/2026-04-02-morning.html">Thursday, April 2, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-01-evening.html"><a href="editions/2026-04-01-evening.html">Wednesday, April 1, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-04-01-morning.html"><a href="editions/2026-04-01-morning.html">Wednesday, April 1, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-31-evening.html"><a href="editions/2026-03-31-evening.html">Tuesday, March 31, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-31-morning.html"><a href="editions/2026-03-31-morning.html">Tuesday, March 31, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-30-evening.html"><a href="editions/2026-03-30-evening.html">Monday, March 30, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-30-morning.html"><a href="editions/2026-03-30-morning.html">Monday, March 30, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-29-evening.html"><a href="editions/2026-03-29-evening.html">Sunday, March 29, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-29-morning.html"><a href="editions/2026-03-29-morning.html">Sunday, March 29, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-28-morning.html"><a href="editions/2026-03-28-morning.html">Saturday, March 28, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-28-evening.html"><a href="editions/2026-03-28-evening.html">Saturday, March 28, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-27-evening.html"><a href="editions/2026-03-27-evening.html">Friday, March 27, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-27-morning.html"><a href="editions/2026-03-27-morning.html">Friday, March 27, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-26-evening.html"><a href="editions/2026-03-26-evening.html">Thursday, March 26, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-26-morning.html"><a href="editions/2026-03-26-morning.html">Thursday, March 26, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-25-evening.html"><a href="editions/2026-03-25-evening.html">Wednesday, March 25, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-25-morning.html"><a href="editions/2026-03-25-morning.html">Wednesday, March 25, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-24-evening.html"><a href="editions/2026-03-24-evening.html">Tuesday, March 24, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-24-morning.html"><a href="editions/2026-03-24-morning.html">Tuesday, March 24, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-23-evening.html"><a href="editions/2026-03-23-evening.html">Monday, March 23, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-23-morning.html"><a href="editions/2026-03-23-morning.html">Monday, March 23, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-22-evening.html"><a href="editions/2026-03-22-evening.html">Sunday, March 22, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-22-morning.html"><a href="editions/2026-03-22-morning.html">Sunday, March 22, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-21-evening.html"><a href="editions/2026-03-21-evening.html">Saturday, March 21, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-21-morning.html"><a href="editions/2026-03-21-morning.html">Saturday, March 21, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-20-evening.html"><a href="editions/2026-03-20-evening.html">Friday, March 20, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-20-morning.html"><a href="editions/2026-03-20-morning.html">Friday, March 20, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-19-evening.html"><a href="editions/2026-03-19-evening.html">Thursday, March 19, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-19-morning.html"><a href="editions/2026-03-19-morning.html">Thursday, March 19, 2026 — Morning Brief · 9:30 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-18-evening.html"><a href="editions/2026-03-18-evening.html">Wednesday, March 18, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-18-morning.html"><a href="editions/2026-03-18-morning.html">Wednesday, March 18, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-17-evening.html"><a href="editions/2026-03-17-evening.html">Tuesday, March 17, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-17-morning.html"><a href="editions/2026-03-17-morning.html">Tuesday, March 17, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-16-evening.html"><a href="editions/2026-03-16-evening.html">Monday, March 16, 2026 — Evening Brief · 5:00 PM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+    <li data-file="editions/2026-03-16-morning.html"><a href="editions/2026-03-16-morning.html">Monday, March 16, 2026 — Morning Brief · 7:00 AM ET</a><button class="delete-btn" onclick="markDelete(this)" title="Remove edition">✕</button><button class="undo-btn" onclick="undoDelete(this)">Undo</button></li>
+  </ul>
+
+  <div class="save-bar" id="saveBar">
+    <p>You've marked editions for removal. Click <strong>Save Changes</strong> to update the index, then run <em>backfill-briefing</em> to regenerate them.</p>
+    <button onclick="saveChanges()">Save Changes</button>
+  </div>
+
+  <p style="font-family:'Inter',sans-serif;font-size:11px;color:#999;margin-top:24px;">Morning Brief runs daily at 7:00 AM ET · Evening Brief runs daily at 5:00 PM ET</p>
+  <p style="margin-top:20px;"><a href="sources.html" style="font-family:'Inter',sans-serif;font-size:13px;color:#0274b6;text-decoration:none;font-weight:500;">View Our Sources →</a></p>
+
+  <div class="catchup">
+    <h2>Missing Editions?</h2>
+    <p class="catchup-desc">If your laptop was off and editions were missed, or you've removed editions above, click <strong>Run now</strong> on the <em>backfill-briefing</em> task in the Cowork sidebar. It automatically detects and generates all missing editions from the past 7 days.</p>
+    <p class="catchup-task">Scheduled Tasks → backfill-briefing → Run now</p>
+  </div>
+</div>
+
+<script>
+// Populate the latest edition card from the first list item
+(function() {
+  var first = document.querySelector('#editionsList li a');
+  if (first) {
+    var card = document.getElementById('latestCard');
+    var title = document.getElementById('latestTitle');
+    card.href = first.href;
+    // Strip the '— Latest' span text if present
+    title.textContent = first.textContent.replace(/\s*—\s*Latest\s*$/, '').trim();
+  }
+})();
+
+function markDelete(btn) {
+  btn.parentElement.classList.add('deleted');
+  updateSaveBar();
+}
+
+function undoDelete(btn) {
+  btn.parentElement.classList.remove('deleted');
+  updateSaveBar();
+}
+
+function updateSaveBar() {
+  const deleted = document.querySelectorAll('.editions-list li.deleted');
+  document.getElementById('saveBar').classList.toggle('visible', deleted.length > 0);
+}
+
+function saveChanges() {
+  const deleted = document.querySelectorAll('.editions-list li.deleted');
+  const filesToDelete = [];
+  deleted.forEach(function(li) {
+    filesToDelete.push(li.getAttribute('data-file'));
+    li.remove();
+  });
+  document.getElementById('saveBar').classList.remove('visible');
+
+  // Reassign "— Latest" tag to the first remaining entry
+  const remaining = document.querySelectorAll('.editions-list li');
+  remaining.forEach(function(li, i) {
+    const dateSpan = li.querySelector('.date');
+    if (i === 0 && remaining.length > 0) {
+      if (!dateSpan) {
+        const a = li.querySelector('a');
+        a.innerHTML = a.innerHTML + ' <span class="date">— Latest</span>';
+      }
+    } else if (dateSpan) {
+      dateSpan.remove();
+    }
+  });
+
+  // Write the deletion list so backfill task knows which files to overwrite
+  const deleteList = filesToDelete.join('\n');
+  const blob = new Blob([deleteList], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'regenerate.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+
+  // Also save the updated index.html
+  const pageHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const htmlBlob = new Blob([pageHtml], { type: 'text/html' });
+  const b = document.createElement('a');
+  b.href = URL.createObjectURL(htmlBlob);
+  b.download = 'index.html';
+  setTimeout(function() { b.click(); URL.revokeObjectURL(b.href); }, 500);
+}
+</script>
+</body>
+</html>
