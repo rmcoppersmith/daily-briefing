@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Thursday, April 2, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Thursday, April 2, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- ======================== -->
+  <!-- AI & TECHNOLOGY SECTION  -->
+  <!-- ======================== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Latest in artificial intelligence</span>
+  </div>
+
+  <!-- LEAD STORY: Investors flee OpenAI for Anthropic -->
+  <article class="lead-story">
+    <h2><a href="https://bloomberg.com/news/articles/2026-04-01/openai-demand-sinks-on-secondary-market-as-anthropic-runs-hot" target="_blank">Investors Desert OpenAI for Anthropic on Secondary Markets</a></h2>
+    <p class="story-summary">OpenAI shares are nearly impossible to sell on secondary markets, with roughly $600 million in shares sitting without a single buyer — while $2 billion in fresh capital floods into rival Anthropic instead. The stunning shift marks a potential inflection point in the AI investment landscape.</p>
+    <div class="story-expanded" id="story-1">
+      <p>Bloomberg reported Wednesday that institutional investors holding OpenAI shares have been unable to find buyers across multiple secondary platforms. In contrast, buyers are reportedly sitting on $2 billion in cash ready to deploy into Anthropic. The defection runs deep: at least a dozen direct OpenAI investors, including Founders Fund, Iconiq, Insight Partners, and Sequoia Capital, have now also backed Anthropic. Business fundamentals are accelerating the shift — Anthropic's share of combined OpenAI-plus-Anthropic enterprise spend has surged from roughly 10% at the start of 2025 to over 65% by February 2026, according to Ramp Economics Lab. Anthropic also projects positive cash flow by 2027, a stark contrast to OpenAI's ongoing losses.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Techpresso</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://bloomberg.com/news/articles/2026-04-01/openai-demand-sinks-on-secondary-market-as-anthropic-runs-hot" target="_blank">bloomberg.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- STORIES GRID -->
+  <div class="stories-grid">
+
+    <!-- Oumi: Custom AI Models -->
+    <article class="story-card">
+      <h3><a href="https://oumi.ai/" target="_blank">Oumi: Build a Custom AI Model in Hours</a></h3>
+      <p class="story-summary">A new startup called Oumi argues that using frontier AI models (GPT, Claude, Gemini) is like cracking a walnut with a sledgehammer — effective but expensive and risky. Their platform lets any company build a tailored AI model in hours using just a few sentences.</p>
+      <div class="story-expanded" id="story-2">
+        <p>Oumi's pitch is that frontier models can be inefficient for niche tasks, costly at scale, and carry vendor risk if a provider changes terms unexpectedly. The platform allows users to create customizable models for specific workflows without deep ML expertise — just describe your needs and Oumi does the rest. A demo video showing the model-building process has racked up 1.3M views on X.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://oumi.ai/" target="_blank">oumi.ai &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Public Agentic Brokerage -->
+    <article class="story-card">
+      <h3><a href="https://public.com/ai-agents" target="_blank">Public Launches First Agentic Brokerage — AI Agents Manage Your Money</a></h3>
+      <p class="story-summary">Investment platform Public has unveiled the first agentic brokerage, allowing users to design AI agents that autonomously monitor markets, execute trades, and manage their portfolios. The launch video has gone viral with 2.3M views.</p>
+      <div class="story-expanded" id="story-3">
+        <p>The process is simple: users define a task (e.g., "rebalance my portfolio monthly"), answer the AI's follow-up questions to tune the strategy, then monitor and modify their agents over time. The agents run on financial-grade infrastructure and Public maintains a full record of all transaction history for transparency and compliance. Early access is available by request. The launch represents one of the first consumer-facing deployments of fully autonomous financial agents.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://public.com/ai-agents" target="_blank">public.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Slack 30 AI Features -->
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/03/31/salesforce-announces-an-ai-heavy-makeover-for-slack-with-30-new-features/" target="_blank">Slack Announces 30 New AI-Powered Features for Slackbot</a></h3>
+      <p class="story-summary">Salesforce is rolling out a major AI-driven overhaul of Slack, giving Slackbot the ability to create reusable skills deployable across teams, deliver structured post-meeting summaries, and remember context across your devices — with adjustable permissions.</p>
+      <div class="story-expanded" id="story-4">
+        <p>The 30 new features, announced this week, represent the most significant update to Slackbot's capabilities since the product launched. The assistant can now function more like an agentic collaborator: building team-wide automations, generating structured meeting recaps, and maintaining persistent context from prior conversations (users can adjust what it remembers). Salesforce says the new capabilities will roll out gradually over the coming months.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/03/31/salesforce-announces-an-ai-heavy-makeover-for-slack-with-30-new-features/" target="_blank">techcrunch.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Baidu Robotaxi Cloud Failure -->
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/04/01/system-failure-paralyzes-baidu-robotaxis-in-china/" target="_blank">Baidu Robotaxis Paralyzed Mid-Traffic by Cloud Failure in Wuhan</a></h3>
+      <p class="story-summary">Over 100 Baidu Apollo Go robotaxis abruptly halted on Wuhan's busy expressways Wednesday after a cloud system failure — the second mass robotaxi shutdown in four months. Some collisions were reported, though no injuries. Chinese authorities attributed the incident to a "system malfunction."</p>
+      <div class="story-expanded" id="story-5">
+        <p>The incident exposes what safety researchers have long warned: centralized cloud architectures create a single point of failure for entire fleets of autonomous vehicles. Last December, a San Francisco blackout knocked out traffic signals and caused Waymo's fleet to create a city-wide traffic jam. Neither incident resulted in serious injuries, but critics note there is no widely adopted contingency plan — in China or elsewhere — for what happens when a city's worth of driverless cars go dark simultaneously. Tech Brew's analysis frames this as the defining infrastructure challenge for the robotaxi industry in 2026.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Tech Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/04/01/system-failure-paralyzes-baidu-robotaxis-in-china/" target="_blank">techcrunch.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in AI & Technology -->
+  <ul class="bullet-stories">
+    <li><strong>Guinndex: AI Tracks Guinness Prices Across 3,000 Pubs</strong> — An Irish entrepreneur built an AI tool that monitors the price of a Guinness pint across 3,000 pubs in Ireland — and says some pubs are now lowering prices to stay competitive with nearby listings. <a href="https://guinndex.ai/" target="_blank">guinndex.ai &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  </ul>
+
+  <!-- ============================ -->
+  <!-- BUSINESS & MARKETS SECTION   -->
+  <!-- ============================ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Tech business &amp; industry moves</span>
+  </div>
+
+  <!-- Lead: Elon Musk Tesla FSD Post -->
+  <article class="lead-story">
+    <h2><a href="https://logos-pres.md/en/news/ilon-musks-questionable-marketing-has-sparked-controversy-around-teslas-autopilot/" target="_blank">Elon Musk's "Try Our Self-Driving" Post Reignites Safety Backlash</a></h2>
+    <p class="story-summary">Elon Musk posted on X Wednesday: "Try out self-driving in a Tesla. It will greatly improve your quality of life and may save your life." The post immediately drew fierce criticism from safety advocates and engineers who say Tesla's Full Self-Driving is still a Level 2 system that requires constant driver monitoring.</p>
+    <div class="story-expanded" id="story-6">
+      <p>The post comes as Tesla is actively fighting a California DMV ruling that found the automaker violated consumer protection law by misleading buyers with the terms "Autopilot" and "Full Self-Driving." Tesla's vehicles maintain Level 2 autonomy — handling steering and speed — but do not constitute true autonomous driving. According to Tesla crash tracking data, at least 65 fatalities have been linked to the Autopilot system since its 2015 launch. Critics on X were quick to point out the irony of the promotional post appearing the same week a California judge ruled Tesla broke the law with similar marketing claims. Tech Brew flagged the post as one of the top stories generating buzz in the tech community today.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Tech Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://logos-pres.md/en/news/ilon-musks-questionable-marketing-has-sparked-controversy-around-teslas-autopilot/" target="_blank">logos-pres.md &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- Bullet: Microsoft Outlook -->
+  <ul class="bullet-stories">
+    <li><strong>Microsoft Outlook Hits Another Snag</strong> — Tech Brew flagged new Outlook connectivity issues on April 2, with enterprise users reporting inability to sign in and send/receive messages — a recurring problem after the major 21-hour outage in January. <a href="https://techcrunch.com/2026/01/22/microsoft-365-hit-by-outage-preventing-access-to-emails-and-files/" target="_blank">TechCrunch background &rarr;</a> <span class="source-badge">Tech Brew</span></li>
+  </ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>Techpresso</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Thursday, April 2, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
