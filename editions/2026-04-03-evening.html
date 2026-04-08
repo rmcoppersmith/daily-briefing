@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Friday, April 3, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-date">Friday, April 3, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,582.69</span><span class="ticker-change">closed</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,879.18</span><span class="ticker-change">closed</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,504.67</span><span class="ticker-change">closed</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$111.32</span><span class="ticker-change">Good Friday</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$66,822</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- AI & TECHNOLOGY -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">The $852 billion question</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://openai.com/index/accelerating-the-next-phase-ai/" target="_blank">OpenAI Closes $122B Round at $852B Valuation — Largest Private Raise in History</a></h2>
+    <p class="story-summary">OpenAI has closed a $122 billion funding round at an $852 billion valuation, making it more valuable than Disney, Uber, and McDonald's combined. It is the largest private capital raise ever recorded. The company now generates $2B in monthly revenue and claims 900 million weekly users.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The fine print matters: Amazon, Nvidia, and SoftBank accounted for 90% of the round, and much of the capital comes with strings attached. $35B of Amazon's pledge is conditional on OpenAI going public or achieving AGI, and a significant portion of Nvidia's contribution is in GPU compute rather than cash — capital that flows largely back to the investors themselves through OpenAI's product spending. OpenAI also launched an ads pilot that crossed $100M ARR in under six weeks. The strategic goal is a "superapp" merging ChatGPT, Codex, browsing, and agentic capabilities — but OpenAI is still projected to lose $44 billion before reaching profitability, optimistically expected around 2029.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Superhuman</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://openai.com/index/accelerating-the-next-phase-ai/" target="_blank">openai.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+    <article class="story-card">
+      <h3><a href="https://www.perplexity.ai/hub/blog/introducing-computer-for-taxes" target="_blank">Perplexity Computer Can Now File Your Federal Tax Return</a></h3>
+      <p class="story-summary">Perplexity unveiled a new capability for its Computer product: end-to-end federal tax preparation. Upload your documents, answer questions about your situation, and Perplexity fills out the relevant IRS forms — applying the current tax code automatically.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The demo, which has been viewed 1.9 million times on X, shows Perplexity Computer navigating IRS form workflows autonomously. The company says it retrieves and applies the current tax code to ensure all filings are up-to-date. With Tax Day on April 15, the timing of the launch is deliberate. This positions Perplexity's Computer product as a direct competitor to Intuit TurboTax and H&amp;R Block in the consumer tax segment — a $15 billion market.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.perplexity.ai/hub/blog/introducing-computer-for-taxes" target="_blank">perplexity.ai &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Moonshot AI's Kimi: $18B Valuation, Zero Hierarchy, 300 Employees — No Titles or OKRs</h3>
+      <p class="story-summary">Moonshot AI, maker of the Kimi K2.5 model recently found at the core of Cursor, has quadrupled its valuation to $18 billion. A rare inside look reveals an org running 300 people with no departments, no titles, and no OKRs — managed directly by co-founders, each overseeing ~50 people.</p>
+      <div class="story-expanded" id="story-3">
+        <p>Moonshot's radical flatness is by design: they hire for "generalization ability" — the same metric they optimize their models for. Over half the staff have rotated through multiple roles. An agent fleet now completes in 90 minutes what previously took three people two days. But the model strains at scale — a former senior hire from big tech quit, saying the team was too young and too smart for their own good, and insiders worry the structure can't hold past 500 people. If it scales, Kimi's org chart becomes an industry blueprint. If not, it's an expensive experiment in radical management theory.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>AI Makes Developers 19% Slower — But They Believe They're 20% Faster</h3>
+      <p class="story-summary">A study found that developers using AI coding tools were actually 19% slower than without them — yet those same developers believed they were working 20% faster. The productivity paradox is one of the most striking findings in AI-assisted development research to date.</p>
+      <div class="story-expanded" id="story-4">
+        <p>The perception gap — nearly 40 points between reality and belief — suggests that AI tools create a strong feeling of productivity even when actual output slows. Researchers attribute the slowdown to context switching, prompt iteration, and reviewing AI-generated code. The Code highlighted five practices that developers use to actually close the gap: tight scope definitions, atomic tasks, local testing before agent handoff, structured output formats, and explicit rejection of AI suggestions that don't meet standards on first review.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Cursor 3 Adds Design Mode: Click-to-Edit, Drag-to-Draw Directly in the IDE</h3>
+      <p class="story-summary">Beyond the agent-first workflow covered this morning, Cursor 3 introduced Design Mode — a visual editing layer that lets developers click UI elements to edit them and drag to draw new components, feeding selections directly into the AI chat. It also enables parallel agents running across multiple repos simultaneously.</p>
+      <div class="story-expanded" id="story-5">
+        <p>Design Mode bridges the gap between design tools like Figma and code editors by making visual selection a first-class input for AI workflows. Developers can select a UI region, immediately feed it to the agent with a prompt, and see changes propagate back into the codebase. The parallel agent capability means a team can run simultaneous workstreams across different repositories from a single Cursor session, with seamless handoff between local and cloud environments.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://cursor.com/blog/cursor-3" target="_blank">cursor.com &rarr;</a></span>
+      </div>
+    </article>
+  </div>
+
+  <p style="font-family:'Inter',sans-serif;font-size:12px;color:var(--wsj-gray);margin:16px 0 8px;text-transform:uppercase;letter-spacing:1px;">Also in AI &amp; Technology</p>
+  <ul class="bullet-stories">
+    <li><strong>Open-Source Claude Code Clone: 100K GitHub Stars in One Day</strong> — A Korean developer rewrote Claude Code in Python after an Anthropic source code leak, publishing it as an open-source project. It hit 100,000 GitHub stars in a single day. <span class="source-badge">The Code</span></li>
+    <li><strong>Vibe-Coded Telehealth Startup Hits $401M Revenue in Year One</strong> — A solo developer built and launched a telehealth startup using AI tools ("vibe coding") from home. The two-person company generated $401 million in its first year. <span class="source-badge">The Code</span></li>
+    <li><strong>Claude Computer Use Comes to Windows</strong> — Anthropic's autonomous computer-use capability, previously available via Claude Cowork and Claude Code, is now available on Windows. <span class="source-badge">Superhuman</span></li>
+    <li><strong>Qwen3.6-Plus: 1M Context Window, Beats Claude Opus 4.5 in Terminal Coding</strong> — Additional detail on Alibaba's Qwen3.6-Plus (covered in morning): it ships with a 1 million token context window and already outperforms Claude Opus 4.5 in terminal-based coding benchmarks. Full Anthropic API support makes drop-in migration from Claude Code seamless. <span class="source-badge">The Code</span></li>
+    <li><strong>Meta vs. Its Own AI Referee</strong> — Tech Brew reports on Meta being challenged by its own AI moderation systems — body unavailable due to email formatting issue. <span class="source-badge">Tech Brew</span></li>
+    <li><strong>iPhone's Strictest Security Feature</strong> — Tech Brew's secondary story covers what appears to be Apple's Lockdown Mode or a new security layer for iPhone — body unavailable due to email formatting. <span class="source-badge">Tech Brew</span></li>
+    <li><strong>NASA Heads to the Moon; OpenAI Buys a Talk Show</strong> — Techpresso's April 3 edition covers NASA's lunar mission progress and the OpenAI/TBPN acquisition (covered this morning) — full body unavailable. <span class="source-badge">Techpresso</span></li>
+  </ul>
+
+</main>
+
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>The Code</span>
+      <span>Techpresso</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Friday, April 3, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
