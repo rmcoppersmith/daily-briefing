@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Saturday, March 22, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Saturday, March 22, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">← All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- GEOPOLITICS & WORLD SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+      <span class="section-name">Geopolitics &amp; World</span>
+    </div>
+
+    <article class="lead-story">
+      <h2><a href="https://www.aljazeera.com/news/2026/3/21/iran-strikes-towns-near-israels-nuclear-site-in-escalating-tit-for-tat" target="_blank">Iran Strikes Near Israel's Dimona Nuclear Facility in Major Escalation</a></h2>
+      <p class="story-summary">Iran launched ballistic missiles that struck towns near Israel's Negev Nuclear Research Center in Dimona, wounding more than 100 people in what marks a critical escalation of the conflict. The attack came in retaliation for an Israeli strike on Iran's Natanz enrichment complex.</p>
+      <div class="story-expanded" id="story-1">
+        <p>The Iranian missiles targeted Dimona and the nearby city of Arad, demonstrating Tehran's ability to strike Israel's most sensitive nuclear infrastructure zones directly. The Israeli military acknowledged it could not intercept the incoming Iranian ballistic missiles. The IAEA reported no damage to the nuclear facility itself and no abnormal radiation levels detected. The escalation has triggered widespread market volatility, with crude oil rising above $98 and the VIX surging amid geopolitical tensions. President Trump has issued a 48-hour ultimatum threatening to bomb Iranian power plants if the Strait of Hormuz is not reopened for oil transit.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://www.aljazeera.com/news/2026/3/21/iran-strikes-towns-near-israels-nuclear-site-in-escalating-tit-for-tat" target="_blank">aljazeera.com →</a></span>
+      </div>
+    </article>
+
+    <ul class="bullet-stories">
+      <li><strong>Iran Launches Ballistic Missiles at Diego Garcia</strong> — Iran targeted the U.S.-UK joint military base in the Indian Ocean with two ballistic missiles, marking the longest-range Iranian strike ever recorded. <a href="https://www.cbsnews.com/news/iranian-strikes-southern-israel-arad-dimona/" target="_blank">CBS News →</a> <span class="source-badge">SitDeck</span></li>
+      <li><strong>Saudi Arabia Expels Iranian Diplomats</strong> — Riyadh expelled Iran's military attaché and four embassy personnel following the escalation, signaling a sharp deterioration in Gulf-Iran relations. <a href="https://www.france24.com/en/middle-east/20260321-iran-strikes-israeli-nuclear-town-in-retaliation-for-natanz-attack-amid-escalating-conflict" target="_blank">France 24 →</a> <span class="source-badge">SitDeck</span></li>
+    </ul>
+  </section>
+
+  <!-- AI & TECHNOLOGY SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+      <span class="section-name">AI &amp; Technology</span>
+    </div>
+
+    <div class="stories-grid">
+      <article class="story-card">
+        <h3><a href="https://phys.org/news/2026-03-ryugu-asteroid-samples-dna-rna.html" target="_blank">Ryugu Asteroid Samples Contain All DNA and RNA Building Blocks</a></h3>
+        <p class="story-summary">Samples from asteroid Ryugu collected by Japan's Hayabusa-2 spacecraft contain all five nucleobases required for DNA and RNA, strengthening theories about the origin of life in the solar system.</p>
+        <div class="story-expanded" id="story-2">
+          <p>The presence of uracil, adenine, guanine, cytosine, and thymine in Ryugu samples demonstrates that these essential molecules for life are abundant throughout the solar system. Researchers discovered a unique correlation between nucleobase ratios and ammonia concentration, suggesting a previously unrecognized pathway for nucleobase formation in early solar system materials. The discovery mirrors earlier findings in samples from asteroid Bennu, indicating these building blocks may be common across primitive asteroids.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More ▾</button>
+          <span class="story-url"><a href="https://phys.org/news/2026-03-ryugu-asteroid-samples-dna-rna.html" target="_blank">phys.org →</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="https://techcrunch.com/2026/03/12/tinder-tries-to-lure-people-back-to-online-dating-with-irl-events-virtual-speed-dating/" target="_blank">Tinder Launches IRL Events to Recapture Users</a></h3>
+        <p class="story-summary">As dating apps see declining use, Tinder and other platforms are introducing in-person events and virtual speed dating to bring users back and compete with emerging IRL-first dating services.</p>
+        <div class="story-expanded" id="story-3">
+          <p>Tinder's new features allow users to find or organize get-togethers, while Hinge expanded its $1 million initiative providing grants up to $25,000 to nonprofits organizing in-person dating events in major cities. Other platforms like Thursday, TimeLeft, and the Dinner Table Club are capitalizing on the growing demand for offline social experiences, with Thursday operating in 75 cities worldwide. This shift reflects user frustration with endless swiping and a desire for authentic human connection.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Morning Brew</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More ▾</button>
+          <span class="story-url"><a href="https://techcrunch.com/2026/03/12/tinder-tries-to-lure-people-back-to-online-dating-with-irl-events-virtual-speed-dating/" target="_blank">techcrunch.com →</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="https://www.businesswire.com/news/home/20240124551711/en/Bending-Spoons-finalizes-acquisition-of-U.S.-based-community-building-platform-Meetup-and-announces-$50000-Community-Fund" target="_blank">Meetup.com Attempts Comeback Under New Ownership</a></h3>
+        <p class="story-summary">After years of decline following WeWork's collapse, Meetup is angling for a second wind under Italian company Bending Spoons' ownership, though pricing increases have upset longtime users.</p>
+        <div class="story-expanded" id="story-4">
+          <p>Bending Spoons acquired Meetup in 2024 and plans to invest nearly $50 million in product improvements and international expansion over the coming years. The company recently raised organizer fees from $24/month to $45/month for the first time since 2019 and began paywalling some features. Despite user backlash, new app registrations increased 20% last year, suggesting a potential post-pandemic resurgence of interest in community-based meetups and grassroots organizing.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Morning Brew</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More ▾</button>
+          <span class="story-url"><a href="https://www.businesswire.com/news/home/20240124551711/en/Bending-Spoons-finalizes-acquisition-of-U.S.-based-community-building-platform-Meetup-and-announces-$50000-Community-Fund" target="_blank">businesswire.com →</a></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- BUSINESS & MARKETS SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-business">Business &amp; Markets</span>
+      <span class="section-name">Business &amp; Markets</span>
+    </div>
+
+    <div class="stories-grid">
+      <article class="story-card">
+        <h3>Solo Travel Market Booming Despite Safety Concerns</h3>
+        <p class="story-summary">The global solo travel market was worth nearly $550 billion last year and is expected to nearly triple by 2033, with women driving over 70% of the growth and tour companies specializing in group experiences for solo travelers.</p>
+        <div class="story-expanded" id="story-5">
+          <p>While a quarter of Americans cite safety concerns and fear of loneliness as barriers to solo travel, the trend continues to accelerate with specialized tour offerings. Companies are capitalizing on the demand by creating women-only trips and group experiences that provide community while allowing individual exploration. The market expansion reflects changing attitudes toward independence and personal growth, particularly among younger demographics.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Morning Brew</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Pitch-A-Friend: PowerPoint Dating Events Go Viral</h3>
+        <p class="story-summary">Audiences are flocking to bars and venues across major cities to watch people pitch their single friends for courtship as if they were investment opportunities, with presentations judged on a balance of humor and earnestness.</p>
+        <div class="story-expanded" id="story-6">
+          <p>Events like "Please Date My Friend" in Chicago attract 20 to 50 submissions for nine available pitching slots, creating a unique form of public matchmaking. Organizers report that successful presentations strike a balance between entertainment value and genuine advocacy for the friend being pitched. The trend reflects broader cultural shifts toward more creative and community-driven approaches to dating and social connection.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Morning Brew</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SCIENCE SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-science">Science</span>
+      <span class="section-name">Science</span>
+    </div>
+
+    <div class="stories-grid">
+      <article class="story-card">
+        <h3><a href="https://www.eurekalert.org/news-releases/1120444" target="_blank">SHP Protein Shows Promise for Osteoarthritis Treatment</a></h3>
+        <p class="story-summary">Researchers identified the SHP (NR0B2) protein as a critical protector of cartilage, with reduced levels linked to accelerated breakdown in osteoarthritis and gene delivery showing long-lasting therapeutic potential.</p>
+        <div class="story-expanded" id="story-7">
+          <p>The protein suppresses production of matrix-degrading enzymes MMP-3 and MMP-13 that destroy cartilage tissue. In mice lacking SHP, cartilage degradation accelerated and pain increased, while restoring SHP levels significantly reduced damage. A gene delivery approach using viral vectors showed particularly promising results, with single-treatment effects persisting even in animals with established osteoarthritis. The findings, published in Nature Communications, suggest a new therapeutic pathway for managing this degenerative joint disease.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More ▾</button>
+          <span class="story-url"><a href="https://www.eurekalert.org/news-releases/1120444" target="_blank">eurekalert.org →</a></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Mass Spectrometry Breakthrough: Analyzing Billion Molecules Simultaneously</h3>
+        <p class="story-summary">A new prototype called MultiQ-IT enables simultaneous analysis of up to a billion molecules, vastly surpassing conventional instruments that process molecules sequentially.</p>
+        <div class="story-expanded" id="story-8">
+          <p>This parallelization approach improves sensitivity, enhances detection of rare molecules, and increases signal-to-noise ratios, offering a blueprint for more efficient molecular analysis. The breakthrough could accelerate research in drug discovery, environmental monitoring, and fundamental chemistry by dramatically reducing analysis time while improving accuracy and detection capabilities.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Humanoid Robot Masters Tennis Through Imperfect Human Motion Data</h3>
+        <p class="story-summary">Researchers developed a system enabling a Unitree G1 humanoid robot to learn tennis skills from fragmented human motion data, achieving a 96.5% success rate in returning balls accurately.</p>
+        <div class="story-expanded" id="story-8b">
+          <p>The approach focuses on learning primitive actions like forehand and backhand strokes rather than complete motion sequences. The system's success in translating imperfect human movement data to robotic execution surpasses previous methods in accuracy and motion naturalness. This advance suggests humanoid robots can learn complex sports skills and dynamic tasks through more flexible training approaches than previously thought possible.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-8b', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Butyrate May Hold Key to Slowing Alzheimer's Progression</h3>
+        <p class="story-summary">A gut-derived molecule called butyrate reduces amyloid-β accumulation, preserves neuronal connections, and lowers inflammation in Alzheimer's disease models, suggesting a potential therapeutic approach targeting the gut-brain axis.</p>
+        <div class="story-expanded" id="story-9">
+          <p>Amyloid-β accumulates in both the brain and gut in Alzheimer's disease, disrupting the enteric nervous system and contributing to gastrointestinal dysfunction before memory decline appears. Mouse studies show butyrate can reverse these changes, prevent memory deficits, and restore gut-brain communication. The findings point to potential therapeutic strategies that work through the gut microbiome rather than directly targeting brain pathology.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Clearing Cellular Waste Extends Lifespan in C. elegans Studies</h3>
+        <p class="story-summary">Elimination of circular RNA from cells and enhancement of the enzyme RNASEK delays aging and extends lifespan, with similar anti-aging effects observed in mice and human cells.</p>
+        <div class="story-expanded" id="story-10">
+          <p>Circular RNA accumulates with age, forming stress granules and contributing to cellular dysfunction. The RNA-degrading enzyme RNASEK declines with age, leading to buildup. By enhancing RNASEK activity or removing accumulated circular RNA, researchers observed delayed aging markers and extended lifespan. The finding suggests that managing cellular waste accumulation could represent a fundamental approach to slowing aging across multiple species.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Stem Cell Therapy Shows Promise for Age-Related Frailty</h3>
+        <p class="story-summary">A single dose of laromestrocel, a stem cell therapy derived from young donor bone marrow, significantly improved physical strength and mobility in older adults with age-related frailty in Phase 2b trials.</p>
+        <div class="story-expanded" id="story-11">
+          <p>In the clinical trial, 30.8% of treated patients improved from frail to non-frail status, with a dose-dependent increase in walking distance. The treatment showed sustainable improvements in physical function and reduced frailty-related decline. These results suggest stem cell therapy may offer a way to reverse aging-related functional decline, potentially transforming treatment approaches for elderly populations.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Walking Patterns Reveal Emotional States</h3>
+        <p class="story-summary">Distinct patterns in arm and leg swing width and timing during walking reliably signal emotional states like anger, sadness, and fear, with potential applications in animation and robotics.</p>
+        <div class="story-expanded" id="story-12">
+          <p>Researchers found that manipulating gait patterns alone can influence emotion perception, indicating that specific movement components causally affect how emotions are expressed and recognized. The discovery suggests that emotional expression is more deeply embedded in the physical body than previously understood, opening new avenues for understanding embodied emotion and human nonverbal communication.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Deep Freshwater Aquifer Discovered Beneath Great Salt Lake</h3>
+        <p class="story-summary">Airborne electromagnetic surveys reveal a substantial freshwater reservoir extending 3-4 km deep beneath the Great Salt Lake, particularly under Farmington Bay and Antelope Island, potentially helping mitigate dust pollution.</p>
+        <div class="story-expanded" id="story-13">
+          <p>The freshwater appears to enter the lake's interior in an unexpected flow pattern, contrary to previous assumptions about groundwater movement in the region. This discovery could represent a significant water resource for the desert-adjacent Salt Lake City area and may help address environmental concerns related to exposed lakebed dust. The findings were made using advanced geophysical mapping techniques.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Designer Crossbreed Dogs Show More Problem Behaviors Than Purebreds</h3>
+        <p class="story-summary">Survey data indicate that cockapoos, cavapoos, and labradoodles exhibit more undesirable behaviors than at least one of their purebred parent breeds in nearly half of behavioral trait comparisons.</p>
+        <div class="story-expanded" id="story-14">
+          <p>Cockapoos showed the most problem behaviors overall, while labradoodles displayed fewer behavioral issues than their purebred progenitors in some traits. The findings challenge widespread assumptions about behavioral advantages of crossbreeding and suggest that hybrid vigor may not consistently extend to behavioral traits. Prospective dog owners considering designer breeds should carefully evaluate specific behavioral characteristics rather than assuming improved temperament.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Electron Orbitals Provide New Method for Controlling Magnetism</h3>
+        <p class="story-summary">Research shows that electron orbitals, not just spin, can control magnetism in materials, enabling more efficient manipulation of magnetic properties via electric current for memory and logic devices.</p>
+        <div class="story-expanded" id="story-15">
+          <p>Orbital-based magnetic effects may surpass conventional spin-based methods in efficiency, offering a new pathway for developing faster, low-power memory and logic devices. This approach has particular applications in emerging altermagnetic materials. The discovery expands our understanding of magnetic control mechanisms and could drive significant advances in computing and data storage technologies.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Gut-Liver Serotonin Pathway Limits Drug Delivery Effectiveness</h3>
+        <p class="story-summary">Researchers discovered that commensal gut bacteria stimulate serotonin production, which activates immune cells that clear drug delivery carriers from the bloodstream, limiting therapeutic efficiency.</p>
+        <div class="story-expanded" id="story-16">
+          <p>Intestinal bacteria stimulate serotonin production via tryptophan metabolism, which in turn activates hepatic Kupffer cells to enhance clearance of nanoparticle and viral delivery vehicles. Disrupting this gut-liver serotonin pathway or restricting tryptophan intake dramatically improves carrier delivery and therapeutic efficacy. The findings suggest that manipulating the gut-liver serotonin axis could significantly enhance the effectiveness of nanomedicine and gene therapy approaches.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Neanderthals Used Birch Tar for Medicinal Properties</h3>
+        <p class="story-summary">Experiments show that birch tar recovered from Neanderthal sites demonstrates antibacterial activity against Staphylococcus, suggesting they used it for wound treatment and basic medicinal care.</p>
+        <div class="story-expanded" id="story-17">
+          <p>Extraction methods replicating those available to Neanderthals confirm the birch tar's antibacterial efficacy, supporting evidence that Neanderthals possessed knowledge of natural substances with medicinal properties. This finding adds to growing evidence of cognitive sophistication and practical problem-solving abilities in these ancient hominins, suggesting they engaged in basic healthcare practices thousands of years before modern medicine.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Fashion Math: Hemlines Cycle Every 20 Years</h3>
+        <p class="story-summary">Mathematical analysis of over a century of women's fashion data demonstrates that clothing styles, particularly hemline lengths, tend to cycle approximately every 20 years, though this pattern has weakened since the 1980s.</p>
+        <div class="story-expanded" id="story-18">
+          <p>Researchers found that bell-bottoms and miniskirts follow predictable cyclical patterns, with styles returning roughly every two decades. However, this regularity has decreased in recent decades due to increased fashion diversity and the simultaneous coexistence of multiple competing trends. The shift reflects broader cultural changes toward individualism and reduced conformity in fashion choices, enabled by internet-enabled access to diverse styles.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>King Harold Sailed to Battle of Hastings, History May Have Misled Us</h3>
+        <p class="story-summary">Analysis of contemporary sources indicates King Harold did not undertake a 200-mile forced march to the 1066 Battle of Hastings but instead used England's fleet for rapid movement and coordinated land-sea operations.</p>
+        <div class="story-expanded" id="story-19">
+          <p>Historical records show the Anglo-Saxon fleet remained active and supported campaigns against both Harald Hardrada and William the Conqueror, challenging long-held narratives about the Norman Conquest. The new interpretation suggests Harold used naval advantages for strategic mobility rather than grueling land marches. This revision highlights how military logistics and transportation often shape historical outcomes more than endurance narratives suggest.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-19', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Project Hail Mary: Separating Science Fact from Fiction</h3>
+        <p class="story-summary">Expert analysis finds that the film accurately portrays orbital mechanics and spacecraft engineering but greatly exaggerates the plausibility of a microorganism dimming the sun.</p>
+        <div class="story-expanded" id="story-20">
+          <p>The movie's depictions of artificial gravity via centrifugal force and scientific collaboration ring true, while the premise of an organism absorbing enough solar energy to reduce the sun's output is highly implausible given the sun's immense energy output and extreme conditions near its surface. The analysis highlights how science fiction can balance accurate technical details with imaginative speculation, though the most critical premise may strain credibility.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-20', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>ChatGPT Can Provide Original Mathematical Proofs</h3>
+        <p class="story-summary">Researchers demonstrate that commercial language models like ChatGPT-5.2 can independently generate original mathematical proofs, as shown in the resolution of a 2024 conjecture with minimal human input.</p>
+        <div class="story-expanded" id="story-21">
+          <p>The AI developed most of the proof structure through a process termed "vibe-proving," with human experts providing verification. This achievement highlights AI's emerging potential in theoretical mathematics research, though expert oversight remains essential for validating correctness. The success suggests new collaborative models between human mathematicians and AI systems could accelerate mathematical discovery and proof development.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-21', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Life, But Not as We Know It: Assembly Theory Offers New Biosignature Search</h3>
+        <p class="story-summary">Assembly theory offers an alternative to traditional biosignature searches by quantifying molecular complexity through an Assembly Index, reflecting the minimum steps needed to build molecules in an atmosphere.</p>
+        <div class="story-expanded" id="story-22">
+          <p>Traditional approaches focus on Earth-like gases, risking false positives and limiting detection to familiar life forms. Assembly theory can identify life regardless of specific biochemistry by measuring molecular complexity via infrared spectroscopy. High complexity and interconnected chemistry suggest the presence of life, enabling a more agnostic and continuous assessment of planetary habitability. This approach could improve the search for extraterrestrial life by detecting unfamiliar biochemistries.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-22', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Platypus Fur Contains Uniquely Spherical Melanosomes</h3>
+        <p class="story-summary">Platypus fur contains spherical, hollow melanosomes—a structure previously unknown in mammals and distinct from structures found in birds—adding to the long list of strange features in this monotreme.</p>
+        <div class="story-expanded" id="story-23">
+          <p>These unique melanosomes produce only brown coloration and appear rich in eumelanin despite their unusual shape. The function and evolutionary origin of this distinctive melanosome morphology remain unclear, representing another puzzle in understanding platypus biology. The discovery underscores how much remains to be learned about this remarkable monotreme's unique adaptations.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-23', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3>Emperor Fish Detect When Humans Are Watching Their Eggs</h3>
+        <p class="story-summary">Emperor cichlids exhibit increased aggression when humans direct their gaze toward the fish's eggs or fry compared to when attention is directed elsewhere, indicating they can detect and respond to human attention direction.</p>
+        <div class="story-expanded" id="story-24">
+          <p>This behavior demonstrates a capacity for attention attribution in non-mammalian species. Such responses may have implications for ecotourism-related stress in aquatic environments, as fish perception of observation pressure could trigger protective aggression. The finding adds to growing evidence that fish possess more sophisticated cognitive abilities than traditionally assumed.</p>
+        </div>
+        <div class="story-meta">
+          <span class="source-badge">Science X</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-24', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Science X Newsletter</span>
+      <span>SitDeck Global Briefing</span>
+      <span>Morning Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Saturday, March 22, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More ▾';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse ▴';
+  }
+}
+</script>
+</body>
+</html>
