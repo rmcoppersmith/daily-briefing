@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Sunday, March 29, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Sunday, March 29, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">&mdash;</span><span class="ticker-change">&mdash;</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Breakthroughs &amp; discoveries</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.scientificamerican.com/article/physicists-just-took-a-road-trip-with-a-load-of-antimatter-heres-how-it-went/" target="_blank">CERN Scientists Transport Antimatter by Road for the First Time in World-First Experiment</a></h2>
+  <p class="story-summary">Scientists at CERN loaded 92 antiprotons into a cryogenic trap, strapped it to a truck, and drove 6.2 miles across their Geneva campus — a feat more than ten years in the making. The breakthrough could pave the way for transporting antimatter to quieter research facilities in Germany, where conditions may help answer why matter survived the Big Bang.</p>
+  <div class="story-expanded" id="story-1">
+    <p>Antimatter is the universe's most fragile substance, destroyed instantly upon contact with ordinary matter. This has historically confined antimatter research to the immediate vicinity of CERN's particle accelerators. The successful road transport opens the possibility of antimatter experiments at distant facilities with lower seismic and electromagnetic noise — conditions that could enable precision measurements of antimatter's gravitational behavior and test fundamental symmetries of physics.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.scientificamerican.com/article/physicists-just-took-a-road-trip-with-a-load-of-antimatter-heres-how-it-went/" target="_blank">scientificamerican.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.nytimes.com/2026/03/27/science/astrophysics-neutrinos-black-holes.html" target="_blank">MIT Scientists Think an Ultra-Energetic Neutrino May Be Proof of an Exploding Black Hole</a></h3>
+  <p class="story-summary">In 2023, an underwater telescope off Sicily detected a neutrino orders of magnitude more energetic than anything produced in a particle collider on Earth. MIT scientists now believe it may have come from an exploding black hole — a concept Stephen Hawking predicted in 1974 but that has never been observed.</p>
+  <div class="story-expanded" id="story-2">
+    <p>If confirmed, this would validate Hawking's theory of black hole radiation, potentially crack open the mystery of dark matter, and reveal entirely new particles. The finding was made by the KM3NeT detector, a cubic-kilometer array of light sensors suspended deep in the Mediterranean Sea, designed to capture the faint flashes produced when ultra-high-energy neutrinos collide with water molecules.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.nytimes.com/2026/03/27/science/astrophysics-neutrinos-black-holes.html" target="_blank">nytimes.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.sciencedaily.com/releases/2026/03/260328024517.htm" target="_blank">Scientists Break Key Solar Barrier With 130% Quantum Yield via Singlet Fission</a></h3>
+  <p class="story-summary">A team at Kyushu University has achieved solar energy conversion exceeding 100% by triggering singlet fission — a process that splits a photon's energy into two usable charges. The experiment hit quantum yields of 130%, producing more energy carriers than absorbed photons.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The work is still proof-of-concept, but if the approach scales, it could push real-world solar panel efficiency past the limits of traditional silicon. Current commercial panels top out around 22–24% efficiency; singlet fission offers a theoretical pathway to dramatically higher ceilings by harvesting energy that conventional cells waste as heat.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.sciencedaily.com/releases/2026/03/260328024517.htm" target="_blank">sciencedaily.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://interestingengineering.com/innovation/first-beer-carbonated-with-air-captured-co2" target="_blank">World's First Beer Carbonated With CO₂ Captured From Thin Air Debuts in California</a></h3>
+  <p class="story-summary">Almanac Beer Co. has launched the first beer carbonated with CO₂ pulled directly from the atmosphere. The direct-air-capture system sits inside the brewery in Alameda, California, captures ambient CO₂, and refines it to 99.999% purity for food-grade use.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The 2022 national CO₂ shortage hit breweries hard, exposing the industry's dependence on fossil-fuel-derived carbon dioxide. This approach could reduce that reliance while also serving as a proof point for atmospheric CO₂ capture technology in food production, refrigeration, agriculture, and even concrete manufacturing.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://interestingengineering.com/innovation/first-beer-carbonated-with-air-captured-co2" target="_blank">interestingengineering.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://interestingengineering.com/health/implant-delivers-hiv-glp1-leptin-drugs" target="_blank">Tiny Implant Produces Multiple Drugs Simultaneously, Could Replace Daily Pills for Chronic Conditions</a></h3>
+  <p class="story-summary">Scientists have built HOBIT, an implantable device packed with engineered cells that continuously produce multiple drugs at once — an anti-HIV antibody, a GLP-1 diabetes peptide, and an appetite-regulating hormone. In animal tests, it delivered steady doses for 30 days straight.</p>
+  <div class="story-expanded" id="story-5">
+    <p>For patients managing chronic conditions with daily pills or injections, this could eventually mean trading in an entire medicine cabinet for a single implant. The multi-drug capability is a significant advance over earlier single-therapy implants, and the 30-day sustained release in animal models suggests a viable path toward long-duration human treatment.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://interestingengineering.com/health/implant-delivers-hiv-glp1-leptin-drugs" target="_blank">interestingengineering.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.sciencedaily.com/releases/2026/03/260328043558.htm" target="_blank">AI-Designed Gene Therapy Acts as Precise Pain "Off Switch" Without Addiction Risk</a></h3>
+  <p class="story-summary">Scientists used AI to map how the brain processes pain and developed a gene therapy that mimics morphine's relief without triggering addiction or side effects. In early tests, it delivered lasting results without disrupting normal sensations.</p>
+  <div class="story-expanded" id="story-6">
+    <p>Millions of Americans live with chronic pain, and most treatments still carry addiction risk. This approach uses precise genetic targeting — guided by AI-generated neural maps — to selectively silence pain pathways while leaving other sensory functions intact. If clinical trials succeed, it could fundamentally reshape chronic pain treatment and offer an alternative to opioid-based therapies.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.sciencedaily.com/releases/2026/03/260328043558.htm" target="_blank">sciencedaily.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Teenager Discovers Rare 6-Inch Megalodon Tooth on Guided Fossil Dive in Florida</h3>
+  <p class="story-summary">Sixteen-year-old Aiden Andrews was on a guided fossil dive off Manasota Key, Florida, when he spotted a 6-inch megalodon tooth — a find so rare that even seasoned dive guides took immediate notice. The tooth belonged to a 60-foot, 50-ton predator that went extinct 3.6 million years ago.</p>
+  <div class="story-expanded" id="story-7">
+    <p>Small megalodon teeth turn up occasionally on Florida dives, but specimens this size are exceptionally uncommon. The megalodon (Otodus megalodon) was the largest shark ever to roam Earth's oceans, and its teeth are among the most sought-after fossils for collectors and paleontologists alike.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.ladbible.com/community/megalodon-shark-wyoming-teenager-diving-underwater-155235-20260328" target="_blank">ladbible.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">New tech gadgets of the week</span>
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Flowtica Scribe</strong> — An AI-powered recorder built inside a working pen that records, transcribes, and creates searchable summaries while you write on paper. <a href="https://flowtica.ai/" target="_blank">flowtica.ai &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Cozytime Lumo</strong> — A compact countertop appliance that works as an oven, grill, or flat indoor BBQ using far infrared heating for fast heat-up, low-smoke cooking, and dual heat zones. <a href="https://cozytime-tech.com/pages/lumo" target="_blank">cozytime-tech.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Livall PikaBoost 2</strong> — A small gadget that converts any bike into an e-bike in seconds, packed with a 500W motor for city commutes and long rides. <a href="https://livall.com/products/livall-pikaboost-2-electrify-your-rides-with-ease" target="_blank">livall.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Stickerbox</strong> — An AI-powered printer for kids that lets them speak an idea and instantly print it as a black-and-white sticker. <a href="https://stickerbox.com/" target="_blank">stickerbox.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- ENTERTAINMENT & CULTURE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+  <span class="section-name">Trending in science &amp; tech on social media</span>
+</div>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://nypost.com/2026/03/27/science/researchers-detect-second-sphinx-beneath-pyramids-of-giza/" target="_blank">Scans Hint at "Underground Megastructure" Beneath the Great Pyramids of Giza</a></h3>
+  <p class="story-summary">Social media was buzzing this week after scans hinted at a structure beneath the Great Pyramids, with many speculating it could be a second Sphinx. While some researchers have backed the claim, others remain skeptical about the interpretation of the geophysical data.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The debate highlights a recurring tension in Egyptology between preliminary geophysical survey results and confirmed archaeological findings. The underground anomaly has been detected by ground-penetrating radar, but excavation would be needed to confirm its nature — a politically and logistically complex prospect at one of the world's most protected heritage sites.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://nypost.com/2026/03/27/science/researchers-detect-second-sphinx-beneath-pyramids-of-giza/" target="_blank">nypost.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://x.com/neuralink/status/2036489073091580011" target="_blank">Neuralink Showcases ALS Patient Speaking Again via Brain Implant That Converts Thoughts to Speech</a></h3>
+  <p class="story-summary">In a viral post, Neuralink demonstrated an ALS patient speaking again through a brain implant that turns thoughts into real-time speech — offering a glimpse at a future where silence caused by neurodegenerative disease may no longer be permanent.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The brain-computer interface decodes neural signals associated with intended speech and synthesizes them into audible words in real time. For ALS patients who progressively lose the ability to speak, move, and eventually breathe, the technology represents a potential lifeline for maintaining communication as the disease advances.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/neuralink/status/2036489073091580011" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Reflect Orbital: Order Sunlight on Demand</strong> — A viral social media post highlights a startup that lets you order reflected sunlight to your location via an app. <a href="https://x.com/shiri_shh/status/2037166429724627241" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Japanese Astronaut Takes "Magic Carpet Ride" on the ISS</strong> — Koichi Wakata floated on a towel aboard the International Space Station in a whimsical scene straight out of Aladdin. <a href="https://x.com/Astro_Wakata/status/2037225376863150366" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Man Builds DIY Life Jacket for Goldfish With Swim Bladder Disease</strong> — A wholesome viral clip shows a tiny buoyancy device keeping a sick goldfish upright and swimming. <a href="https://x.com/positivityofx/status/2037073787364241579" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman (Zain Kahn)</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Sunday, March 29, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
