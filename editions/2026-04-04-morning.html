@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Saturday, April 4, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-date">Saturday, April 4, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,582.69</span><span class="ticker-change ticker-down">-3.84% YTD</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,879.18</span><span class="ticker-change ticker-down">-5.86% YTD</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,504.67</span><span class="ticker-change ticker-down">-3.24% YTD</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$112.06</span><span class="ticker-change ticker-up">+11.9%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$66,918</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- GEOPOLITICS & WORLD -->
+  <div class="section-header">
+    <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+    <span class="section-name">Two US planes down — war at the threshold</span>
+  </div>
+
+  <article class="lead-story">
+    <h2>US F-15E and A-10 Warthog Shot Down by Iran; Drone Strikes US Base in Kuwait — War Escalation Odds Hit 83.5%</h2>
+    <p class="story-summary">Two US warplanes were shot down within a single operational period — an F-15E over Iran (one crew member rescued, SAR ongoing for the second) and an A-10 Warthog near the Strait of Hormuz (pilot safe). Iran simultaneously launched a drone strike on Camp Buehring in Kuwait, directly attacking a US Army base in a Gulf partner state. Prediction markets now place an 83.5% probability on US ground forces entering Iran by April 30 — a 17-point single-day surge.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The simultaneous loss of two US aircraft in a single period represents the most serious military escalation since the conflict began. The F-15E crew situation is acute: one aviator was rescued with a combat search-and-rescue mission operating deep inside Iranian territory, while Iran offered civilians a reward for capturing the second crew member alive. The A-10 Warthog loss near the Strait of Hormuz is separately significant given Trump's Truth Social posts explicitly referencing seizing the Strait and taking Iranian oil. The Kuwait drone strike on Camp Buehring — home to US Army forces — marks the first direct Iranian kinetic attack on a Gulf Cooperation Council state hosting American troops. US forces simultaneously struck the 34th Brigade of the Popular Mobilization Forces (Iranian proxy militia) in Mosul, Iraq, expanding the operational theater into a third country. The CNN Fear &amp; Greed Index sits at 11 (Extreme Fear).</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">SitDeck</span>
+      <span class="source-badge">Morning Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+    <article class="story-card">
+      <h3>Trump Proposes $2.2 Trillion Budget: $1.5T Military, $150M for Alcatraz, Cuts EPA and SBA by Half</h3>
+      <p class="story-summary">President Trump submitted a $2.2 trillion FY2027 budget proposal that would boost military spending to $1.5 trillion — a 42% increase and the largest single-year military spending jump since World War II — while slashing domestic programs. The EPA would lose 52% of its funding; the SBA 67%.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The budget proposal includes $28.5 billion for immigration enforcement, $10 billion for Washington DC beautification, $150 million to rebuild Alcatraz as a working federal prison, and a $15 billion reallocation from renewable energy and clean air programs to fossil fuels and AI supercomputers. Non-military discretionary spending would drop 10% to ~$660 billion. The Department of Health and Human Services would shrink by 12.5%, with NIH divisions researching transgender health and racial health disparities eliminated. NASA funding would be cut 23%. Fiscal watchdogs warned the military buildup could add trillions to the $39 trillion federal debt. Congress is the only body that can actually set the budget; prior Trump budget proposals were significantly modified by lawmakers.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>US Economy Adds 178,000 Jobs in March; Unemployment Falls to 4.3%</h3>
+      <p class="story-summary">The Labor Department reported that the US economy added 178,000 jobs in March, reversing February's 133,000 decline and beating analyst expectations. The unemployment rate fell to 4.3%, down from 4.4% in February. Healthcare led all sectors.</p>
+      <div class="story-expanded" id="story-3">
+        <p>The jobs report represents a bright spot in an otherwise anxious economic environment dominated by Middle East conflict risk and energy price spikes. The partial recovery in unemployment reflects genuine hiring rather than a labor force contraction — though economists noted that some of the rate improvement reflects workers stopping their job searches. February's figure was also revised down by 41,000. The data left economists "cautiously optimistic" about labor market resilience even as oil prices, tariff uncertainty, and geopolitical risk cloud the broader outlook.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Strait of Hormuz Seizure Threat: Trump Posts Cryptic "KEEP THE OIL" on Truth Social</h3>
+      <p class="story-summary">President Trump posted a series of Truth Social messages explicitly referencing opening the Strait of Hormuz, taking Iranian oil, and a cryptic "KEEP THE OIL, ANYONE?" — representing the most direct public declaration of intent toward Iranian energy infrastructure yet. Iran has already categorized nations into "hostile," "neutral," and "friendly" based on Strait access.</p>
+      <div class="story-expanded" id="story-4">
+        <p>SitDeck rates the confidence as HIGH on the statements, LOW on imminent execution, but notes that public presidential declarations of this type narrow the range of diplomatic off-ramps. Iran's Strait categorization framework — effectively threatening Gulf states over alignment — puts Saudi Arabia, UAE, Qatar, and Oman in a bind. Any Iranian mining, blockade declaration, or commercial shipping attack in the Strait would trigger international emergency protocols and potentially a NATO/GCC military response. Oil markets are already pricing direct disruption risk at $112/bbl. At $130–150/bbl, a true Hormuz closure would push global energy markets into crisis.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Cuba to Release Over 2,000 Political Prisoners</h3>
+      <p class="story-summary">Cuba announced it will release more than 2,000 political prisoners as a humanitarian gesture amid continued US diplomatic and economic pressure on the island nation.</p>
+      <div class="story-expanded" id="story-5">
+        <p>The release would be one of the largest prisoner freeing actions in Cuba in decades. The announcement follows sustained US pressure including sanctions and negotiations. The timing — amid a broader moment of global geopolitical tension — may reflect Cuban leadership's calculation that demonstrating flexibility on human rights could ease economic strain. Details on the release timeline and conditions were not immediately available.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+  </div>
+
+  <p style="font-family:'Inter',sans-serif;font-size:12px;color:var(--wsj-gray);margin:16px 0 8px;text-transform:uppercase;letter-spacing:1px;">Also in Geopolitics &amp; World</p>
+  <ul class="bullet-stories">
+    <li><strong>Israel Bombs Bridges in Eastern Lebanon; 3 UNIFIL Peacekeepers Killed</strong> — Israeli forces struck bridge infrastructure in eastern Lebanon as Hezbollah continued rocket and drone exchanges into northern Israel. Three Indonesian UNIFIL peacekeepers were killed; the UN Security Council issued a press statement. <span class="source-badge">SitDeck</span></li>
+    <li><strong>Drone Strike on Sudan Hospital Kills 10</strong> — A drone strike attributed to the RSF or allied forces struck a hospital in Sudan, killing at least 10 people according to MSF (Doctors Without Borders) — a potential war crimes violation under international law. <span class="source-badge">SitDeck</span></li>
+    <li><strong>NPT Review Conference Opens; Trump Seeks Iran Nuclear Deal</strong> — The Nuclear Non-Proliferation Treaty Review Conference is convening alongside active kinetic operations against Iran. The Arms Control Association warned US negotiators were "ill-prepared" for serious nuclear talks with Tehran. <span class="source-badge">SitDeck</span></li>
+    <li><strong>Springs Fire Breaks Out in Riverside County, California</strong> — A fast-growing wildfire known as the Springs Fire broke out in Southern California's Riverside County, adding to the ongoing wildfire stress across the Western US. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>Federal Judge Blocks Powell Subpoenas Again</strong> — A federal judge upheld his earlier decision blocking subpoenas in the criminal probe of Fed Chair Jerome Powell, likely setting up an appeal that could delay confirmation of Powell's successor. <span class="source-badge">Morning Brew</span></li>
+  </ul>
+
+  <!-- AI & TECHNOLOGY -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">OpenAI exec moves and the Artemis moment</span>
+  </div>
+
+  <div class="stories-grid">
+    <article class="story-card">
+      <h3>OpenAI Revenue Chief Fidji Simo Takes Medical Leave; COO Brad Lightcap Shifts Roles</h3>
+      <p class="story-summary">Fidji Simo, OpenAI's CEO of AGI Deployment (effectively the chief revenue officer), will take several weeks of medical leave. The planned absence comes as OpenAI prepares for an IPO. Separately, longtime COO Brad Lightcap is shifting to lead special projects.</p>
+      <div class="story-expanded" id="story-6">
+        <p>Simo was instrumental in OpenAI's decision to acquire TBPN and has been the primary architect of the company's monetization strategy — the ads pilot, enterprise deals, and the broader "superapp" vision. Her absence at a critical pre-IPO moment raises questions about continuity. Lightcap's shift to "special projects" is a common organizational move for executives who are transitioning out or being repositioned, though the company did not characterize it as such. The dual leadership changes come at a moment when OpenAI is also integrating its $122B funding round and preparing for public markets.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Meta Testing Premium Instagram With Secret Story Viewing</h3>
+      <p class="story-summary">Meta is piloting a premium version of Instagram that would allow subscribers to view Stories without notifying the poster. The feature is part of a broader exploration of paid Instagram tiers.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Anonymous story viewing has been a frequently requested feature and, until now, available only through third-party tools that violate Instagram's terms of service. Building it into a paid tier creates a monetization path for privacy-seeking behavior. The premium tier is also expected to include other exclusive features. The move mirrors Meta's subscription approach on Facebook and WhatsApp as the company seeks diversified revenue beyond advertising amid regulatory scrutiny of its ad business.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+  </div>
+
+  <!-- SCIENCE -->
+  <div class="section-header">
+    <span class="section-tag section-tag-science">Science</span>
+    <span class="section-name">From the Moon and the lab</span>
+  </div>
+
+  <article class="lead-story">
+    <h2>NASA Artemis II Crew Sends Back Stunning Photos of Earth — First Humans Near the Moon Since 1972</h2>
+    <p class="story-summary">The four astronauts aboard NASA's Artemis II mission — currently on their way to becoming the first humans to reach the Moon since 1972 — sent back breathtaking photographs of Earth from space. After Wednesday's launch and a 5-minute, 50-second engine burn, they've left Earth's orbit on their lunar test flight path.</p>
+    <div class="story-expanded" id="story-8">
+      <p>The mission is historic on multiple fronts: the crew will travel the farthest distance humans have ever traveled in space. In a lighter milestone, it's the first-ever crewed mission with a dedicated toilet aboard — during Apollo missions, astronauts used bags and tubes, leading to a famous "rogue floating turd" incident during Apollo 10. Artemis II's toilet was briefly offline for the first few hours but fully operational by bedtime. The mission is a test flight fly-by; scientists hope Artemis III will achieve a Moon landing in 2028. NASA's 23% funding cut in Trump's budget proposal (announced the same week) adds a shadow to the program's long-term trajectory.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Morning Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+    <article class="story-card">
+      <h3><a href="https://phys.org/news/2026-04-quantum-coherence-large-scales-realistic.html" target="_blank">Quantum Coherence Could Be Preserved at Large Scales in Realistic Environments</a></h3>
+      <p class="story-summary">New research suggests quantum coherence — the fragile quantum mechanical property that enables quantum computing — may be maintainable at much larger scales than previously thought, even in non-laboratory environments. The finding could have significant implications for practical quantum computing.</p>
+      <div class="story-expanded" id="story-9">
+        <p>Quantum decoherence — the rapid loss of quantum states when exposed to environmental noise — has been the central engineering challenge in building scalable quantum computers. If coherence can be preserved at realistic scales and temperatures, it would remove one of the fundamental barriers to quantum advantage in commercial applications. The research was highlighted as the spotlight story in Science X's April 3 edition.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://phys.org" target="_blank">phys.org &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://phys.org/news/2026-04-secrets-black-holes-higgs-mass.html" target="_blank">Black Holes and the Higgs Mass May Be Hidden in 7-Dimensional Geometry</a></h3>
+      <p class="story-summary">Physicists propose that the mysteries of black hole physics and the Higgs boson mass — two of the deepest open questions in theoretical physics — could be explained through a 7-dimensional geometric framework, building on string theory and extra-dimensional models.</p>
+      <div class="story-expanded" id="story-10">
+        <p>The Higgs mass problem (why the Higgs boson is so much lighter than theoretical predictions suggest) has been unsolved for decades. Connecting it geometrically to black hole physics opens a potential unified theoretical framework. The work sits at the intersection of high-energy particle physics and gravitational theory, with implications for our understanding of the fundamental structure of the universe.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://phys.org" target="_blank">phys.org &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://phys.org/news/2026-04-1200-year-old-fijian-island-built.html" target="_blank">Scientists Discover a 1,200-Year-Old Fijian Island Likely Built from Discarded Shellfish Remains</a></h3>
+      <p class="story-summary">Researchers have found that a 1,200-year-old island in Fiji was almost certainly constructed — deliberately or accidentally — from centuries of accumulated discarded shellfish remains, offering new insight into how Pacific Island communities shaped their environments.</p>
+      <div class="story-expanded" id="story-11">
+        <p>The finding challenges assumptions about natural island formation in the Pacific and raises fascinating questions about how human dietary practices can, over time, literally reshape geography. Shell middens — refuse heaps from shellfish consumption — are well-documented archaeological features, but this appears to be one of the clearest cases of an entire island emerging from such accumulation.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://phys.org" target="_blank">phys.org &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://phys.org/news/2026-04-memristor-oxygen-gradient-reinforcement-learning.html" target="_blank">New Memristor Design Uses Built-In Oxygen Gradient to Stabilize AI Reinforcement Learning</a></h3>
+      <p class="story-summary">Researchers developed a new memristor — a device that can "remember" its electronic state — that uses a built-in oxygen gradient to dramatically improve stability in reinforcement learning hardware, potentially enabling more reliable neuromorphic computing.</p>
+      <div class="story-expanded" id="story-12">
+        <p>Memristors have long been proposed as the hardware substrate for neuromorphic chips that could run AI models with far less power than conventional silicon. The instability problem has been a persistent barrier. This oxygen gradient approach provides a physical mechanism for consistent state retention, which could accelerate the timeline for energy-efficient AI hardware.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://phys.org" target="_blank">phys.org &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://phys.org/news/2026-04-transcranial-magnetic-stimulation-deep-brain.html" target="_blank">Transcranial Magnetic Stimulation Can Target a Deep Brain Region Without Surgery</a></h3>
+      <p class="story-summary">Scientists have demonstrated that transcranial magnetic stimulation (TMS) can precisely target a deep brain region previously reachable only through invasive surgery or medication — a breakthrough for non-invasive treatment of neurological and psychiatric conditions.</p>
+      <div class="story-expanded" id="story-13">
+        <p>TMS has been FDA-approved for depression and OCD treatment for years, but its reach has been limited to surface brain structures. Reaching deep brain regions without surgery opens potential treatment pathways for conditions like Parkinson's disease, severe depression, and epilepsy, where deep brain stimulation via implanted electrodes is currently the only option. The advance could expand TMS's clinical applicability substantially.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://phys.org" target="_blank">phys.org &rarr;</a></span>
+      </div>
+    </article>
+  </div>
+
+  <p style="font-family:'Inter',sans-serif;font-size:12px;color:var(--wsj-gray);margin:16px 0 8px;text-transform:uppercase;letter-spacing:1px;">Also in Science</p>
+  <ul class="bullet-stories">
+    <li><strong>Neptune and Uranus May Have 'Superionic' Interiors</strong> — New research suggests the depths of Neptune and Uranus may contain "superionic" water — a state of matter simultaneously solid and liquid — which could explain the planets' unusual magnetic fields. <a href="https://phys.org" target="_blank">phys.org &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Tiny African Fish Climbs 50-Foot Waterfalls</strong> — Researchers documented a small African fish species capable of scaling a 50-foot waterfall — an extraordinary feat of evolved locomotion that challenges understanding of fish biomechanics. <a href="https://phys.org" target="_blank">phys.org &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Injectable Particle Could Make Infant Surgery Safer</strong> — A new injectable nanoparticle technology shows promise for reducing surgical risk in infants, who face disproportionately high complications from standard anesthetic and surgical approaches. <a href="https://phys.org" target="_blank">phys.org &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Overnight Machine Perfusion Shifts Liver Transplants to Daytime</strong> — Machine perfusion technology that keeps donor livers viable overnight allows transplant teams to schedule surgeries during daytime hours, improving surgeon performance and patient outcomes. <a href="https://phys.org" target="_blank">phys.org &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>New Insights Into Influenza Immunity Could Improve Future Vaccines</strong> — Looking back at historic flu strains, researchers uncovered new mechanisms of immune response that could inform the design of longer-lasting influenza vaccines. <a href="https://phys.org" target="_blank">phys.org &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Dalí's 'Sublime' Amber Medium Explains Unusual Aging in a Masterpiece</strong> — Scientists found that Salvador Dalí used an unusual amber-based medium in one of his paintings, which may explain the distinctive and accelerated aging patterns observed in the work at a museum. <a href="https://phys.org" target="_blank">phys.org &rarr;</a> <span class="source-badge">Science X</span></li>
+  </ul>
+
+  <!-- ENTERTAINMENT & CULTURE -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">Sports roundup</span>
+  </div>
+
+  <ul class="bullet-stories">
+    <li><strong>Italy Coach Gennaro Gattuso Resigns After Third Consecutive World Cup Failure</strong> — Italy's head men's soccer coach Gennaro Gattuso resigned after the country failed to qualify for the 2026 World Cup — its third consecutive absence from the tournament. The Italian Football Federation faces mounting pressure to overhaul its youth development structure. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>NCAA Women's Basketball Championship: UCLA vs. South Carolina</strong> — UCLA and South Carolina will play for the NCAA women's national championship after defeating Texas and UConn, respectively, in Final Four action. The game is scheduled for Sunday. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>Robot MLB Umpires Are Forcing Downward Player Height Revisions</strong> — MLB's new automated ball-strike system requires precise player heights to calibrate strike zones. The league has been downwardly revising dozens of players' officially listed heights on its website to match reality. "Small ball is officially back." <span class="source-badge">Morning Brew</span></li>
+    <li><strong>United Airlines to Offer Tiered Business and Premium Economy Tickets</strong> — United will introduce tiered pricing for business class and premium economy, making premium seats more accessible but with booking restrictions — a new take on cabin pricing strategy. <span class="source-badge">Morning Brew</span></li>
+  </ul>
+
+</main>
+
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>SitDeck</span>
+      <span>Morning Brew</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Saturday, April 4, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
