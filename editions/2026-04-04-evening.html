@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Saturday, April 4, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Saturday, April 4, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- AI & TECHNOLOGY — ROBOTICS SPECIAL -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Robotics Special: Machines Moving at Scale</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://waymo.com" target="_blank">Waymo Hits 500,000 Paid Rides Per Week — A 10x Surge in Under Two Years</a></h2>
+    <p class="story-summary">Waymo has reached a milestone of 500,000 fully autonomous paid rides per week, representing a tenfold increase from its 2024 baseline — a growth rate that would be extraordinary for any transportation company, let alone one fielding driverless cars. The company has expanded into seven Sun Belt markets and shows no sign of slowing.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The scale of Waymo's expansion is striking: just two years ago, the company was operating in a handful of cities with limited hours and geofenced zones. Now, with half a million weekly paid trips, it is demonstrating that autonomous ride-hailing can operate at commercial scale without safety drivers. The Sun Belt expansion — covering markets like Phoenix, Los Angeles, Austin, and San Francisco — has allowed Waymo to build dense operational density, which improves ride-matching efficiency and reduces deadhead miles. Competitors are watching closely: Cruise remains sidelined after its 2023 pedestrian incident, leaving Waymo as the clear leader in the U.S. market. The key question is whether the unit economics can support profitable operations without subsidies as the fleet scales further.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Superhuman</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Physical Intelligence Eyes $1B Raise at $11B Valuation — Up from $5.6B Four Months Ago</h3>
+      <p class="story-summary">Physical Intelligence, the robotics AI startup building general-purpose robot software, is in talks to raise $1 billion at an $11 billion valuation — nearly double the $5.6 billion valuation it carried just four months ago. The rapid step-up reflects intense investor demand for foundation model approaches to robotics.</p>
+      <div class="story-expanded" id="story-2">
+        <p>Physical Intelligence (Pi) has attracted attention for its approach of training large neural networks on diverse robot demonstrations, aiming to produce a single model that can operate many different robot hardware platforms — analogous to how large language models generalize across tasks. The $11B valuation, if confirmed, would make it one of the most valuable pre-revenue robotics companies ever. The fundraise comes as industrial buyers are signaling serious interest in deploying general-purpose robots for warehouse, logistics, and manufacturing tasks where the hardware is increasingly commoditized but the software remains the bottleneck. Investors like Khosla Ventures and Jeff Bezos have already backed the company.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Baidu Apollo Go System Failure Strands 100 Robotaxis in Wuhan for Hours</h3>
+      <p class="story-summary">A software or connectivity failure in Baidu's Apollo Go autonomous vehicle fleet left approximately 100 robotaxis stranded across Wuhan, with passengers stuck inside for up to two hours before the situation was resolved. The incident highlights the operational risks of large-scale autonomous deployments where remote intervention capabilities are critical.</p>
+      <div class="story-expanded" id="story-3">
+        <p>Baidu's Apollo Go has been one of China's most aggressive commercial robotaxi deployments, operating hundreds of vehicles across multiple cities with plans to expand to 1,000+ vehicles. The Wuhan incident — affecting around 100 vehicles simultaneously — suggests the failure was at the infrastructure or coordination layer rather than an isolated vehicle fault. Passengers were reportedly unable to exit the vehicles during the lockout period, raising immediate safety and regulatory questions. China's robotaxi sector is under growing scrutiny from regulators who are balancing aggressive deployment targets against public safety concerns. Baidu has not disclosed the root cause.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Dubai Deploys Quadruped Robot Firefighters Active in Live Incidents</h3>
+      <p class="story-summary">Dubai's Civil Defense has deployed quadruped robots capable of fighting fires in environments too dangerous for human firefighters — operating in temperatures up to 500°C and delivering up to 2,400 liters of water per minute. The robots are no longer in testing; they are responding to real incidents.</p>
+      <div class="story-expanded" id="story-4">
+        <p>The Dubai robot firefighters represent a meaningful operational advance over prior robot-in-emergency deployments, which were typically limited to reconnaissance. These quadrupeds are equipped with thermal imaging, can navigate rubble and debris, and carry their own hose connections rather than requiring fixed infrastructure. The 2,400 liters-per-minute delivery rate is comparable to a small fire engine. Dubai's Civil Defense cited high-rise building fires — a persistent risk given the city's density of skyscrapers — as a primary use case. The program is being watched by fire departments in Singapore, London, and several U.S. cities exploring similar technology.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>AGIBOT Completes Its 10,000th Humanoid Robot — Months After Its First</h3>
+      <p class="story-summary">Chinese humanoid robotics company AGIBOT has built its 10,000th humanoid robot, reaching that production milestone within months of shipping its first units. The pace of scale — from prototype to five-figure production — is being cited as evidence that Chinese robotics manufacturers are moving faster than Western counterparts on manufacturing ramp.</p>
+      <div class="story-expanded" id="story-5">
+        <p>AGIBOT's production trajectory is notable because humanoid robots are mechanically complex, with dozens of actuators, sensors, and structural components that require tight tolerances. Reaching 10,000 units in a compressed timeframe implies either significant pre-built supply chain relationships or a modular design philosophy that allows faster assembly. The company is targeting factory floor automation as its primary market — not consumer or service robotics — which means buyers are industrial customers with more tolerance for imperfect demos and longer integration timelines. AGIBOT competes with Unitree, Fourier Intelligence, and foreign players like Boston Dynamics and Figure AI.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Pony.ai Plans 3,000 Robotaxis Across 20+ Cities</h3>
+      <p class="story-summary">Pony.ai, which went public on the Nasdaq in late 2024, has announced plans to deploy 3,000 robotaxis across more than 20 cities — a major expansion of its current fleet and a signal that post-IPO capital is being deployed aggressively into hardware and operations.</p>
+      <div class="story-expanded" id="story-6">
+        <p>Pony.ai's 3,000-vehicle target would make it one of the largest robotaxi fleets in operation globally. The company has been operating in China primarily, with permits in Beijing, Guangzhou, and Shenzhen, and has been working to establish a presence in the Middle East and Europe. Unlike Waymo, which manufactures its own sensor-laden Jaguar I-PACE fleet, Pony.ai works with OEM partners to integrate its software into production vehicles — a strategy that reduces per-vehicle cost but adds integration complexity. The 20+ city target implies expansion into second-tier Chinese cities where regulatory approval timelines are shorter.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Musk Pushes Grok as Preferred AI — xAI's Competitive Positioning Intensifies</h3>
+      <p class="story-summary">Elon Musk is actively promoting Grok, xAI's large language model, as a superior alternative to ChatGPT and Claude — using his platform on X to direct users toward Grok's capabilities and positioning the model as less ideologically constrained than competitors. The push coincides with xAI's continued infrastructure buildout at its Memphis data center.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Musk's promotion of Grok is notable because X's 500M+ user base gives xAI a direct distribution channel that competitors like Anthropic and Mistral lack. Grok is integrated directly into the X app and is available free to Premium subscribers, lowering the barrier to trial. The messaging around Grok being "uncensored" or less filtered than competitors is a deliberate positioning strategy aimed at users who feel other AI models are overly cautious or politically biased. Grok 3, the current flagship, reportedly performs competitively on coding and math benchmarks, though independent evaluations have been mixed on general reasoning tasks.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div>
+
+  <h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--wsj-gray);margin:24px 0 8px;">Also in AI &amp; Technology</h4>
+  <ul class="bullet-stories">
+    <li><strong>UBTech Offering $18M/Year for Chief AI Scientist</strong> — The Chinese humanoid robotics company is dangling one of the largest AI talent packages ever publicly disclosed, targeting researchers with foundation model expertise to accelerate its WALKER humanoid platform. <span class="source-badge">Superhuman</span></li>
+    <li><strong>FedEx Partners with Berkshire Grey for Warehouse Automation</strong> — FedEx is expanding its deployment of Berkshire Grey's robotic picking and sorting systems across distribution facilities, aiming to reduce sort labor costs and improve package throughput during peak seasons. <span class="source-badge">Superhuman</span></li>
+    <li><strong>Chinese Satellite Tests Flexible Robotic Arm in Orbit</strong> — A Chinese experimental satellite successfully completed four in-orbit tasks using a flexible robotic arm, including grappling and repositioning operations — technology with both commercial satellite servicing and dual-use implications. <span class="source-badge">Superhuman</span></li>
+    <li><strong>Disney's Olaf Robot T-Poses and Falls at Disneyland Paris Debut</strong> — Disney's new free-roaming Olaf animatronic robot, intended to greet guests in character at Disneyland Paris, experienced a software failure during its public debut — freezing in a T-pose before falling. The video circulated widely, becoming an instant meme and an unflattering reminder of the gap between robotics demos and reliable deployment. <span class="source-badge">Superhuman</span></li>
+    <li><strong>Bremerhaven University's Pepper Robot Guides Tourists via Gemini</strong> — A German university has deployed a Pepper robot powered by Google's Gemini model to assist tourists with navigation and local information, demonstrating practical integration of frontier LLMs into existing service robot hardware. <span class="source-badge">Superhuman</span></li>
+  </ul>
+
+</main>
+
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>Techpresso</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Saturday, April 4, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
