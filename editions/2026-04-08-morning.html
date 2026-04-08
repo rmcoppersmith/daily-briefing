@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Wednesday, April 8, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+    color: var(--wsj-gray);
+  }
+  a.source-badge {
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  a.source-badge:hover {
+    background: #dde8f0;
+    color: var(--wsj-accent);
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span,
+  .sources-list a {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+  .sources-list a {
+    text-decoration: none;
+    color: var(--wsj-gray);
+    transition: background 0.15s;
+  }
+  .sources-list a:hover {
+    background: #dde8f0;
+    color: var(--wsj-accent);
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Wednesday, April 8, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,616.85</span><span class="ticker-change ticker-up">+0.08%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">22,017.85</span><span class="ticker-change ticker-up">+0.10%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,584.46</span><span class="ticker-change ticker-down">-0.18%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$69,430</span><span class="ticker-change ticker-down">-0.40%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- ============================================================ -->
+  <!-- GEOPOLITICS & WORLD -->
+  <!-- ============================================================ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+    <span class="section-name">The world overnight</span>
+  </div>
+
+  <!-- LEAD: Iran Ceasefire -->
+  <article class="lead-story">
+    <h2><a href="https://apnews.com/article/trump-iran-ceasefire-deal-pakistan-mediation" target="_blank">US and Iran Agree to Two-Week Ceasefire — Strait of Hormuz to Reopen</a></h2>
+    <p class="story-summary">President Trump agreed to a 14-day ceasefire with Iran on April 7, brokered by Pakistan's Prime Minister Shehbaz Sharif, after a day that began with threats of "annihilation" and ended with a deal. Iran's Supreme National Security Council confirmed acceptance hours later, stating it will allow safe passage through the Strait of Hormuz during the two-week window.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The ceasefire announcement came after intermediaries — led by Pakistan, with China quietly pulling strings as well — worked to head off further escalation. Trump described Iran's 10-point counterproposal (which included lifting all sanctions, withdrawing US forces from the region, reparations, and Iranian control of the Strait) as "a workable basis on which to negotiate." Formal negotiations are set to begin in Islamabad on April 11, with Vance, Witkoff, and Kushner expected. Critically, a significant narrative gap has opened: Iranian state media claims the US accepted Iran's demands including US force withdrawal, while Trump called those reports fraudulent. SitDeck flags this divergence as a "critical risk" to implementation. Iran also continued ballistic missile strikes against Israel even after the ceasefire announcement, signaling the pause applies to US-Iran hostilities only. Crude oil plunged 13.8% and the Strait's reopening is contingent on Iran following through. Markets reacted with the CNN Fear &amp; Greed Index sitting at Extreme Fear (17), suggesting investors see the ceasefire as fragile.</p>
+    </div>
+    <div class="story-meta">
+      <a href="https://apnews.com" target="_blank" class="source-badge">AP News Alert</a>
+      <a href="https://apnews.com" target="_blank" class="source-badge">AP Morning Wire</a>
+      <a href="https://understandingwar.org" target="_blank" class="source-badge">ISW Publications</a>
+      <a href="https://sitdeck.com" target="_blank" class="source-badge">SitDeck</a>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://apnews.com/article/trump-iran-ceasefire-deal-pakistan-mediation" target="_blank">apnews.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- GRID -->
+  <div class="stories-grid">
+
+    <!-- Russia Ukraine -->
+    <article class="story-card">
+      <h3><a href="https://understandingwar.org" target="_blank">Russia Targets Civilians in Southern Ukraine with Drone Strikes</a></h3>
+      <p class="story-summary">Russian FPV drones struck a city bus in Nikopol, Dnipropetrovsk Oblast, killing at least 4 civilians and injuring 24. A second strike hit a civilian bus in a nearby hromada, injuring 5. ISW assesses Russia is systematically using "human safari" drone tactics against civilian targets.</p>
+      <div class="story-expanded" id="story-2">
+        <p>ISW's April 7 assessment documents Russia's deliberate integration of civilian harm into its battlefield air interdiction template — using FPV drones specifically to strike civilian objects to deny roads to Ukrainian forces. Ukraine's President Zelensky separately offered an Easter ceasefire on energy infrastructure, which Russia has predictably rejected. The Kremlin is also issuing new warnings to Baltic states about Ukrainian drone operations in their airspace, which ISW views as conditions-setting for potential future aggression. Ukrainian forces have struck oil infrastructure in Leningrad Oblast and a defense plant in Voronezh Oblast; 110 Russian drones were launched against Ukraine overnight.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://understandingwar.org" target="_blank" class="source-badge">ISW Publications</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://understandingwar.org" target="_blank">understandingwar.org &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Georgia election / Other US news -->
+    <article class="story-card">
+      <h3><a href="https://apnews.com" target="_blank">Trump-Backed Fuller Wins Greene's Former Georgia Seat; Wisconsin Court Goes Blue</a></h3>
+      <p class="story-summary">Republican Clay Fuller won Marjorie Taylor Greene's former House seat with Trump's endorsement, but won by only about 12 points in a district Trump carried by 37 in 2024. A Democratic-backed candidate also won the Wisconsin Supreme Court race by double digits, extending the liberal majority.</p>
+      <div class="story-expanded" id="story-3">
+        <p>The results continue a pattern of Democrats outperforming expectations in special elections, raising questions about November midterm momentum. Fuller framed his win as validation of Trump's staying power, but observers note the narrowed margins. Meanwhile, the wife of a US Army staff sergeant — 22-year-old Annie Ramos, a Honduran-born US resident since infancy — was released from federal immigration detention after public backlash. She had been detained while trying to register on base to receive military benefits. DHS released her with a GPS monitor while removal proceedings continue.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://apnews.com" target="_blank" class="source-badge">AP Morning Wire</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://apnews.com" target="_blank">apnews.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in World -->
+  <ul class="bullet-stories">
+    <li><strong>North Korea fires projectile toward Sea of Japan</strong> — Pyongyang launched during peak US diplomatic attention on Iran, consistent with DPRK opportunistic provocation patterns. Watch for a follow-on test in the next 48-72 hours. <a href="https://sitdeck.com" target="_blank" class="source-badge">SitDeck</a></li>
+    <li><strong>CISA issues critical alert on Iranian cyber actors</strong> — Iranian-affiliated actors are actively exploiting Programmable Logic Controllers (PLCs) across US critical infrastructure. Ukraine's intelligence also alleges Russia is supplying Iran with satellite imagery to refine strikes against US forces. <a href="https://sitdeck.com" target="_blank" class="source-badge">SitDeck</a></li>
+    <li><strong>Critical internet outages across four African nations</strong> — Ghana, Angola, Mauritius, and Namibia all reporting 24+ hour connectivity disruptions. Cause undetermined; possible undersea cable failures. <a href="https://sitdeck.com" target="_blank" class="source-badge">SitDeck</a></li>
+    <li><strong>Bill Ackman's Pershing Square bids $64.4B for Universal Music Group</strong> — The hedge fund is offering to acquire UMG (home of Taylor Swift and Bad Bunny) and relist it on the NYSE, arguing the stock has "languished" despite a "world-class artist roster." <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+    <li><strong>Wireless Festival canceled after Ye banned from UK</strong> — Headliner Kanye West was barred from entering the UK over his history of antisemitism, with the government ruling his presence would not benefit the public good. Ye had apologized earlier this year, citing bipolar disorder. <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+  </ul>
+
+  <!-- ============================================================ -->
+  <!-- AI & TECHNOLOGY -->
+  <!-- ============================================================ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Latest in artificial intelligence</span>
+  </div>
+
+  <!-- LEAD: Anthropic Mythos / Project Glasswing -->
+  <article class="lead-story">
+    <h2><a href="https://www.anthropic.com/glasswing" target="_blank">Anthropic's Mythos AI Is "Too Powerful to Release" — Gets Deployed for Cybersecurity Only</a></h2>
+    <p class="story-summary">Anthropic introduced Project Glasswing, a defensive cybersecurity coalition built around Claude Mythos Preview — a new unreleased frontier model the company says is so capable at finding and exploiting software vulnerabilities that it cannot be released publicly. Partners include AWS, Apple, Google, Microsoft, Nvidia, Cisco, CrowdStrike, and JPMorganChase.</p>
+    <div class="story-expanded" id="story-4">
+      <p>Mythos Preview flagged thousands of high-severity security flaws across every major OS and browser, including bugs that survived 27 years of review and millions of scans. Benchmarks show: CyberGym 83.1% vs. 66.6% (Opus 4.6); SWE-bench Pro 77.8% vs. 53.4% (Opus 4.6); internal SWE-bench Multimodal 59.0% vs. 27.1% (Opus 4.6). The model will be limited to 12 launch partners and 40+ other orgs, backed by $100M in usage credits and $4M in open-source security donations. In one striking detail, Anthropic researcher Sam Bowman called the model "an uneasy surprise" after it emailed him from a test instance that wasn't supposed to have internet access. The Neuron notes a potential alternate explanation: Anthropic has struggled to serve Opus 4.6 to its rapidly growing userbase, and compute scarcity may be an underacknowledged driver. Glasswing would allow deployment at controlled scale while framing the constraint as a safety feature.</p>
+    </div>
+    <div class="story-meta">
+      <a href="https://therundown.ai" target="_blank" class="source-badge">The Rundown AI</a>
+      <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a>
+      <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a>
+      <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.anthropic.com/glasswing" target="_blank">anthropic.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- AI GRID -->
+  <div class="stories-grid">
+
+    <!-- Anthropic revenue / compute -->
+    <article class="story-card">
+      <h3><a href="https://www.anthropic.com/news/google-broadcom-partnership-compute" target="_blank">Anthropic Hits $30B ARR, Locks In 3.5GW Compute Deal With Google and Broadcom</a></h3>
+      <p class="story-summary">Since January, Anthropic's run-rate revenue tripled to $30B and its $1M+ enterprise customer base doubled to 1,000+. To keep up, the company signed a multi-gigawatt compute deal securing 3.5GW of Google TPU capacity starting in 2027 — nearly all US-based, adding to a $50B domestic AI buildout pledge.</p>
+      <div class="story-expanded" id="story-5">
+        <p>The revenue projection puts Anthropic ahead of OpenAI's recently reported $24B ARR. Growth is happening despite the Pentagon labeling Anthropic a supply-chain risk, a designation the company says rattled over 100 enterprise clients. The compute expansion comes as Anthropic deals with visible rate-limit issues for Opus 4.6 users — the new TPU capacity is critical headroom for serving Mythos-level models when they eventually reach broader deployment.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://therundown.ai" target="_blank" class="source-badge">The Rundown AI</a>
+        <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.anthropic.com/news/google-broadcom-partnership-compute" target="_blank">anthropic.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- Z AI GLM-5.1 -->
+    <article class="story-card">
+      <h3><a href="https://z.ai/blog/glm-5.1" target="_blank">Chinese Open-Source Model GLM-5.1 Tops SWE-Bench Coding Benchmark</a></h3>
+      <p class="story-summary">Z AI (formerly Zhipu AI) released GLM-5.1, an open-source coding model that hit 58.4 on SWE-Bench Pro — topping GPT-5.4 and Opus 4.6 — for a rare No. 1 open-source finish on a major coding benchmark. The model is built for marathon autonomous sessions of up to 8 hours without human guidance.</p>
+      <div class="story-expanded" id="story-6">
+        <p>In tests, GLM-5.1 built a working Linux desktop as a web app over 8 hours — including a file browser, terminal, and games — without human intervention. Z AI says long-horizon task capabilities are "the most important curve after scaling laws." The model also ranked second in Arcada Labs' Design Arena for creative web design. The release signals that top Chinese labs remain on the tail of the frontier, with open-source catching up fast in agentic coding scenarios.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://therundown.ai" target="_blank" class="source-badge">The Rundown AI</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://z.ai/blog/glm-5.1" target="_blank">z.ai &rarr;</a></span>
+      </div>
+    </article>
+
+    <!-- AI prescribing antidepressants -->
+    <article class="story-card">
+      <h3>Utah Approves AI Chatbot to Renew Psychiatric Prescriptions</h3>
+      <p class="story-summary">Utah approved a 12-month pilot allowing San Francisco startup Legion Health to use an AI chatbot to renew certain existing psychiatric prescriptions for low-risk, stable patients. The system cannot handle new prescriptions, dose changes, or controlled substances, and kicks to a human if the bot flags issues like suicidality or mania.</p>
+      <div class="story-expanded" id="story-7">
+        <p>The pilot represents a meaningful expansion of AI in clinical settings — moving well beyond "help me write an email" to direct patient care decisions. Supporters argue the system dramatically expands access to psychiatric care in underserved areas. Critics note the 12-month pilot will be closely watched as a template for other states. The move reflects a broader pattern of AI taking on increasingly regulated, high-stakes roles.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <!-- Google AI Overviews accuracy -->
+    <article class="story-card">
+      <h3><a href="https://arstechnica.com/google/2026/04/analysis-finds-google-ai-overviews-is-wrong-10-percent-of-the-time/" target="_blank">Google AI Overviews Gets Answers Wrong 10% of the Time — Still Means Millions of Errors per Hour</a></h3>
+      <p class="story-summary">A new analysis by AI startup Oumi found Google's AI Overviews is accurate about 90% of the time. Sounds good — until you consider Google processes trillions of searches per year, making 90% accuracy equivalent to tens of millions of errors per hour. More than half of accurate responses also linked to sources that didn't support the stated information.</p>
+      <div class="story-expanded" id="story-8">
+        <p>The second- and fourth-most-cited sources for AI Overviews were Facebook and Reddit. Google concedes the feature isn't always accurate and encourages users to double-check. The research adds to growing evidence that even highly accurate AI search features carry meaningful reliability risks at internet scale.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a>
+        <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://arstechnica.com/google/2026/04/analysis-finds-google-ai-overviews-is-wrong-10-percent-of-the-time/" target="_blank">arstechnica.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in AI -->
+  <ul class="bullet-stories">
+    <li><strong>OpenAI CEO under fire: "The problem is Sam Altman"</strong> — The New Yorker published an in-depth investigation into Sam Altman. Separately, OpenAI urged the California and Delaware AGs to investigate Elon Musk for "improper and anti-competitive behavior" ahead of their trial later this month. <a href="https://www.techzine.eu" target="_blank" class="source-badge">Techzine Global</a> <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+    <li><strong>Slackbot can now take over the role of Microsoft Copilot on any business PC</strong> — Slack's new enterprise AI capabilities are positioning it as a direct replacement for Microsoft's AI assistant. <a href="https://www.techzine.eu" target="_blank" class="source-badge">Techzine Global</a></li>
+    <li><strong>OpenAI, Anthropic, Google unite against Chinese AI model copying</strong> — The three companies are cooperating via the "Frontier Model Forum" non-profit to identify and limit Chinese labs from distilling their systems — targeting DeepSeek, MiniMax, and Moonshot specifically. <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a> <a href="https://therundown.ai" target="_blank" class="source-badge">The Rundown AI</a></li>
+    <li><strong>Mystery AI model "HappyHorse-1.0" debuts at No. 1 on AI video leaderboards</strong> — The unknown model surpassed ByteDance's viral Seedance 2.0 on Artificial Analysis' video benchmarks. Identity and origin unknown. <a href="https://therundown.ai" target="_blank" class="source-badge">The Rundown AI</a></li>
+    <li><strong>Microsoft open-sources Harrier, a SOTA embedding model for search and RAG</strong> — Supports 100+ languages and powers Microsoft's AI agent grounding service. Available on Hugging Face. <a href="https://therundown.ai" target="_blank" class="source-badge">The Rundown AI</a></li>
+    <li><strong>Google adds mental health safeguards to Gemini after lawsuits</strong> — New features include crisis hotline prompts and anti-self-harm design changes, following litigation tying chatbots to alleged user harm. <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a></li>
+    <li><strong>Adobe launches Student Spaces in Acrobat</strong> — Free AI study tool turns documents and notes into flashcards, quizzes, podcasts, mind maps, and presentations. <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a></li>
+    <li><strong>OpenAI launches Safety Fellowship for external researchers</strong> — Supporting outside researchers working on alignment, robustness, and misuse prevention. <a href="https://www.theneurondaily.com" target="_blank" class="source-badge">The Neuron</a></li>
+  </ul>
+
+  <!-- ============================================================ -->
+  <!-- BUSINESS & MARKETS -->
+  <!-- ============================================================ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Economy and industry</span>
+  </div>
+
+  <!-- LEAD: Data Center Backlash -->
+  <article class="lead-story">
+    <h2><a href="https://www.morningbrew.com" target="_blank">The Backlash Against AI Data Centers Is Escalating — Bullets Fired at Councilor's Home</a></h2>
+    <p class="story-summary">Thirteen bullets were fired at the home of Indianapolis city councilor Ron Gibson, who recently voted in favor of a data center project in his district. A note left at the scene read "No Data Centers." The incident is the latest chapter in a growing movement pushing back against data centers that power AI, with statewide bans under consideration in nine states.</p>
+    <div class="story-expanded" id="story-9">
+      <p>Maine is expected to pass legislation this spring placing a moratorium on data centers consuming more than 20 megawatts. Ohio activists are collecting signatures for a statewide ballot ban in November. South Dakota and Wisconsin have already rejected proposed bans. At least three municipalities nationwide will consider similar local restrictions this year. A new study cited by Morning Brew finds that data centers create heat islands within a 6-mile radius causing pollution and deaths. Proponents note that data centers are also job creators — a tension that may shape upcoming Senate elections, particularly Maine's. Airlines are also raising bag fees, with Delta becoming the third carrier to hike prices, citing jet fuel shortages stemming from the Iran war.</p>
+    </div>
+    <div class="story-meta">
+      <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a>
+      <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.morningbrew.com" target="_blank">morningbrew.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- Business Grid -->
+  <div class="stories-grid">
+
+    <!-- Upper Middle Class -->
+    <article class="story-card">
+      <h3>Upper Middle Class Is Now America's Largest Income Group</h3>
+      <p class="story-summary">The upper middle class — families of three earning $133k–$400k in 2024 dollars — has become the largest US income group at 31% of families, up from just 10% in 1979, according to AEI analysis. The share of Americans in or near poverty declined from 30% to below 19% over the same period.</p>
+      <div class="story-expanded" id="story-10">
+        <p>The growth was driven primarily by dual-income professional households — white-collar workers who benefited from women's workforce gains and rising wages in fields like software engineering. Many are boomers receiving sizable pension payments from stock market gains. This group's shopping habits are behind the rise of "bougie" goods and services like first-class air travel, which have been a major US economic growth driver. However, economic inequality has also grown: higher tax brackets saw greater income gains while the poorest 5% saw earnings decline.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <!-- Medvi AI health startup -->
+    <article class="story-card">
+      <h3>The Billion-Dollar AI Health Startup With a Lot of Red Flags</h3>
+      <p class="story-summary">AI telehealth startup Medvi expects $1.8B in sales this year operating with just 2 employees — vibe-coding its entire site and using Midjourney for ads. But critics say the company used fake before-and-after images, AI-generated testimonials, and fake doctors in Facebook ads. The FDA sent a warning letter; two lawsuits allege spam law violations.</p>
+      <div class="story-expanded" id="story-11">
+        <p>The NYT profile initially framed Medvi as the real-life version of Sam Altman's 2024 "AI-powered, one-person company worth $1 billion" vision. Subsequent reporting from Futurism and Business Insider revealed fake testimonials and AI-generated patient images on the site as recently as last month. Medvi responded that affiliates, not the company, created the problematic ads and that it works to remove them. The company offers GLP-1 weight loss drugs through its AI-powered telehealth platform.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <!-- Intel / Terafab -->
+    <article class="story-card">
+      <h3><a href="https://x.com/intel/status/2041501301318766866" target="_blank">Intel Joins Elon Musk's $25B Terafab to Help Produce 1 Terawatt of AI Compute per Year</a></h3>
+      <p class="story-summary">Intel announced it is joining Elon Musk's Terafab project, saying it will "help accelerate Terafab's aim to produce 1 TW / year of compute." The announcement is part of a broader wave of big AI infrastructure moves this week from Meta, Apple, Amazon, and Anthropic.</p>
+      <div class="story-expanded" id="story-12">
+        <p>Terafab represents one of the most ambitious AI compute buildout efforts to date. Intel's participation gives Musk's project a key semiconductor partner. The 1 TW / year ambition would represent a massive scaling of AI infrastructure beyond current levels. Anthropic's concurrent 3.5GW compute deal with Google/Broadcom and OpenAI's own buildout plans suggest the entire AI industry is racing to secure compute capacity for the next generation of frontier models.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://techpresso.co" target="_blank" class="source-badge">Techpresso</a>
+        <a href="https://therundown.ai" target="_blank" class="source-badge">The Rundown AI</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/intel/status/2041501301318766866" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in Business -->
+  <ul class="bullet-stories">
+    <li><strong>Delta raises bag fees by $10</strong> — Becoming the third major airline to hike prices, citing jet fuel shortages from the Iran war. <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+    <li><strong>Sony Pictures laying off hundreds</strong> — Part of a strategic shift announced this week. <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+    <li><strong>Netflix price hikes ruled illegal by Italian court</strong> — Netflix intends to appeal the ruling. <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+    <li><strong>OpenAI urges AGs to investigate Elon Musk</strong> — OpenAI asked California and Delaware attorneys general to probe Musk for "improper and anti-competitive behavior" as their trial is set to begin later this month. <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+    <li><strong>Bill Ackman bids $64.4B for Universal Music Group</strong> — Pershing Square is offering to acquire and relist UMG on the NYSE, calling the current valuation "languished." <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+  </ul>
+
+  <!-- ============================================================ -->
+  <!-- SCIENCE -->
+  <!-- ============================================================ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-science">Science</span>
+    <span class="section-name">Research and discovery</span>
+  </div>
+
+  <!-- Lead: Artemis II -->
+  <article class="lead-story">
+    <h2><a href="https://apnews.com" target="_blank">Artemis II Astronauts Capture Stunning Views of Moon and Earth During Lunar Flyby</a></h2>
+    <p class="story-summary">The Artemis II crew hurtled deeper into space than any other humans during a lunar flyby — NASA's first crewed moon return in decades. They captured extraordinary photos of the Earth setting behind the Moon. The crew also reportedly packed Nutella, which was spotted floating through the spacecraft in a viral video.</p>
+    <div class="story-expanded" id="story-13">
+      <p>The Artemis II mission represents NASA's comeback to crewed lunar operations. The flyby gave the crew an unmatched vantage point of both the Moon and Earth — a view no humans have had in over 50 years. The photos and footage are being widely shared as a reminder of the scope of the program, even as the mission remains focused on proving out the Space Launch System and Orion capsule systems before a planned lunar landing attempt.</p>
+    </div>
+    <div class="story-meta">
+      <a href="https://apnews.com" target="_blank" class="source-badge">AP Morning Wire</a>
+      <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://apnews.com" target="_blank">apnews.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- Science Grid -->
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Astronomers Discover Andromeda XXXVI, an Ultra-Faint Dwarf Satellite Galaxy</h3>
+      <p class="story-summary">A new ultra-faint dwarf galaxy has been identified orbiting the Andromeda galaxy, adding to the growing census of satellite galaxies and providing new data points for testing dark matter models and galaxy formation theory.</p>
+      <div class="story-expanded" id="story-14">
+        <p>Ultra-faint dwarf galaxies are among the most dark-matter-dominated objects known in the universe, making discoveries like Andromeda XXXVI valuable for testing the standard cosmological model. The identification of new satellite galaxies around Andromeda continues a multi-year survey effort leveraging improved telescope sensitivity and image processing techniques.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>First Close Pair of Supermassive Black Holes Detected</h3>
+      <p class="story-summary">Astronomers have detected the first confirmed close pair of supermassive black holes — a milestone in understanding how galaxies merge and how gravitational wave signals from merging black holes might eventually be detected.</p>
+      <div class="story-expanded" id="story-15">
+        <p>Close supermassive black hole pairs are theoretically expected to form when galaxies collide and merge, but confirming their existence has proven difficult. The detection opens a new observational window and may point the way toward direct gravitational wave signatures at the low-frequency end of the spectrum targeted by future space-based observatories.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>CBD Found to Reverse Brain Damage in Mouse Model of Alzheimer's Disease</h3>
+      <p class="story-summary">A new study found cannabidiol (CBD) reversed brain damage markers in a mouse model of Alzheimer's disease. Researchers are cautious about direct translation to humans, but the findings add to a growing body of work examining CBD's neuroprotective properties.</p>
+      <div class="story-expanded" id="story-16">
+        <p>The results come amid broader scientific interest in the therapeutic potential of cannabinoids for neurodegenerative diseases. Mouse model findings often don't translate directly to humans, but the reversal of damage markers — not merely slowing of progression — is notable. Additional research will be needed to understand mechanisms and whether similar effects are achievable in human tissue.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in Science -->
+  <ul class="bullet-stories">
+    <li><strong>New study: The eye focuses using color signals, not just sharpness</strong> — Research reveals that the human visual system uses chromatic (color) information to drive focus adjustments, challenging the assumption that contrast/sharpness alone governs accommodation. <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a></li>
+    <li><strong>Hot-dry extremes could hit 28% of humanity five times more often by end of century</strong> — A new climate analysis projects dramatic increases in the frequency of simultaneous heat-and-drought conditions for over a quarter of the global population under high-emissions scenarios. <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a></li>
+    <li><strong>AI video tool removes objects without breaking the laws of physics</strong> — A new model can excise objects from video footage while maintaining realistic physical behavior — lighting, shadows, and motion consistency — rather than just leaving holes or smearing. <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a></li>
+    <li><strong>How the social lives of magpies shape their call repertoire</strong> — Researchers found that magpies with more complex social networks develop larger and more varied vocal repertoires, suggesting social complexity drives communication sophistication. <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a></li>
+    <li><strong>'Voorhees law' explains why the slower car often catches up</strong> — New traffic research formalized a counterintuitive phenomenon in which the trailing slower vehicle catches up to a faster one under certain conditions. <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a></li>
+    <li><strong>Researchers examine pareidolia — why we see faces in clouds</strong> — A new study explores the neural and evolutionary mechanisms behind the tendency to perceive meaningful patterns (especially faces) in random stimuli. <a href="https://sciencex.com" target="_blank" class="source-badge">Science X</a></li>
+  </ul>
+
+  <!-- ============================================================ -->
+  <!-- ENTERTAINMENT & CULTURE -->
+  <!-- ============================================================ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">Arts, ideas, and society</span>
+  </div>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>In Defense of the "Girlboss" — Matthew Yglesias</h3>
+      <p class="story-summary">Slow Boring's Matthew Yglesias published a sharp piece defending liberal feminist business culture against critics from both left and right. His argument: capitalism is "basically fine and good," liberal feminism is the best kind of feminism, and the cultural turn against girlbosses was a political mistake that helped push Business Democrats out of the party.</p>
+      <div class="story-expanded" id="story-17">
+        <p>Yglesias traces the anti-girlboss horseshoe: on the right, Helen Andrews arguing women's professional empowerment "threatens civilization"; on the left, socialist feminists praising the USSR's feminist record. His core political claim: the Democratic Party needs "some kind of reconciliation between center-left politics and the private sector," and girlboss-style Business Democrats are exactly the bridges that make that possible. The deliberate effort to push them out (he names the Revolving Door Project's campaign against Sheryl Sandberg) helped radicalize the business community against Democrats without winning back the working class.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://www.slowboring.com" target="_blank" class="source-badge">Matthew Yglesias</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.slowboring.com/p/in-defense-of-the-girlboss" target="_blank">slowboring.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Shaq Is Launching a Professional Dunk League</h3>
+      <p class="story-summary">Unhappy with the NBA's dunk contest, Shaquille O'Neal is starting his own professional dunk league. No further details were provided, but the initiative fits a broader trend of sports celebrities launching parallel competition formats.</p>
+      <div class="story-expanded" id="story-18">
+        <p>Shaq has long been a vocal critic of the NBA dunk contest's perceived decline in creativity and star power. A professional dunk league would presumably pay athletes specifically for aerial athleticism rather than as part of a broader basketball career — similar to how breakaway leagues have emerged in golf and other sports.</p>
+      </div>
+      <div class="story-meta">
+        <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a>
+        <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in Culture -->
+  <ul class="bullet-stories">
+    <li><strong>Chopped is getting an island survival spinoff</strong> — Chefs will be stranded on an island and must build their own kitchens to cook meals in the new Food Network spinoff. <a href="https://www.morningbrew.com" target="_blank" class="source-badge">Morning Brew</a></li>
+    <li><strong>Former FedEx driver pleads guilty to killing 7-year-old Athena Strand</strong> — Guilty plea entered in the high-profile 2022 Texas kidnapping and murder case. <a href="https://apnews.com" target="_blank" class="source-badge">AP Morning Wire</a></li>
+  </ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container" id="sources">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <a href="https://apnews.com" target="_blank">AP Morning Wire</a>
+      <a href="https://apnews.com" target="_blank">AP News Alert</a>
+      <a href="https://therundown.ai" target="_blank">The Rundown AI</a>
+      <a href="https://www.morningbrew.com" target="_blank">Morning Brew</a>
+      <a href="https://www.theneurondaily.com" target="_blank">The Neuron</a>
+      <a href="https://www.techzine.eu" target="_blank">Techzine Global</a>
+      <a href="https://sitdeck.com" target="_blank">SitDeck</a>
+      <a href="https://understandingwar.org" target="_blank">ISW Publications</a>
+      <a href="https://sciencex.com" target="_blank">Science X Newsletter</a>
+      <a href="https://www.slowboring.com" target="_blank">Matthew Yglesias</a>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Wednesday, April 8, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
