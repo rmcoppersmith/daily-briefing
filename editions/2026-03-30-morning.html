@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Monday, March 30, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Monday, March 30, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,368.85</span><span class="ticker-change ticker-down">-3.4%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">20,948.36</span><span class="ticker-change ticker-down">-4.5%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">45,166.64</span><span class="ticker-change ticker-down">-2.7%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$101.98</span><span class="ticker-change ticker-up">+2.3%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$66,983.63</span><span class="ticker-change ticker-up">+0.9%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">31.05</span><span class="ticker-change ticker-up">+13.2%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">War, diplomacy, and global affairs</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://app.sitdeck.com/briefing/260d71e0-dd6e-4be0-ad2b-2ae76810dc27" target="_blank">US-Israeli Campaign Against Iran Escalates Dramatically as Airstrikes Hit Tehran, Markets Plunge</a></h2>
+  <p class="story-summary">The US-Israeli military campaign against Iran has escalated overnight, with airstrikes hitting Tehran's Mehrabad Airport, a Central Bank branch, petrochemical facilities in Tabriz, and the strategic port of Bandar Abbas. Global equity markets are in freefall with the Fear &amp; Greed Index at an extreme-fear reading of 8/100, as oil approaches $100/barrel on war premium.</p>
+  <div class="story-expanded" id="story-1">
+    <p>This represents the deepest penetration of Iranian urban infrastructure to date. The Pentagon is reportedly preparing for weeks of ground operations in Iran, and the USS Tripoli ARG with the 31st MEU and 2,500 Marines trained in amphibious landings has entered CENTCOM waters. In an interview with the Financial Times, President Trump said his preferred tactic would be to "take the oil," comparing it to US actions in Venezuela, and mused about seizing Kharg Island, Iran's main oil terminal. According to the Wall Street Journal, Trump is also weighing a military operation to extract 1,000 pounds of uranium from Iran. An E-3 Sentry AWACS aircraft was confirmed totally destroyed in an Iranian strike — a significant ISR/C2 capability loss from an already critically small US fleet.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/260d71e0-dd6e-4be0-ad2b-2ae76810dc27" target="_blank">sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Iranian Retaliation Expands to Gulf Arab Infrastructure</h3>
+  <p class="story-summary">Iran struck a Kuwaiti power and desalination plant, killing one worker — the first confirmed Iranian kinetic action against Gulf Cooperation Council civilian infrastructure. Separately, Iranian-backed militants launched drone and rocket attacks on Baghdad International Airport, destroying an Iraqi An-32B military transport aircraft.</p>
+  <div class="story-expanded" id="story-2">
+    <p>The Kuwait plant attack is a watershed moment that risks drawing Saudi Arabia, UAE, and other GCC members into active conflict. Iraq's sovereignty is being eroded from multiple directions, with US forces operating from Iraqi soil while Iranian proxies attack Baghdad Airport. Insurance war-risk premiums are expected to spike on the Gulf infrastructure attack news.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Houthis Enter Iran War, Launch Missiles at Israel</h3>
+  <p class="story-summary">Yemen's Houthis said they launched missiles at Israel on Saturday, marking their first direct participation in the Iran war. The move opens another front in the expanding regional conflict and continues to shape Red Sea shipping risk.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The Houthi dimension has been a persistent threat to Red Sea shipping throughout the conflict. Their direct entry into the war against Israel adds to the multi-front pressure, alongside Netanyahu's order for a deeper Israeli ground invasion into Lebanon, which risks Hezbollah activating its full rocket arsenal against Israeli cities.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.morningbrew.com" target="_blank">Iran War Sending Aluminum Prices Higher as IRGC Attacks Regional Producers</a></h3>
+  <p class="story-summary">Iran's IRGC attacked two aluminum producers in US-allied nations — Emirates Global Aluminium in Abu Dhabi and Aluminum Bahrain (Alba, home to the world's largest smelter) — causing significant damage and injuries. The conflict is driving aluminum prices higher on top of Trump's existing 50% tariffs on the metal.</p>
+  <div class="story-expanded" id="story-4">
+    <p>Under normal conditions, the Middle East produces about 9% of global aluminum supply. A Qatar plant jointly owned by QatarEnergy and Norsk Hydro has scaled production to about 60% capacity due to gas supply issues through the Strait of Hormuz. India's Hindalco Industries has invoked force majeure clauses, citing war-related disruptions. Aluminum prices on the London Metal Exchange are up about 4% since the war started on February 28.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.morningbrew.com" target="_blank">morningbrew.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>"No Kings" Rallies Draw 8 Million Across US and Europe</h3>
+  <p class="story-summary">At least 8 million people participated in 3,300 "No Kings" rallies across the US and Europe on Saturday, according to organizers. Protests erupted in multiple US cities including Los Angeles, Portland, and Boston, with arrests reported and Portland demonstrators breaching an ICE facility.</p>
+  <div class="story-expanded" id="story-5">
+    <p>The scale of the protests represents one of the largest coordinated demonstrations in recent years. Domestic political tension is elevated amid the ongoing Iran conflict and broader policy disputes.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Netanyahu Orders Deeper Lebanon Invasion</strong> — In parallel to the Iran campaign, Netanyahu has ordered a deeper Israeli ground invasion into Lebanon, opening a dangerous second front and stretching IDF operational capacity. <span class="source-badge">SitDeck</span></li>
+  <li><strong>US Allows Russian Oil Tanker into Cuba</strong> — The vessel Anatoly Kolodkin, carrying 650,000 barrels of crude, is being allowed to enter Cuba despite the US oil blockade. Trump said he had "no problem" because "they have to survive." <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Pakistan to Host US–Iran Talks</strong> — Pakistan announced it would host direct negotiations between the US and Iran, though neither country commented on the announcement. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Saudi Arabia Nuclear Enrichment Pathway</strong> — Reports confirm the Trump administration is negotiating a nuclear deal with Saudi Arabia that would permit enrichment — a significant proliferation risk marker as the region militarizes. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Catholic Cardinal Blocked from Jerusalem Church</strong> — A Catholic cardinal and priest were prevented by Israeli police from entering the Church of the Holy Sepulchre in Jerusalem on Sunday. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>French Police Foil Paris Bombing</strong> — French police foiled an attempted bombing outside a Paris Bank of America on Saturday. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>West Africa Internet Outages</strong> — Critical BGP-level internet outages detected in Nigeria, Ghana, Cameroon, Togo, and Zimbabwe — potentially conflict/infrastructure related or state-directed. <span class="source-badge">SitDeck</span></li>
+  <li><strong>UK Ready to Board Russian "Shadow Fleet" Vessels</strong> — The UK announced it is prepared to board and detain Russian shadow fleet tankers in British waters — a meaningful escalation of economic warfare against Moscow. <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/" target="_blank">Anthropic Accidentally Leaks 'Claude Mythos' — A New AI Tier Above Opus</a></h2>
+  <p class="story-summary">Details of Anthropic's next flagship AI, Claude Mythos, surfaced after the company's CMS left launch materials in an unsecured data store. The leaked draft blog calls it "a step change" in capabilities and Anthropic's most capable system to date, placed in a new "Capybara" tier above Opus.</p>
+  <div class="story-expanded" id="story-6">
+    <p>A CMS configuration error left thousands of unpublished assets, including a draft blog post about the model, in a publicly accessible data cache. Anthropic flagged the model as "currently far ahead of any other AI model in cyber capabilities" and warned it could help hackers outpace defenders. Anthropic confirmed to Fortune that a "new general purpose model with meaningful advances in reasoning, coding, and cybersecurity" is being tested. The leak has a similar vibe to OpenAI's Q*-era leaks, where conveniently timed rumors doubled as free hype. Accidental or not, a new model tier above Opus sounds like a major step up the frontier ladder.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/" target="_blank">fortune.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.wsj.com/tech/ai/the-decadelong-feud-shaping-the-future-of-ai-7075acde" target="_blank">WSJ Reveals the Decade-Long Personal War Between Altman and Amodei</a></h3>
+  <p class="story-summary">The Wall Street Journal published a deep investigation into the personal grudges, power struggles, and broken promises between Sam Altman and Dario Amodei, tracing back to 2016 and detailing how the fallout created Anthropic and now shapes the trajectory of the two most important AI companies.</p>
+  <div class="story-expanded" id="story-7">
+    <p>Key revelations: Co-founder Greg Brockman once floated selling AGI access to rival nations including UN Security Council nuclear powers — a proposal Dario considered "tantamount to treason." Altman assured Dario that Brockman wouldn't have authority over him, then quietly struck a deal giving Brockman the power to fire him. A 2020 confrontation where Altman accused the Amodeis of plotting against him to the board ended in a shouting match. Privately, Dario has compared the Altman-Musk lawsuit to "Hitler vs. Stalin," called Brockman's $25M pro-Trump PAC donation "evil," and likened OpenAI to Big Tobacco. The rivalry continues to manifest in everything from Super Bowl ad wars to opposing Pentagon contract decisions.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.wsj.com/tech/ai/the-decadelong-feud-shaping-the-future-of-ai-7075acde" target="_blank">wsj.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://techcrunch.com/2026/03/29/why-openai-really-shut-down-sora/" target="_blank">Why OpenAI Really Killed Sora: $1M/Day Burn Rate, Collapsing Users</a></h3>
+  <p class="story-summary">OpenAI shut down its Sora video generation tool because every video a user generated pulled from a finite pool of compute the company desperately needed elsewhere. The app peaked at a million users, collapsed to under 500,000, and was burning $1 million a day on the way down.</p>
+  <div class="story-expanded" id="story-8">
+    <p>Meanwhile, Anthropic was quietly winning over the engineers and enterprises that actually drive revenue. Altman made the call to shut Sora down and redirect the compute. The decision underscores a fundamental tension in AI: compute is the new crude oil, and companies are forced to choose where to drill. OpenAI decided its core LLM products were more valuable than video generation.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://techcrunch.com/2026/03/29/why-openai-really-shut-down-sora/" target="_blank">techcrunch.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://edition.cnn.com/2026/03/29/us/angela-lipps-ai-facial-recognition" target="_blank">Grandmother Jailed Five Months After AI Facial Recognition Wrongly ID'd Her</a></h3>
+  <p class="story-summary">A Tennessee grandmother spent five months in jail after police used Clearview AI's facial recognition to wrongly link her to bank fraud committed in North Dakota — a state she says she had never visited. The case highlights ongoing concerns about the accuracy and civil liberties implications of AI-powered law enforcement tools.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The wrongful identification led to months of incarceration before the error was discovered. The case adds to a growing body of evidence that AI facial recognition systems disproportionately generate false positives and can have devastating consequences for innocent individuals caught up in their errors.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://edition.cnn.com/2026/03/29/us/angela-lipps-ai-facial-recognition" target="_blank">cnn.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://techcrunch.com/2026/03/28/bluesky-leans-into-ai-with-attie-an-app-for-building-custom-feeds/" target="_blank">Bluesky Launches AI App for Building Custom Social Feeds</a></h3>
+  <p class="story-summary">Bluesky launched Attie, a standalone AI app powered by Claude that lets anyone build custom social feeds using plain-language commands. The company plans to eventually let users vibe-code their own apps on the AT Protocol.</p>
+  <div class="story-expanded" id="story-10">
+    <p>The app represents Bluesky's first major foray into AI-powered features, allowing users to describe the kind of feed they want in natural language rather than dealing with technical configuration. It's a significant move that could differentiate the platform from competitors.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://techcrunch.com/2026/03/28/bluesky-leans-into-ai-with-attie-an-app-for-building-custom-feeds/" target="_blank">techcrunch.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>AI Is "Unbundling" Jobs, Not Killing Them</strong> — A <a href="https://www.theregister.com/2026/03/24/ai_job_unbundling/" target="_blank">new research paper</a> argues AI isn't killing jobs outright but narrowing them into lower-paid tasks, with workers in weak-bundle roles like coding support most at risk of being quietly hollowed out. <span class="source-badge">The Neuron</span></li>
+  <li><strong>Developer Reveals How ChatGPT's Bot Detection Works</strong> — A <a href="https://www.buchodi.com/chatgpt-wont-let-you-type-until-cloudflare-reads-your-react-state-i-decrypted-the-program-that-does-it/" target="_blank">detailed breakdown</a> shows every message triggers a hidden Cloudflare program that checks 55 properties across your browser, network, and React app state. <span class="source-badge">The Neuron</span></li>
+  <li><strong>Developer Builds Full DAW Using Multi-Agent Coding</strong> — A developer built a <a href="https://nathan-delacretaz.com/thinks/harness-design" target="_blank">fully functional browser-based digital audio workstation</a> using an open-source multi-agent coding harness over 20 hours of unattended autonomous work. <span class="source-badge">The Neuron</span></li>
+  <li><strong>Anthropic Wins Federal Injunction Against Trump Admin</strong> — Anthropic <a href="https://www.wsj.com/politics/policy/anthropic-wins-injunction-in-court-battle-with-trump-administration-4cc93351" target="_blank">won an injunction</a> blocking the Trump administration's supply-chain-risk designation, with the judge calling it "classic illegal First Amendment retaliation." <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Altman Claims He Tried to "Save" Anthropic</strong> — Sam Altman reportedly <a href="https://www.axios.com/2026/03/26/sam-altman-openai-anthropic-pentagon" target="_blank">told OpenAI staff</a> via Slack that he tried to "save" Anthropic during its Pentagon standoff — even as OpenAI locked in its own defense deal. <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>xAI Co-Founder Ross Nordeen Departs</strong> — Ross Nordeen <a href="https://www.businessinsider.com/xai-cofounder-ross-nordeen-leaves-musk-preps-spacex-ipo-2026-3" target="_blank">left xAI</a> this week, the last remaining original co-founder besides Elon Musk. <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Google Expands Live Translate to iOS</strong> — Google <a href="http://blog.google/products-and-platforms/products/translate/live-translate-with-headphones/" target="_blank">rolled out</a> its Live Translate feature to iOS, turning any pair of headphones into a real-time interpreter across 70+ languages. <span class="source-badge">The Rundown AI</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Companies, deals, and the economy</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.cnbc.com/2026/03/29/eli-lilly-reaches-deal-to-bring-ai-developed-drugs-to-global-market.html" target="_blank">Eli Lilly Strikes $2.75 Billion Deal for AI-Discovered Drug Pipeline</a></h2>
+  <p class="story-summary">Eli Lilly entered a $2.75 billion deal with Hong Kong-based Insilico Medicine to license its AI-discovered drug pipeline, with 28 compounds already in development. Insilico receives $115 million up front and can earn the full deal value through regulatory milestones and royalties.</p>
+  <div class="story-expanded" id="story-11">
+    <p>Lilly gets exclusive rights to sell an Insilico-developed GLP-1 drug for diabetes. While Lilly's weight loss and diabetes injectables helped it become the first drugmaker to reach a $1 trillion valuation, the company is turning to AI investments for its next success cycle. China's significant research investments and lower trial costs are making it attractive for drug discovery. However, if American lawmakers object to large drugmakers paying China for assets rather than acquiring US startups, legislation or an executive order could shut down this avenue.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnbc.com/2026/03/29/eli-lilly-reaches-deal-to-bring-ai-developed-drugs-to-global-market.html" target="_blank">cnbc.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Zillow's "Preview" Feature Gains Momentum with 29 Brokerage Partners</h3>
+  <p class="story-summary">Zillow's new "Preview" feature, which lets participating brokerages show homes as pre-listings before they hit the market, has grown from 5 launch partners including Keller Williams and Remax to 29 firms. In response, Homes.com, Realtor.com, and ComeHome.com launched their own pre-market offerings.</p>
+  <div class="story-expanded" id="story-12">
+    <p>The rub: many of these deals require brokerages to enter exclusivity agreements, so homebuyers wanting to see everything in their neighborhood as early as possible will need to rotate among online real estate marketplaces as if they were streaming platforms.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Markets Open Week in Correction Territory After Fifth Straight Weekly Loss</h3>
+  <p class="story-summary">The Dow and Nasdaq both open today in correction territory after capping off a fifth straight week of losses. The S&amp;P 500 fell 3.4% with the Fear &amp; Greed Index hitting an extreme-fear reading of 8/100. Markets will be closed on Friday to observe Good Friday.</p>
+  <div class="story-expanded" id="story-13">
+    <p>Oil prices are creating a structural premium with WTI at ~$102 and upside risk if the Strait of Hormuz closure probability rises. Gold is holding near all-time highs at ~$4,500/oz as a war hedge. Defense contractors (RTX, LMT, NOC) are likely outperforming, while airlines, shipping, and energy importers face severe margin pressure. Alphabet finished down ~9% last week despite publishing research on a new AI model data compression method.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>March Jobs Report Due Friday</strong> — Analysts anticipate +55,000 jobs after February's decline of 92,000. February's JOLTS report comes tomorrow, initial jobless claims on Thursday. Markets closed Friday for Good Friday. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Apple Turns 50 on Wednesday</strong> — Apple plans to wrap its 50th anniversary celebrations with a big event at Cupertino headquarters. Bloomberg's Mark Gurman hinted Paul McCartney could headline the finale. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>WTO Talks Collapse</strong> — Brazil blocked a US-led moratorium on digital transmission tariffs, a signal of fracturing trade coalitions that may embolden other nations to impose digital trade duties. <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Discovery and exploration</span>
+</div>
+
+<article class="story-card">
+  <h3>NASA's Artemis II Moon Mission Launch Window Opens Wednesday</h3>
+  <p class="story-summary">After years of delays and more than $44 billion spent, the launch window for NASA's Artemis II mission opens Wednesday evening. If conditions are right, four astronauts will blast toward the moon, travel around it, and return to Earth in a roughly 10-day mission.</p>
+  <div class="story-expanded" id="story-14">
+    <p>If conditions aren't right on Wednesday, additional launch windows will be available each day through April 6. The mission marks the first crewed lunar flight since Apollo 17 in 1972 and is a critical step toward NASA's goal of returning astronauts to the lunar surface.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<!-- ============================================================ -->
+<!-- ENTERTAINMENT & CULTURE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+  <span class="section-name">What people are watching, reading, and talking about</span>
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Project Hail Mary Holds #1 at Box Office</strong> — The film held onto its top domestic spot for a second weekend and became the biggest Hollywood flick of 2026 so far. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>March Madness Final Four Set</strong> — Men's: Illinois vs. UConn and Michigan vs. Arizona, both games Saturday. Women's Final Four gets decided tonight, with the women's title game Sunday and men's championship next Monday. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>400,000 KitKats Stolen in Italy</strong> — A truck carrying over 400,000 KitKat units was stolen after leaving a factory in central Italy on its way to Poland. KitKat says supply is unaffected. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Kangaroo on the Lam for Three Days in Wisconsin</strong> — Chesney the kangaroo hopped his 8-foot enclosure at Sunshine Farm in Necedah, WI, after stray dogs spooked him. A drone service tracked his heat signature — described as "a dinosaur running through the woods" — before his keeper caught up three days later. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Rundown AI</span>
+      <span>Morning Brew</span>
+      <span>The Neuron</span>
+      <span>SitDeck</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Monday, March 30, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
