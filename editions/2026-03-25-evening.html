@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Wednesday, March 25, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Wednesday, March 25, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,591.90</span><span class="ticker-change ticker-up">+0.54%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,929.83</span><span class="ticker-change ticker-up">+0.77%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,429.49</span><span class="ticker-change ticker-up">+0.66%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$99.55</span><span class="ticker-change ticker-down">-4.7%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$71,100</span><span class="ticker-change ticker-up">+2.4%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">25.35</span><span class="ticker-change ticker-down">-5.9%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2>Meta's Unofficial Pivot: AI Agents Over Avatars as Employees Flock to MyClaw</h2>
+  <p class="story-summary">Meta is acting more like an AI agent company than a metaverse company in 2026, making strategic acquisitions and encouraging employees at every level to rethink their roles with AI. Internally, employees are flocking to MyClaw, a personal agent built on OpenClaw, giving it access to chat logs and work files to work around the clock.</p>
+  <div class="story-expanded" id="story-1">
+    <p>Meta acqui-hired AI agent startup Dreamer this week, marking its third agent-focused deal in four months following Manus and Moltbook. CEO Mark Zuckerberg is building a personal AI agent to help him run the company and has put CTO Andrew Bosworth — who formerly ran metaverse operations — in charge of empowering Meta's workforce to use AI.</p>
+    <p>The nail in the coffin: Meta shut down VR social network Horizon Worlds last week after Reality Labs racked up roughly $80 billion in cumulative losses since 2020. Now it's pouring $135 billion into AI infrastructure instead. Meta hasn't said the word "pivot" yet — but it sure looks like one.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.bitget.com/amp/news/detail/12560605295716" target="_blank">bitget.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://moda.app/" target="_blank">Moda Launches 'Tasteful' Design Agent, Raises $7.5M</a></h3>
+  <p class="story-summary">A new startup raised $7.5M to grow its AI design platform where humans and agents collaborate to create marketing assets, slide decks, and animations. A trio of agents does research and creates drafts, then the user fine-tunes the final product. The launch video already has 2M+ views.</p>
+  <div class="story-expanded" id="story-2">
+    <p>Moda positions itself as the antidote to "AI slop" — the generic, templated output that has plagued AI-generated design. The platform uses a collaborative workflow: the user kicks off the process with a prompt, three specialized agents handle research, layout, and visual design, and the human steps back in for final adjustments. Early reception suggests real demand for AI design tools that prioritize aesthetic quality over pure speed.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://moda.app/" target="_blank">moda.app &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://linqapp.com/" target="_blank">Linq Raises $27M to Let You Text Your AI via iMessage, SMS, and FaceTime</a></h3>
+  <p class="story-summary">Linq has raised $27M to unlock conversational AI experiences on iMessage, SMS, RCS, voice, and even FaceTime — potentially paving the way for texting AI agents through native phone interfaces instead of separate apps.</p>
+  <div class="story-expanded" id="story-3">
+    <p>Some AI tools like the viral agent OpenClaw already let users communicate with AI via WhatsApp or Telegram, but Linq wants to go further by embedding directly into the phone's native messaging stack. The approach could remove the biggest friction point in AI adoption: making users download yet another app. If it works, texting your AI agent could feel as natural as texting a friend.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://linqapp.com/" target="_blank">linqapp.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--wsj-gray);margin:24px 0 8px;">Also in AI &amp; Technology</h4>
+<ul class="bullet-stories">
+  <li><strong>Anthropic Stock Fund Surges 600%</strong> — Investors found a new public fund with exposure to private startups including Anthropic, OpenAI, and SpaceX — the stock is up 600% this week. <a href="https://x.com/JoshKale/status/2036451540169343363" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Claude Cowork for Job Applications Goes Viral</strong> — A post showing how to use Claude Cowork to apply to jobs has racked up 2.9M views. <a href="https://x.com/gudanglifehack/status/2035979583758143774" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Meek Mill Says Claude Transformed His Music Career</strong> — The rapper claims Anthropic's AI assistant changed how he works, sparking debate about whether it's organic or a paid promotion (3.2M views). <a href="https://x.com/MeekMill/status/2036107917095469093" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Vibe Coding Tutorial with Google's Logan Kilpatrick</strong> — Superhuman sat down with Google's Logan Kilpatrick to show how to build apps from scratch to deployment inside AI Studio, including building a working video game in under 10 minutes. <a href="https://youtu.be/Vom6GWZwwfk" target="_blank">youtube.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>New AI Tools: tldrr, ImageToVideo, Flyne, Octrafic</strong> — tldrr summarizes and organizes saved URLs; ImageToVideo transforms images into cinematic video; Flyne creates images and video all-in-one; Octrafic tests APIs in plain English from the terminal. <span class="source-badge">Superhuman</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Markets, finance, and industry</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.cnbc.com/2026/03/25/meta-youtube-los-angeles-california-verdict.html" target="_blank">Meta and YouTube Found Liable in Landmark Social Media Addiction Trial</a></h2>
+  <p class="story-summary">A California jury found Meta and YouTube liable for knowingly using interfaces and features that made their platforms addictive to children and teenagers, ordering $3 million in compensatory damages. The jury determined Meta bears 70% of the responsibility and YouTube 30%.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The verdict is being called a "Big Tobacco moment" for social media by child safety advocates. The landmark ruling could influence the outcome of roughly 2,000 other pending lawsuits against tech companies over social media harms to minors. While the $3 million in compensatory damages is modest, the legal precedent is significant — establishing that platform design choices that maximize engagement can constitute negligence when they harm young users.</p>
+    <p>This is separate from the $375 million New Mexico verdict against Meta from earlier this week over child predator content. Together, the two rulings represent an escalating legal reckoning for Big Tech over youth safety.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnbc.com/2026/03/25/meta-youtube-los-angeles-california-verdict.html" target="_blank">cnbc.com &rarr;</a></span>
+  </div>
+</article>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Wednesday, March 25, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
