@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Monday, March 23, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Monday, March 23, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,506.48</span><span class="ticker-change ticker-down">-4.95% YTD</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,647.61</span><span class="ticker-change ticker-down">-6.86% YTD</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">45,577.47</span><span class="ticker-change ticker-down">-5.17% YTD</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$67,962</span><span class="ticker-change ticker-down">-22.34% YTD</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.reuters.com/business/media-telecom/openai-expand-ads-chatgpt-all-free-low-cost-users-information-reports-2026-03-21/" target="_blank">ChatGPT's Free Ride Is Over — OpenAI Rolling Out Ads to All Free and Go Users</a></h2>
+  <p class="story-summary">OpenAI is expanding ads to all free and Go-tier ChatGPT users in the US in the coming weeks, partnering with ad-tech firm Criteo. Ads will appear at the bottom of answers when there's a relevant sponsored product or service. Plus, Pro, Business, and Enterprise users won't see them.</p>
+  <div class="story-expanded" id="story-1">
+    <p>The economics made this inevitable: ChatGPT has 900 million weekly active users but only 50 million are paying. Running the platform costs roughly $17 billion a year. Revenue hit $20B+ in 2025, growing 10x since 2023, but still doesn't cover costs when infrastructure is included. OpenAI CFO Sarah Friar said the business model must "scale with the value intelligence delivers." OpenAI says ads won't influence ChatGPT's answers, won't share conversations with advertisers, and will stay off sensitive topics like health and politics. Users under 18 are exempt. The company is charging a reported $60 per 1,000 impressions with a $200K minimum commitment. Shopify, Target, Williams Sonoma, and Adobe are among the early advertisers.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.reuters.com/business/media-telecom/openai-expand-ads-chatgpt-all-free-low-cost-users-information-reports-2026-03-21/" target="_blank">reuters.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://x.com/xai/status/2035520240684032012" target="_blank">Musk Unveils 'Terafab' — A $25B AI Chip Factory Spanning Tesla, SpaceX, and xAI</a></h3>
+  <p class="story-summary">Elon Musk unveiled Terafab, a new Tesla-SpaceX-xAI chip facility in Austin that aims to produce a terawatt of AI compute per year — roughly 50x what the entire world outputs today. He called it "the most epic chip building exercise in history."</p>
+  <div class="story-expanded" id="story-2">
+    <p>The Austin facility would handle logic, memory, packaging, and testing — a vertical integration Musk says exists nowhere else. Two chip types are planned: one for Tesla vehicles and Optimus robots, another space-grade chip for solar-powered AI satellites launched via Starship. Musk said "no one wants AI computing centers in their backyard," expecting space-based compute to undercut ground costs within 2–3 years. He also pitched the Terafab as the first step towards a "galactic civilization" with a post-scarcity economy.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/xai/status/2035520240684032012" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.japantimes.co.jp/business/2026/03/21/companies/softbank-ohio-data-center/" target="_blank">SoftBank Breaks Ground on $500B AI Data Center Campus in Ohio</a></h3>
+  <p class="story-summary">SoftBank has broken ground on a massive AI data center campus in Ohio, targeting 10 gigawatts of power at a former uranium enrichment site. The project is part of the company's broader push to dominate AI infrastructure.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The campus represents one of the largest single AI infrastructure investments ever announced, reflecting the enormous demand for compute power as AI models grow increasingly sophisticated. The choice of a former uranium enrichment site provides the large-scale power infrastructure needed for such an ambitious project.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.japantimes.co.jp/business/2026/03/21/companies/softbank-ohio-data-center/" target="_blank">japantimes.co.jp &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.wsj.com/tech/ai/mark-zuckerberg-is-building-an-ai-agent-to-help-him-be-ceo-eddab2d5" target="_blank">Zuckerberg Is Building a Personal AI Agent to Help Him Run Meta</a></h3>
+  <p class="story-summary">Mark Zuckerberg is developing a personal AI agent designed to help him perform his duties as CEO of Meta. The project reflects Meta's deepening commitment to AI across all facets of the company, from products to internal operations.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The move signals a growing trend among tech executives to use AI not just as a product for customers, but as a personal productivity and decision-making tool at the highest levels of corporate leadership.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.wsj.com/tech/ai/mark-zuckerberg-is-building-an-ai-agent-to-help-him-be-ceo-eddab2d5" target="_blank">wsj.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.cnn.com/2026/03/20/tech/white-house-ai-framework" target="_blank">White House Releases AI Policy Blueprint for Congress</a></h3>
+  <p class="story-summary">The White House released its AI policy blueprint aiming to block states from writing their own AI laws while keeping federal oversight across existing agencies. The framework represents the administration's bid to shape how AI is regulated nationally.</p>
+  <div class="story-expanded" id="story-5">
+    <p>The blueprint seeks to establish a unified federal approach to AI governance, preempting a potential patchwork of state-level regulations. By routing oversight through existing agencies rather than creating new ones, the plan aims to streamline regulation while maintaining accountability.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnn.com/2026/03/20/tech/white-house-ai-framework" target="_blank">cnn.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.ft.com/content/7ffea5b4-e8bc-47cd-adb4-257f84c8028b" target="_blank">OpenAI Plans to Nearly Double Workforce to 8,000 by End of 2026</a></h3>
+  <p class="story-summary">OpenAI is reportedly planning to grow from 4,500 to 8,000 employees by the end of 2026, reflecting the company's increasing enterprise AI focus and the scale of its ambitions beyond consumer products.</p>
+  <div class="story-expanded" id="story-6">
+    <p>The aggressive hiring push comes as OpenAI expands its enterprise offerings and works to maintain its position at the forefront of AI development amid intensifying competition from Google, Anthropic, and others.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.ft.com/content/7ffea5b4-e8bc-47cd-adb4-257f84c8028b" target="_blank">ft.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.reuters.com/technology/tencent-integrates-wechat-with-openclaw-ai-agent-amid-china-tech-battle-2026-03-22/" target="_blank">Tencent Launches ClawBot AI Agent in WeChat for 1B+ Users</a></h3>
+  <p class="story-summary">Tencent launched ClawBot, a tool that brings the OpenClaw AI agent directly into WeChat for its 1 billion+ monthly users, intensifying the AI race among China's tech giants.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The integration of AI agents into WeChat — China's dominant super-app for messaging, payments, and daily life — represents a massive distribution advantage for Tencent's AI ambitions, putting conversational AI capabilities in front of one of the world's largest user bases.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.reuters.com/technology/tencent-integrates-wechat-with-openclaw-ai-agent-amid-china-tech-battle-2026-03-22/" target="_blank">reuters.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://x.com/claudeai/status/2035025492617961704" target="_blank">Anthropic Rolls Out Projects in Claude Cowork Desktop App</a></h3>
+  <p class="story-summary">Anthropic launched Projects in Claude Cowork, allowing users to import their existing web-based Claude projects or create new ones to use directly on the desktop app.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The feature bridges the gap between Claude's web and desktop experiences, letting users maintain project continuity across both platforms and take advantage of Cowork's local computing capabilities.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/claudeai/status/2035025492617961704" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://x.com/amanrsanger/status/2035079293257359663" target="_blank">Cursor Reveals Its Composer 2 Model Was Built on Kimi K2.5</a></h3>
+  <p class="story-summary">Cursor revealed that its Composer 2 coding model was built on top of Kimi K2.5, after facing backlash for initially failing to disclose the detail in its release.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The disclosure came after community members noticed similarities and pressed Cursor for transparency. The incident highlights ongoing debates about attribution and transparency when companies fine-tune or build on top of existing AI models.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/amanrsanger/status/2035079293257359663" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>LLMs Give Trendy Buzzword Advice Regardless of Context</strong> — New HBR research found that LLMs consistently recommend trendy buzzword strategies over context-specific ones, regardless of industry or prompt. <a href="https://hbr.org/2026/03/researchers-asked-llms-for-strategic-advice-they-got-trendslop-in-return" target="_blank">hbr.org &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Halter's AI 'Cowgorithm' Nears $2B Valuation</strong> — New Zealand's Halter is nearing a funding round led by Peter Thiel's Founders Fund that would value the AI cow collar startup at $2B. Its solar-powered collars use AI to track, herd, and optimize grazing with 6,000+ data points per minute. <a href="https://www.bloomberg.com/news/articles/2026-03-20/peter-thiel-s-founders-fund-backs-ai-cow-collar-startup-at-2-billion-valuation" target="_blank">bloomberg.com &rarr;</a> <span class="source-badge">The Rundown AI</span> <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Cargill Using AI to Recover $200M in Missed Meat</strong> — The beef-processing giant is using AI to scan cattle carcasses for tiny flecks of meat missed during butchering, potentially recovering 0.5% more meat per animal — worth about $200 million across its 11 billion pounds of annual processing. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Uber Eats Launches Self-Driving Robot Delivery in Philadelphia</strong> — Uber Eats launched a self-driving robot delivery fleet in Philadelphia through a partnership with Avride, already running in Austin, Dallas, and Jersey City. The robots track orders in real time, wait up to 10 minutes, and operate in all weather. <span class="source-badge">The Neuron</span></li>
+  <li><strong>US Man Pleads Guilty to $1.2M AI Music Fraud</strong> — A US man pleaded guilty to generating fake AI music tracks and inflating their play counts, earning $1.2M per year. He now faces up to five years in prison. <a href="https://www.theguardian.com/us-news/2026/mar/21/man-pleads-guilty-music-streaming-fraud-ai" target="_blank">theguardian.com &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Markets, money, and corporate moves</span>
+</div>
+
+<article class="lead-story">
+  <h2>US Consumers Reconsider EVs as Gas Prices Surge Amid Iran War</h2>
+  <p class="story-summary">Rising gas prices driven by the Iran conflict are making electric vehicles increasingly attractive to American car buyers. While consumers aren't rushing out en masse, those already in the market are finding compelling reasons to choose electric amid competitive pricing and a growing used EV market.</p>
+  <div class="story-expanded" id="story-10">
+    <p>"Higher oil prices always help the transition to electric vehicles," Asian Development Bank Chief Economist Albert Park told Bloomberg. While the $7,500 federal EV tax credit was eliminated, manufacturer and dealer incentives are filling the gap. The WSJ highlighted a buyer who purchased a 2026 Chevrolet Equinox EV for $23,991 — more than 50% off its $48,269 sticker price. Tesla is also expanding pilot tests of its Semi truck, with rave reviews from drivers. Mass production begins this summer, targeting 15,000 units by end of 2026. Owner-operator truckers are among the earliest to feel the war's cost impact, with one reporting $300–$400 extra per week in diesel costs. Economists note it typically takes three to six months of persistently higher gas prices for consumers to start considering alternatives.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Walmart Rolls Out Digital Price Labels Nationwide, Secures AI Pricing Patents</h3>
+  <p class="story-summary">Walmart plans to switch all US stores to digital shelf labels by year's end. The retailer also secured patents for using machine learning and AI in price management, including methods to predict demand and automatically update prices for markdowns.</p>
+  <div class="story-expanded" id="story-11">
+    <p>Digital shelf labels are easier for employees to update than paper tags, but that also means it's easier to raise prices, stoking concerns among consumer advocates about surge pricing. Walmart insists DSLs won't be used for dynamic pricing and that patents will be used for markdowns and to help human employees make decisions. Kroger has also experimented with the technology. Legislation has been introduced in Congress and several states that would require paper shelf-pricing for large grocery stores.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Markets Post Fourth Straight Week of Losses</h3>
+  <p class="story-summary">The S&P 500, Dow, and Nasdaq all notched their fourth consecutive weekly decline last Friday. This week features a light economic calendar, meaning the Iran war could influence markets even more than usual.</p>
+  <div class="story-expanded" id="story-12">
+    <p>Year-to-date, the Nasdaq is down 6.86%, the S&P 500 is down 4.95%, and the Dow is down 5.17%. Bitcoin has dropped 22.34% on the year. The University of Michigan releases final March consumer sentiment data on Friday, and initial jobless claims come Thursday. Beyond (formerly Beyond Meat) reports earnings Wednesday, with shares down more than 79% over the past year.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Anthropic Faces DOD in Court Tomorrow</strong> — Anthropic is challenging the Department of Defense's decision to designate it as a supply chain risk. Tomorrow's hearing focuses on a preliminary injunction to block the designation while the larger legal battle plays out. It stems from Anthropic's public breakup with the Pentagon over military use of AI tools. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>GameStop Reports Q4 Earnings Tomorrow</strong> — The original meme stock posts results with year-over-year revenue down 4.6% last quarter. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Global affairs and policy</span>
+</div>
+
+<article class="lead-story">
+  <h2>ICE Agents Deploying to Major Airports Today to Assist TSA Amid Staffing Crisis</h2>
+  <p class="story-summary">US Border Czar Tom Homan told CNN that ICE agents will begin assisting with security at large airports starting today, amid a TSA staffing crisis caused by the partial Department of Homeland Security shutdown that has left agents unpaid for weeks.</p>
+  <div class="story-expanded" id="story-13">
+    <p>The ICE agents would assist with security at airport entrances and exits but probably wouldn't work the X-ray machines. The TSA staffing issues stem from the partial DHS shutdown, which began in mid-February and persists due to congressional disagreements. Many TSA agents have called off sick, and more than 400 have quit altogether.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Iran Threatens to Close Strait of Hormuz if US Strikes Power Plants</h3>
+  <p class="story-summary">Iran warned that the Strait of Hormuz would be "completely closed" if President Trump follows through on threats to "obliterate" the country's power plants, escalating tensions that are already roiling energy markets.</p>
+  <div class="story-expanded" id="story-14">
+    <p>The threat adds another layer of risk to an already volatile geopolitical situation. The Strait of Hormuz is the world's most critical oil chokepoint, with roughly 20% of global petroleum passing through it daily. Closure would send energy prices soaring and disrupt global supply chains.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Former FBI Director Robert Mueller Dies at 81</h3>
+  <p class="story-summary">Robert S. Mueller III, the decorated Marine veteran who became FBI director the week before 9/11 and later served as special counsel investigating Russian interference in the 2016 election, has died at 81.</p>
+  <div class="story-expanded" id="story-15">
+    <p>Mueller was highly regarded for reforming the FBI into a 21st-century intelligence operation and for his bipartisanship. He served as FBI director from 2001 to 2013. In 2017, he was appointed special counsel to oversee the Russia investigation. His 448-page report included the famous line: "While this report does not conclude that the President committed a crime, it also does not exonerate him."</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Russia Throttling Telegram in Favor of National Messenger MAX</strong> — Russia is actively throttling the messaging app Telegram to push users toward its new "national" messenger MAX, despite fierce public opposition. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Hawaii Hit by Heaviest Rain in 20 Years</strong> — More than 2,000 people were left without power on Sunday as Hawaii experienced its heaviest rainfall in two decades. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- ENTERTAINMENT & CULTURE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+  <span class="section-name">Culture, sports, and entertainment</span>
+</div>
+
+<article class="lead-story">
+  <h2>Banksy Unmasked — Art World Reacts as Street Artist's Identity Confirmed</h2>
+  <p class="story-summary">A new Reuters report has effectively confirmed that the anonymous street artist Banksy is Robin Gunningham, a man in his 50s. Surprisingly, some collectors are welcoming the revelation — with one saying he now feels "more comfortable" buying the work.</p>
+  <div class="story-expanded" id="story-16">
+    <p>Collector Peter Brant, who runs a gallery in New York, told the Wall Street Journal he had never purchased Banksy's work before because of the artist's elusive identity, but "I feel more comfortable knowing who he is." The WSJ expects Banksy valuations to skyrocket. As Morning Brew put it: "If you're going to pay $25 million for a painting, you'd probably want to know it wasn't done by your middle-school bully."</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Project Hail Mary Scores Amazon MGM's Biggest Opening at $80.5M</h3>
+  <p class="story-summary">Amazon MGM scored its biggest opening ever with Project Hail Mary starring Ryan Gosling, bringing in $80.5 million at the North American box office this weekend.</p>
+  <div class="story-expanded" id="story-17">
+    <p>The film's massive opening comes amid a strong period for science fiction at the box office and is a major win for Amazon's entertainment division. The movie, based on Andy Weir's bestselling novel, has been a cultural talking point throughout the weekend.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>MLB Season Returns This Week</strong> — Baseball is back: a Netflix-exclusive Giants vs. Yankees game Wednesday night kicks it off, with the full Opening Day on Thursday. The Dodgers are favored to repeat after last season's 19% ratings surge in the World Series. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Alex Ovechkin Becomes Second NHL Player to Score 1,000 Career Goals</strong> — The Washington Capitals legend joins Wayne Gretzky as the only players to reach the milestone. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Neuron</span>
+      <span>The Rundown AI</span>
+      <span>Morning Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Monday, March 23, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
