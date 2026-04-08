@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Wednesday, April 1, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Wednesday, April 1, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,575.32</span><span class="ticker-change ticker-up">+0.72%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,840.95</span><span class="ticker-change ticker-up">+1.16%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,565.74</span><span class="ticker-change ticker-up">+0.48%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">~$103</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Afternoon developments in AI and tech</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://arcprize.org/arc-agi/3" target="_blank">ARC-AGI-3 Drops Every Major AI Model to Below 1% — Humans Score 100%</a></h2>
+  <p class="story-summary">The ARC Prize Foundation released ARC-AGI-3, the first interactive reasoning benchmark for AI agents. It drops models into unfamiliar game worlds with no instructions, rules, or goals — and every frontier model failed catastrophically. Gemini 3.1 Pro led at just 0.37%, GPT-5.4 scored 0.26%, Claude Opus 4.6 hit 0.25%, and Grok-4.20 scored 0%. Untrained humans solve 100% of environments.</p>
+  <div class="story-expanded" id="story-1">
+    <p>The benchmark was built by François Chollet and Mike Knoop's foundation, which set up an in-house game studio and created 135 original interactive environments from scratch. The design is intentional: an AI agent must explore, figure out what it's supposed to do, form a plan, and execute it — testing in-context learning and adaptation rather than memorization. Today's frontier models are, in Chollet's framing, "incredible memorization machines" that can ace trained-on exams but fail when faced with genuinely novel environments. The competition runs through December 2026 with an $850,000 prize pool ($700K grand prize for the first agent to score 100%). The benchmark is open to the public — you can play it yourself at arcprize.org/tasks.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://arcprize.org/arc-agi/3" target="_blank">arcprize.org &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://claudefa.st/blog/guide/mechanics/claude-buddy" target="_blank">Claude Buddy Goes Live: Anthropic's April Fools Tamagotchi Launches in Your Terminal</a></h3>
+  <p class="story-summary">Anthropic shipped Claude Buddy today — a full tamagotchi-style virtual pet living inside the Claude Code terminal — as its April Fools release. The feature was accidentally exposed in the March 31 source code leak before it could launch. Run <code>/buddy</code> in Claude Code v2.1.89+ with a Pro subscription during the April 1–7 preview window.</p>
+  <div class="story-expanded" id="story-2">
+    <p>Claude Buddy includes 18 species (duck, goose, cat, rabbit, owl, penguin, turtle, snail, dragon, octopus, axolotl, ghost, robot, blob, cactus, mushroom, chonk, and capybara) across five rarity tiers, with a stat system tracking DEBUGGING, PATIENCE, CHAOS, WISDOM, and SNARK. Your buddy reacts to your session activity and has LLM-integrated personality. The system includes deterministic generation and anti-cheat architecture. Official launch is scheduled for May, following the preview window. The feature was meant to be a surprise but was discovered by developers combing through the leaked 512,000-line source code over the weekend.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://claudefa.st/blog/guide/mechanics/claude-buddy" target="_blank">claudefa.st &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://github.com/instructkr/claw-code" target="_blank">Korean Developer Rewrites Leaked Claude Code in Python Overnight — "claw-code" Hits 50K Stars Before Anthropic DMCA</a></h3>
+  <p class="story-summary">After Anthropic began issuing DMCA takedowns across GitHub mirrors of its leaked source code, Korean developer Sigrid Jin woke at 4 AM and rewrote the entire Claude Code codebase from scratch in Python. The clean-room rewrite — dubbed "claw-code" — became the fastest repository in GitHub history to cross 50,000 stars, and remains legally protected from Anthropic's copyright claims.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The incident underscores a quirk of copyright law: a clean-room rewrite that doesn't copy the original code directly is protected, regardless of what inspired it. Jin rewrote the full agentic runtime, the custom terminal UI, tool execution system, and permission architecture in Python before sunrise — working from the publicly-disclosed behavior of Claude Code rather than lifting the leaked TypeScript directly. The claw-code repo is open source. Separately, Boris Cherny (Claude Code's creator) attributed the original leak to a manual deployment error and confirmed Anthropic is automating its publishing process to prevent recurrence.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://github.com/instructkr/claw-code" target="_blank">github.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.baseten.co/inference-engineering/" target="_blank">Inference Engineering Is Becoming the Next Big Discipline in Software — 80% Cost Cuts, 99.99% Uptime</a></h3>
+  <p class="story-summary">As open models catch up to proprietary ones, a new engineering discipline is taking shape: optimizing how AI models actually run in production. Companies running their own inference stacks are seeing 80% cost savings and uptime improvements from 99% to 99.99%. Cursor's Composer 2 ran on Kimi K2.5 — an open model — and matched Claude Opus 4.6 at roughly one-tenth the token cost.</p>
+  <div class="story-expanded" id="story-4">
+    <p>Philip Kiely, a developer advocate at Baseten, just published a book on the craft. The discipline requires managing GPU clusters, tuning quantization, and building efficient autoscaling — skills most companies haven't hired for because the role didn't exist at scale until recently. The talent pool is catching up as open models improve every few weeks, pushing more companies to the scale where self-hosting makes financial sense. If you're spending six figures a month on closed model APIs, inference engineering is worth evaluating.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.baseten.co/inference-engineering/" target="_blank">baseten.co &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://x.com/jack/status/2039003879841362278" target="_blank">Jack Dorsey Shares Block's Plan to Replace Middle Management Entirely With AI</a></h3>
+  <p class="story-summary">Twitter co-founder Jack Dorsey publicly shared Block's plan to eliminate middle management by replacing managerial functions with AI systems. The post drew 2.2 million views on X within hours, making it one of the most-discussed corporate AI announcements of the week.</p>
+  <div class="story-expanded" id="story-5">
+    <p>Dorsey did not provide a timeline for the transition, but the public announcement signals a strategic direction that goes beyond mere AI tooling adoption — it's a structural reorganization. If implemented, Block would join a small but growing number of companies attempting to flatten organizational hierarchies using AI for coordination, performance tracking, and resource allocation. The announcement comes as many tech companies have been laying off middle management layers for unrelated reasons, potentially making AI a convenient framing for workforce restructuring.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/jack/status/2039003879841362278" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.softr.io/" target="_blank">Softr Launches AI-Native No-Code Platform for Production-Ready Business Apps</a></h3>
+  <p class="story-summary">Softr's new AI-native platform lets non-technical users build production-grade software — client portals, CRMs, inventory tools — with complex components like databases, permissions systems, and full user interfaces. Completed apps run on Softr's infrastructure, and non-technical users can make edits in a visual editor post-launch.</p>
+  <div class="story-expanded" id="story-6">
+    <p>The platform targets the gap between simple no-code tools and developer-built software, aiming for the class of applications that have previously required engineering resources to build and maintain. By handling infrastructure, auth, and data modeling, Softr is betting that AI-assisted generation plus a visual editing layer is enough for most internal tools and client-facing portals. The launch competes directly with tools like Glide, Retool, and Airtable Interfaces in the "ops software without an engineer" category.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.softr.io/" target="_blank">softr.io &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.techbrew.com/stories/2026/04/01/apple-turns-50-ai-strategy" target="_blank">Apple at 50: While Rivals Race to Build Giant Cloud Models, Apple Bets Big on On-Device AI</a></h3>
+  <p class="story-summary">As Apple marks its 50th anniversary, Tech Brew's analysis highlights that the company's AI strategy is the sharpest differentiator setting it apart from Microsoft, Meta, and Amazon — all of which are scaling massive cloud-based models. Apple is focused on smaller, on-device systems that leverage its custom silicon and hardware ecosystem.</p>
+  <div class="story-expanded" id="story-7">
+    <p>Apple's share price has grown more than Microsoft, Meta, and Amazon over the past year, suggesting markets are rewarding the differentiated approach. Apple co-founders Steve Jobs, Steve Wozniak, and Ronald Wayne signed the Apple Computer Company documents on April 1, 1976 — exactly 50 years ago today. With 2.5 billion active devices worldwide and a $3.7 trillion market cap, Apple's hardware-first, privacy-centric AI play stands in contrast to the dominant trend of centralizing AI compute in hyperscale data centers.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.techbrew.com/stories/2026/04/01/apple-turns-50-ai-strategy" target="_blank">techbrew.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Sora's Daily Losses Revealed</strong> — Alleged reports expose just how much OpenAI was spending per day on compute to run Sora, shedding light on why the video app was wound down. <a href="https://x.com/Dexerto/status/2038899844291436861" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Sequoia Maps $1T+ AI Agent Opportunity Across Service Industries</strong> — Sequoia published a comprehensive map of every service industry ripe for AI agent takeover, totaling over $1 trillion in opportunity. <a href="https://x.com/gregisenberg/status/2039125157134905517" target="_blank">x.com &rarr;</a> <span class="source-badge">The Code</span></li>
+  <li><strong>Google Paper: Blockchain Encryption Far More Vulnerable to Quantum Computers Than Thought</strong> — New research from Google reveals that blockchain encryption is significantly weaker against quantum computing attacks than previously understood — a warning for the crypto industry. <a href="https://x.com/projecteleven/status/2038807049262264502" target="_blank">x.com &rarr;</a> <span class="source-badge">The Code</span></li>
+  <li><strong>OpenAI Engineer Maps the Real "Agent Stack"</strong> — With everyone calling everything an "agent," an OpenAI engineer published a systems map of what agentic AI infrastructure actually looks like, clarifying the components most teams get wrong. <a href="https://www.linkedin.com/posts/vinothgovindarajan_the-agent-stack-part-1-a-systems-map-of-share-7444241370829017088-GP_F/" target="_blank">linkedin.com &rarr;</a> <span class="source-badge">The Code</span></li>
+  <li><strong>Claude Code Users Only Tapping ~10% of Its Capabilities</strong> — A developer's deep-dive through the leaked source code found that most users are only using roughly 10% of what Claude Code can do. <a href="https://x.com/mal_shaik/status/2038918662489510273" target="_blank">x.com &rarr;</a> <span class="source-badge">The Code</span></li>
+  <li><strong>Meta-Harness: AI-Generated Test Harnesses Beat Human-Designed Ones</strong> — Researchers let an AI agent analyze past code and logs to auto-generate evaluation harnesses — and the AI-built harnesses outperformed manually crafted ones. <a href="https://x.com/yoonholeee/status/2038640635482456118" target="_blank">x.com &rarr;</a> <span class="source-badge">The Code</span></li>
+  <li><strong>The Claudefolio: Claude Agents Given $50,000 to Invest in the Stock Market</strong> — Someone set up Claude agents with $50K to see if they can outperform the S&amp;P 500 — sparking 2.6 million views on X and debate about AI as an investment manager. <a href="https://x.com/theaiportfolios/status/2039006300441620782" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Base44 Adds 130+ Skills to Autonomous Superagent</strong> — App-building tool Base44 expanded its autonomous Superagent with over 130 new skills, including the ability to add customizable skills on demand. <a href="https://x.com/Base44/status/2038640316622725173" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>Anthropic's "Mythos" Model: The Earlier Leak This Week</strong> — Superhuman flagged that the Claude Code npm leak is Anthropic's second breach in under a week — the first having exposed details of Mythos, Anthropic's secretive upcoming model. <span class="source-badge">Superhuman</span></li>
+  <li><strong>5 New AI Tools Worth Watching</strong> — From Superhuman's roundup: Ribbi (self-evolving multi-modal creative agent), AgentField (open-source AI control plane), Maestri (infinite canvas for multi-agent coding on macOS), Raccoon (collaborative AI agent), and AdsCreator (URL-to-ad generator). <span class="source-badge">Superhuman</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Companies, deals, and the economy</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://fortune.com/2026/04/01/spacex-has-filed-confidentially-for-ipo/" target="_blank">SpaceX Files Confidentially for $1.75 Trillion IPO — "Project Apex" Lines Up 21 Banks for June Listing</a></h2>
+  <p class="story-summary">SpaceX has confidentially filed its draft IPO registration with the SEC, targeting a June listing at a potential valuation of $1.75 trillion — which would make it the largest IPO in history, dwarfing Saudi Aramco's $29 billion record. The offering, internally codenamed "Project Apex," has lined up 21 banks, with Morgan Stanley, Goldman Sachs, JPMorgan, Bank of America, and Citigroup serving as lead bookrunners. The company expects to raise approximately $75 billion.</p>
+  <div class="story-expanded" id="story-8">
+    <p>SpaceX's listing would position it as the first of what could be a historic trio of mega-IPOs, ahead of OpenAI and Anthropic. The $1.75T valuation is notable given that SpaceX merged with Musk's xAI in February, creating a combined entity then valued at $1.25 trillion — meaning the combined entity has appreciated significantly since the merger. Elon Musk's decision to target the Nasdaq listing ahead of OpenAI appears strategic, as SpaceX/xAI aims to capture investor appetite before competitors can go public. The scale of the banking syndicate (21 banks is unusually large) signals the complexity of managing what would be the largest-ever stock offering.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://fortune.com/2026/04/01/spacex-has-filed-confidentially-for-ipo/" target="_blank">fortune.com &rarr;</a></span>
+  </div>
+</article>
+
+<!-- ============================================================ -->
+<!-- ENTERTAINMENT & CULTURE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+  <span class="section-name">Media, people, and the internet</span>
+</div>
+
+<article class="story-card">
+  <h3><a href="https://www.dexerto.com/entertainment/paul-mccartney-banned-from-reddit-after-posting-photos-from-his-own-concert-3342725/" target="_blank">Paul McCartney Banned From Reddit After Posting Concert Photos to His Own Subreddit</a></h3>
+  <p class="story-summary">Paul McCartney was temporarily banned from Reddit after posting a Dropbox link with photos from his recent intimate sold-out LA show to r/PaulMcCartney — his own subreddit. The subreddit's moderators applied standard spam rules without realizing the poster was McCartney himself, and the ban quickly became a viral story across the internet.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The incident is a perfect encapsulation of how decentralized platform moderation can fail — even a subject's own community subreddit can ban them for self-promotion. McCartney's account was eventually unbanned, but not before the story spread widely. The episode joins a list of memorable celebrity-vs-platform clashes that highlight the sometimes absurd application of automated or community-applied content rules. Tech Brew flagged the story with the note: "Happy April Fools' Day, especially to Anthropic" — acknowledging that the tech world's biggest April 1 story was decidedly not a prank.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.dexerto.com/entertainment/paul-mccartney-banned-from-reddit-after-posting-photos-from-his-own-concert-3342725/" target="_blank">dexerto.com &rarr;</a></span>
+  </div>
+</article>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>The Code</span>
+      <span>Techpresso</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Wednesday, April 1, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
