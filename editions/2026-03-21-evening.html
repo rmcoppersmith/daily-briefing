@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Saturday, March 21, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Saturday, March 21, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">← All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">5,667.56</span><span class="ticker-change ticker-down">-1.51%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">17,691.63</span><span class="ticker-change ticker-down">-2.01%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">41,985.35</span><span class="ticker-change ticker-down">-0.96%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$91.37</span><span class="ticker-change ticker-down">-2.0%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$70,800</span><span class="ticker-change ticker-up">+1.0%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">26.78</span><span class="ticker-change ticker-up">+11.31%</span></div>
+</div>
+
+<main class="container">
+
+  <!-- ========== AI & TECHNOLOGY ========== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">AI &amp; Technology</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://x.com/Rewkang/status/2033043512925581805" target="_blank">Unitree's Humanoid Robot Aces Tennis With Near-Perfect Returns</a></h2>
+    <p class="story-summary">A video of Unitree's G1 humanoid robot went viral this week, showing the machine going toe-to-toe with human opponents in multi-shot tennis rallies — returning forehands, backhands, and shuffling fluidly across the court. Chinese researchers at Tsinghua University trained the system on roughly five hours of amateur motion capture data, achieving a near 97% success rate across 10,000 trials.</p>
+    <div class="story-expanded" id="story-unitree-tennis">
+      <p>The demonstration marks a significant leap in humanoid robotics: just a year ago, a humanoid robot walking in a straight line without stumbling would have made headlines. The G1's ability to process real-time ball trajectories, coordinate full-body movement, and maintain balance during lateral shuffles represents a convergence of advances in computer vision, reinforcement learning, and physical AI. Unitree founder Wang Xingxing has separately predicted that humanoid robots could break the 10-second 100-meter barrier by mid-2026, though he cautions that generalization across unpredictable real-world environments remains the industry's biggest unsolved problem.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Superhuman</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-unitree-tennis', this)">Read More ▾</button>
+      <span class="story-url"><a href="https://x.com/Rewkang/status/2033043512925581805" target="_blank">x.com →</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://nvidianews.nvidia.com/news/nvidia-and-global-robotics-leaders-take-physical-ai-to-the-real-world" target="_blank">NVIDIA Unveils New AI Models and Simulation Tools at GTC 2026</a></h3>
+      <p class="story-summary">NVIDIA announced a suite of new AI models and simulation tools at its GTC 2026 conference, aiming to power the next generation of intelligent robots across industries. The company also launched NemoClaw for the OpenClaw agent community, letting users install NVIDIA models with a single command.</p>
+      <div class="story-expanded" id="story-nvidia-gtc">
+        <p>CEO Jensen Huang dedicated a major part of his keynote to OpenClaw, the open-source AI agent platform that has become a viral sensation with over 100,000 GitHub stars. NVIDIA's new tools span physical AI simulation, robotics foundation models, and enterprise-grade deployment infrastructure — positioning the company as the picks-and-shovels supplier for the coming wave of embodied AI.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-nvidia-gtc', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://nvidianews.nvidia.com/news/nvidia-and-global-robotics-leaders-take-physical-ai-to-the-real-world" target="_blank">nvidianews.nvidia.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html" target="_blank">OpenClaw's 'ChatGPT Moment' Sparks Concern That AI Models Are Becoming Commodities</a></h3>
+      <p class="story-summary">The open-source AI agent platform OpenClaw has become so popular so quickly that industry observers say it's demonstrating how rapidly big, expensive AI models are becoming commoditized. The tool, which connects AI models directly to apps, browsers, and system tools, surpassed 100,000 GitHub stars in February.</p>
+      <div class="story-expanded" id="story-openclaw">
+        <p>OpenClaw can execute shell commands, browse the web, send emails, manage calendars, and take actions across users' digital lives with over 100 built-in skills. The platform has been especially explosive in China, where major tech companies and even local governments have rushed to expand access. However, China's government has also moved to restrict state agencies from using it, citing security concerns. NVIDIA's Jensen Huang featured OpenClaw prominently in his GTC 2026 keynote.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-openclaw', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html" target="_blank">cnbc.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://windowsreport.com/microsoft-lays-out-big-plan-to-fix-windows-11-quality-in-2026/" target="_blank">Microsoft Announces Sweeping Windows Changes</a></h3>
+      <p class="story-summary">Microsoft unveiled a comprehensive roadmap to dramatically improve Windows 11 quality, reliability, and usability. Executive VP Pavan Davuluri detailed changes including reintroducing vertical taskbar positioning, giving users more control over updates, and pulling back unnecessary Copilot integrations from apps like Notepad, Photos, and Snipping Tool.</p>
+      <div class="story-expanded" id="story-microsoft-windows">
+        <p>The overhaul addresses some of the most persistent user complaints: forced updates will be reduced, users can pause updates indefinitely, and restarts without installing pending updates will be possible. Microsoft also acknowledged it had been too aggressive in embedding Copilot across Windows, committing to be "more intentional" about AI integration. The first wave of improvements began rolling out to Windows Insiders in March, with deeper architectural changes expected throughout 2026.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-microsoft-windows', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://windowsreport.com/microsoft-lays-out-big-plan-to-fix-windows-11-quality-in-2026/" target="_blank">windowsreport.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://searchengineland.com/google-search-ai-headline-rewrites-test-472146" target="_blank">Google Search Testing AI-Rewritten Headlines in Results</a></h3>
+      <p class="story-summary">Google confirmed it is testing AI-generated headline rewrites in Search results, replacing publishers' original titles with machine-generated alternatives. The Verge discovered that some results displayed completely different headlines than the original articles, sometimes changing the tone or intent entirely.</p>
+      <div class="story-expanded" id="story-google-headlines">
+        <p>In one example, an article titled "I used the 'cheat on everything' AI tool and it didn't help me cheat on anything" was shortened to simply "'Cheat on everything' AI tool" — stripping away the critical perspective and making it appear like a product recommendation. Google says the test is "small and narrow" and intended to better match titles to search queries, but publishers have raised concerns about loss of editorial control. The experiment is not yet approved for broader rollout.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-google-headlines', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://searchengineland.com/google-search-ai-headline-rewrites-test-472146" target="_blank">searchengineland.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.techinasia.com/news/samsung-advances-humanoid-robot-tech-factories" target="_blank">Samsung Ramping Up Humanoid Robotics for Smart Factories</a></h3>
+      <p class="story-summary">Samsung is accelerating its humanoid robotics development with the goal of building AI-driven "smart factories" by 2030. The initiative represents a major push into factory automation as the company looks to reduce labor costs and increase manufacturing precision across its global production lines.</p>
+      <div class="story-expanded" id="story-samsung-robots">
+        <p>The announcement comes amid a broader industry trend of major manufacturers investing heavily in humanoid robots for production environments. Samsung joins companies like Tesla, BMW, and Foxconn in betting that humanoid form factors — rather than traditional fixed industrial robots — will provide the flexibility needed for complex assembly tasks that currently require human workers.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-samsung-robots', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://www.techinasia.com/news/samsung-advances-humanoid-robot-tech-factories" target="_blank">techinasia.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://fortune.com/2026/03/17/robot-dog-patrols-data-centers-ai-infrastructure-buildout" target="_blank">Boston Dynamics Robot Dogs Now Patrolling America's Biggest Data Centers</a></h3>
+      <p class="story-summary">Boston Dynamics' quadruped robots are being deployed as security guards at some of the nation's largest data centers, at up to $300,000 each. As companies pour nearly $700 billion into AI infrastructure, the need for round-the-clock surveillance has outstripped what human security teams can provide at scale.</p>
+      <div class="story-expanded" id="story-boston-dynamics">
+        <p>Boston Dynamics says each robot pays for itself within two years through reduced staffing costs and continuous monitoring capabilities. The deployments are part of a growing trend of using autonomous machines to protect critical AI infrastructure, which has become an increasingly attractive target for both physical intrusion and surveillance.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-boston-dynamics', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://fortune.com/2026/03/17/robot-dog-patrols-data-centers-ai-infrastructure-buildout" target="_blank">fortune.com →</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <h4 style="font-family:'Inter',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--wsj-gray);margin:24px 0 8px;">Also in AI &amp; Technology</h4>
+  <ul class="bullet-stories">
+    <li><strong>Unitree Founder Predicts 10-Second 100m Sprint for Robots by Mid-2026</strong> — Wang Xingxing says the performance gap between humans and machines is shrinking fast, though real-world generalization remains the biggest unsolved challenge. <a href="https://regional.chinadaily.com.cn/ezhejiang/2026-03/18/c_1169325.htm" target="_blank">China Daily →</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>Piaggio Launches Star Wars-Licensed Cargo Robot</strong> — The G1T4-M1N1 is a special-edition droid version of Piaggio's gitamini robot that follows users around and carries up to 20 lbs, featuring custom decals and 22 unique R2-D2-style sounds designed with Disney and Lucasfilm. <a href="https://www.youtube.com/watch?v=iM9PkY20mDY" target="_blank">YouTube →</a> <span class="source-badge">Superhuman</span></li>
+  </ul>
+
+  <!-- ========== BUSINESS & MARKETS ========== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Business &amp; Markets</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://www.cnbc.com/2026/03/20/elon-musk-determined-to-be-liable-for-misleading-twitter-investors.html" target="_blank">Jury Finds Elon Musk Misled Twitter Shareholders — Damages Could Reach $2.6 Billion</a></h2>
+    <p class="story-summary">A California jury unanimously found that Elon Musk made materially false or misleading statements to Twitter investors ahead of his $44 billion acquisition in 2022. The jury determined that Musk's tweets on May 13 and 17, 2022, harmed shareholders who sold their stock based on his statements, with total damages potentially reaching $2.6 billion.</p>
+    <div class="story-expanded" id="story-musk-twitter">
+      <p>The four-day deliberation resulted in a split verdict: while jurors found Musk's statements were misleading and caused harm, they did not find that he engaged in a specific scheme to defraud investors. Musk's legal team characterized the outcome as a "bump in the road" and confirmed plans to appeal. The case centered on whether Musk intentionally manipulated Twitter's stock price by publicly questioning the deal while privately still intending to complete it.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Techpresso</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-musk-twitter', this)">Read More ▾</button>
+      <span class="story-url"><a href="https://www.cnbc.com/2026/03/20/elon-musk-determined-to-be-liable-for-misleading-twitter-investors.html" target="_blank">cnbc.com →</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://www.cnbc.com/2026/03/19/amazon-acquires-startup-rivr-to-test-robots-for-doorstep-delivery.html" target="_blank">Amazon Acquires Swiss Robotics Startup Rivr for Doorstep Delivery</a></h3>
+      <p class="story-summary">Amazon has quietly acquired Rivr, a Swiss startup building quadruped robots designed to carry packages from delivery vehicles to customers' front doors. The acquisition extends Amazon's robotics push beyond its warehouses, where it already has over 1 million robots deployed.</p>
+      <div class="story-expanded" id="story-amazon-rivr">
+        <p>Amazon had previously backed Rivr through its $1 billion Industrial Innovation Fund, making the acquisition a natural next step. The "last 50 feet" problem — getting packages from curb to doorstep — has long been a logistical bottleneck, and Rivr's quadruped design is specifically engineered to navigate stairs, uneven terrain, and obstacles that wheeled robots struggle with. The deal signals Amazon's intent to automate the full delivery chain from warehouse to front door.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-amazon-rivr', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://www.cnbc.com/2026/03/19/amazon-acquires-startup-rivr-to-test-robots-for-doorstep-delivery.html" target="_blank">cnbc.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://finance.yahoo.com/news/never-left-travis-kalanick-launches-204535639.html" target="_blank">Travis Kalanick Launches Robotics Startup Atoms</a></h3>
+      <p class="story-summary">Former Uber CEO Travis Kalanick has entered the robotics space with a new startup called Atoms, building fleets of wheeled industrial robots for food delivery, logistics, and mining applications. The venture marks Kalanick's return to the transportation and logistics world he helped transform with Uber.</p>
+      <div class="story-expanded" id="story-kalanick-atoms">
+        <p>Atoms is taking a different approach from companies like Tesla and Figure that are focused on humanoid form factors, instead opting for purpose-built wheeled robots optimized for specific industrial use cases. The startup is reportedly already in pilot programs with several food delivery and logistics companies, leveraging Kalanick's extensive network in the transportation sector.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-kalanick-atoms', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://finance.yahoo.com/news/never-left-travis-kalanick-launches-204535639.html" target="_blank">yahoo.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/03/17/gecko-robotics-lands-the-largest-u-s-navy-robotics-deal-yet/" target="_blank">Gecko Robotics Secures Largest-Ever U.S. Navy Robotics Deal</a></h3>
+      <p class="story-summary">Gecko Robotics has landed its biggest U.S. Navy contract to date, deploying inspection robots and digital twin technology across fleet ships. The deal underscores the military's growing reliance on autonomous systems for infrastructure maintenance and readiness assessment.</p>
+      <div class="story-expanded" id="story-gecko-navy">
+        <p>Gecko's wall-climbing robots use ultrasonic sensors to inspect ship hulls, pipes, and tanks for corrosion and structural weaknesses — tasks that traditionally required expensive dry-docking or hazardous manual inspections. The digital twin component creates detailed 3D models of inspected vessels, allowing the Navy to track degradation over time and plan maintenance more efficiently.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-gecko-navy', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/03/17/gecko-robotics-lands-the-largest-u-s-navy-robotics-deal-yet/" target="_blank">techcrunch.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/03/12/lucid-motors-shows-off-robotaxi-concept-called-lunar" target="_blank">Lucid Motors Debuts 'Lunar' Robotaxi Concept</a></h3>
+      <p class="story-summary">Lucid Motors unveiled "Lunar," a two-seater robotaxi concept with no steering wheel or pedals, built on its upcoming mid-size EV platform. The concept signals Lucid's ambitions to compete in the autonomous ride-hailing market alongside Waymo, Tesla, and Zoox.</p>
+      <div class="story-expanded" id="story-lucid-lunar">
+        <p>The Lunar concept features a fully autonomous design from the ground up, rather than retrofitting an existing passenger vehicle. By building on Lucid's mid-size platform rather than its luxury Air sedan, the company is targeting a price point that could make fleet economics viable for ride-hailing operators. No production timeline has been announced, but the concept demonstrates Lucid's strategic pivot toward autonomous commercial vehicles.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-lucid-lunar', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/03/12/lucid-motors-shows-off-robotaxi-concept-called-lunar" target="_blank">techcrunch.com →</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ========== ENTERTAINMENT & CULTURE ========== -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">Entertainment &amp; Culture</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://www.independent.co.uk/tech/pokemon-go-delivery-robots-niantic-b2939449.html" target="_blank">Pokémon Go Players Have Been Unknowingly Training Delivery Robots for Years</a></h2>
+    <p class="story-summary">Millions of Pokémon Go players have spent the last decade doing far more than catching Pikachu. Since 2016, the game has quietly assembled a database of over 30 billion real-world images. Now Niantic Spatial is partnering with Coco Robotics to use that data to help delivery bots navigate complex urban environments.</p>
+    <div class="story-expanded" id="story-pokemon-robots">
+      <p>Coco Robotics, whose delivery bots have completed around half a million deliveries in cities like Los Angeles and Chicago, will use Niantic's massive spatial dataset to improve navigation through sidewalks, intersections, and building entrances. The partnership turns one of the world's most popular mobile games into an unexpected data pipeline for the robotics industry — a revelation that raises both fascinating possibilities and fresh questions about how user-generated data gets repurposed.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Superhuman</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-pokemon-robots', this)">Read More ▾</button>
+      <span class="story-url"><a href="https://www.independent.co.uk/tech/pokemon-go-delivery-robots-niantic-b2939449.html" target="_blank">independent.co.uk →</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://x.com/adamcurtisbroll/status/2034033087613702364" target="_blank">Dancing Robot Goes Haywire at California Restaurant in Viral Video</a></h3>
+      <p class="story-summary">What started as dinner entertainment at a California restaurant turned chaotic when an AgiBot X2 humanoid robot began flinging its arms and crashing into tableware. Viral videos show three employees struggling to restrain the robot while one staff member frantically searched her phone for a kill switch.</p>
+      <div class="story-expanded" id="story-agibot-restaurant">
+        <p>The incident has become the latest viral reminder that humanoid robots in public-facing roles still have significant reliability challenges. While the robot was reportedly in a pre-programmed entertainment mode, something triggered erratic behavior that its handlers couldn't immediately shut down — highlighting the need for better failsafe mechanisms as robots increasingly interact with the public in uncontrolled environments.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-agibot-restaurant', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://x.com/adamcurtisbroll/status/2034033087613702364" target="_blank">x.com →</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://interestingengineering.com/ai-robotics/world-record-robot-solves-puzzle-cube" target="_blank">UK Brothers Build Robot That Smashes Rubik's Cube World Record</a></h3>
+      <p class="story-summary">Matthew and Thomas Pidden built a four-armed robot that solved a 4×4 Rubik's Cube in 45.3 seconds, breaking a record that had stood for over a decade. The robot used custom algorithms to scan, calculate, and execute the fastest possible solution sequence, earning official Guinness World Records recognition.</p>
+      <div class="story-expanded" id="story-rubiks-record">
+        <p>The achievement required solving two distinct engineering challenges: building a mechanical system precise enough to manipulate small cube segments at high speed, and developing algorithms that could both identify the cube's current state and compute an optimal solution in milliseconds. The brothers designed and 3D-printed the four-armed mechanism themselves, with each arm capable of independent rotation.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-rubiks-record', this)">Read More ▾</button>
+        <span class="story-url"><a href="https://interestingengineering.com/ai-robotics/world-record-robot-solves-puzzle-cube" target="_blank">interestingengineering.com →</a></span>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman (Zain Kahn)</span>
+      <span>Techpresso</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Saturday, March 21, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  var el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More ▾';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse ▴';
+  }
+}
+</script>
+</body>
+</html>
