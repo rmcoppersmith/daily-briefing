@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Monday, March 23, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Monday, March 23, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- AI & TECHNOLOGY -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Latest in artificial intelligence</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://x.com/trq212/status/2034761016320696565" target="_blank">Anthropic Ships Claude Code Channels — Its Answer to OpenClaw</a></h2>
+    <p class="story-summary">Anthropic launched Claude Code Channels, a new feature that lets users send messages to existing Claude Code sessions via Telegram or Discord, directly mirroring functionality offered by OpenClaw. The feature is available as a research preview, and Anthropic has said it plans to expand it further.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The release comes just weeks after OpenAI hired the creator of OpenClaw, giving it an early edge in the agent-messaging space. Claude Code also now supports recurring tasks, letting users automate routine workflows on a schedule. Together, the updates signal Anthropic's push to make Claude Code a full-featured agentic development platform, not just a coding assistant.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Superhuman</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://x.com/trq212/status/2034761016320696565" target="_blank">x.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://x.com/DhravyaShah/status/2035517012647272689" target="_blank">Supermemory Hits 99% Accuracy With New Agent Memory System — No Vector Database Needed</a></h3>
+      <p class="story-summary">AI startup Supermemory unveiled ASMR (Agentic Search and Memory Retrieval), a system that replaces vector search with parallel teams of specialized agents that actively read, analyze, and extract facts from conversation histories. Their LongMemEval benchmark score jumped from 85% to 98.6%.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The approach ditches vector databases entirely, instead using teams of agents that process long conversation histories in parallel. Each agent specializes in different types of fact extraction. The team plans to open-source the full codebase in early April, which could reshape how the industry approaches agent memory — a problem that has plagued every major AI developer.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/DhravyaShah/status/2035517012647272689" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/03/20/jeff-bezos-blue-origin-enters-the-space-data-center-game/" target="_blank">Blue Origin Files for 51,600 AI Data Center Satellites With 'Project Sunrise'</a></h3>
+      <p class="story-summary">Jeff Bezos' space startup has officially entered the orbital data center race with Project Sunrise, a proposed mega-constellation of solar-powered satellites that would perform AI compute directly in orbit. The FCC filing puts Blue Origin on a collision course with SpaceX, Starcloud, and Google's Project Suncatcher.</p>
+      <div class="story-expanded" id="story-3">
+        <p>The satellites would operate in sun-synchronous orbits between 500–1,800 km altitude, with each orbital plane containing approximately 300–1,000 satellites. The system connects to Blue Origin's TeraWave network of 5,408 laser-linked satellites announced in January. The move is driven by surging demand for AI compute that ground-based data centers can't keep up with — land is scarce, power grids are strained, and permitting timelines are long.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/03/20/jeff-bezos-blue-origin-enters-the-space-data-center-game/" target="_blank">techcrunch.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>MCP Backlash Grows — Perplexity Ditches the Protocol as Devs Debate Its Value</h3>
+      <p class="story-summary">A growing number of developers are questioning whether Anthropic's Model Context Protocol adds real value or just unnecessary overhead. The debate hit a tipping point when Perplexity co-founder Denis Yarats revealed the company is abandoning MCP in favor of direct APIs and CLIs.</p>
+      <div class="story-expanded" id="story-4">
+        <p>Critics argue that CLI tools like curl and git already exist in model training data, so agents can use them without schema overhead. But the backlash has a blind spot: almost no one separates MCP's two modes. Local stdio keeps the server on your machine, while remote HTTP puts it on a centralized server for team-wide access. Centralized MCP gives teams one place to manage auth, track tools, and maintain consistency across agents — problems CLIs were never built to solve. The smartest teams aren't picking sides; they use CLIs when a model already understands the tool and pivot to MCP for enterprise auth, observability, and governance.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://x.com/MilkRoadAI/status/2035510709124059305" target="_blank">AI Cattle Startup Halter Gets Founders Fund Backing for Its 'Cowgorithm'</a></h3>
+      <p class="story-summary">Halter, an AI startup backed by Peter Thiel's Founders Fund, makes solar-powered GPS collars that herd cattle using sound and vibration cues — eliminating fences, farm dogs, and manual herding. The collar also monitors digestion, fertility cycles, and biometrics around the clock.</p>
+      <div class="story-expanded" id="story-5">
+        <p>Founded in 2016 by Craig Piggott, a former Rocket Lab spacecraft designer, Halter now has over 600,000 cattle wearing its collars. The company's proprietary algorithm — nicknamed the "cowgorithm" — represents part of a broader wave of AI adoption in agriculture, from weed-blasting lasers to computer vision meat inspection systems. While the national AI conversation focuses on office productivity, some of the most tangible gains are showing up in pastures.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/MilkRoadAI/status/2035510709124059305" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://blog.google/innovation-and-ai/models-and-research/google-labs/stitch-ai-ui-design/" target="_blank">Google Stitch 2.0 Goes Viral — Vibe-Design Production-Ready UI in Seconds</a></h3>
+      <p class="story-summary">Google's upgraded Stitch tool is generating major buzz, with a viral prompt for creating ultra-sleek web pages racking up 10,000 bookmarks. The tool lets users "vibe design" production-ready UI components and full web pages from natural language descriptions in seconds.</p>
+      <div class="story-expanded" id="story-6">
+        <p>Stitch 2.0 builds on Google's earlier design-to-code tooling but adds significantly improved visual fidelity and the ability to generate complete, responsive layouts. The viral moment was driven by a specific prompt technique shared by developer Viktor Oddy that produces consistently polished results, showing that prompt engineering for design tools is becoming its own discipline.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://blog.google/innovation-and-ai/models-and-research/google-labs/stitch-ai-ui-design/" target="_blank">blog.google &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://x.com/saranormous/status/2035080458304987603" target="_blank">Andrej Karpathy Says He Hasn't Written Code Since December 2025</a></h3>
+      <p class="story-summary">In a new podcast with Sarah Guo, former OpenAI and Tesla AI leader Andrej Karpathy revealed he hasn't personally written a line of code since December 2025 — relying entirely on AI coding tools. The clip has drawn 2.5 million views and reignited debate about the "post-code" era.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Karpathy's revelation is notable given his stature as one of the most respected researchers in deep learning. His comments suggest that even elite programmers are finding AI coding assistants capable enough to replace manual coding for many tasks. The podcast dives into how the nature of software development is shifting from writing code to directing AI agents that write it for you.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://x.com/saranormous/status/2035080458304987603" target="_blank">x.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Also in AI & Technology -->
+  <ul class="bullet-stories">
+    <li><strong>Streaming Fraud Exposed</strong> — A fraudster made $8M by using AI to generate songs and streaming them billions of times on music platforms (9.5M views). <a href="https://x.com/fearedbuck/status/2035080144486838433" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>Dad Vibecodes Piano App</strong> — A non-developer father built his daughter a Guitar Hero-style piano learning app using AI coding tools, racking up 2.2 million views. <a href="https://x.com/RG_Leachman/status/2035537289812816128" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>Sundar Pichai Recaps Google's Biggest Week</strong> — Google's CEO posted a wrap-up of the five biggest updates the company shipped last week. <a href="https://x.com/sundarpichai/status/2035097187840139663" target="_blank">x.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>Claude Code Power User Guides</strong> — An Anthropic engineer compiled every Claude Code guide he's written into one thread — essential reading for anyone building with skills or agents. <a href="https://x.com/trq212/status/2035372716820218141" target="_blank">x.com &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>3-Layer Agent Harness for UI</strong> — An engineer with no design experience now ships UI weekly using a three-layer agent harness across Claude Code, Cursor, and Codex. <a href="https://x.com/neethanwu/status/2034786360356204934" target="_blank">x.com &rarr;</a> <span class="source-badge">The Code</span></li>
+    <li><strong>Inside the .claude/ Folder</strong> — A guide walks through the full anatomy of the hidden .claude/ directory, from permissions to custom slash commands (2.5M views). <a href="https://x.com/akshay_pachaar/status/2035341800739877091" target="_blank">x.com &rarr;</a> <span class="source-badge">The Code</span></li>
+  </ul>
+
+  <!-- BUSINESS & MARKETS -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Companies &amp; dealmaking</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://www.bloomberg.com/features/2026-apple-next-ceo/" target="_blank">John Ternus Emerges as Apple's Likely Next CEO</a></h2>
+    <p class="story-summary">A comprehensive Bloomberg profile has cemented John Ternus, Apple's SVP of hardware engineering, as the leading internal candidate to eventually replace Tim Cook. Ternus oversees the devices generating roughly 80% of Apple's revenue and recently took the stage — not Cook — to unveil the $599 MacBook Neo.</p>
+    <div class="story-expanded" id="story-8">
+      <p>Insiders describe Ternus as "well-liked" among Apple's leadership and credit him with reversing a trend of declining product quality. He is reportedly overseeing the biggest set of iPhone revamps in the product's history. The day after the MacBook Neo announcement, it was Ternus who appeared on Good Morning America to promote the device — a level of public-facing visibility historically reserved for the CEO. While Cook isn't expected to retire imminently, the succession picture is increasingly clear.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Techpresso</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.bloomberg.com/features/2026-apple-next-ceo/" target="_blank">bloomberg.com &rarr;</a></span>
+    </div>
+  </article>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman (Zain Kahn)</span>
+      <span>The Code</span>
+      <span>Techpresso</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Monday, March 23, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
