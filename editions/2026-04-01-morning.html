@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Wednesday, April 1, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Wednesday, April 1, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,528.52</span><span class="ticker-change ticker-up">+2.91%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,590.63</span><span class="ticker-change ticker-up">+3.83%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,341.51</span><span class="ticker-change ticker-up">+2.49%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$103.04</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$68,034.85</span><span class="ticker-change ticker-up">+2.29%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">25.25</span><span class="ticker-change ticker-down">-17.5%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://openai.com/index/accelerating-the-next-phase-ai/" target="_blank">OpenAI Closes Record $122B Funding Round at $852B Valuation, Announces 'Superapp'</a></h2>
+  <p class="story-summary">OpenAI announced the largest single fundraise in venture history — $122 billion at an $852 billion valuation — with Amazon ($50B), Nvidia ($30B), and SoftBank ($30B) anchoring the round. The company revealed it's generating $2B/month in revenue with 900M weekly active users and 50M subscribers, and plans to merge ChatGPT, Codex, and its agent tools into a unified "AI superapp."</p>
+  <div class="story-expanded" id="story-1">
+    <p>For the first time, $3B came from individual retail investors through bank channels. Amazon's commitment reportedly carries an AGI clause that could reset terms if OpenAI crosses that threshold. Enterprise already accounts for 40%+ of revenue and is on track to match consumer by year-end. OpenAI's ads pilot hit $100M in annual revenue in under six weeks. Codex has 2M weekly users, up 5x in three months. The unified superapp comes on the heels of the recent wind-down of the Sora video app, suggesting the company is skating to where the money is heading.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://openai.com/index/accelerating-the-next-phase-ai/" target="_blank">openai.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://x.com/Fried_rice/status/2038894956459290963" target="_blank">Anthropic Accidentally Leaks Claude Code's Entire Source Code</a></h3>
+  <p class="story-summary">Anthropic accidentally leaked the source code behind Claude Code to a public npm registry, exposing 1,900+ files, 512,000+ lines of TypeScript, and several unreleased features. The GitHub mirror hit 25,000+ stars within hours, and someone rewrote the entire thing in Python using OpenAI's Codex.</p>
+  <div class="story-expanded" id="story-2">
+    <p>The leak revealed a sophisticated agent operating system: custom terminal UI, dual-track permissions, streaming tool executor, Git worktree agent isolation, and MCP dynamic tool discovery. Developers found 44 feature flags and three unreleased projects, including persistent cross-session memory and a deep-planning system. Internal codenames surfaced: "Capybara" mapping to a Claude 4.6 variant at v8, "Numbat" (upcoming launch), and "Fennec" (Opus 4.6). The memory system stores everything in MEMORY.md with 150-character pointers and runs a background "autoDream" process that tidies notes. Wes Bos found 187 hardcoded spinner verbs and an analytics system that logs prompts as negative when users swear. Anthropic called it "human error, not a security breach" with no customer data exposed.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/Fried_rice/status/2038894956459290963" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://poll.qu.edu/poll-release?releaseid=3955" target="_blank">Quinnipiac Poll: AI Use Jumps 14% as American Trust and Optimism Sink</a></h3>
+  <p class="story-summary">A new Quinnipiac University poll reveals a widening gap between AI adoption and public sentiment — usage increased 14% but trust, optimism, and job concerns are all trending negative. 70% of respondents expect AI to shrink job opportunities, up 14 points.</p>
+  <div class="story-expanded" id="story-3">
+    <p>Research (51%) was the top use case, followed by writing (28%), school/work projects (27%), and data analysis (27%). Sentiment varied sharply with income: 52% earning $200K+ said AI does more good than harm, while 60% earning under $50K said it's doing more harm. Only 5% believe AI is being developed by people who represent their interests, and 74% say the government is not doing enough to regulate AI.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://poll.qu.edu/poll-release?releaseid=3955" target="_blank">poll.qu.edu &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://prismml.com/news/bonsai-8b" target="_blank">PrismML Launches 1-Bit Bonsai: 8B Model That Runs on an iPhone</a></h3>
+  <p class="story-summary">PrismML emerged from stealth and launched Bonsai, an 8B-parameter model squeezed into 1.15 GB — 14x smaller than peers — that runs on an iPhone at 40 tokens/sec and hits 440 tokens/sec on an RTX 4090, competitive with full-precision 8B models on benchmarks.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The Caltech team calls it "concentrating intelligence" rather than scaling it, and their intelligence-density metric (useful capability per GB) is 10.6x higher than Qwen3 8B. A normal 8B model needs ~16 GB and a cloud server. Bonsai needs one gigabyte and your pocket. The model is free and open on Hugging Face.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://prismml.com/news/bonsai-8b" target="_blank">prismml.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.newscientist.com/article/2521256-ai-data-centres-can-warm-surrounding-areas-by-up-to-9-1c/" target="_blank">AI Data Centers Warming Surrounding Areas by Up to 9.1°C</a></h3>
+  <p class="story-summary">A study analyzing 20 years of satellite data across 8,400+ sites found AI data centers can warm surrounding areas by up to 9.1°C, already affecting up to 340 million people worldwide. The finding raises concerns about the environmental impact of the rapid buildout of AI infrastructure.</p>
+  <div class="story-expanded" id="story-5">
+    <p>The heat island effect from data centers is a growing concern as companies like Oracle, Amazon, and others invest billions in expanding AI compute capacity. The research underscores that AI's environmental footprint extends well beyond electricity consumption and carbon emissions.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.newscientist.com/article/2521256-ai-data-centres-can-warm-surrounding-areas-by-up-to-9-1c/" target="_blank">newscientist.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>axios npm Package (300M+ Weekly Downloads) Compromised with Malware</h3>
+  <p class="story-summary">The widely-used axios npm package, with over 300 million weekly downloads, was compromised via a hijacked maintainer account. The supply chain attack injected malicious code into one of the most depended-upon packages in the JavaScript ecosystem.</p>
+  <div class="story-expanded" id="story-6">
+    <p>This marks another significant supply-chain security incident in the npm ecosystem. Developers who auto-update dependencies may have been exposed to the compromised version before it was identified and remediated.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://hcompany.ai/holo3" target="_blank">H Company's Holo3 Tops Desktop Computer-Use Benchmark</a></h3>
+  <p class="story-summary">Holo3 by H Company scored 78.85% on OSWorld-Verified, the leading desktop computer-use benchmark, beating GPT-5.4 and Opus 4.6 with only 10B active parameters. Open weights for the 35B-A3B version are available on Hugging Face under Apache 2.0.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The model represents a new state-of-the-art in computer-use agents, achieving top performance with a fraction of the parameters used by competing models. This positions H Company as a key player in the emerging agentic AI space.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://hcompany.ai/holo3" target="_blank">hcompany.ai &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Google Releases Veo 3.1 Lite</strong> — New budget video generation model for developers at half the cost of its Fast variant, generating clips up to 8 seconds. <a href="https://blog.google/innovation-and-ai/technology/ai/veo-3-1-lite/" target="_blank">blog.google &rarr;</a> <span class="source-badge">The Rundown AI</span> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Salesforce Updates Slack Agent</strong> — 30 new capabilities for its Slackbot agent, including reusable skills, MCP connections, and desktop operation. <a href="https://slack.com/blog/news/agent-orchestration" target="_blank">slack.com &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Alibaba Launches Qwen3.5-Omni</strong> — New AI model with text, image, audio, and video understanding capabilities. <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Flora AI Launches Fauna</strong> — Built-in creative agent that handles model routing and prompting. <a href="https://flora.ai/blog/introducing-fauna" target="_blank">flora.ai &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>ChatGPT for Excel Now Available Worldwide</strong> — Builds and updates spreadsheets from natural language, analyzes data across tabs; included with Plus, Pro, Business, Enterprise. <a href="https://chatgpt.com/apps/spreadsheets/" target="_blank">chatgpt.com &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Ollama 0.19 Doubles Mac Performance</strong> — Runs local AI models up to 2x faster on Macs by switching to Apple's MLX framework. <span class="source-badge">The Neuron</span></li>
+  <li><strong>Capy AI IDE for Parallel Development</strong> — AI-native IDE that runs multiple coding agents at once, managing work from task to PR. <a href="https://capy.ai/" target="_blank">capy.ai &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Together AI Releases Aurora</strong> — Open-source RL framework that turns speculative decoding into a self-improving system that learns from live traffic. <a href="https://www.together.ai/blog/aurora" target="_blank">together.ai &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Zapier Requires AI Fluency for Every Hire</strong> — Building AI competency into its hiring rubric a year after going AI-first. <a href="https://zapier.com/blog/raising-ai-fluency-bar-in-hiring/" target="_blank">zapier.com &rarr;</a> <span class="source-badge">The Neuron</span></li>
+  <li><strong>Forecasting Research Institute Survey on AI's Economic Impact</strong> — 69 economists, 52 AI experts, and 38 superforecasters predict major AI progress but no dramatic break from current GDP growth rates by 2030 or 2050. <a href="https://forecastingresearch.substack.com/p/forecasting-the-economic-effects-of-ai" target="_blank">forecastingresearch.substack.com &rarr;</a> <span class="source-badge">The Neuron</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Global affairs and security</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://app.sitdeck.com/briefing/1db55360-ed25-4e05-a441-9a4730fb4be7" target="_blank">Iran Campaign Escalates: Strikes on Steel Plants, HIMARS From Kuwait, Tanker Retaliation</a></h2>
+  <p class="story-summary">The U.S.-Israeli military campaign against Iran (Operation Epic Fury) is intensifying with confirmed strikes on Iranian steel plants in Isfahan and Khuzestan, HIMARS ER-GMLRS launches from Bubiyan Island, Kuwait, and an Iranian drone strike on a Kuwaiti tanker. President Trump stated the operation could conclude in 2–3 weeks without a formal deal.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The strikes on economic infrastructure mark an expansion beyond purely military objectives. Trump said a formal deal is "irrelevant" — the operation will end when Iran's nuclear weapons capability is neutralized. Iran is threatening to enforce Strait of Hormuz passage fees in national currency and forcibly detain violating vessels. Al Hadath reports Iran's judiciary chief was killed in an attack on Tehran, though this remains unconfirmed. The CNN Fear &amp; Greed Index sits at an extreme fear reading of 8, despite the equity relief rally. WTI crude at $103.04/bbl with analysts modeling $120–$140 scenarios if Iran follows through on Strait of Hormuz threats. Gold at $4,720/oz (+4.3%) reflects flight-to-safety positioning.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/1db55360-ed25-4e05-a441-9a4730fb4be7" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Gas Hits $4 a Gallon for the First Time Since 2022</h3>
+  <p class="story-summary">The average price of gas in the US reached $4.02, surpassing $4 per gallon for the first time in four years. Since the US and Israel launched attacks on Iran about a month ago, US gas prices have jumped 35% from just under $3 before the war started on Feb. 28.</p>
+  <div class="story-expanded" id="story-9">
+    <p>California hit $5.91 per gallon. Every 10% rise in fuel prices could push food costs up by 2–3%, per the New York Times. The Trump administration promised to release 172 million barrels from strategic reserves, removed sanctions on Russian oil, and nixed a maritime law to ease supply chains. The EPA loosened regulations requiring cleaner summertime gasoline blends. Delivery and ride-share companies are increasing gas rebates for drivers. Many consumers are reconsidering summer travel plans.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Secretary Rubio Signals U.S. Will 'Reexamine' NATO Relationship</h3>
+  <p class="story-summary">Secretary of State Rubio stated the U.S. "will have to reexamine" its NATO relationship once the Iran conflict concludes — a significant signal of potential alliance restructuring that could reshape transatlantic security.</p>
+  <div class="story-expanded" id="story-10">
+    <p>The statement comes as NATO allies are already strained by divergent views on the Iran campaign. European allied reactions and any emergency consultations or formal NATO Council meetings would indicate the seriousness of alliance fracture pressure. EU released €80M to Kyiv from frozen Russian asset profits but acknowledged a shortfall on military funding.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Lebanon Crisis Deepens: Israeli Strikes Hit Beirut, Three UN Peacekeepers Killed</h3>
+  <p class="story-summary">Israeli airstrikes hit Beirut, killing three UN peacekeepers. The UN Security Council held an emergency session with delegates trading blame, and Secretary-General Guterres issued two condemnation statements within 24 hours.</p>
+  <div class="story-expanded" id="story-11">
+    <p>The Lebanon situation is generating significant diplomatic activity at the UN level. The killing of peacekeepers represents a serious escalation that could draw broader international condemnation and potential policy shifts among nations contributing to UNIFIL.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>SCOTUS Rules Against Colorado's Conversion Therapy Ban</h3>
+  <p class="story-summary">In an 8–1 decision, the Supreme Court sided with a Christian counselor who argued that Colorado's ban on conversion therapy for LGBTQ+ kids violates the First Amendment. The court sent the case back to a lower court where it's expected to be nullified.</p>
+  <div class="story-expanded" id="story-12">
+    <p>Colorado Attorney General Phil Weiser called the decision a "setback" for efforts to protect children from "harmful and discredited mental health practices." More than 20 other states have similar laws that could now face legal challenges.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Navy CNO Warns Iran Conflict Strains China Deterrence</h3>
+  <p class="story-summary">Admiral Caudle publicly acknowledged that consuming naval resources in the Iran campaign mathematically degrades the U.S. ability to deter China — a rare public acknowledgment of strategic overextension risk.</p>
+  <div class="story-expanded" id="story-13">
+    <p>USS Gerald R. Ford (CVN-78) is positioned in the Eastern Mediterranean while USS Abraham Lincoln (CVN-72) is in the Arabian Sea. New EA-37B Compass Call advanced electronic warfare jets are transiting toward the Middle East, potentially providing CENTCOM with its most capable standoff jamming platform. An F-35 also went down at the Nevada Test and Training Range; pilot ejected safely.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Russia-Ukraine: ISW Assesses Russian Advances Have Slowed</h3>
+  <p class="story-summary">The Institute for the Study of War assesses that Russian advances have slowed, with Ukrainian counterattacks and mid-range strikes impeding Russian momentum across multiple sectors. U.S. attention on Iran raises the risk of opportunistic Russian pushes.</p>
+  <div class="story-expanded" id="story-14">
+    <p>With U.S. resources concentrated on Iran, analysts are monitoring for any opportunistic Russian offensive push, particularly in the Zaporizhzhia or Kharkiv sectors where Ukrainian lines are thinner. EU released €80M to Kyiv from frozen Russian asset profits.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Trump's $400M White House Ballroom Must Stop</strong> — A federal judge ruled construction cannot proceed until approved by Congress. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Federal Judge Blocks Trump Admin From Pulling NPR/PBS Funding</strong> — Executive order to defund public media temporarily halted. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Serbia-Croatia Tensions Flare</strong> — Balkan regional summit cancelled after leaders exchanged hostile rhetoric. <span class="source-badge">SitDeck</span></li>
+  <li><strong>M4.9 Earthquake Near Ishige, Japan</strong> — Felt by residents; no tsunami. Vanuatu also recorded a M7.3 earthquake with limited impact. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Chad Experiencing Critical Internet Outages</strong> — Sustained BGP outages across multiple data sources consistent with infrastructure failure or deliberate disruption. <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Companies, deals, and the economy</span>
+</div>
+
+<article class="lead-story">
+  <h2>McCormick Buys Unilever's Food Business for $45 Billion</h2>
+  <p class="story-summary">Spice giant McCormick — owner of Old Bay, French's, and Frank's RedHot — acquired Unilever's food division in a deal worth ~$45 billion. About 70% of Unilever's food sales come from Hellmann's and Knorr, which will become part of McCormick's portfolio if approved by regulators.</p>
+  <div class="story-expanded" id="story-15">
+    <p>Unilever's shedding of its food business comes as packaged food companies slim down in response to inflation and changing consumer habits. The deal marks the biggest news to hit the condiment industry in years and signals ongoing consolidation in the consumer packaged goods sector.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.cnbc.com/2026/03/31/oracle-layoffs-ai-spending.html" target="_blank">Oracle Cuts Thousands of Jobs in Major AI Pivot</a></h3>
+  <p class="story-summary">Oracle laid off thousands of employees in its largest-ever restructuring, crediting a pivot toward AI infrastructure. The company is ramping AI data-center spending to meet $553B in remaining performance obligations from OpenAI and others.</p>
+  <div class="story-expanded" id="story-16">
+    <p>The layoffs come as Oracle shifts resources from legacy business lines to AI infrastructure buildout. The scale of remaining performance obligations underscores the massive enterprise demand for AI compute capacity.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <span class="source-badge">The Neuron</span>
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnbc.com/2026/03/31/oracle-layoffs-ai-spending.html" target="_blank">cnbc.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Whoop Triples Valuation to $10 Billion</h3>
+  <p class="story-summary">Fitness-tracking wearable company Whoop raised $575 million, nearly tripling its most recent valuation of $3.6 billion. Among the new investors was medical device giant Abbott, as part of Whoop's broader push into health.</p>
+  <div class="story-expanded" id="story-17">
+    <p>Endorsed by LeBron James, Michael Phelps, and other world-class athletes, Whoop reported bookings increased 103% last year and now has more than 2.5 million members.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Allbirds Sells All Assets for $39 Million to Ed Hardy Owner</h3>
+  <p class="story-summary">Allbirds, which debuted with a $4 billion valuation in 2021, agreed to sell all assets for $39 million to American Exchange Group. The eco-friendly shoemaker will shutter all but two outlets after expanding to 60 stores globally.</p>
+  <div class="story-expanded" id="story-18">
+    <p>Sales fell from $297.8 million in 2022 to $189.8 million last year — every year as a public company ended in the red. The company introduced products that didn't sell, including leggings discovered to be see-through after ordering tens of thousands. The deal is expected to close in Q2 after shareholder approval.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Apple Turns 50</h3>
+  <p class="story-summary">Apple celebrates its 50th anniversary today. Founded in a garage, the iPhone maker now has a $3.7 trillion market cap, 2.5 billion active devices, and 166,000 employees. Warren Buffett admitted yesterday he sold his stake too early.</p>
+  <div class="story-expanded" id="story-19">
+    <p>The milestone comes as Apple continues to navigate challenges in AI integration and an evolving competitive landscape in consumer electronics and services.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-19', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Job Openings Fall to Six-Year Low</strong> — Hiring slowed in the US, per government data. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Instagram Testing Paid Subscription Plan</strong> — Would allow users to view Stories anonymously, among other features. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Delta Partners With Amazon Leo</strong> — High-speed satellite internet on flights, starting in 2028. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Stocks Soared on Iran War-End Hopes</strong> — S&amp;P +2.91%, Nasdaq +3.83%, Dow +2.49% after Trump signaled openness to ending operation. CoreWeave spiked +12% after securing a big loan for AI infrastructure. <span class="source-badge">Morning Brew</span> <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Research and discovery</span>
+</div>
+
+<article class="lead-story">
+  <h2>NASA Sends Crew to Circle the Moon — First Since 1972</h2>
+  <p class="story-summary">Weather permitting, NASA is launching Artemis II today, sending four astronauts to orbit the moon in a historic mission that will include the first woman, person of color, and non-US citizen (Canadian) to leave low Earth orbit. The 10-day, $4 billion trip is a key step in NASA's $100 billion Artemis program.</p>
+  <div class="story-expanded" id="story-20">
+    <p>The mission is a major test for Boeing's Space Launch System (SLS) rocket and Lockheed Martin's Orion capsule. Originally planned for February, it was scuttled by SLS malfunctions. SpaceX is developing a lunar lander for upcoming missions, as Jeff Bezos's Blue Origin races to build a competing spacecraft. NASA aims to test docking Orion with either lander next year and have humans on the lunar surface as early as 2028, eventually establishing a permanent moon base as a launch pad for Mars exploration.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-20', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<ul class="bullet-stories">
+  <li><strong>Astronomers Determine Fate of Double White Dwarf Binary</strong> — New research reveals the orbital evolution of a closely paired white dwarf system. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Global Water Resources Growing More Dependent on Extreme Rainfall</strong> — New index quantifies the shift toward extreme precipitation events for freshwater supply. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>New Catalyst Enables Targeted Antibiotic Redesign</strong> — Approach to beat resistant bacteria by redesigning existing antibiotics using a novel catalyst. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Silicon-Perovskite Tandem Solar Cell Hits 32.76% Efficiency</strong> — Molecular additive breakthrough pushes record efficiency for tandem solar cells. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Gaia Analysis Finds Messier 35 Is Larger and Older Than Estimated</strong> — Revised measurements from the Gaia space telescope. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Cannabis and Tobacco Use Linked to Smaller Brain Volume</strong> — Study finds structural brain changes associated with long-term use. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Terraforming Mars: Modeling Engineered Aerosols to Warm the Planet</strong> — Researchers simulate aerosol-based approaches to making Mars habitable. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Lost Mosaic Reveals First Image of Female Beast-Fighter From Roman Era</strong> — Archaeological discovery provides new insight into Roman entertainment. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>SimCells Successfully Target Drug-Resistant Bacteria</strong> — Synthetic minimal cells show promise against antibiotic-resistant infections. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Premature and Small Births Linked to Lifelong Learning Problems</strong> — Research connects birth weight and gestational age to educational outcomes. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>New Eye Cancer Treatment Derived From Pig Semen</strong> — Novel delivery method shows improved efficacy for ocular cancer therapy. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Viruses 'Eavesdrop' on Each Other — But It Can Backfire</strong> — Study reveals how viral communication can be exploited. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Legged Robot for Moon and Mars Resource Prospecting</strong> — Could accelerate the search for resources on the lunar surface and life on Mars. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Can Planes Evacuate in 90 Seconds?</strong> — Simulations reveal the safest cabin layout for emergency evacuations. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>3 Million-Cell Map Shows Menopause Reshapes Breast Tissue</strong> — Findings may explain the increased cancer risk associated with menopause. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Rundown AI</span>
+      <span>Morning Brew</span>
+      <span>The Neuron</span>
+      <span>SitDeck</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Wednesday, April 1, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
