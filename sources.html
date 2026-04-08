@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Sources</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover { background: var(--wsj-black); color: var(--wsj-white); }
+  .masthead-nav a.active { background: var(--wsj-black); color: var(--wsj-white); }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .page-intro {
+    font-size: 15px;
+    color: var(--wsj-gray);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .source-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+  }
+  .source-card:last-child { border-bottom: none; }
+
+  .source-time {
+    flex-shrink: 0;
+    width: 90px;
+    text-align: center;
+    padding: 8px 0;
+  }
+  .source-time .time {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--wsj-black);
+  }
+  .source-time .edition-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 4px;
+    display: inline-block;
+  }
+  .tag-morning { background: #e8f4fd; color: #0274b6; }
+  .tag-evening { background: #f0e8fd; color: #6b3fa0; }
+
+  .source-info { flex: 1; }
+  .source-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .source-name a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .source-name a:hover { color: var(--wsj-accent); }
+  .source-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .source-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .source-url a:hover { text-decoration: underline; }
+  .source-desc {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+
+  .section-divider {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin: 32px 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+
+  .excluded-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f5f5f2;
+    border-radius: 6px;
+  }
+  .excluded-section h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    margin-bottom: 12px;
+  }
+  .excluded-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #999;
+    padding: 6px 0;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .source-card { flex-direction: column; gap: 8px; }
+    .source-time { width: auto; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Newsletter Sources</div>
+  <nav class="masthead-nav">
+    <a href="index.html">← All Editions</a>
+    <a href="sources.html" class="active">Sources</a>
+  </nav>
+</header>
+
+<main class="container">
+
+<h2 class="page-title">Our Sources</h2>
+<p class="page-intro">The Daily Briefing aggregates, deduplicates, and summarizes stories from the following newsletters. Sources are organized by the edition they typically appear in based on their arrival time.</p>
+
+<div class="section-divider">Morning Brief · 7:00 AM ET</div>
+<p style="font-family:'Inter',sans-serif;font-size:12px;color:var(--wsj-gray);margin-bottom:16px;">Covers 5:00 PM previous day through 7:00 AM</p>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~5:00 AM</div>
+    <span class="edition-tag tag-morning">Morning</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://www.therundown.ai" target="_blank">The Rundown AI</a></div>
+    <div class="source-url"><a href="https://www.therundown.ai" target="_blank">therundown.ai →</a></div>
+    <p class="source-desc">Daily AI news covering product launches, funding rounds, and industry developments. Consistently one of the first AI newsletters to arrive each morning.</p>
+  </div>
+</div>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~5:30 AM</div>
+    <span class="edition-tag tag-morning">Morning</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://www.morningbrew.com" target="_blank">Morning Brew</a></div>
+    <div class="source-url"><a href="https://www.morningbrew.com" target="_blank">morningbrew.com →</a></div>
+    <p class="source-desc">Business, markets, and culture roundup. Key source for market data used in the ticker bar, plus financial news, entertainment, and general interest stories.</p>
+  </div>
+</div>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~6:30 AM</div>
+    <span class="edition-tag tag-morning">Morning</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://www.theneuron.ai" target="_blank">The Neuron</a></div>
+    <div class="source-url"><a href="https://www.theneuron.ai" target="_blank">theneuron.ai →</a></div>
+    <p class="source-desc">AI-focused newsletter with strong editorial analysis. Often provides the deepest coverage of AI policy, product launches, and industry moves.</p>
+  </div>
+</div>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~9:00 PM</div>
+    <span class="edition-tag tag-morning">Morning</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://sciencex.com" target="_blank">Science X</a></div>
+    <div class="source-url"><a href="https://sciencex.com" target="_blank">sciencex.com →</a></div>
+    <p class="source-desc">Science and research roundup covering breakthroughs in physics, biology, space, and technology. Arrives evening before, captured by next morning's edition.</p>
+  </div>
+</div>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~10:20 PM</div>
+    <span class="edition-tag tag-morning">Morning</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://app.sitdeck.com" target="_blank">SitDeck</a></div>
+    <div class="source-url"><a href="https://app.sitdeck.com" target="_blank">sitdeck.com →</a></div>
+    <p class="source-desc">Geopolitical intelligence briefing. Arrives late evening with overnight global developments, captured by the next morning's edition.</p>
+  </div>
+</div>
+
+<div class="section-divider">Evening Brief · 5:00 PM ET</div>
+<p style="font-family:'Inter',sans-serif;font-size:12px;color:var(--wsj-gray);margin-bottom:16px;">Covers 7:00 AM through 5:00 PM same day — only new stories not in the morning edition</p>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~9:00 AM</div>
+    <span class="edition-tag tag-evening">Evening</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://www.superhuman.ai" target="_blank">Superhuman</a></div>
+    <div class="source-url"><a href="https://www.superhuman.ai" target="_blank">superhuman.ai →</a></div>
+    <p class="source-desc">AI tools, trends, and productivity tips curated by Zain Kahn. Arrives after the morning cutoff, consistently captured in the evening edition.</p>
+  </div>
+</div>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~10:00 AM</div>
+    <span class="edition-tag tag-evening">Evening</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://www.thetldr.ai" target="_blank">The Code</a></div>
+    <div class="source-url"><a href="https://www.thetldr.ai" target="_blank">thetldr.ai →</a></div>
+    <p class="source-desc">AI developer-focused news covering new model releases, coding tools, and technical developments.</p>
+  </div>
+</div>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~1:00 PM</div>
+    <span class="edition-tag tag-evening">Evening</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://www.techpresso.co" target="_blank">Techpresso</a></div>
+    <div class="source-url"><a href="https://www.techpresso.co" target="_blank">techpresso.co →</a></div>
+    <p class="source-desc">Afternoon tech roundup. Arrives midday with a mix of AI, security, and general technology news.</p>
+  </div>
+</div>
+
+<div class="source-card">
+  <div class="source-time">
+    <div class="time">~2:30 PM</div>
+    <span class="edition-tag tag-evening">Evening</span>
+  </div>
+  <div class="source-info">
+    <div class="source-name"><a href="https://www.tech.morningbrew.com" target="_blank">Tech Brew</a></div>
+    <div class="source-url"><a href="https://www.tech.morningbrew.com" target="_blank">tech.morningbrew.com →</a></div>
+    <p class="source-desc">Morning Brew's technology vertical covering enterprise tech, cybersecurity, and industry trends. Note: email formatting sometimes requires fallback to web version.</p>
+  </div>
+</div>
+
+<div class="excluded-section">
+  <h3>Currently Excluded</h3>
+  <div class="excluded-item">DeepLearning.AI — Irregular delivery schedule; managed via the Exclude tab in the audit spreadsheet</div>
+</div>
+
+</main>
+
+<footer class="edition-footer">
+  The Daily Briefing — Sources are managed in the "Include" and "Exclude" tabs of briefing-audit.xlsx
+</footer>
+
+</body>
+</html>
