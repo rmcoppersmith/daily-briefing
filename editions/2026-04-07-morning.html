@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Tuesday, April 7, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Tuesday, April 7, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,611.83</span><span class="ticker-change ticker-up">+0.44%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,996.34</span><span class="ticker-change ticker-up">+0.54%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,669.88</span><span class="ticker-change ticker-up">+0.36%</span></div>
+  <div class="ticker-item"><span class="ticker-label">WTI Oil</span><span class="ticker-value">$114.49</span><span class="ticker-change ticker-up">+1.85%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$69,735</span><span class="ticker-change ticker-up">+3.31%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">24.17</span><span class="ticker-change">Elevated</span></div>
+</div>
+
+<main class="container">
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: AI & TECHNOLOGY -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Latest in artificial intelligence</span>
+  </div>
+
+  <!-- LEAD: OpenAI Social Contract -->
+  <article class="lead-story">
+    <h2><a href="https://cdn.openai.com/pdf/561e7512-253e-424b-9734-ef4098440601/Industrial%20Policy%20for%20the%20Intelligence%20Age.pdf" target="_blank">OpenAI publishes "Industrial Policy for the Intelligence Age" — a mini-New Deal for AI</a></h2>
+    <p class="story-summary">OpenAI released a 13-page policy blueprint outlining how society should adapt to impending superintelligence — proposing robot taxes, a public wealth fund paying dividends to every American, a four-day workweek, expanded social safety nets, and containment playbooks for rogue autonomous AI. CEO Sam Altman told Axios the moment requires a new "social contract," saying the transition toward superintelligence has already begun.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The document, titled "Industrial Policy for the Intelligence Age," compares this moment to the Industrial Revolution, arguing that the Progressive Era and New Deal had to rebuild the social contract for electricity and mass production — and AI may require something similarly ambitious. Key proposals include shifting the tax base away from labor and toward capital and automated labor taxes; seeding a sovereign-style wealth fund with AI company contributions that would pay dividends to all Americans (akin to Alaska's oil fund); piloting a 32-hour/four-day workweek; building an "AI trust stack" with stronger auditing, incident reporting, and public oversight; faster grid expansion; and containment protocols for autonomous AI systems that can't be shut off. OpenAI also announced fellowships, research grants of up to $100,000, up to $1M in API credits, and a new DC workshop to move ideas toward policy. Axios called it "the most detailed blueprint any tech titan has ever published for how to tax, regulate, and redistribute wealth from the technology he's building." Early reaction was a mix of "whoa" and "convenient." The Trump administration prefers a light-touch AI approach, but Senate bills to tax AI and mitigate job impacts are reportedly in the works. The proposal also addressed AI-enabled weapons threats — cyberattacks and engineered bioweapons — calling for expanded international safety cooperation.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Morning Brew</span>
+      <span class="source-badge">The Rundown AI</span>
+      <span class="source-badge">The Neuron</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://cdn.openai.com/pdf/561e7512-253e-424b-9734-ef4098440601/Industrial%20Policy%20for%20the%20Intelligence%20Age.pdf" target="_blank">openai.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- STORY CARDS GRID: AI -->
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://www.newyorker.com/magazine/2026/04/13/sam-altman-may-control-our-future-can-he-be-trusted" target="_blank">New Yorker investigation surfaces secret memos behind Sam Altman's firing</a></h3>
+      <p class="story-summary">The New Yorker published a deep investigation into Sam Altman drawing on 100+ interviews, unseen memos from ex-chief scientist Ilya Sutskever, and private notes from Anthropic's Dario Amodei — alleging a long-running pattern of deception. Sutskever's 70-page document of Slack messages and HR records claims Altman misrepresented safety protocols to OpenAI's board.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The investigation spans Altman's full career — conflicts at his startup Loopt, Y Combinator partners attempting to remove him, and the November 2023 board drama. Amodei's private notes, kept for years, independently reached the same conclusion as Sutskever: "The problem with OpenAI is Sam himself." A Microsoft exec told reporters there is "a small but real chance" Altman is "remembered as a Bernie Madoff, Sam Bankman-Fried-level scammer." The Rundown notes there is no single "smoking gun," but a detailed pattern of behavior across Altman's career — balanced by fiercely loyal colleagues and supporters — making him one of the most polarizing figures in the AI era.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Rundown AI</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.newyorker.com/magazine/2026/04/13/sam-altman-may-control-our-future-can-he-be-trusted" target="_blank">newyorker.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.theregister.com/2026/04/03/netflix_video_ai/" target="_blank">Netflix open-sources VOID video AI; Meta takes hybrid open/closed model approach</a></h3>
+      <p class="story-summary">Netflix released VOID, a physics-aware AI model that removes objects from video and realistically fills in the background — now open-sourced on Hugging Face. Separately, Meta is preparing to release the first AI models from Alexandr Wang's Superintelligence team, with some available as open source while the largest models remain closed.</p>
+      <div class="story-expanded" id="story-3">
+        <p>Netflix's VOID could significantly reduce video editing costs and effort, making complex compositing tasks faster and more accessible. The Neuron frames the two announcements together as a snapshot of where AI is headed: powerful tools escaping labs, but companies getting pickier about how much they share. Meta's "Avocado" model was delayed in March after benchmark performances fell short of rivals. Axios reported Meta "knows its new models may not be competitive across the board" but believes it will have areas of strength that appeal to consumers. The Rundown noted that after the money spent and the high-profile Wang hire, another underperforming release would be painful for Meta's frontier AI ambitions.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <span class="source-badge">The Rundown AI</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.axios.com/2026/04/06/meta-open-source-ai-models" target="_blank">axios.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Anthropic to charge Claude Code users extra for third-party tools</h3>
+      <p class="story-summary">Anthropic is planning to charge Claude Code subscribers additional fees to use OpenClaw and other third-party tools, marking a significant change to its pricing structure, according to Morning Brew.</p>
+      <div class="story-expanded" id="story-4">
+        <p>The pricing change would affect Claude Code users who rely on third-party integrations and tools within the Anthropic ecosystem. No additional details on pricing tiers or timing were provided in the newsletter. The Rundown AI referenced a related article headlined "Anthropic tells OpenClaw users to pay up" in its highlights section, suggesting this story is receiving broad coverage in AI circles.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://nationaltoday.com/us/ca/san-francisco/news/2026/04/06/ai-psychiatry-startup-approved-to-prescribe-meds/" target="_blank">Legion Health becomes first AI app approved to refill psychiatric medications without clinician</a></h3>
+      <p class="story-summary">Legion Health won state approval to let its AI app directly refill psychiatric medications — the first time a state has greenlit an AI platform to handle the process without clinician oversight. The Rundown AI flagged it as a significant milestone in AI's expanding role in healthcare.</p>
+      <div class="story-expanded" id="story-5">
+        <p>The approval marks a regulatory first that could accelerate AI's penetration into clinical workflows. Mental health medication management has long required direct clinician involvement; this decision by an unnamed state signals growing regulatory comfort with AI handling routine prescription tasks. The development comes alongside OpenAI's data showing ChatGPT receives approximately 2 million insurance-related messages weekly, underscoring the scale at which AI is already operating in healthcare-adjacent contexts.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Rundown AI</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://nationaltoday.com/us/ca/san-francisco/news/2026/04/06/ai-psychiatry-startup-approved-to-prescribe-meds/" target="_blank">nationaltoday.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div><!-- /stories-grid AI -->
+
+  <!-- AI ALSO IN BULLETS -->
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;margin:24px 0 8px;">Also in AI &amp; Technology</p>
+  <ul class="bullet-stories">
+    <li><strong>Iran threatens Stargate</strong> — Iran's military singled out OpenAI's $30B Stargate data center in Abu Dhabi as a target, publishing satellite imagery of the facility and vowing to destroy U.S. AI infrastructure across the region. <a href="https://www.tomshardware.com/tech-industry/iran-threatens-complete-and-utter-annihilation-of-openais-usd30b-stargate-ai-data-center-in-abu-dhabi-regime-posts-video-with-satellite-imagery-of-chatgpt-makers-premier-1gw-data-center" target="_blank">Tom's Hardware &rarr;</a> <span class="source-badge">The Rundown AI</span> <span class="source-badge">The Neuron</span></li>
+    <li><strong>OpenAI and Anthropic racing toward IPOs</strong> — The WSJ reported both companies are pressing toward public offerings despite massive AI training costs and continued heavy cash burn. <a href="https://www.wsj.com/tech/ai/openai-anthropic-ipo-finances-04b3cfb9" target="_blank">WSJ &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>AI search SEO arms race</strong> — SEO firms and brands are racing to manipulate AI search results to get cited by ChatGPT, Gemini, and Google AI Overviews, creating a new optimization battlefield. <a href="https://www.theverge.com/tech/900302/ai-seo-industry-google-search-chatgpt-gemini-marketing" target="_blank">The Verge &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>Chip packaging as AI bottleneck</strong> — WIRED reported advanced chip packaging has emerged as a major constraint on AI scaling, with Intel saying the business could exceed $1B and potentially land Google and Amazon deals. <a href="https://www.wired.com/story/why-chip-packaging-could-decide-the-next-phase-of-the-ai-boom/" target="_blank">WIRED &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>Xoople raises $130M to map Earth for AI</strong> — Spain-based Xoople closed a $130 million Series B to build a satellite data business generating better Earth imagery for AI model training. <a href="https://techcrunch.com/2026/04/06/spains-xoople-raises-130-million-series-b-to-map-the-earth-for-ai/" target="_blank">TechCrunch &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>Google releases AI Edge Eloquent for iOS</strong> — A free dictation app that cleans up raw speech into polished text entirely on-device, with no cloud processing required. <a href="https://apps.apple.com/us/app/google-ai-edge-eloquent/id6756505519" target="_blank">App Store &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>ChatGPT handles 2M insurance messages weekly</strong> — OpenAI Head of Business Finance Chengpeng Mou posted new stats showing ChatGPT's growing use for healthcare and insurance questions. <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>OpenAI CEO/CFO split on IPO timing</strong> — The Information reported Sam Altman and CFO Sarah Friar are not aligned on when to go public; OpenAI denied the characterization. <span class="source-badge">The Rundown AI</span></li>
+    <li><strong>Nvidia still dominates AI compute ownership</strong> — Epoch AI's new AI Chip Owners explorer shows Nvidia retains an overwhelming majority of AI compute globally, with all other players competing for the margins. <a href="https://epoch.ai/data/ai-chip-owners/" target="_blank">epoch.ai &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>Microsoft Copilot Pages: turn AI answers into editable docs</strong> — Copilot users can now hit "Edit in Pages" to transform a chatbot response into a persistent, editable document with Copilot still available alongside for continued refinement. <span class="source-badge">The Neuron</span></li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: GEOPOLITICS & WORLD -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+    <span class="section-name">Global developments and conflict</span>
+  </div>
+
+  <!-- LEAD: US-Iran War -->
+  <article class="lead-story">
+    <h2><a href="https://app.sitdeck.com/briefing/f12e720d-5fd5-4422-8223-41b1175d98d4" target="_blank">US-Iran war enters critical phase: Israeli airstrikes hit Tehran, Iranian missiles target Saudi energy infrastructure</a></h2>
+    <p class="story-summary">The Israeli Air Force conducted extensive overnight airstrikes on western Tehran — including the area around Mehrabad Airport — with U.S. forces reportedly participating. Iran retaliated with missile salvos striking Saudi Arabia's Eastern Province energy sites, directly threatening global oil supply. Polymarket now prices near-certainty (99.7%) of U.S. ground forces entering Iran by April 30. The Fear &amp; Greed Index sits at 11 — Extreme Fear.</p>
+    <div class="story-expanded" id="story-6">
+      <p>SitDeck's 0200Z intelligence briefing paints a rapidly escalating picture: IAF strikes in Tehran produced large fires and pillars of smoke around the airport district, signaling willingness to degrade Iranian strategic mobility. Saudi Arabia intercepted seven Iranian inbound missiles targeting the Eastern Province — home to Aramco infrastructure — marking a direct threat to global energy supply. WTI crude surged +1.85% to $114.49. Iran's Bushehr nuclear power plant has also been struck, raising acute radiological risk and IAEA monitoring concerns. A single stabilizing development: the White House confirmed a successful U.S. special operations rescue of a downed airman from inside Iranian territory — a potential diplomatic opening that Trump, Hegseth, and Joint Chiefs Chairman Gen. Caine publicly praised. Key indicators to watch: Trump's 8pm ET deadline for Iran to reopen the Strait of Hormuz, any Vance/Witkoff ceasefire framework signaling, Saudi Aramco infrastructure damage assessments, and IAEA response to the Bushehr strikes. Israeli children have been unable to attend school for five weeks; protesters swarmed the U.S. Embassy in Tel Aviv demanding an end to the wars.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">SitDeck</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://app.sitdeck.com/briefing/f12e720d-5fd5-4422-8223-41b1175d98d4" target="_blank">sitdeck.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Trump threatens Iran with total destruction as 8 PM deadline looms</h3>
+      <p class="story-summary">With his self-imposed 8pm ET deadline for Iran to reopen the Strait of Hormuz arriving tonight, President Trump declared that "every bridge" and "every power plant" in Iran could be attacked and incapacitated "in one night." The UN warned such strikes on civilian infrastructure could violate international law.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Trump's remarks came after Iran reportedly rejected a U.S. offer of a 45-day ceasefire, pushing instead for a permanent end to the war. VP Vance and envoy Witkoff are reportedly participating directly in negotiations, with Vance also heading to Budapest ahead of Hungary's Sunday election. Trump has also publicly stated the U.S. "could charge for Hormuz passage" — an unprecedented and potentially destabilizing framing for global shipping markets. Morning Brew noted Trump said he was "not worried" the strikes would be considered war crimes.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Morning Brew</span>
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://app.sitdeck.com/briefing/f12e720d-5fd5-4422-8223-41b1175d98d4" target="_blank">Bushehr nuclear plant struck; THAAD kill vehicle component recovered in Syria</a></h3>
+      <p class="story-summary">Multiple reports confirm strikes on or near Iran's Bushehr nuclear power plant, raising acute radiological concerns and IAEA monitoring integrity questions. Separately, The War Zone reported that a THAAD interceptor's infrared seeker was recovered intact in Syria — a potentially major intelligence loss for U.S. ballistic missile defense programs.</p>
+      <div class="story-expanded" id="story-8">
+        <p>The Bushehr strikes represent a new legal and nuclear threshold in the conflict — any confirmed damage triggering an emergency IAEA Board of Governors session would be a significant escalation marker. The THAAD seeker recovery in Syria is a separate but significant intelligence development: adversary exploitation of U.S. infrared seeker technology (particularly by Iran, Russia, or China) could degrade future ballistic missile defense effectiveness. SitDeck flagged both as high-priority indicators to watch in the coming 24–48 hours.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://app.sitdeck.com/briefing/f12e720d-5fd5-4422-8223-41b1175d98d4" target="_blank">sitdeck.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>U.S. special operations rescues downed airman from inside Iran</h3>
+      <p class="story-summary">The White House confirmed a successful SOF rescue of a downed U.S. airman from inside Iranian territory. Trump, Hegseth, and Joint Chiefs Chairman Gen. Caine publicly praised the operation — the sole stabilizing signal amid an otherwise escalating conflict. Trump then threatened jail for a journalist who revealed details of the rescue.</p>
+      <div class="story-expanded" id="story-9">
+        <p>The rescue operation, detailed by the BBC, provides a potential diplomatic opening even as military strikes intensify. However, Trump's subsequent threat to jail the journalist who revealed the rescue details has become a domestic press freedom flashpoint — coinciding with Rep. Ansari introducing impeachment articles against Secretary of War Hegseth. SitDeck notes the rescue as the sole stabilizing development in an otherwise escalating picture, calling it a "potential diplomatic opening."</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <span class="source-badge">Morning Brew</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div><!-- /stories-grid World -->
+
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;margin:24px 0 8px;">Also in Geopolitics &amp; World</p>
+  <ul class="bullet-stories">
+    <li><strong>Jamie Dimon's annual letter warns of risks ahead</strong> — The JPMorgan CEO cited geopolitical conflict in Iran, inflation, trouble in private markets, and "poor" bank regulations. He warned of inflation "slowly creeping up" as "the skunk at the party" that could push rates up and asset prices down. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>VP Vance heads to Budapest ahead of Hungary election</strong> — Vance is meeting Hungarian PM Orbán before Sunday's vote; TASS confirms Vance may also join direct Iran negotiations, reinforcing his dual diplomatic role as a back-channel node. <span class="source-badge">SitDeck</span></li>
+    <li><strong>$600M counter-UAS contract awarded for Operation Epic Fury</strong> — Joint Interagency Task Force 401 committed over $600M for counter-drone capabilities, signaling sustained commitment to the Iran campaign's defensive infrastructure. <span class="source-badge">SitDeck</span></li>
+    <li><strong>Hamas Gaza demilitarization deal sought by week's end</strong> — The U.S. is pressing Hamas for a Gaza demilitarization agreement, running in parallel to the Iran ceasefire effort. <span class="source-badge">SitDeck</span></li>
+    <li><strong>Supreme Court clears way for Bannon conviction dismissal</strong> — The Court handed Trump ally Steven Bannon an order that likely enables dismissal of his criminal conviction for refusing to testify to Congress about Jan. 6. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>B-2A Spirit detected airborne over Japan</strong> — A B-2A stealth bomber (callsign FENIXR2) was spotted over the Sea of Japan heading east — notable given ongoing Iran operations tempo. <span class="source-badge">SitDeck</span></li>
+    <li><strong>Critical internet outages in Africa</strong> — BGP and ping-level outages flagged as critical in South Sudan, Namibia, and Benin. <span class="source-badge">SitDeck</span></li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: BUSINESS & MARKETS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Finance, deals, and the economy</span>
+  </div>
+
+  <!-- LEAD: Markets / Oil -->
+  <article class="lead-story">
+    <h2>Oil surges as Iranian missiles target Saudi energy sites; markets at "Extreme Fear" despite modest equity gains</h2>
+    <p class="story-summary">WTI crude jumped +1.85% to $114.49 as Iranian missile strikes on Saudi Arabia's Eastern Province raised direct supply disruption risk. Equities posted modest gains — S&amp;P +0.44%, Nasdaq +0.54% — as institutional buyers selectively stepped in, but the Fear &amp; Greed Index sits at an extreme 11/100 and the VIX is elevated at 24.17, reflecting deep retail anxiety. Further escalation targeting Aramco production could push WTI toward $120+ rapidly.</p>
+    <div class="story-expanded" id="story-10">
+      <p>SitDeck's market analysis frames the oil surge as directly pricing in supply disruption risk from Iranian strikes on Saudi energy infrastructure. Gold counterintuitively pulled back -0.72% to $4,650.90, possibly reflecting profit-taking at high levels or short-term dollar strengthening — though safe-haven demand is likely to resume if escalation continues. Bitcoin slipped slightly (-0.66%), consistent with risk-off behavior. A novel and destabilizing variable: Trump's suggestion the U.S. "could charge for Hormuz passage" introduces acute uncertainty for global shipping and insurance markets. Defense sector spending remains a tailwind, with a $600M+ counter-UAS contract, an Israel-Greece PULS system deal ($750M), and sustained Operation Epic Fury spending all signaling sustained procurement demand.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">SitDeck</span>
+      <span class="source-badge">Morning Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;margin:24px 0 8px;">Also in Business &amp; Markets</p>
+  <ul class="bullet-stories">
+    <li><strong>Paramount-Skydance secures ~$24B from sovereign wealth funds</strong> — Saudi Arabia, Qatar, and Abu Dhabi sovereign wealth funds have committed nearly $24 billion for Paramount-Skydance's takeover of Warner Bros. Discovery, per the WSJ. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>Amazon-USPS deal: 1B+ packages annually</strong> — Amazon has reached a deal with the post office to continue delivering more than 1 billion packages for the e-commerce giant annually, according to Reuters. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>Robinhood and BNY Mellon to manage Trump children accounts</strong> — The two firms have been tapped to manage the new Trump accounts for children. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>AMC stock surges on Mario Galaxy box office</strong> — AMC jumped +12.50% after The Super Mario Galaxy Movie helped drive holiday weekend box office and concession sales. <span class="source-badge">Morning Brew</span></li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: ENTERTAINMENT & CULTURE -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">Pop culture, sports, and society</span>
+  </div>
+
+  <!-- LEAD: Ye / Wireless Festival -->
+  <article class="lead-story">
+    <h2>Pepsi, AB-InBev, Rockstar, PayPal, Diageo all flee Wireless Festival after Ye added as headliner</h2>
+    <p class="story-summary">Five major corporate sponsors have now pulled out of London's Wireless Festival following the announcement that Ye — who released a song called "Heil Hitler" less than a year ago and has a long history of antisemitic statements — will headline the July event. UK Prime Minister Keir Starmer called the booking "deeply concerning," and UK ministers are reviewing Ye's permission to enter the country.</p>
+    <div class="story-expanded" id="story-11">
+      <p>The exodus began with Pepsi withdrawing after 10 years as the festival's main brand partner, followed swiftly by Diageo. AB-InBev and Rockstar Energy Drink subsequently announced they are also pulling back, per the Wall Street Journal and Variety. PayPal, which hosted a ticket pre-sale, said it won't allow the festival to use its branding going forward. Meanwhile, Ye sold out two shows at SoFi Stadium in Los Angeles grossing $33 million, and his new album debuted at No. 2 on the Billboard 200. In January, he placed a full-page apology in the WSJ, attributing past remarks to bipolar disorder.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Morning Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;margin:24px 0 8px;">Also in Entertainment &amp; Culture</p>
+  <ul class="bullet-stories">
+    <li><strong>Michigan wins men's NCAA championship</strong> — The Wolverines beat UConn 69-63 for their first men's national basketball title since 1989, snapping a 25-year Big Ten title drought. UConn suffered its first loss in a national championship game. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>Angel Reese traded to Atlanta Dream</strong> — The WNBA All-Star was dealt from the Chicago Sky to Atlanta in exchange for two first-round draft picks. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>Phone-free restaurants and bars on the rise</strong> — At least 11 states now have individual restaurants or bars with phone restrictions, per Axios. 63% of Gen Z says they intentionally disconnect; upscale chains like Delilah's and some Chick-fil-A locations now offer incentives for going phone-free. <span class="source-badge">Morning Brew</span></li>
+    <li><strong>Savannah Guthrie returns to Today show</strong> — Guthrie returned following the disappearance of her mother, saying "It's good to be home." <span class="source-badge">Morning Brew</span></li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: SCIENCE -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-science">Science</span>
+    <span class="section-name">Research, space, and discovery</span>
+  </div>
+
+  <!-- LEAD: Artemis II -->
+  <article class="lead-story">
+    <h2><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmNBRZwc48J8xRJPlMSSNI1aUfm7CV3lxL7kif_xHZ9OY5WVjQzgonjk0_t0oGKEiUoRuAuYuXBFLqe5fpW9j15mgDQMXKOXKUTCCLTForT5mtCJrhndAYSv4JlPtT1PT_MBRRlptmZdINMZVfSS9T2PJD1O7Jg0c&s=64e547ecb3da3baa" target="_blank">Artemis II crew breaks Apollo 13 record — farthest humans have ever traveled from Earth</a></h2>
+    <p class="story-summary">At 1:57pm ET Monday, the four Artemis II astronauts set a new record for the farthest humans have ever traveled from Earth, reaching 252,756 miles — surpassing the Apollo 13 crew's 1970 record by roughly 4,100 miles. The crew completed a lunar flyby including 40 minutes of planned communication blackout as they passed the moon's far side, and are slated to splash down on Friday.</p>
+    <div class="story-expanded" id="story-12">
+      <p>Science X reported the final maximum distance as 252,760 miles. Canadian astronaut Jeremy Hansen said from the ship: "We most importantly choose this moment to challenge this generation and the next to make sure this record is not long-lived." The milestone puts Artemis II squarely in the history books and sets the stage for future crewed lunar missions. Morning Brew noted the crew did take photos during the journey — mostly for science rather than social media. The crew's safe return splash-down is scheduled for Friday.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Science X</span>
+      <span class="source-badge">Morning Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmNBRZwc48J8xRJPlMSSNI1aUfm7CV3lxL7kif_xHZ9OY5WVjQzgonjk0_t0oGKEiUoRuAuYuXBFLqe5fpW9j15mgDQMXKOXKUTCCLTForT5mtCJrhndAYSv4JlPtT1PT_MBRRlptmZdINMZVfSS9T2PJD1O7Jg0c&s=64e547ecb3da3baa" target="_blank">sciencex.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVJLlOXC9Rn-kLkbmJnBNU5k2UoU_Q8uA8CF7LzXgwiEsotVxeaFeMqQPLqY3cLlXoUYjvWozu_DkDWdDGJ3KUTCCLQl4iVo2pUpGxmNgdAPJQl9Nc0O37NA9Kyp4xNYhUNPlBTCpajLAKhqDLiUIXtBGGzU_D6ed1UAGEkWVm1w&s=37bc46ac8bf3e743" target="_blank">Imaging study sheds light on how deep brain stimulation acts on Parkinson's disease</a></h3>
+      <p class="story-summary">A new imaging study has provided clearer insight into the neural mechanisms through which deep brain stimulation (DBS) alleviates Parkinson's disease symptoms, advancing understanding of one of neurology's most effective interventions.</p>
+      <div class="story-expanded" id="story-13">
+        <p>Deep brain stimulation has been a cornerstone treatment for advanced Parkinson's disease for decades, but exactly how it modulates neural circuits has remained incompletely understood. This imaging study offers new mechanistic clarity that could inform more targeted stimulation protocols and patient selection criteria.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVJLlOXC9Rn-kLkbmJnBNU5k2UoU_Q8uA8CF7LzXgwiEsotVxeaFeMqQPLqY3cLlXoUYjvWozu_DkDWdDGJ3KUTCCLQl4iVo2pUpGxmNgdAPJQl9Nc0O37NA9Kyp4xNYhUNPlBTCpajLAKhqDLiUIXtBGGzU_D6ed1UAGEkWVm1w&s=37bc46ac8bf3e743" target="_blank">sciencex.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmJQlB3c4wJpIVL6FGVzISmqsLjfGb3R5J4wmZ7UvQ7PIvA0mKyyE5jQc4oEJkNVCNtgyR4ZfGHUPzUJ_-GcT05goLSMDKIDncXSC1RldgSoypMJe9lMEQT-BKx-he2OzyeAhayMYhIIRKMeYXCHcMzbguhK6Q3VEQqwTIvA2H&s=b79883b9d94c0ce8" target="_blank">Polymers built inside the body through blood-catalyzed chemistry allow on-demand brain control</a></h3>
+      <p class="story-summary">Researchers have developed a method to grow polymers directly inside living tissue using blood-catalyzed chemistry, enabling precise on-demand control of brain activity. The breakthrough could open new avenues for treating neurological conditions without traditional implanted devices.</p>
+      <div class="story-expanded" id="story-14">
+        <p>The technique leverages the body's own chemistry — specifically blood-based catalysis — to trigger polymer formation in targeted tissue regions. The ability to form functional materials in vivo rather than implanting them externally could significantly reduce surgical risk and enable more dynamic, responsive neural interfaces.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmJQlB3c4wJpIVL6FGVzISmqsLjfGb3R5J4wmZ7UvQ7PIvA0mKyyE5jQc4oEJkNVCNtgyR4ZfGHUPzUJ_-GcT05goLSMDKIDncXSC1RldgSoypMJe9lMEQT-BKx-he2OzyeAhayMYhIIRKMeYXCHcMzbguhK6Q3VEQqwTIvA2H&s=b79883b9d94c0ce8" target="_blank">sciencex.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmPQlZickgJIhMKKYCVDRdkbAGmrvU3BRS5kjX_FDe8qU9EkDInCAgjGc-u1pJJVrFqhiYuY3FFFShUY7hYNzl7zwTQJnGODWIVGuhW1YZXJmpH5W1nt9MQuZNlvUS3_fnMBJZwdEpZtkLfOcaRwdPiq0D1OrVkUMWtRI&s=090300cb1dc92aef" target="_blank">Microscopic mechanism of 'quantum collapse' in real-world environments uncovered for the first time</a></h3>
+      <p class="story-summary">Scientists have for the first time directly observed the microscopic mechanism behind quantum wavefunction collapse as it occurs in real-world (noisy, non-isolated) environments — a longstanding puzzle at the heart of quantum mechanics that underpins quantum computing and measurement theory.</p>
+      <div class="story-expanded" id="story-15">
+        <p>Quantum collapse — the process by which a quantum system transitions from a superposition of states to a definite outcome upon measurement — has been theorized and described mathematically for a century, but its microscopic physical mechanism in realistic environments has remained elusive. This discovery has potential implications for quantum computing error correction and the fundamental interpretation of quantum theory.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Science X</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmPQlZickgJIhMKKYCVDRdkbAGmrvU3BRS5kjX_FDe8qU9EkDInCAgjGc-u1pJJVrFqhiYuY3FFFShUY7hYNzl7zwTQJnGODWIVGuhW1YZXJmpH5W1nt9MQuZNlvUS3_fnMBJZwdEpZtkLfOcaRwdPiq0D1OrVkUMWtRI&s=090300cb1dc92aef" target="_blank">sciencex.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div><!-- /stories-grid Science -->
+
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;margin:24px 0 8px;">Also in Science</p>
+  <ul class="bullet-stories">
+    <li><strong>Bennu asteroid sample reveals water flow through early solar system</strong> — Analysis of the OSIRIS-REx Bennu sample shows how water flowed through the newly forming asteroid, providing a window into early solar system chemistry. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmNwNDytZ4J4BVPbhKFjRajqEOmK_U3xRR613X7UzF5fk6D0mKyyE5jQc4oEJkNVCNtgyR4ZfGHUPzUJ_-GcT05goLSMDKIDncXSC1RldgSoypMJe9lMEQT-BKx-he2OzyeAhayMYhIIRKMeYXCHcMzbguhK6Q3VEQqwTIvA2H&s=263b8c5aa6391746" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>TESS spots the rise of a black hole X-ray binary system</strong> — NASA's TESS telescope has detected the emergence of a new black hole X-ray binary, providing rare real-time data on these energetic systems. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmIQNe1443OIBbJvlHVCpa1bYOjfGb2B9H9V3U5Evc7LQgEkD70Dohk1so6UFMKlqMsAqG-ozFHHnqQZ7lSty97jgHRMiFICCMZy61QksnVp-qUpC9kN0IC-lTlulLxeX5KVQVl5JmYZ15PaZGV2YJ1ORdxO7P&s=dda937043062bc7c" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>GLP-1 drugs show digestive side effects but may help fight infections</strong> — New research on Ozempic-class drugs finds they produce digestive side effects as expected, but also appears to offer protective benefit against certain infections. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNUVKrhfFidYl6oGh6jU1QNT4FfX6FbW5fghD1vBjiY9hV1jvFtWKgCNsAKrr5bEA0XiGZT7U9T0_zAUC9HXOAuMXSm9WlZ7WpWlBpj6jMUceeRFl_xe2OflaAJMzc8seY9PIbFbTyNNhPZXx-3KhA1n91aT4B-HrKtnVh-S&s=689565ce5d87ceda" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Resilient soft robot actuator shows potential for space</strong> — A new space-ready soft robot actuator design demonstrates the resilience needed for the extremes of space environments. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KgSlguR4ioAIa519IeS6hKn_tMnrK7Z1AAlJd4JoRLJLhGXihL1aUMgKmYxR5UqlSV-Frf9OI0CgDX0zQ3hBU_sU5fPxGQsAKY44zFHHn0S4_-XNS95SIKSNDXMCbHTTm5cFYjW5GxAsm5lNAYSqFRjuFg0uHmJQdEw81oMIBRIa0CVTFTnbAbka6Fg0kVthfP8H7B8uI5RhuIg2dk0w4&s=e175b6480a5e8987" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>'Hot Jupiter' orbiting a metal-poor star discovered</strong> — Astronomers identified a rare hot Jupiter exoplanet in orbit around a metal-poor host star, challenging prevailing models of gas giant formation. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmPQlZickgJIhMKKYCVDRdkbAGmrvU3BRS5kjX_FDe8qU9EkDInCAgjGc-u1pJJVrFqhiYuY3FFFShUY7hYNzl7zwTQJnGODWIVGuhW1YZXJmpH5W1nt9MQuZNlvUS3_fnMBJZwdEpZtkLfOcaRwdPiq0D1OrVkUMWtRI&s=090300cb1dc92aef" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>New equation may help baristas make the perfect espresso</strong> — Researchers developed a mathematical model predicting optimal espresso extraction parameters, which could standardize shot quality across different machines and grind settings. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmMBdYxdc8O48VL7VdUjVLmbdCka-JwxRV9EvX_1fe9KU9EkDInCAgjGc-u1pJJVrFqhiYuY3FFFShUY7hYNzl7zwTQJnGODWIVGuhW1YZXJmpH5W1nt9MQuZNlvUS3_fnMBJZwdEpZtkLfOcaRwdPiq0D1OrVkUMWtRI&s=2b031a645dc7f5b0" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Three Himalayan predators coexist by partitioning prey</strong> — A study found snow leopards, wolves, and other top Himalayan predators reduce direct competition by dividing available prey species among themselves by preference and habitat. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmPQ9Axc80LYBWYKRdXiJejKsdh_Ga3hRe7leOoU_Q8v88EkTLzTw6hhU9pkpCaFeMqQPLqY3cLlXoUYjvWozu_DkDWdDGJ3KUTCCLQl4iVo2pUpGxmNgdAPJQl9Nc0O37NA9Kyp4xNYhUNPlBTCpajLAKhqDLiUIXtBGGzU_D6ed1UAGEkWVm1w&s=95fff1e0299d9ea1" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Smart sensor decodes fatigue and stress from body signals on the move</strong> — A new wearable sensor can detect and distinguish fatigue from stress using biometric signals captured during normal movement, without requiring stationary monitoring. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVJLlOXC9Rn-kLkbmJnBNU5k2UoU_Q8uA8CF7LzXgwiEsotVxeaFeMqQPLqY3cLlXoUYjvWozu_DkDWdDGJ3KUTCCLQl4iVo2pUpGxmNgdAPJQl9Nc0O37NA9Kyp4xNYhUNPlBTCpajLAKhqDLiUIXtBGGzU_D6ed1UAGEkWVm1w&s=37bc46ac8bf3e743" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>How the female baboon body has the final say in sperm selection</strong> — Research reveals physiological mechanisms in female baboons that allow selective filtering of sperm, giving females more reproductive agency than previously understood. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmMwNAxc8weYNZL7tAVWtdl6AW2a-J1ANLqUyO4VOO9f84OV7L1ic3hAUjo0NeMkudtkmBqJTuHEPjTY_hAtTt6jwKC9HXOAuCWSCkTlIhUcWgDp2wgJwfUetBjvhaw_y5bVUcl5YpFZFKJLgPDWofyvRdwg&s=ef2d7553c45b1f3b" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>How one 'forever chemical' can disrupt a baby's facial development</strong> — A study identified a specific PFAS chemical's mechanism of disrupting craniofacial development during fetal growth, with implications for ongoing PFAS regulatory debates. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVLrxKVi9cmahCkLWKwwRW8wmY7V3Ire00BUTFz3s8lVUh61pPK2CLqxqGv5yMH1HrQY74WsOm_iELcsnGMT2UVXCxQlovU96xG5mDmtAcVuZNneIC1eHiOR8AytQ5MZVMKKZTCX4MyfdaiJ2JwxhKpxLWrA2Bsr0&s=957d7c28335a25c6" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+    <li><strong>Alignment during conversations is highly situation-dependent, study finds</strong> — A new study found that conversational alignment between people — the tendency to mirror language and behavior — varies dramatically by situation, challenging assumptions about its universality. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbSmNApEw804MY9MYLdAVTBaircOgLWW3wIL702d5FPIrfg8EljF1zw7jxYloEJXeUqMqTCHs4zDEkO6So3gWsX07idAWNDOCjmEXCShQgYjUpmtA9KpjdwuReZJiu1W1u62MQdEyNp4OpZUKKBbXjRDyvxcxe_MzTBW9U2WrAmdoLllVBs&s=b0c94b4ff76c988f" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  </ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Morning Brew</span>
+      <span>The Rundown AI</span>
+      <span>The Neuron</span>
+      <span>SitDeck</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Tuesday, April 7, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
