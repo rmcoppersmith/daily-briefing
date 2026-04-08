@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Sunday, April 5, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Sunday, April 5, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- AI & TECHNOLOGY -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Agents, acquisitions, and the week's biggest AI stories</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://www.youtube.com/watch?v=knx2wrILP1M" target="_blank">Andreessen: Why AI Agents Work Is a 50-Year-Old Answer — LLM + Bash + Files + Cron</a></h2>
+    <p class="story-summary">In a landmark Latent Space interview, Marc Andreessen broke down the architecture of OpenClaw — calling it "one of the 10 most important software things, probably ever" — and explained that the reason agents actually work has nothing to do with new technology. The recipe: a language model, a bash shell, a file system in markdown, and a cron job. Every component except the model has existed for decades.</p>
+    <div class="story-expanded" id="story-1">
+      <p>Andreessen's analysis is deliberately demystifying: LLM + shell + files + markdown + cron = agent. Because the agent's memory lives in files rather than in the model, it's fully portable — swap Claude for GPT, move to a new machine, and the agent migrates itself. Tell it to add a new capability and it reads its own code and builds it. No widely deployed software has ever done that. The shell gives it access to everything on the machine; add a browser and it has the full internet. Beyond the architecture, Andreessen made three consequential predictions: (1) Agents need bank accounts — HTTP 402 ("Payment Required") has been an unused error code since 1999, and the x402 Foundation (Coinbase, Stripe, Visa, Google, Microsoft) just launched to fix it, with 75 million transactions in 30 days. (2) Proof-of-human is the next critical protocol — bots now pass the Turing test, so "not a bot" checks are dead; you need biometric proof of humanity with selective disclosure. (3) AI may kill the managerial class — founders have always needed professional managers because they didn't scale; AI could let the next founder do both, combining startup speed with corporate scale for the first time. On the pace of change, Andreessen cautions that ~35% of the economy requires licensing, and 900 hours of certification to become a hairdresser in California — regulation will slow AI adoption far more than any technical limitation.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">The Neuron</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.youtube.com/watch?v=knx2wrILP1M" target="_blank">youtube.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://finance.yahoo.com/sectors/technology/articles/deepseek-v4-model-run-huawei-134341751.html" target="_blank">DeepSeek V4 to Run on Huawei Chips — First Frontier AI Model on Domestic Chinese Silicon</a></h3>
+      <p class="story-summary">DeepSeek has confirmed its next model, V4, will run on Huawei-designed Ascend chips — making it the first frontier-class AI model trained entirely on domestic Chinese silicon. The milestone carries major geopolitical significance: it demonstrates that China's semiconductor industry can support world-class AI development despite U.S. export restrictions on Nvidia hardware.</p>
+      <div class="story-expanded" id="story-2">
+        <p>Until now, even Chinese AI labs have relied heavily on Nvidia H100s and A100s stockpiled before export controls tightened. Huawei's Ascend 910B chips have been improving rapidly but were considered 1-2 generations behind Nvidia on raw training performance. DeepSeek's confirmation that V4 will run natively on Ascend — if the performance claims hold up — would validate Huawei's chip roadmap and demonstrate that the export restriction strategy has at most delayed, rather than blocked, China's frontier AI development. The news is expected to intensify debate in Washington about whether export controls are working as intended.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://finance.yahoo.com/sectors/technology/articles/deepseek-v4-model-run-huawei-134341751.html" target="_blank">finance.yahoo.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.bloomberg.com/news/articles/2026-04-04/anthropic-acquires-coefficient-bio" target="_blank">Anthropic Acquires Biotech Startup Coefficient Bio for $400M — Its Biggest Deal Ever</a></h3>
+      <p class="story-summary">Anthropic has acquired Coefficient Bio, a computational biology startup, for $400 million — its largest acquisition ever and a signal that Anthropic's AI safety research agenda extends beyond language models into biological systems. The deal positions Anthropic at the intersection of AI and life sciences at a time when both fields are accelerating rapidly.</p>
+      <div class="story-expanded" id="story-3">
+        <p>Coefficient Bio was working on using AI to model protein interactions and cellular systems, with applications in drug discovery and synthetic biology. Anthropic's interest likely centers on interpretability — understanding what's happening inside complex biological systems parallels understanding what's happening inside large neural networks. The acquisition also gives Anthropic a foothold in the biotech sector that could open new enterprise customer relationships beyond the software and services markets it currently serves. At $400M, the deal is notable given Anthropic's stated focus on frontier AI safety research; it signals the company believes biological risk is within its research mandate.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.bloomberg.com/news/articles/2026-04-04/anthropic-acquires-coefficient-bio" target="_blank">bloomberg.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Leaked OpenAI Cap Table: Non-Profit Holds $220B in Gains, Ashton Kutcher Fund Up 43x, Nvidia Underwater</h3>
+      <p class="story-summary">A leaked OpenAI cap table circulated on X this weekend, purporting to show the distribution of unrealized gains as the company prepares for a potential Q4 IPO: the non-profit sits on $220B in gains, Ashton Kutcher's Sound Ventures is up 43x, Microsoft is up 18x ($215B), employees collectively hold ~$135B in equity — and Nvidia, which invested at a high valuation, is currently underwater.</p>
+      <div class="story-expanded" id="story-4">
+        <p>The cap table leak comes as OpenAI's corporate structure — a capped-profit company controlled by a non-profit — remains one of the most complex and contested arrangements in tech. The non-profit board's fiduciary duty is to humanity rather than shareholders, creating unusual dynamics as the company contemplates a public offering. Nvidia's reported underwater position is striking given the company's dominant role in AI infrastructure — it reflects the price it paid for a strategic stake during a period of peak OpenAI valuation enthusiasm. The Ashton Kutcher 43x figure would represent an extraordinary return for Sound Ventures and is consistent with early-stage entry before OpenAI's commercial scale became apparent. The authenticity of the document has not been officially confirmed by OpenAI.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://huggingface.co/netflix/void-model" target="_blank">Netflix Open-Sources VOID — Its First Public AI Video Model for Object Removal</a></h3>
+      <p class="story-summary">Netflix has released VOID (Video Object Inpainting and Deletion), its first publicly open-sourced AI model — a video editing tool that removes objects from footage and fills the background naturally using temporal-aware inpainting. The release marks an unexpected entry by a content company into the open-source AI tools ecosystem.</p>
+      <div class="story-expanded" id="story-5">
+        <p>Video object removal has historically required frame-by-frame manual editing or expensive VFX compositing. VOID automates this by using a model trained on video data that understands temporal consistency — so when an object is removed, the background "reconstruction" matches across frames without flickering or artifacts. Netflix developed VOID for internal production use (removing wires, props, or unintended objects in post-production) and has released it under an open-source license. The release is notable because it gives independent filmmakers, YouTubers, and researchers access to professional-grade video editing capability. A live demo is available on Hugging Face Spaces.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://huggingface.co/netflix/void-model" target="_blank">huggingface.co &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Claude Mythos Leaked Above Opus Tier — Cybersecurity Stocks Crashed 3–7%</h3>
+      <p class="story-summary">Details of a new Anthropic model called Claude Mythos — positioned above the Opus tier in capability — leaked through an unsecured CMS, triggering an unusual market reaction: cybersecurity stocks dropped 3–7% on the news, apparently on investor concern that a significantly more capable AI model would displace human security analysts faster than expected.</p>
+      <div class="story-expanded" id="story-6">
+        <p>The Claude Mythos leak is unusual in several ways. First, the vector — an unsecured content management system rather than a model weight or API breach — suggests the information was being prepared for a planned announcement rather than exfiltrated. Second, the cybersecurity market reaction implies investors are pricing in a discontinuous capability jump rather than incremental improvement. Cybersecurity is one of the fields where AI has been seen as both a threat amplifier and a potential labor replacement for junior analysts doing threat monitoring and log analysis. If Mythos represents a step-change in reasoning capability, the concern is that automated security operations centers (SOCs) could displace significant headcount faster than expected.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Jensen Huang Tells Lex Fridman: "I Think We've Achieved AGI"</h3>
+      <p class="story-summary">Nvidia CEO Jensen Huang, in a conversation with Lex Fridman, stated "I think we've achieved AGI" — a declaration that joins a small but growing list of prominent technologists willing to make this claim publicly. The physicist who coined the term AGI reportedly agreed with Huang's assessment in the same conversation.</p>
+      <div class="story-expanded" id="story-7">
+        <p>The AGI claim from Huang is notable because Nvidia, as the primary infrastructure provider for AI training and inference, has a better view than almost anyone of what models can actually do in practice at scale. The debate around AGI definitions continues — critics point out that current models still fail at novel reasoning tasks, exhibit brittleness, and lack embodied understanding of the physical world. Proponents argue the goalposts have been moved repeatedly and that systems capable of passing professional certification exams, writing code better than most humans, and conducting scientific research independently meet any reasonable operational definition. The convergence of tech leaders making this claim publicly suggests a shift in how the industry is representing its own progress.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.cnbc.com/2026/03/24/arm-launches-its-own-cpu-with-meta-as-first-customer.html" target="_blank">Arm Launches Its First Chip in 35 Years — 136-Core AI Inference Processor, Meta as Launch Customer</a></h3>
+      <p class="story-summary">Arm Holdings has unveiled its first proprietary chip design in 35 years: a 136-core, 3nm AI inference processor designed to challenge Nvidia's dominance in the inference market. Meta is the launch customer — a significant endorsement that signals at least one hyperscaler is willing to commit to an alternative supply chain for AI compute.</p>
+      <div class="story-expanded" id="story-8">
+        <p>Arm's chip marks a strategic shift from pure IP licensing — its historical business model — to becoming a competitor in the final product market. The move risks cannibalizing relationships with chip makers who license Arm's instruction set (including Qualcomm, Apple, and Ampere), but the potential upside is enormous: the AI inference market is projected to be a multi-hundred billion dollar opportunity as inference costs overtake training costs in the AI stack. The 3nm fabrication puts the chip on par with Nvidia's latest process node. Meta's endorsement is particularly meaningful given Meta's scale (hundreds of billions of model inferences per day) and its aggressive push to own more of its AI infrastructure rather than depend on third-party clouds.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.cnbc.com/2026/03/24/arm-launches-its-own-cpu-with-meta-as-first-customer.html" target="_blank">cnbc.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/04/02/microsoft-takes-on-ai-rivals-with-three-new-foundational-models/" target="_blank">Microsoft Launches Three In-House AI Foundation Models — Suleyman: OpenAI Renegotiation "Unlocked Superintelligence"</a></h3>
+      <p class="story-summary">Microsoft has launched three proprietary foundation models, entering a market it previously approached primarily as OpenAI's distributor and investor. CEO Mustafa Suleyman said the renegotiation of Microsoft's OpenAI contract was the event that "unlocked our ability to pursue superintelligence" — suggesting the new models represent strategic independence rather than a complementary partnership.</p>
+      <div class="story-expanded" id="story-9">
+        <p>Microsoft's move to develop its own foundation models is a significant strategic signal. The company has invested over $13 billion in OpenAI and built Azure OpenAI Service as a major revenue driver — but depending on a single external model provider creates both commercial and strategic risk. The three new models reportedly cover different capability tiers and domains, following the trend of multi-model portfolios at other hyperscalers (Google's Gemini family, Amazon's Titan/Nova family). Suleyman's language about the OpenAI renegotiation is striking — it implies the original contract constrained Microsoft's ability to train and deploy its own models, and that the renegotiation removed those constraints. The models' specific capabilities and target markets have not been fully disclosed.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Neuron</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/04/02/microsoft-takes-on-ai-rivals-with-three-new-foundational-models/" target="_blank">techcrunch.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--wsj-gray);margin:24px 0 8px;">Also in AI &amp; Technology</h4>
+  <ul class="bullet-stories">
+    <li><strong>Claude "Caveman Mode" Cuts API Token Costs by 75%</strong> — A viral r/ClaudeAI post (4.1K upvotes) showed that forcing Claude into minimal, caveman-style responses dramatically cuts output tokens. The technique is for developers paying per API token, not Pro subscription users. System prompt rules: 3–6 word sentences, no preamble, drop articles, tools first then stop. Since Claude Sonnet output tokens cost 5x more than input ($15 vs $3/million), cutting output 75% has real impact on long coding session costs. <a href="https://www.reddit.com/r/ClaudeAI/comments/1sble09/taught_claude_to_talk_like_a_caveman_to_use_75/" target="_blank">reddit.com &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>x402 Foundation Launches to Build AI Agent Payment Rails</strong> — Coinbase, Stripe, Visa, Google, and Microsoft have co-founded the x402 Foundation to revive HTTP's long-unused 402 "Payment Required" status code as native machine-to-machine payment infrastructure. 75 million transactions processed in the first 30 days. The goal: let AI agents pay for web content and services they consume on behalf of users. <a href="https://www.x402.org/" target="_blank">x402.org &rarr;</a> <span class="source-badge">The Neuron</span></li>
+    <li><strong>UK Tests "Litter Cam" AI That Fines Drivers for Tossing Rubbish</strong> — The United Kingdom is piloting an AI-powered camera system that identifies drivers throwing rubbish from moving vehicles and automatically issues fines — extending automated enforcement from speed cameras into environmental violation territory. <span class="source-badge">Superhuman</span></li>
+  </ul>
+
+  <!-- SCIENCE -->
+  <div class="section-header">
+    <span class="section-tag section-tag-science">Science</span>
+    <span class="section-name">Medicine, space, and biometrics</span>
+  </div>
+
+  <article class="lead-story">
+    <h2><a href="https://www.sciencedaily.com/releases/2026/04/260403044651.htm" target="_blank">Gene Therapy Injection Reverses Deafness in Landmark Trial — All 10 Patients Improved</a></h2>
+    <p class="story-summary">Scientists have published results from a small but landmark gene therapy trial in which ten patients with varying degrees of hereditary deafness received an injection delivering a working copy of the OTOF gene directly into the inner ear. Every patient showed major improvement: average sound detection thresholds jumped from 106 decibels to 52 decibels — a dramatic recovery that represents the threshold of functional hearing.</p>
+    <div class="story-expanded" id="story-10">
+      <p>OTOF mutations cause otoferlin deficiency, a form of hereditary deafness where the inner ear's hair cells are structurally intact but unable to transmit signals to the auditory nerve because the otoferlin protein is absent or dysfunctional. The gene therapy delivers a functional OTOF gene using a viral vector (adeno-associated virus) injected directly into the cochlea, where it prompts hair cells to begin producing working otoferlin. The 100% response rate across 10 patients — with an average improvement of 54 decibels — is extraordinary for a first-in-human trial and suggests the mechanism is robust. Researchers are now eyeing other deafness-causing genes (GJB2 and TMC1) as the next targets, which could eventually extend gene therapy approaches to a much larger population of hereditary hearing loss patients.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Superhuman</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.sciencedaily.com/releases/2026/04/260403044651.htm" target="_blank">sciencedaily.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Artemis II Crew Swings Around the Moon — Farthest Humans from Earth in 54 Years</h3>
+      <p class="story-summary">NASA's Artemis II has successfully executed its lunar flyby, swinging within 8,000 kilometers of the Moon's surface — the first crewed mission to reach cislunar space since Apollo 17 in 1972. The crew won't land; the mission is a stress test of the Orion spacecraft ahead of Artemis IV and V, which are slated to land on the Moon in 2028.</p>
+      <div class="story-expanded" id="story-11">
+        <p>Artemis II's four astronauts have been using NASA-issued iPhone 17 Pro Max handsets to photograph Earth and the Moon from Orion's windows — the first time an iPhone has been fully certified for extended use beyond low Earth orbit. The images have gone viral, providing the public with the most striking views of Earth from deep space since the Apollo era. The mission's engineering objectives focus on validating Orion's life support, propulsion, and communication systems at lunar distances before committing a crew to an actual landing. If Artemis II completes successfully, it will be followed by Artemis III (landing near the lunar south pole with SpaceX's Starship HLS as lander) and further missions establishing sustained lunar presence.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.newsweek.com/biometrics-xr-vibrations-skull-replace-passwords-for-logins-11768056" target="_blank">Your Skull Vibrations Could Replace Passwords — VitalID Authenticates by Heartbeat and Breathing</a></h3>
+      <p class="story-summary">Scientists at Rutgers University have developed VitalID, a biometric authentication system that identifies users by the unique vibrations their heartbeat and breathing create inside their skull bones. Across 10 months of testing with 52 users, the system correctly authenticated the right person over 95% of the time and blocked imposters 98% of the time.</p>
+      <div class="story-expanded" id="story-12">
+        <p>VitalID works because skull bone vibration patterns are uniquely individual — influenced by the specific geometry of each person's cranial bones, sinuses, and blood vessel layout. The system is designed primarily for VR and AR headsets, which already make contact with the skull and could integrate the sensors without additional hardware. Unlike fingerprints or facial recognition, skull vibrations are continuous — the system can authenticate passively and re-authenticate throughout a session rather than requiring a discrete login event. The researchers see this as a particularly valuable approach for immersive environments where traditional authentication methods (passwords, face unlock) are awkward and break the experience.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.newsweek.com/biometrics-xr-vibrations-skull-replace-passwords-for-logins-11768056" target="_blank">newsweek.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.newsweek.com/skin-cancer-heat-activated-patch-kills-deadly-melanoma-11774490" target="_blank">Heat-Activated Skin Patch Kills Melanoma Without Surgery in Mouse Trials</a></h3>
+      <p class="story-summary">Scientists have developed a stretchy, bandage-like patch that kills melanoma cells using heat-triggered copper ion release. When warmed to 108°F by a low-power laser, the patch releases copper ions that penetrate the skin and destroy cancer cells through oxidative stress while leaving healthy tissue untouched. In mouse trials, it also appeared to trigger an immune response that stopped the cancer from spreading.</p>
+      <div class="story-expanded" id="story-13">
+        <p>The mechanism is dual: the copper ions themselves create oxidative stress that is toxic to rapidly dividing cancer cells, and the localized cell death appears to release tumor antigens that activate the immune system — producing an abscopal-like effect where the treatment affects not just the treated site but potentially spreads systemic anti-tumor immunity. The patch's specificity comes from the temperature threshold: 108°F is achievable with a handheld low-power laser without burning skin, and the copper release is activated only at that temperature. Human trials are expected to begin within 18 months. If results replicate, this could offer an alternative to excisional surgery for early-stage melanoma and reduce the treatment burden for patients who are poor surgical candidates.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.newsweek.com/skin-cancer-heat-activated-patch-kills-deadly-melanoma-11774490" target="_blank">newsweek.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+  <h4 style="font-family:'Inter',sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--wsj-gray);margin:24px 0 8px;">Also in Science</h4>
+  <ul class="bullet-stories">
+    <li><strong>Smartphone Device Tests Water Contamination in Under a Minute</strong> — Scientists have built a portable clip-on device for smartphones that detects urobilin — a marker of human and animal waste — using a glowing test strip read by the phone's camera. Results in under a minute from a single water drop. Aimed at emergency responders and communities in developing regions where lab testing takes hours. <a href="https://interestingengineering.com/innovation/rapid-water-contamination-test-smartphone-detection" target="_blank">interestingengineering.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>Brain Circuits Linking Deep Sleep to Growth Hormone Release Mapped</strong> — Scientists have identified the specific brain circuits in mice that control growth hormone release during deep sleep, uncovering a feedback loop connecting sleep quality to muscle repair, fat metabolism, and cognitive performance. The findings could inform treatments for sleep disorders, metabolic disease, and neurodegenerative conditions. <span class="source-badge">Superhuman</span></li>
+  </ul>
+
+  <!-- ENTERTAINMENT & CULTURE -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">Drones, viral science, and tech of the week</span>
+  </div>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://www.reddit.com/r/Damnthatsinteresting/comments/1sas241/almost_1000_drones_recreated_the_rms_titanic_in/" target="_blank">1,000 Drones Recreate the RMS Titanic in the Skies Over Belfast Harbour</a></h3>
+      <p class="story-summary">Nearly 1,000 drones lit up the skies above Belfast Harbour to recreate the iconic silhouette of the RMS Titanic, marking the anniversary of the ship's historic departure from its birthplace in 1912. The display went massively viral on Reddit and social media, with the video accumulating hundreds of thousands of views within hours.</p>
+      <div class="story-expanded" id="story-14">
+        <p>The drone display is part of Belfast's ongoing commemoration of its most famous ship — the Titanic Belfast museum is one of the UK and Ireland's most-visited tourist attractions, and the city has invested heavily in Titanic-related heritage tourism. Coordinating nearly 1,000 drones to form a coherent moving image requires sophisticated choreography software and precise GPS synchronization; the technology has improved dramatically in the past five years, allowing displays of this complexity to be staged in relatively short timeframes and at lower cost than traditional fireworks. The viral spread of the video demonstrates the power of drone light shows as a shareable spectacle format that travels well on social media.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.reddit.com/r/Damnthatsinteresting/comments/1sas241/almost_1000_drones_recreated_the_rms_titanic_in/" target="_blank">reddit.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.reddit.com/r/Damnthatsinteresting/comments/1sawd8p/japanese_space_robotics_from_1991/" target="_blank">Japan's 1991 Space Robotics Video Goes Viral — "Hard to Believe How Advanced It Still Appears Today"</a></h3>
+      <p class="story-summary">A resurfaced video of Japan's early-1990s space robotics program has gone viral on Reddit, striking viewers with how sophisticated and forward-looking the technology appears even 35 years later. The clip showcases precision manipulator arms and dexterous grasping capabilities developed by JAXA predecessors for orbital servicing — capabilities that still represent the frontier of deployed space robotics today.</p>
+      <div class="story-expanded" id="story-15">
+        <p>The viral response to the 1991 video touches on a genuine paradox in space robotics: the field made enormous technical strides in the 1980s and early 1990s, particularly in Japan (which invested heavily in remote manipulation for its orbital experiments on the Space Shuttle) and NASA, but deployment of advanced robotics in actual space operations has lagged far behind what was demonstrated in labs and testbeds. The reasons are a combination of the extreme cost and risk tolerance required for space hardware, the long development cycles for flight-qualified systems, and the lack of commercial demand until recently. The current wave of commercial satellite servicing startups is finally beginning to deploy some of these long-dormant capabilities.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.reddit.com/r/Damnthatsinteresting/comments/1sawd8p/japanese_space_robotics_from_1991/" target="_blank">reddit.com &rarr;</a></span>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Neuron</span>
+      <span>Superhuman</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Sunday, April 5, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
