@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Monday, March 30, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Monday, March 30, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.intercom.com/blog/announcing-fin-apex-the-age-of-vertical-models-is-here/" target="_blank">Vertical AI Models Are Outperforming Frontier Giants — And It's Just Getting Started</a></h2>
+  <p class="story-summary">Intercom's custom model Apex 1.0 is now outperforming GPT-5.4 and Opus 4.5 in customer service, resolving 73.1% of issues with 65% fewer hallucinations. Days later, Cursor shipped Composer 2, a fine-tuned model that beats Claude Opus 4.6 on terminal benchmarks at one-tenth the cost. Both followed the same playbook: take an open-weight base and post-train on proprietary domain data.</p>
+  <div class="story-expanded" id="story-1">
+    <p>The implications are enormous. Intercom built Apex using billions of real-world customer service interactions curated by its 60-person AI team, while Cursor trained on millions of actual coding sessions. This domain-specific data is something frontier labs simply don't have. Andrej Karpathy recently noted that AI is shifting toward specialization instead of one-size-fits-all models — frontier models are over-serving specific industries with general intelligence that costs too much. Companies with direct access to real-world workflow data are already building cheaper, faster alternatives, forcing the big labs to either specialize or watch their margins disappear. With Fin handling 2 million issues a week, Intercom is nearing $100M in revenue from its AI-first approach.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.intercom.com/blog/announcing-fin-apex-the-age-of-vertical-models-is-here/" target="_blank">intercom.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://x.com/_chenglou/status/2037713766205608234" target="_blank">Midjourney Engineer's TypeScript Library Makes Web Text Render 500x Faster</a></h3>
+  <p class="story-summary">A Midjourney engineer open-sourced Pretext, a pure TypeScript engine that measures and positions multiline text without relying on CSS or DOM reflow. Developed using Claude Code and Codex, it supports all languages, RTL scripts, and emojis. The repo gained 11.9k GitHub stars within hours as demos went viral.</p>
+  <div class="story-expanded" id="story-2">
+    <p>Web layouts have been constrained by CSS for decades, limiting how developers interact with text positioning and rendering. Pretext validates against browser ground truth to ensure accuracy while bypassing the browser's layout engine entirely. The library handles layout 500x faster than conventional CSS approaches, opening new possibilities for real-time text manipulation in web applications.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/_chenglou/status/2037713766205608234" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://developers.openai.com/codex/plugins" target="_blank">OpenAI Codex Adds Plugins, Matching Claude Code and Gemini CLI</a></h3>
+  <p class="story-summary">OpenAI launched Codex plugins that bundle MCP servers, app integrations, and reusable workflows into one-click installs. Over 20 plugins are available at launch including Figma, Linear, Notion, Sentry, Slack, and Gmail. All three major AI coding agents now support installable plugin packages.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The launch brings Codex into direct parity with Anthropic's Claude Code and Google's Gemini CLI on the plugin front. Users can open "plugins" in the Codex app and click "install" on their preferred plugin to bundle skills, workplace apps, and Model Context Protocol servers into reusable workflows. The move signals that plugin ecosystems are becoming table stakes for AI coding tools.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://developers.openai.com/codex/plugins" target="_blank">openai.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://blog.google/innovation-and-ai/products/gemini-app/switch-to-gemini-app/" target="_blank">Gemini Now Lets You Import Chat History from Other AI Chatbots</a></h3>
+  <p class="story-summary">Google's Gemini now lets users upload preferences and chat history from competing AI tools, so they can switch without losing existing conversations. The feature is available in Gemini's Settings under the new "Import" option, and the chatbot walks users through the migration process.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The move is a direct play for user acquisition from ChatGPT and Claude, reducing the friction of switching by preserving context and preferences. It mirrors the approach mobile carriers took with number portability — making it trivially easy to leave a competitor. Google is betting that lowering switching costs will accelerate Gemini adoption among power users who've already invested time customizing other chatbots.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://blog.google/innovation-and-ai/products/gemini-app/switch-to-gemini-app/" target="_blank">blog.google &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://mistral.ai/news/voxtral-tts" target="_blank">Mistral Ships Voxtral TTS: Realistic AI Speech in Nine Languages</a></h3>
+  <p class="story-summary">Mistral launched Voxtral TTS, a 4-billion-parameter text-to-speech model that delivers realistic, expressive speech in nine languages. It can clone any voice from just a three-second clip, capturing natural nuances like pauses, accents, and intonation with a latency of just 70ms.</p>
+  <div class="story-expanded" id="story-5">
+    <p>In human evaluations, Voxtral outperformed ElevenLabs Flash v2.5 on naturalness. The model represents a significant step forward for the French AI lab, which has been steadily expanding beyond its core language model offerings into multimodal capabilities. The ultra-low latency makes it suitable for real-time conversational applications.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://mistral.ai/news/voxtral-tts" target="_blank">mistral.ai &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.bloomberg.com/news/articles/2026-03-30/openai-s-chatgpt-app-store-took-aim-at-apple-but-results-lag-so-far" target="_blank">ChatGPT's App Store Struggles Six Months In: Limited Functionality, Frustrated Developers</a></h3>
+  <p class="story-summary">Bloomberg reports that ChatGPT's third-party app initiative is off to a sluggish start. While over 300 integrations are available, they're hidden away and partner companies are hesitant to hand off customer relationships and payments to OpenAI. Booking.com sees low referral traffic compared to Google.</p>
+  <div class="story-expanded" id="story-6">
+    <p>OpenAI's e-commerce ambitions are also faltering — the company is pivoting away from a recently launched feature that lets users buy items directly from the chatbot's interface, as users simply weren't using ChatGPT for purchases. The app store push has the potential to escalate a growing rivalry with Apple, but the early results suggest the platform model that worked for mobile apps doesn't translate cleanly to AI chatbots where users expect seamless, integrated experiences rather than app-switching.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.bloomberg.com/news/articles/2026-03-30/openai-s-chatgpt-app-store-took-aim-at-apple-but-results-lag-so-far" target="_blank">bloomberg.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://macdailynews.com/2026/03/30/apple-shifts-ai-strategy-toward-app-store-and-search-like-platform/" target="_blank">Apple Shifts AI Strategy Toward App Store and Search-Like Platform</a></h3>
+  <p class="story-summary">Apple has effectively conceded the race to build its own frontier AI model, instead planning to turn the App Store into an AI marketplace for third-party tools. Siri may integrate external models like Gemini and Claude, reflecting Apple's internal view that large language models will become commoditized.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The updated Siri assistant is set to be more conversational and capable of multi-step tasks, with Apple believed to be adopting Google's Gemini as a key backend. Rather than investing billions in proprietary model development, Apple is doubling down on its platform strength — acting as the distribution layer and taking a cut, much as it has with the original App Store. The strategy bets that the hardware-services flywheel matters more than model ownership.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://macdailynews.com/2026/03/30/apple-shifts-ai-strategy-toward-app-store-and-search-like-platform/" target="_blank">macdailynews.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Chess Grandmasters Gain a Competitive Edge by Selectively Ignoring AI</h3>
+  <p class="story-summary">Elite chess players are deliberately playing suboptimal moves to drag opponents into unfamiliar territory where memorized AI preparation is useless. With both sides studying the same AI engines, draws have surged — until champions started weaponizing unpredictability over computational perfection.</p>
+  <div class="story-expanded" id="story-8">
+    <p>Bloomberg reports that instead of following AI-recommended "perfect" moves, top players deliberately deviate to force opponents to rely on their own critical thinking rather than memorized computer analysis. The pattern has broader implications for every industry leaning on AI: knowing when to push back against algorithmic recommendations may become a competitive advantage. As Zain Kahn notes, some of life's biggest wins come from decisions an algorithm might consider "non-optimal" — quitting a job, pivoting careers, launching a new venture.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>AI Coding Agents Degrade Over Long Sessions</strong> — A viral post <a href="https://x.com/systematicls/status/2038241033755168959" target="_blank">explains</a> why AI coding agents lose quality the longer they run and how to design harnesses that keep them on track. <span class="source-badge">The Code</span></li>
+  <li><strong>Karpathy's Flattery Trap</strong> — Andrej Karpathy spent 4 hours perfecting a blog post with an LLM, then the same LLM <a href="https://x.com/karpathy/status/2037921699824607591" target="_blank">flipped his entire argument</a> in seconds (3M views). <span class="source-badge">The Code</span></li>
+  <li><strong>15 Under-Utilized Claude Code Features</strong> — The creator of Claude Code shared <a href="https://x.com/bcherny/status/2038454336355999749" target="_blank">15 features</a> that can drastically change how developers build. <span class="source-badge">The Code</span></li>
+  <li><strong>Claude Finds Zero-Day Vulnerabilities Live on Stage</strong> — A security expert <a href="https://x.com/chiefofautism/status/2037951563931500669" target="_blank">demonstrated</a> Claude finding unknown vulnerabilities in Ghost CMS and the Linux kernel entirely on its own (1.6M views). <span class="source-badge">The Code</span></li>
+  <li><strong>Skip Cursor's Permission Prompts with YOLO Mode</strong> — Enable YOLO mode in Cursor Settings and whitelist safe commands like tests and builds so the agent runs autonomously without pausing for approval. <a href="https://www.builder.io/blog/cursor-tips#using-yolo-mode" target="_blank">Builder.io &rarr;</a> <span class="source-badge">The Code</span></li>
+  <li><strong>Google Paper: Agentic AI and the Next Intelligence Explosion</strong> — Researchers found that advanced models solve hard problems through internal debate, suggesting the next AI leap will be a collaborative network of humans and machines rather than a single super-brain. <a href="https://arxiv.org/abs/2603.20639" target="_blank">arxiv.org &rarr;</a> <span class="source-badge">The Code</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Companies, deals, and the economy</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.cnbc.com/2026/03/30/quantum-computing-firms-go-public-breakthroughs-commercialization.html" target="_blank">Q-Day Is Coming: Quantum Computing Firms Race to Market as Industry Hits "Inflection Point"</a></h2>
+  <p class="story-summary">Quantum computing firms are rushing to go public and commercialize as the industry reaches what many are calling an inflection point. Google has moved its recommended Q-Day preparation deadline to 2029 — the theoretical day a quantum computer can break all current public-key cryptography — accelerating urgency across the security industry.</p>
+  <div class="story-expanded" id="story-9">
+    <p>Logical qubit breakthroughs are accelerating the transition to fault tolerance, with researchers demonstrating logical qubits that produce dramatically fewer errors than their physical counterparts. A 2048-bit RSA integer could potentially be factored in less than a week with a quantum computer sporting 1 million "noisy qubits." Enterprises are being urged to spend more on Post-Quantum Cryptography (PQC) implementation immediately, as Forrester warns that practical quantum computing by 2030 is likely — and so is Q-Day. The race to quantum-safe security is now a board-level concern.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.cnbc.com/2026/03/30/quantum-computing-firms-go-public-breakthroughs-commercialization.html" target="_blank">cnbc.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>NVIDIA and Eli Lilly Announce $1 Billion AI Drug Discovery and Robotics Lab</h3>
+  <p class="story-summary">NVIDIA and Eli Lilly will invest up to $1 billion over five years in a new Silicon Valley-based AI co-innovation lab that pioneers robotics and "physical AI" to accelerate drug discovery and manufacturing. The lab will use physical AI and robotics to help Lilly scale production of high-demand medications.</p>
+  <div class="story-expanded" id="story-10">
+    <p>This announcement builds on Lilly's $2.75 billion Insilico Medicine deal reported this morning. The NVIDIA partnership goes further — applying robotics and automation directly to the manufacturing floor to strengthen supply chain reliability. The two companies will invest in talent, infrastructure, and compute, using Vertex AI Platform, NVIDIA's GPU ecosystem, and physical AI agents to reinvent pharmaceutical production. Lilly is clearly betting its next growth cycle on AI across the entire drug pipeline, from discovery through manufacturing.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Agibot Rolls Out 10,000th Mass-Produced Humanoid Robot</h3>
+  <p class="story-summary">Chinese robotics company Agibot has shipped its 10,000th mass-produced humanoid unit, underscoring how quickly China's robotics sector is scaling. The milestone is aided by deep domestic manufacturing capabilities and surging global demand for humanoid robots in industrial applications.</p>
+  <div class="story-expanded" id="story-11">
+    <p>The pace of production highlights a growing gap between Chinese and Western robotics companies in terms of manufacturing scale. While US firms like Boston Dynamics and Figure AI focus on research and limited deployments, Chinese manufacturers are already producing humanoid robots at factory scale. The development has significant implications for global supply chains and the future of industrial automation.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Amazon Acquires Fauna Robotics for Household and Logistics Humanoids</h3>
+  <p class="story-summary">Amazon has acquired Fauna Robotics, a startup developing humanoid robots for household and educational use. The company plans to integrate Fauna's technology into its broader robotics and AI ecosystem spanning consumer products and warehouse logistics.</p>
+  <div class="story-expanded" id="story-12">
+    <p>The acquisition extends Amazon's robotics portfolio beyond warehouse automation into consumer-facing applications. Combined with Amazon's existing fleet of warehouse robots and its Astro home robot, Fauna's humanoid technology could accelerate Amazon's push toward general-purpose robotic assistants for both homes and fulfillment centers.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>The Code</span>
+      <span>Techpresso</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Monday, March 30, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
