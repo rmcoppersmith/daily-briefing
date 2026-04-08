@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Friday, March 27, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-date">Friday, March 27, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,368.85</span><span class="ticker-change ticker-down">-1.67%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">20,948.36</span><span class="ticker-change ticker-down">-2.15%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">45,166.64</span><span class="ticker-change ticker-down">-1.73%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$107.81</span><span class="ticker-change ticker-up">+1.9%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$68,788</span><span class="ticker-change ticker-down">-1.85%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">27.44</span><span class="ticker-change ticker-up">+8.3%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://fortune.com/2026/03/27/anthropic-data-leak-reveals-powerful-secret-mythos-ai-model/" target="_blank">Anthropic Data Leak Reveals "Claude Mythos" — Its Most Powerful AI Model Yet</a></h2>
+  <p class="story-summary">A draft blog post accidentally left in an unsecured, publicly searchable database revealed Anthropic's upcoming "Claude Mythos" model. The company confirmed the model represents "a step change" in performance and is "the most capable we've built to date," outperforming Claude Opus 4.6 across cybersecurity, coding, and academic reasoning benchmarks.</p>
+  <div class="story-expanded" id="story-1">
+    <p>The leak exposed nearly 3,000 unpublished assets from Anthropic's content management system due to a misconfiguration the company attributed to "human error." Internal documents warn that Mythos is "currently far ahead of any other AI model in cyber capabilities" and "presages an upcoming wave of models that can exploit vulnerabilities in ways that far outpace the efforts of defenders." Cybersecurity stocks plunged on the news as investors fear an accelerating cyber arms race. Anthropic says it is restricting early access to organizations focused on cyber defense, giving them time to harden their systems before broader release. The model would occupy a new tier — internally dubbed "Capybara" — above Opus in Anthropic's lineup.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://fortune.com/2026/03/27/anthropic-data-leak-reveals-powerful-secret-mythos-ai-model/" target="_blank">fortune.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://www.trychroma.com/research/context-1" target="_blank">Chroma Open-Sources Context-1: A 20B Search Agent Rivaling Frontier Models</a></h3>
+  <p class="story-summary">Chroma released Context-1, a 20-billion-parameter agentic search model under the Apache 2.0 license. Built on OpenAI's gpt-oss-20B, it handles complex queries by decomposing them into sub-queries, retrieving data iteratively, and pruning irrelevant results — rivaling GPT-5.4 and Opus 4.6 on public benchmarks while running 10x faster and 25x cheaper.</p>
+  <div class="story-expanded" id="story-2">
+    <p>Context-1 scores a 90.8% on ComplexFuncBench and leads on multi-hop retrieval tasks. It uses a novel "self-editing context" approach, selectively pruning documents mid-search to free capacity for further exploration. John Schulman of OpenAI praised the work, highlighting the synthetic data pipeline with verification steps and a curriculum that shifts from recall to precision. The model is available on Hugging Face and designed to serve as a retrieval subagent alongside larger reasoning models.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.trychroma.com/research/context-1" target="_blank">trychroma.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://docs.stripe.com/projects" target="_blank">Stripe Launches "Stripe Projects" CLI for Full-Stack Infrastructure Setup</a></h3>
+  <p class="story-summary">Stripe launched Stripe Projects, a command-line tool that lets developers set up hosting, databases, auth, analytics, and AI services with a few terminal commands. Early partners include Vercel, Supabase, Clerk, Neon, PlanetScale, and PostHog, with real credentials synced securely to local and CI environments.</p>
+  <div class="story-expanded" id="story-3">
+    <p>The tool handles everything from credential management and billing to plan upgrades directly from the terminal, eliminating the need to jump between dashboards. Stripe Projects also supports upgrading third-party service subscriptions using Shared Payment Tokens — currently in developer preview in the US, Europe, UK, and Canada. Patrick Collison demoed the tool, which positions Stripe as a broader developer infrastructure platform beyond just payments.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://docs.stripe.com/projects" target="_blank">stripe.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://addyosmani.com/blog/comprehension-debt/" target="_blank">Comprehension Debt: The Hidden Cost of AI-Assisted Coding</a></h3>
+  <p class="story-summary">Google Cloud AI Director Addy Osmani coined "comprehension debt" — the growing gap between code that works and code that engineers actually understand. An Anthropic study of 52 engineers found that those using AI assistants scored significantly lower on comprehension tests, with the sharpest declines in debugging performance.</p>
+  <div class="story-expanded" id="story-4">
+    <p>Unlike technical debt, which shows up as slow builds and messy dependencies, comprehension debt is invisible until something breaks and nobody can trace why. AI now generates code faster than any human can review, breaking the feedback loop that code reviews used to provide for knowledge sharing. The reckoning arrives at the worst possible moment — usually during an outage. The implication: understanding what was written, and why, is now the core engineering skill, not writing the code itself.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Code</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://addyosmani.com/blog/comprehension-debt/" target="_blank">addyosmani.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Jevons' Paradox Suggests AI Could Create More Jobs, Not Fewer</h3>
+  <p class="story-summary">A 160-year-old economic theory offers a counter-narrative to AI job fears: when technology makes something more efficient, society doesn't use less of it — it uses far more. TrueUp data shows tech hiring is rebounding, with open engineering positions hitting a 3-year high at 67,000+ globally and AI-specific postings jumping 117% annually.</p>
+  <div class="story-expanded" id="story-5">
+    <p>Economist William Stanley Jevons observed in 1865 that a more efficient steam engine didn't reduce coal consumption — it made coal cheap enough to power entirely new industries. Superhuman's analysis suggests the same dynamic is playing out with AI: recruiter demand is surging back toward 2022 peaks, a leading indicator that companies are planning to expand. The growth is currently confined to tech, but if Jevons' Paradox holds, AI adoption could spawn new roles and ventures that were previously too expensive or complex to pursue.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Superhuman</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Sentience Raises $6.5M for "Uploaded Consciousness" Platform</strong> — A new startup raised $6.5 million to build what it calls "humanity's platform for uploaded consciousness." <a href="https://sentience.com/" target="_blank">sentience.com &rarr;</a> <span class="source-badge">Superhuman</span></li>
+  <li><strong>DIY mRNA Cancer Vaccine for Dog Built with ChatGPT, Gemini, and Grok</strong> — An AI consultant used multiple chatbots to design a custom mRNA cancer vaccine for his dog. Sam Altman met him this week and has a "big vision" for where personalized AI medicine goes next. <span class="source-badge">The Code</span></li>
+  <li><strong>AI-Generated Content Has Surpassed Human Output</strong> — A viral Ark Invest chart shows AI-generated content skyrocketing past human content, racking up 10.1 million views on X. <span class="source-badge">Superhuman</span></li>
+  <li><strong>Cursor Ships Real-Time Reinforcement Learning for Composer 2</strong> — New model checkpoints now ship every five hours using real-time RL, allowing rapid iteration on Cursor's coding agent. <a href="https://cursor.com/blog/real-time-rl-for-composer" target="_blank">cursor.com &rarr;</a> <span class="source-badge">The Code</span></li>
+  <li><strong>First Look at Ads in ChatGPT</strong> — A Reddit user shared screenshots of ads appearing in ChatGPT in a Google Ads-like format, confirming the rollout OpenAI announced earlier this week. <span class="source-badge">Superhuman</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Markets, finance, and the economy</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://www.fool.com/investing/2026/03/27/could-spacexs-175t-valuation-make-it-the-biggest-p/" target="_blank">SpaceX Eyes Historic $1.75 Trillion IPO — Largest in History</a></h2>
+  <p class="story-summary">SpaceX is preparing to file its S-1 prospectus with the SEC, targeting a $75 billion raise at a $1.75 trillion valuation — which would make it the largest initial public offering in history, dwarfing Saudi Aramco's $29.4 billion record from 2019. Morgan Stanley and Goldman Sachs are leading as underwriters, with a target listing date of June 2026.</p>
+  <div class="story-expanded" id="story-6">
+    <p>The staggering valuation is driven primarily by Starlink's profitability: the satellite internet service generated over $10 billion in revenue and $8 billion in profit in 2025, with 9.2 million active subscribers. SpaceX is scheduling April investor briefings, and the company may allocate 30% of shares to retail investors — roughly 3x the typical amount. The IPO comes after SpaceX's February 2026 acquisition of xAI and amid Elon Musk's expanding portfolio of ventures. Analysts project Starlink revenue could reach $15.9–$24 billion in 2026.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.fool.com/investing/2026/03/27/could-spacexs-175t-valuation-make-it-the-biggest-p/" target="_blank">fool.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://9to5mac.com/2026/03/26/apple-discontinues-the-mac-pro/" target="_blank">Apple Discontinues the Mac Pro After 20 Years</a></h3>
+  <p class="story-summary">Apple has quietly killed the Mac Pro, removing its iconic tower desktop from its website and stores with no plans for future hardware. The Mac Studio, which is smaller and uses newer Apple silicon chips, is now Apple's high-end desktop for professional use.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The Mac Pro was last updated in 2023 with the M2 Ultra chip and had long been Apple's most expensive and expandable desktop. The discontinuation marks the end of a 20-year era for the modular workstation that was a staple of creative professionals and enterprises. Apple's shift signals that its custom silicon strategy has made the traditional tower form factor obsolete — the Mac Studio delivers comparable or better performance in a fraction of the size.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://9to5mac.com/2026/03/26/apple-discontinues-the-mac-pro/" target="_blank">9to5mac.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.investing.com/news/stock-market-news/cybersecurity-stocks-plunge-as-anthropics-claude-mythos-leak-sparks-ai-fear-4584897" target="_blank">Cybersecurity Stocks Plunge on Anthropic Mythos Leak</a></h3>
+  <p class="story-summary">Software and cybersecurity stocks fell sharply Friday after leaked internal documents revealed Anthropic's Mythos model could exploit vulnerabilities "in ways that far outpace the efforts of defenders." The sell-off compounded an already brutal week for equities, with the S&amp;P 500 posting its fifth straight losing week.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The broader market continued its descent amid escalating Middle East tensions and surging energy costs. The Dow tumbled nearly 800 points into correction territory, while Bitcoin slid alongside software stocks. The Mythos revelation added a new fear vector: that frontier AI models could fundamentally shift the balance between cyber attackers and defenders, undermining the value proposition of existing cybersecurity companies.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Techpresso</span>
+    <span class="source-badge">Tech Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.investing.com/news/stock-market-news/cybersecurity-stocks-plunge-as-anthropics-claude-mythos-leak-sparks-ai-fear-4584897" target="_blank">investing.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Superhuman</span>
+      <span>The Code</span>
+      <span>Techpresso</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Friday, March 27, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
