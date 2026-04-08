@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Tuesday, March 24, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Tuesday, March 24, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,581.00</span><span class="ticker-change ticker-up">+1.15%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">21,946.76</span><span class="ticker-change ticker-up">+1.38%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">46,208.47</span><span class="ticker-change ticker-up">+1.38%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">$91.86</span><span class="ticker-change ticker-up">+4.2%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$70,914</span><span class="ticker-change ticker-up">+4.61%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">26.15</span><span class="ticker-change ticker-down">-2.4%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://x.com/claudeai/status/2036195789601374705" target="_blank">Anthropic Ships Remote Computer Use for Claude</a></h2>
+  <p class="story-summary">Anthropic released a research preview giving Claude direct control of your Mac desktop — clicking, typing, and navigating across any app while you step away. A new companion feature called Dispatch lets users assign tasks from their phone, turning Claude into a remote digital employee.</p>
+  <div class="story-expanded" id="story-1">
+    <p>The system is built to avoid screen control when possible, checking for direct app integrations and browser access before resorting to clicking. The feature is currently available only to macOS users on Pro or Max plans via Cowork and Claude Code, with a Windows version in the pipeline. Anthropic acquired computer use startup Vercept in February, and this marks the team's first product launch after just four weeks of integration. Anthropic's Alex Albert commented: "The future where I never have to open my laptop to get work done is becoming real very fast."</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://x.com/claudeai/status/2036195789601374705" target="_blank">x.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://lumalabs.ai/uni-1" target="_blank">Luma AI's Uni-1 Image Model Thinks as It Generates</a></h3>
+  <p class="story-summary">Luma AI rolled out Uni-1, an image model that processes text and visuals through the same pipeline — reasoning through what it's asked to do before and while it creates. The company calls this approach a "path to general intelligence."</p>
+  <div class="story-expanded" id="story-2">
+    <p>Uni-1 runs on the same type of architecture as GPT Image 1.5 and Nano Banana Pro, processing text and images in a single pipeline instead of using diffusion. The model features real-world understanding, enabling creative decisions and use cases such as infographics, manga, and specific aesthetics. In testing, Uni-1 topped human preference rankings for style, editing, and reference-based work, trailing only Nano Banana Pro in text-to-image ELO. Its API price of ~$0.09/image at 2K resolution undercuts Nano Banana Pro's $0.134 rate by roughly a third, though the API is waitlist-only for now.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://lumalabs.ai/uni-1" target="_blank">lumalabs.ai &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://www.wsj.com/tech/ai/mark-zuckerberg-is-building-an-ai-agent-to-help-him-be-ceo-eddab2d5" target="_blank">Zuckerberg Builds Personal AI Agent, Mandates AI Usage at Meta</a></h3>
+  <p class="story-summary">Mark Zuckerberg is creating a personal "CEO agent" to shortcut the chain of command, according to the WSJ. The move is part of a company-wide mandate that now factors AI usage into performance reviews.</p>
+  <div class="story-expanded" id="story-3">
+    <p>Zuck's agent is still in development but already handles tasks like pulling answers that typically require going through multiple layers of Meta's org chart. Staffers have spun up custom agent tools, including one called "My Claw" that reads their work files and negotiates with coworkers' bots directly. Another Claude-powered internal tool called "Second Brain" acts as an AI chief of staff, pulling answers from any internal document on demand. Zuckerberg had previously courted OpenClaw creator Peter Steinberger and also acquired Chinese agentic platform Manus in December.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://www.wsj.com/tech/ai/mark-zuckerberg-is-building-an-ai-agent-to-help-him-be-ceo-eddab2d5" target="_blank">wsj.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://lexfridman.com/jensen-huang-transcript" target="_blank">Nvidia CEO Jensen Huang Declares "We've Achieved AGI"</a></h3>
+  <p class="story-summary">Nvidia CEO Jensen Huang appeared on the Lex Fridman Podcast and made a bold claim: "I think it's now. I think we've achieved AGI" when asked about his intelligence timelines.</p>
+  <div class="story-expanded" id="story-4">
+    <p>The statement marks one of the most definitive claims from a major tech CEO on the state of artificial general intelligence. Huang's comments come at a time when Nvidia remains the dominant supplier of AI training chips and continues to benefit from the massive infrastructure buildout across the industry.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">The Rundown AI</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://lexfridman.com/jensen-huang-transcript" target="_blank">lexfridman.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Samsung Smart Fridge Ads Trigger Fierce Customer Backlash</h3>
+  <p class="story-summary">A Samsung pilot program introducing advertisements on smart refrigerator screens has triggered fierce customer backlash, the Wall Street Journal reported. Banner ads for products like Tide detergent began appearing on Samsung Family Hub fridges that typically cost $1,800+.</p>
+  <div class="story-expanded" id="story-5">
+    <p>Owners can turn off banner ads, but doing so also disables a screen widget that shows news, weather, and a calendar. They cannot disable third-party, full-screen ads that may appear on the appliance's internet browser. Almost every customer interviewed was critical. Samsung said last April it didn't have plans to put ads on smart home screens, but has since reversed that position. LG Electronics, Whirlpool, and GE have made similar no-ads statements, which they have not yet strayed from.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Apple WWDC 2026 Set for June 8–12</strong> — Apple announced its annual developer conference, teasing "AI advancements" speculated to include a Siri overhaul powered by Google Gemini. <a href="https://www.apple.com/newsroom/2026/03/apples-worldwide-developers-conference-returns-the-week-of-june-8/" target="_blank">apple.com &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>OpenAI Guarantees 17.5% Returns to Lure PE Firms</strong> — OpenAI is reportedly guaranteeing a minimum return to lure private equity firms into its enterprise joint venture, outbidding Anthropic as both companies prepare for IPOs. <a href="https://www.reuters.com/business/openai-sweetens-private-equity-pitch-amid-enterprise-turf-war-with-anthropic-2026-03-23/" target="_blank">reuters.com &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>Dreamer Licenses Tech to Meta</strong> — Agentic personal software builder Dreamer announced it is licensing its technology to Meta, with its full team joining Meta Superintelligence Labs in an undisclosed deal. <a href="https://dreamer.com/community-letter" target="_blank">dreamer.com &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>OpenAI Hires Former Meta VP for Ad Sales Push</strong> — OpenAI hired former Meta VP of global clients Dave Dugan to run its ad sales, as the company continues its initial advertising push into ChatGPT. <a href="https://www.wsj.com/tech/ai/openai-taps-former-meta-executive-to-lead-ad-push-60d39af2" target="_blank">wsj.com &rarr;</a> <span class="source-badge">The Rundown AI</span></li>
+  <li><strong>AI Agents Still Fail to Spot Deception, Study Finds</strong> — New research finds that even highly performing AI agents can still fail to detect deception, raising questions about AI reliability in adversarial environments. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Global affairs and conflict</span>
+</div>
+
+<article class="lead-story">
+  <h2>US-Iran Conflict Dominates as Trump Claims Peace Talks, Tehran Denies</h2>
+  <p class="story-summary">The US-Iran conflict (Operation Epic Fury) remains the dominant global flashpoint. President Trump delayed strikes on Iranian power plants after claiming "constructive conversations," but Tehran flatly denied that any talks are underway, calling the claim "fake news." USAF B-52s continued conducting bombing runs over Iran while Iranian ballistic missiles struck Arad in southern Israel.</p>
+  <div class="story-expanded" id="story-6">
+    <p>Oman's Foreign Minister separately cited "significant progress" in a prior round of nuclear talks. Polymarket gives only 14.5% probability of a US-Iran ceasefire by March 31. CENTCOM confirmed active flight operations aboard USS Abraham Lincoln (CVN-72) in support of the operation. Rescue forces responded to the Iranian missile impact in Arad with reports of missing individuals. France's Macron declared Lebanon's fight "just" amid escalating Israeli attacks, while Israeli Finance Minister Smotrich called for annexation of southern Lebanon. Iraq saw two US airstrikes — one killing seven fighters in the west, another injuring four at a militia base south of Baghdad. Crude oil surged +4.2% to $91.86 with the CNN Fear &amp; Greed Index reading Extreme Fear (11). Trump told reporters that US envoys were speaking to a "respected" leader and that Iran was eager to end the war, though those claims remain unverified.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/9dc156e4-c90a-4c40-b4b2-cb7d75f1ea6f" target="_blank">sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Russia Executes Overnight Missile-Drone Assault on Ukrainian Cities</h3>
+  <p class="story-summary">Russian missiles and drones struck residential buildings in Zaporizhzhia and Poltava overnight, injuring at least 3 people. Air raid alerts covered much of Ukraine in a pattern consistent with Russia's ongoing infrastructure and morale-targeting campaign.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The strikes are part of a continued combined missile-drone campaign targeting multiple Ukrainian cities. Air raid alerts swept across much of the country during the overnight hours, with civilian infrastructure bearing the brunt of the damage.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>LaGuardia Airport Closed After Fatal Crash Between Plane and Fire Truck</h3>
+  <p class="story-summary">LaGuardia Airport was closed yesterday morning and reopened in the afternoon following a crash between an Air Canada Express plane and a fire truck that killed both pilots and injured several passengers and crew. About 600 flights were canceled.</p>
+  <div class="story-expanded" id="story-8">
+    <p>The collision happened just after the plane carrying 70 passengers landed as the fire truck was headed to inspect another plane. Delays are expected to continue through this morning. The incident compounds US aviation system stress already under strain from other factors.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>SCOTUS Appears Poised to Strike Down Late-Arriving Ballot Laws</h3>
+  <p class="story-summary">The Supreme Court's conservative majority appeared during oral arguments to favor striking down a Mississippi law that allows mail-in ballots postmarked by election day but received later to be counted. At least 15 other states have similar laws.</p>
+  <div class="story-expanded" id="story-9">
+    <p>A ruling is expected by June, which means it would govern vote counting in November's midterm elections. The ruling could have a large impact on voting by mail — a practice President Trump has long opposed. The case could reshape how millions of Americans participate in elections.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Saudi Nuclear Enrichment Deal Under Negotiation</h3>
+  <p class="story-summary">Reports indicate the Trump administration is pursuing a nuclear deal with Saudi Arabia that would permit Riyadh to enrich uranium domestically — a significant nonproliferation red line coinciding with the active US-Iran conflict over Iran's nuclear program.</p>
+  <div class="story-expanded" id="story-10">
+    <p>The deal would represent a major shift in US nonproliferation policy. Congressional or IAEA reaction could trigger a nonproliferation crisis alongside the active Iran conflict. Watch for State Department or IAEA statements in the coming days.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>USS Abraham Lincoln Conducting Active Operations</strong> — CENTCOM confirmed active flight operations aboard CVN-72 in the Arabian Sea/Persian Gulf in support of Operation Epic Fury. <span class="source-badge">SitDeck</span></li>
+  <li><strong>USS Gerald R. Ford Diverted for Repairs</strong> — The carrier arrived in Souda Bay, Crete, for repairs following a laundry room fire, reducing available carrier strike capacity in the Atlantic/Mediterranean. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Colombian Military Plane Carrying 125 People Crashes</strong> — A Colombian military aircraft crashed with 125 people aboard. Casualty figures have not yet been confirmed. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Russian Influence Operation Alleged in Angola</strong> — BBC reporting on an alleged Russian operation to trigger anti-government protests in Angola, consistent with documented Russian gray-zone activity across sub-Saharan Africa. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Markwayne Mullin Confirmed as Homeland Security Secretary</strong> — The US Senate confirmed Mullin, resolving a leadership gap at a moment of elevated domestic and border security activity. <span class="source-badge">SitDeck</span> <span class="source-badge">Morning Brew</span></li>
+  <li><strong>TotalEnergies Wind Lease Deal</strong> — The Trump administration reached an agreement for French energy giant TotalEnergies to terminate nearly $1 billion in offshore wind leases and instead invest in US oil and natural gas production, with government reimbursement. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Texas Refinery Explosion</strong> — An explosion at Valero's Port Arthur, Texas refinery prompted a shelter-in-place order. Port Arthur is one of the largest refining complexes in the US, posing potential short-term supply disruption. <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Commerce and finance</span>
+</div>
+
+<article class="lead-story">
+  <h2>Bipartisan Bill Would Ban Sports Prediction Markets</h2>
+  <p class="story-summary">A bipartisan bill introduced in the Senate would ban prediction markets like Kalshi and Polymarket from offering contracts on sports and casino games by closing a CFTC loophole. Sports contracts are the platforms' big money drivers — Kalshi reported 90% of its NFL-season volume was on sports.</p>
+  <div class="story-expanded" id="story-11">
+    <p>Sportsbooks are regulated by state bodies while prediction markets are monitored federally by the CFTC because event action is considered a "swap," not a bet. This has allowed prediction platforms to operate in all 50 states, including those where sports betting is illegal. Nevada won a temporary ban last week. During the first four days of March Madness, Kalshi saw $2.67 billion in weekly sports trades and Polymarket had $1.22 billion — weekly increases of 28% and 32% respectively. Despite reputational issues, Polymarket became an MLB licensing partner and Kalshi recently raised $1 billion at a $22 billion valuation. Shares of traditional sportsbooks climbed: Flutter +4.4%, DraftKings +1.2%, PENN +5.6%, MGM +4.5%.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>OnlyFans Owner Leonid Radvinsky Dead at 43</h3>
+  <p class="story-summary">The secretive billionaire owner of OnlyFans, Leonid Radvinsky, has died of cancer at age 43. The erotic marketplace connecting millions of creators with over 300 million users generated $7.2 billion in revenue for 2024.</p>
+  <div class="story-expanded" id="story-12">
+    <p>Radvinsky bought a majority stake in 2018 and steered it to become one of the UK's top startups. The platform is credited with disrupting the exploitative porn industry by enabling independent content creation, though it has also faced controversy over its own exploitative content. OnlyFans takes a 20% cut from creators' proceeds. Before his death, Radvinsky was in talks to sell a 60% stake in a deal valuing the company at $8 billion. He used dividends of hundreds of millions to support philanthropic causes including cancer research.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Cornell Study: Workers Who Fall for "Corporate BS" Are Worse at Their Jobs</h3>
+  <p class="story-summary">A Cornell study found that workers most susceptible to "corporate bullshit" scored significantly worse on workplace decision-making and analytic thinking tests. Researchers created a "Corporate Bullshit Receptivity Scale" after asking 1,000+ workers to assess statements.</p>
+  <div class="story-expanded" id="story-13">
+    <p>The study had workers assess the business savvy of statements — some generated by a computer, others from real Fortune 500 leaders. Those high on the CBSR saw their bosses as more charismatic and "visionary" while scoring much worse on cognitive tests. The researcher explained: "Rather than a 'rising tide lifting all boats,' a higher level of corporate BS in an organization acts more like a clogged toilet of inefficiency."</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Markets Rally on Iran Talk Hopes</strong> — President Trump pushed oil prices down and stock prices up by saying the US was in talks to end the Iran war. Airlines benefited particularly from the possibility of lower fuel costs. S&amp;P +1.15%, Nasdaq +1.38%, Dow +1.38%. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>BlackRock CEO Warns AI Could Worsen Inequality</strong> — Larry Fink said in a letter to investors that AI could worsen income inequality and that people should invest in top AI companies to avoid being left behind. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Est&eacute;e Lauder in Talks to Acquire Puig</strong> — The cosmetics giant is in talks to acquire Spanish beauty company Puig (Charlotte Tilbury parent). The combined company could be worth $40 billion. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Bill Cosby Hit with $19 Million Jury Verdict</strong> — A jury returned a $19 million verdict in a civil lawsuit brought by Donna Motsinger, who claims Cosby drugged and raped her in 1972. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>DoorDash Offers Extra Pay for Rising Gas Prices</strong> — DoorDash is offering extra compensation to US and Canadian delivery drivers to offset rising gas prices. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>March Madness Draws 9.8 Million Viewers</strong> — Opening games garnered 9.8 million television viewers, a 6% increase over last year, according to Nielsen. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Research and discovery</span>
+</div>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com" target="_blank">Superconducting Quantum Processor Performs Well with Significantly Less Wiring</a></h3>
+  <p class="story-summary">Researchers have demonstrated a superconducting quantum processor that maintains strong performance while requiring significantly fewer wiring connections — a potential breakthrough for scaling quantum computing systems.</p>
+  <div class="story-expanded" id="story-14">
+    <p>Reducing wiring complexity is one of the key engineering challenges in scaling quantum computers. This advance could make it more practical to build larger quantum processors by simplifying the physical infrastructure required to operate them.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com" target="_blank">Moons Orbiting Wandering Exoplanets Could Be Habitable — with One Catch</a></h3>
+  <p class="story-summary">New research suggests that moons orbiting rogue exoplanets — planets that wander through space without a star — could potentially support habitable conditions, though with an important caveat that remains to be explored.</p>
+  <div class="story-expanded" id="story-15">
+    <p>The finding expands the potential range of environments where life could exist beyond traditional habitable zone models centered on star systems.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com" target="_blank">Superconducting Altermagnets Could Carry Spin Without Energy Loss</a></h3>
+  <p class="story-summary">A new class of superconducting altermagnets has been shown to potentially carry electron spin without energy loss, combining properties of superconductors and magnets in ways that could advance next-generation electronics and spintronics.</p>
+  <div class="story-expanded" id="story-16">
+    <p>Altermagnets are a recently recognized class of magnetic materials that don't behave like traditional ferromagnets or antiferromagnets. Combining their properties with superconductivity opens new possibilities for lossless information transfer.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com" target="_blank">JWST Probes Young Star Clusters in Nearby Galaxy NGC 628</a></h3>
+  <p class="story-summary">The James Webb Space Telescope has revealed new details about emerging young star clusters in the nearby spiral galaxy NGC 628, offering fresh insights into the processes of star formation and galactic evolution.</p>
+  <div class="story-expanded" id="story-17">
+    <p>NGC 628 (also known as the Phantom Galaxy) is a grand design spiral galaxy approximately 32 million light-years away, making it an ideal target for studying star formation with JWST's infrared capabilities.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Hall 'Rectenna' Detects Signals Over 100 GHz Range</strong> — A new Hall rectenna device can detect signals across an exceptionally wide frequency range exceeding 100 GHz, with applications in communications and sensing. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>China's Earliest Bronze Age Meteoritic Iron Artifact Unearthed</strong> — Archaeologists discovered a meteoritic iron artifact at the Sanxingdui sacrificial site, representing China's earliest known Bronze Age use of extraterrestrial iron. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Epigenetics of Trauma: 86 miRNAs Linked to PTSD Severity</strong> — Researchers identified 86 microRNAs linked to PTSD symptom severity and social adversity, shedding light on the epigenetic mechanisms of trauma. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>How Groups of Neurons Support Memory Formation</strong> — New research reveals mechanisms by which neuronal groups coordinate to support the formation and consolidation of memories. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Changes in Protein Production Linked to Autism-like Behavior in Mice</strong> — A study found that alterations in protein synthesis pathways are associated with autism-like behavioral patterns in mouse models. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>How Soil Microbes May Control the Planet's Future</strong> — Research explores how soil microorganisms play a critical role in global carbon cycles and may significantly influence the trajectory of climate change. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Novel Approach Allows Studying Otter DNA Without Disturbing Them</strong> — Scientists developed a non-invasive technique for collecting and analyzing otter DNA from environmental samples. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Altered Colony Chemistry Destroys Termite Societies</strong> — Research reveals how changes in chemical signaling within termite colonies can lead to complete societal collapse. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Iron Age Hoards Reveal First Four-Wheeled Wagons in Britain</strong> — Two buried Iron Age hoards provide the first evidence for the use of four-wheeled wagons in ancient Britain. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Indigenous Wisdom Can Guide Indonesia's Ocean Economy</strong> — Researchers argue that traditional indigenous knowledge can help guide Indonesia's efforts to build a sustainable ocean economy. <a href="https://sciencex.com" target="_blank">sciencex.com &rarr;</a> <span class="source-badge">Science X</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>The Rundown AI</span>
+      <span>Morning Brew</span>
+      <span>SitDeck</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Tuesday, March 24, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
