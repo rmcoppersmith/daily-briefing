@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Tuesday, April 7, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Tuesday, April 7, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Evening Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</header>
+
+<!-- TICKER BAR -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: AI & TECHNOLOGY -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+    <span class="section-name">Latest in artificial intelligence</span>
+  </div>
+
+  <!-- LEAD: OpenAI/Anthropic/Google Frontier Model Forum -->
+  <article class="lead-story">
+    <h2>OpenAI, Anthropic, and Google unite through Frontier Model Forum to combat adversarial model distillation</h2>
+    <p class="story-summary">Three of AI's biggest rivals are formally coordinating to stop "adversarial distillation" — the practice of harvesting outputs from frontier U.S. models to build cheaper knockoffs. OpenAI has accused DeepSeek of piggybacking on its technology; Anthropic has already cut off access to three Chinese labs caught doing the same. U.S. officials estimate the practice drains billions from Silicon Valley labs annually.</p>
+    <div class="story-expanded" id="story-1">
+      <p>The cooperation is formalized through the Frontier Model Forum, the industry safety group. Both OpenAI and Anthropic have taken unilateral enforcement steps — Anthropic severing Chinese-controlled firms and OpenAI going public with its accusations. The joint coordination signals the three companies now view this as a systemic threat requiring collective action rather than individual responses. The move comes as AI model capabilities increasingly overlap, making the economics of distillation — building a capable model by learning from a more expensive one — particularly attractive to well-resourced adversaries.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">The Code</span>
+      <span class="source-badge">Tech Brew</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.japantimes.co.jp/business/2026/04/07/tech/openai-anthropic-google-china-copy/" target="_blank">japantimes.co.jp &rarr;</a></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3><a href="https://cdn.openai.com/pdf/561e7512-253e-424b-9734-ef4098440601/Industrial%20Policy%20for%20the%20Intelligence%20Age.pdf" target="_blank">OpenAI proposes intelligence age industrial policy: 4-day workweek, robot taxes, public wealth fund</a></h3>
+      <p class="story-summary">OpenAI released a 13-page policy document reframing AI as economic infrastructure, not just software. Key proposals include a "Right to AI" guaranteeing free or low-cost access to foundational models, a tax shift targeting AI-driven corporate profits rather than labor income, and a public wealth fund distributing AI-generated returns to citizens.</p>
+      <div class="story-expanded" id="story-2">
+        <p>The document outlines system-level mechanisms: a standardized audit layer requiring third-party evaluation pipelines for deployed models, system logs enforcing provenance tracking and signed actions across workflows, and a public fund structure funded by AI companies. Sam Altman's framing: when superintelligence arrives, society will need a new social contract — portable benefits that follow workers between jobs, a 4-day workweek, and universal access to AI tools. The policy paper is being read alongside separate reporting that OpenAI expects to burn $85 billion by 2028, making the "AI revenue for the public good" framing somewhat ironic given current cash dynamics.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AlphaSignal</span>
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/04/06/openais-vision-for-the-ai-economy-public-wealth-funds-robot-taxes-and-a-four-day-work-week/" target="_blank">techcrunch.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Anthropic hits $30B run-rate revenue — tripled from $9B in under four months</h3>
+      <p class="story-summary">Anthropic's annualized revenue has reached $30 billion, up from $9 billion at the end of 2025. The company added $6 billion in ARR during February 2026 alone. The number of enterprise customers spending over $1 million annually has more than doubled to 1,000+ in just two months.</p>
+      <div class="story-expanded" id="story-3">
+        <p>The explosive growth is driven by Claude Code adoption and enterprise API consumption. Lenny Rachitsky's podcast with Anthropic's head of growth covers the dynamics behind the acceleration. Despite the topline growth, Anthropic's profitability timeline remains 2029 — the company projects 2026 as its biggest loss year. The tension between explosive revenue growth and continued heavy investment spending mirrors OpenAI's own financials, where $85 billion in cumulative burn is projected before the 2030 profitability target.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">ben's bites</span>
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://techcrunch.com/2026/04/07/intel-signs-on-to-elon-musks-terafab-chips-project/" target="_blank">Intel joins Elon Musk's Terafab: two AI chip plants covering vehicles, robotics, and data centers</a></h3>
+      <p class="story-summary">Intel has signed on to Elon Musk's $25 billion Terafab project alongside Tesla, SpaceX, and xAI. The initiative includes two advanced chip plants at a large Austin, Texas facility — one focused on vehicles and humanoid robots, the other on AI data centers. Intel stock surged 3% on the announcement.</p>
+      <div class="story-expanded" id="story-4">
+        <p>Terafab represents one of the most ambitious domestic chip manufacturing commitments in years, combining the Musk industrial empire's captive demand (Tesla vehicles, Optimus robots, xAI inference) with Intel's fabrication expertise. Broadcom is separately expanding its Google and Anthropic deals, creating a picture of a rapidly consolidating AI chip supply chain with a few large relationships dominating compute allocation. Uber is also the latest company to expand Amazon AWS AI chip usage, extending Trainium3 trials.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://techcrunch.com/2026/04/07/intel-signs-on-to-elon-musks-terafab-chips-project/" target="_blank">techcrunch.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://www.bloomberg.com/news/articles/2026-04-07/anthropic-lets-apple-amazon-test-more-powerful-mythos-ai-model" target="_blank">Apple and Amazon gain early access to Anthropic's Mythos model ahead of wider release</a></h3>
+      <p class="story-summary">Anthropic is letting tech firms including Apple and Amazon test its more powerful, unreleased Mythos AI model, partly to help prepare for potential cyberattack scenarios that could emerge if the advanced system is made more widely available. The controlled early-access program reflects Anthropic's staged deployment approach for its most capable models.</p>
+      <div class="story-expanded" id="story-5">
+        <p>Mythos represents Anthropic's next major capability frontier above the current Claude Sonnet/Opus 4.6 tier. The involvement of Apple and Amazon — both major Claude API customers — in pre-release testing suggests the model will arrive with strong enterprise integration from day one. The parallel narrative: Anthropic's run-rate revenue is at $30B and accelerating, its compute partnership with Google and Broadcom for gigawatt-scale TPU capacity is set to go live in 2027, and it's locking in the largest distribution partners before wider rollout.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Techpresso</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://www.bloomberg.com/news/articles/2026-04-07/anthropic-lets-apple-amazon-test-more-powerful-mythos-ai-model" target="_blank">bloomberg.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Google releases Gemma 4: four new open-weights models including mobile-optimized 2B and 4B</h3>
+      <p class="story-summary">Google released four new open-weights Gemma 4 models: a 26B MoE and 31B dense for powerful laptops and desktops, and 2B and 4B models optimized for mobile phones. The release is targeted primarily at companies looking to fine-tune models rather than end-user direct deployment.</p>
+      <div class="story-expanded" id="story-6">
+        <p>Gemma 4 continues Google's strategy of releasing open-weights versions of its model family to cultivate developer ecosystems around its architecture and training approaches. The mobile-tier 2B/4B models are notable given Qualcomm's recent on-device AI push and growing interest in edge inference. The release lands alongside Google's Gemma AI Edge Eloquent dictation app (released earlier this week) and the broader Broadcom/Google/Anthropic compute expansion announcement, keeping Google active across the entire AI stack simultaneously.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">ben's bites</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3><a href="https://cursor.com/blog/warp-decode" target="_blank">Cursor warp decode achieves 1.84x faster MoE inference by eliminating expert-batching overhead</a></h3>
+      <p class="story-summary">Cursor rewrote its mixture-of-experts token generation pipeline with "warp decode" — assigning each GPU warp directly to one output value instead of grouping work by experts. The result: 1.84x higher throughput on Blackwell GPUs, memory bandwidth approaching ~3.95 TB/s, and outputs 1.4x closer to FP32 reference precision than standard MoE decode.</p>
+      <div class="story-expanded" id="story-7">
+        <p>Standard MoE decoding wastes cycles on scatter/combine stages and padding that exist purely to coordinate around expert groupings. Warp decode eliminates these stages entirely by mapping one warp to one output neuron, fusing the operation into two GPU kernels that stream weights, accumulate in registers, and write a single output. This reduces intermediate buffer use and GPU synchronization overhead simultaneously. The breakthrough also demonstrates how inference optimization at the infrastructure layer — not model architecture — is increasingly where competitive advantage is being built. AlphaSignal notes this is a top-trending technical finding with 2,528 stars on GitHub.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AlphaSignal</span>
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://cursor.com/blog/warp-decode" target="_blank">cursor.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>MemPalace: Milla Jovovich's open-source AI memory layer scores 100% on LongMemEval benchmark</h3>
+      <p class="story-summary">Actress and entrepreneur Milla Jovovich released MemPalace, an open-source memory layer for LLM workflows that organizes full conversation history into a hierarchical "palace" structure — wings (projects), rooms (topics), halls (types) — achieving a perfect 500/500 on LongMemEval and 96.6% without API calls using local retrieval. It has 9,528 GitHub stars.</p>
+      <div class="story-expanded" id="story-8">
+        <p>MemPalace solves the "disappearing context" problem by storing full conversations rather than summaries, then using structural narrowing before semantic search to retrieve the right context fast. Its AAAK compression achieves ~30x smaller context that remains readable by any LLM. The local stack (SQLite + ChromaDB) requires no API key, and a knowledge graph layer tracks facts and flags contradictions. The development underscores the point made in the Claude Code source code analysis: the wrapper and infrastructure layer is where the next wave of AI differentiation is being built, and that's now happening outside traditional AI labs.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AlphaSignal</span>
+        <span class="source-badge">The Code</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Meta plans open-source versions of next two frontier models: Avocado (LLM) and Mango (image/video)</h3>
+      <p class="story-summary">Meta is working on open-source editions of its next proprietary models, codenamed Avocado (an LLM) and Mango (an image and video generator), reversing December 2025 reports of a pivot to fully closed-source. The open-source versions will likely be lighter editions with fewer parameters, partly due to AI safety considerations. No release date announced.</p>
+      <div class="story-expanded" id="story-9">
+        <p>The reversal is notable: Bloomberg had reported late last year that Meta was going fully closed-source under new Chief AI Officer Alexandr Wang. The course correction suggests either that closed-source dynamics created commercial or recruiting headwinds, or that the open-source community feedback loop is still considered strategically valuable. Meta has $14.3 billion invested in a 49% stake in Scale AI and is building out its superintelligence team — Avocado and Mango will be the first models to emerge from that new structure.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">The Code</span>
+        <span class="source-badge">Superhuman</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://siliconangle.com/2026/04/06/report-meta-developing-open-source-versions-upcoming-ai-models/" target="_blank">siliconangle.com &rarr;</a></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Why Anthropic is shutting out third-party agents — and OpenAI isn't</h3>
+      <p class="story-summary">Every's analysis unpacks the divergence: Anthropic cut off subscription-funded usage for tools like OpenClaw because frontier AI agents running 24/7 cost $300–$1,000/day — far beyond what flat-rate subscriptions cover. OpenAI has enough capital to absorb the cost and is using the moment to capture users, with GPT-5.4 token usage surging week-over-week as Opus 4.6 usage falls.</p>
+      <div class="story-expanded" id="story-10">
+        <p>The Every piece frames this as a strategic fork rather than a simple pricing decision: Anthropic's margin constraints are forcing product discipline (steering users toward Dispatch, scheduled tasks, projects, and computer use — all owned infrastructure), while OpenAI's funding runway allows it to effectively subsidize user acquisition. Affected users have been offered a one-time credit equal to one month's subscription. The net effect: Anthropic retains unit economics but risks ceding agentic workflow mindshare to OpenAI at a critical adoption window.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">Every</span>
+        <span class="source-badge">ben's bites</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+        <span class="story-url"><a href="https://every.to/context-window/get-your-hands-dirty" target="_blank">every.to &rarr;</a></span>
+      </div>
+    </article>
+
+  </div><!-- /stories-grid AI -->
+
+  <!-- AI ALSO IN BULLETS -->
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;margin:24px 0 8px;">Also in AI &amp; Technology</p>
+  <ul class="bullet-stories">
+    <li><strong>Anthropic/Google/Broadcom multi-gigawatt TPU deal</strong> — Anthropic signed a deal for gigawatt-scale TPU capacity with Google and Broadcom, set to go live in 2027 — its largest compute commitment to date, driven by revenue tripling since late 2025. <span class="source-badge">The Code</span></li>
+    <li><strong>OpenAI acquires TBPN podcast</strong> — OpenAI acquired the popular TBPN tech podcast. Ben Tossell's analysis: unclear why either party needs each other given TBPN's growing independent ad revenue, though OpenAI may want a direct channel to the tech audience that avoids traditional media. <span class="source-badge">ben's bites</span></li>
+    <li><strong>OpenAI and Anthropic cash burn projections</strong> — New WSJ reporting: OpenAI expects to burn a total of $85B by 2028 before reaching profitability in 2030; Anthropic projects 2026 as its biggest loss year, with profitability expected by 2029. <a href="https://sherwood.news/tech/report-openai-on-track-to-burn-usd85-billion-in-2028-expects-profitability/" target="_blank">sherwood.news &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>xAI upgrades API with pay-per-use pricing and simulation Playground</strong> — xAI launched an XMCP server, updated SDKs, and a new API Playground for testing and simulation workflows, plus pay-per-use pricing across all tiers. <span class="source-badge">AlphaSignal</span></li>
+    <li><strong>Windsurf launches Adaptive router for model selection</strong> — Windsurf's new Adaptive routing feature automatically selects the optimal model based on task complexity and cost, with daily limits removed for Max users. <span class="source-badge">AlphaSignal</span></li>
+    <li><strong>OpenAI launches Safety Fellowship — hours after New Yorker reported it dissolved safety teams</strong> — The timing drew immediate criticism on social media. Ronan Farrow's New Yorker investigation reported OpenAI had dissolved its safety teams; OpenAI announced the fellowship the same day. <span class="source-badge">The Code</span></li>
+    <li><strong>Cursor-3 adds standalone agent window</strong> — New standalone window for running agents enables local-to-cloud handoff and cross-project work. <span class="source-badge">ben's bites</span></li>
+    <li><strong>Nate's analysis: AI is closing economic arbitrage gaps on the timescale of model releases</strong> — A Polymarket bot turned $313 into ~$438K in 30 days by closing pricing gaps faster than humans. Nate's essay argues AI is collapsing inefficiencies that previously took decades to close — with new arbitrage gaps opening elsewhere as fast as old ones disappear. <a href="https://natesnewsletter.substack.com/p/313-became-438000-in-30-days-youre" target="_blank">natesnewsletter.substack.com &rarr;</a> <span class="source-badge">Nate's Substack</span></li>
+    <li><strong>Uber expands Amazon AI chip usage — adds Trainium3 trial</strong> — Uber expanded its AWS contract and began trialing Trainium3, Amazon's Nvidia-competitor chip, for ride-sharing infrastructure. <a href="https://techcrunch.com/2026/04/07/uber-is-the-latest-to-be-won-over-by-amazons-ai-chips/" target="_blank">techcrunch.com &rarr;</a> <span class="source-badge">Techpresso</span></li>
+    <li><strong>Apple's foldable iPhone faces engineering issues</strong> — Techpresso reports Apple's foldable iPhone is encountering significant engineering challenges ahead of its anticipated launch window. <a href="https://archive.techpresso.co/p/apple-s-foldable-iphone-faces-engineering-issues" target="_blank">techpresso.co &rarr;</a> <span class="source-badge">Techpresso</span></li>
+    <li><strong>Pika AI Self: add a living AI avatar to your live video calls</strong> — Pika Labs released Pika AI Self, which creates a living avatar that can join Google Meet calls and converse with your personality and preferences. Agent avatar skills available on GitHub. <a href="https://www.pika.me/" target="_blank">pika.me &rarr;</a> <span class="source-badge">Superhuman</span></li>
+    <li><strong>Karpathy's new knowledge base model: topical grouping over raw retrieval</strong> — Andrej Karpathy proposed organizing AI knowledge bases topically, enhanced with summaries, backlinks, and wikis. Farza's "Farzapedia" — a personal Wikipedia built from 2,500 diary entries — is a leading real-world implementation. <span class="source-badge">ben's bites</span></li>
+    <li><strong>RAG made 32x more memory efficient</strong> — A technique used by Perplexity, Azure, and HubSpot achieves dramatically more efficient retrieval-augmented generation; explained with code examples in The Code newsletter. <span class="source-badge">The Code</span></li>
+    <li><strong>Claude Code SKILL.md live data injection via `!` syntax</strong> — Claude Code engineer Lydia Hallie shared that embedding shell commands with the `!` backtick syntax in SKILL.md files lets Claude Code inject live output (PR diffs, test results, API responses) automatically before processing — eliminating manual copy-paste workflows. <span class="source-badge">The Code</span></li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: GEOPOLITICS & WORLD -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+    <span class="section-name">Global developments and conflict</span>
+  </div>
+
+  <!-- LEAD: Iran 8 PM deadline -->
+  <article class="lead-story">
+    <h2>Trump sets civilization-or-deal ultimatum for 8 PM; U.S. strikes Kharg Island again as deadline looms</h2>
+    <p class="story-summary">President Trump warned Tuesday morning that "a whole civilization will die tonight" unless Iran meets his 8 PM ET deadline to reopen the Strait of Hormuz — while simultaneously saying Iran still had time to capitulate. Hours later, U.S. forces struck Kharg Island, Iran's critical oil hub, for a second time, according to a White House source speaking anonymously. Iranian officials urged citizens to form human chains to protect power plants.</p>
+    <div class="story-expanded" id="story-11">
+      <p>The AP's 8:31 AM alert captured Trump's exact framing: "a whole civilization will die tonight" but Iran "still has time." The 9:07 AM alert confirmed a second Kharg Island strike ahead of the deadline. By early afternoon, Tehran's UN representative Amir-Saeid Iravani responded that Trump's threats "constitute incitement to war crimes and potentially genocide." The AP Afternoon Wire's 11 AM edition noted Iran had urged young people to form human chains around power plants — a signal that civilian infrastructure is now perceived as an active target. This morning's edition covered the overnight strikes and original threat framing; all three AP alerts above represent afternoon-window developments.</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">AP News Alert</span>
+      <span class="source-badge">AP Afternoon Wire</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+      <span class="story-url"><span class="no-url">no url</span></span>
+    </div>
+  </article>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Iran's UN envoy: Trump's threats "constitute incitement to war crimes and potentially genocide"</h3>
+      <p class="story-summary">Tehran's United Nations representative Amir-Saeid Iravani responded formally to Trump's Tuesday threats, calling them an "incitement to war crimes and potentially genocide." The statement escalates Iran's diplomatic posture at the UN at the exact moment Trump's 8 PM deadline hangs over the standoff.</p>
+      <div class="story-expanded" id="story-12">
+        <p>Iravani's framing is notable as a deliberate escalation through international legal channels — invoking the language of genocide and war crimes at the UN level creates a record and invites third-party response from the broader UN Security Council membership. Iran has historically used UN diplomacy as a counter-pressure mechanism when facing military escalation. The statement arrives alongside reports of human chains forming around Iranian power plants, signaling that the Iranian government is preparing its population for civilian infrastructure strikes.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AP News Alert</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Georgia special congressional election: voters pick replacement for Marjorie Taylor Greene</h3>
+      <p class="story-summary">Voters in Georgia's northwest congressional district went to the polls Tuesday to select a replacement for Marjorie Taylor Greene, who resigned from Congress three months ago after a public rift with President Trump. The outcome immediately affects the House balance of power, where Republicans hold a razor-thin 217-214 majority. The two finalists: Trump-backed Clay Fuller and Shawn Harris.</p>
+      <div class="story-expanded" id="story-13">
+        <p>The AP Afternoon Wire describes it as a special congressional runoff, with the winner filling out the remainder of Greene's term. The fragility of the House majority means even a single seat shifts the calculus on any legislation requiring all hands on deck. AP Decision Notes flagged the race as a key indicator for the evening, alongside Wisconsin's spring election where Democrats hope to extend liberal control of the state Supreme Court.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AP Afternoon Wire</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Zelenskyy offers Easter pause on energy strikes; Russian drone kills 4 in bus strike</h3>
+      <p class="story-summary">Ukrainian President Zelenskyy proposed an Easter ceasefire specifically targeting energy infrastructure attacks, offering a partial pause in the Russia-Ukraine conflict. The announcement came the same day a Russian drone struck a civilian bus, killing four people — a reminder of the gap between diplomatic gestures and battlefield reality.</p>
+      <div class="story-expanded" id="story-14">
+        <p>Zelenskyy's offer is narrowly scoped to energy strikes, not a full ceasefire, and comes ahead of Orthodox Easter. Russia has not yet formally responded. The bus strike underscores the ongoing civilian toll even as political gestures toward de-escalation occur. The AP Afternoon Wire flagged this as one of several parallel diplomatic tracks this week — alongside Trump's Iran deadline and the Vance/Witkoff ceasefire negotiation framework — that together suggest an unusually active period of conflict diplomacy.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AP Afternoon Wire</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>South Korea addresses IAEA over nuclear submarine plans; Kim Yo Jong responds to drone apology</h3>
+      <p class="story-summary">South Korea's Ministry of Foreign Affairs is inviting IAEA Director General Rafael Grossi to Seoul to discuss safeguards for its planned nuclear-powered attack submarine (SSN) program — approved by Trump during his October summit with South Korean President Lee. Separately, Kim Jong Un's sister Kim Yo Jong responded positively to Lee's first public expression of regret over recent South Korean drone incursions into North Korea.</p>
+      <div class="story-expanded" id="story-15">
+        <p>The SSN development is complex: U.S.-designed nuclear submarines use highly enriched uranium (HEU), the same material used in nuclear weapons, requiring IAEA verification. South Korea hasn't yet chosen HEU or LEU fuel, but either path requires revising the U.S.-South Korea "123 agreement" — a 90-day congressional review process. On the inter-Korean front, Kim Yo Jong's assessment that Lee's stance reflects "a frank and broad-minded man's attitude" is positive signaling, though ISW-CDOT's analysis concludes inter-Korean dialogue remains unlikely in the near term despite the exchange. The drone incursions by three South Korean civilians, one NIS employee, and two military officers occurred four times between September 2025 and January 2026.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">ISW Publications</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div><!-- /stories-grid World -->
+
+  <p style="font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;margin:24px 0 8px;">Also in Geopolitics &amp; World</p>
+  <ul class="bullet-stories">
+    <li><strong>UK bars Ye — Wireless Festival now canceled</strong> — The UK government formally barred the rapper formerly known as Kanye West from entering the country ahead of his planned Wireless Festival headlining slot in July. Festival organizers canceled the event entirely, with ticket refunds promised. This morning's edition covered the cascade of sponsor withdrawals; the travel ban and cancellation are new afternoon developments. <span class="source-badge">AP Afternoon Wire</span></li>
+    <li><strong>Florida: DeSantis signs law to label groups as terrorists and expel student supporters</strong> — Governor DeSantis signed legislation that would classify certain organizations as terrorist groups and enable expulsion of students who support them. <span class="source-badge">AP Afternoon Wire</span></li>
+    <li><strong>Venezuela: Delcy Rodríguez remains acting president after 90-day appointment expired</strong> — Rodríguez's initial 90-day acting presidency appointment has expired but she remains in the role. <span class="source-badge">AP Afternoon Wire</span></li>
+    <li><strong>Wisconsin spring election: Democrats aim to extend liberal control of state Supreme Court</strong> — Polls closed on Wisconsin's spring election, with Democrats hoping to increase the progressive majority on the battleground state's Supreme Court. <span class="source-badge">AP Afternoon Wire</span></li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: BUSINESS & MARKETS -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-business">Business &amp; Markets</span>
+    <span class="section-name">Finance, deals, and the economy</span>
+  </div>
+
+  <!-- LEAD: CEO exits citing AI -->
+  <article class="lead-story">
+    <h2>CEOs of Walmart, Coca-Cola, and Adobe all step down — each citing AI transformation as the defining reason</h2>
+    <p class="story-summary">In a single quarter, the chief executives of three major American companies announced departures with AI explicitly at the center of their reasoning. Adobe's Shantanu Narayen framed it as "the next era of creativity is being written right now — shaped by AI." Walmart's Doug McMillon said he wanted someone "faster" as the company moves into agentic commerce. Coca-Cola's James Quincey said it was "time to put someone else on the field for the next wave of growth."</p>
+    <div class="story-expanded" id="story-16">
+      <p>Superhuman's analysis notes two possible readings: these could be convenient exits for executives who've exercised stock options and prefer comfortable retirements, or they signal a genuine top-to-bottom restructuring era for corporate America. The simultaneity across three very different industries — consumer goods, retail, and creative software — is what makes the pattern notable. Whether each individual departure is AI-driven or merely AI-framed, the public messaging is consistent: the next CEO cycle will be defined by how well leadership navigates AI transformation. "Brace for immense change," Superhuman writes. "AI is ushering in new roles that didn't exist before, billion-dollar companies run by a single person, and, yes, the potential for mass layoffs."</p>
+    </div>
+    <div class="story-meta">
+      <span class="source-badge">Superhuman</span>
+      <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+      <span class="story-url"><a href="https://www.cnbc.com/2026/03/26/coca-cola-james-quincey-walmart-doug-mcmillon-artificial-intelligence-step-down.html" target="_blank">cnbc.com &rarr;</a></span>
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- SECTION: ENTERTAINMENT & CULTURE -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+    <span class="section-name">Pop culture, sports, and society</span>
+  </div>
+
+  <div class="stories-grid">
+
+    <article class="story-card">
+      <h3>Charlie's Angels reunite for 50th anniversary: Kate Jackson, Jaclyn Smith, and Cheryl Ladd</h3>
+      <p class="story-summary">The three original Charlie's Angels — Kate Jackson, Jaclyn Smith, and Cheryl Ladd — reunited publicly to mark the 50th anniversary of the iconic TV franchise. The reunion brings together the show's full trio for the first time in years.</p>
+      <div class="story-expanded" id="story-17">
+        <p>Charlie's Angels debuted in 1976 and ran five seasons, becoming one of the defining pop culture artifacts of late-1970s television. The 50th anniversary reunion follows the franchise's continued cultural presence through film adaptations and ongoing nostalgia cycles. The AP Afternoon Wire flagged the reunion as a trending story alongside the day's heavier geopolitical and political news — a notable contrast given the rest of Tuesday's news cycle.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AP Afternoon Wire</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+    <article class="story-card">
+      <h3>Volkswagen Beetle shell suspended on cliff above British Columbia highway — UBC engineering prank</h3>
+      <p class="story-summary">A red Volkswagen Beetle shell appeared suspended on a rock face above Highway 99 in Squamish, British Columbia, bearing a large "E" on its roof — the calling card of University of British Columbia engineering students who have a long tradition of placing Beetle shells in difficult-to-reach locations. Authorities urged people to stay away from the area.</p>
+      <div class="story-expanded" id="story-18">
+        <p>The Beetle prank tradition dates back decades at UBC, where engineering students have periodically placed the iconic shells on rooftops, suspended from bridges, and in other improbable locations. Highway 99, also known as the Sea-to-Sky Highway, runs between Vancouver and Whistler along a dramatic coastal route — making a cliffside placement visible to drivers a particularly high-profile execution. The AP noted this as Tuesday's trending story.</p>
+      </div>
+      <div class="story-meta">
+        <span class="source-badge">AP Afternoon Wire</span>
+        <button class="read-more-btn" onclick="toggleExpand('story-18', this)">Read More &#9662;</button>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+
+  </div><!-- /stories-grid Culture -->
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container" id="sources">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>AP News Alert</span>
+      <span>AP Afternoon Wire</span>
+      <span>AlphaSignal</span>
+      <span>Techpresso</span>
+      <span>Superhuman</span>
+      <span>ben's bites</span>
+      <span>The Code</span>
+      <span>Nate's Substack</span>
+      <span>Every</span>
+      <span>ISW Publications</span>
+      <span>Tech Brew</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Tuesday, April 7, 2026 — Evening Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
