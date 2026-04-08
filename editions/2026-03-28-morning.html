@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Saturday, March 28, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Saturday, March 28, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">&larr; All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">6,368.85</span><span class="ticker-change ticker-down">-1.67%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">20,948.36</span><span class="ticker-change ticker-down">-2.15%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">45,166.64</span><span class="ticker-change ticker-down">-1.73%</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">~$110</span><span class="ticker-change ticker-up">+7%</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">$65,969.61</span><span class="ticker-change ticker-down">-4.19%</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">31.00</span><span class="ticker-change ticker-up">+13.2%</span></div>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ -->
+<!-- GEOPOLITICS & WORLD -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+  <span class="section-name">Global conflicts and political developments</span>
+</div>
+
+<article class="lead-story">
+  <h2><a href="https://app.sitdeck.com/briefing/aa6541ca-7ea4-4385-88d2-9bc89e34b5cc" target="_blank">Iran-US-Israel War Escalates Sharply as Iranian Missiles Strike Israel, Bahrain, and US Gulf Bases</a></h2>
+  <p class="story-summary">The US-Israeli military campaign against Iran ("Operation Epic Fury") has escalated dramatically, with Iranian ballistic missiles and drones striking Tel Aviv, Bahrain, and US military installations across the Gulf region in the past 24 hours. Israeli airstrikes hit Tehran's Iran University of Science and Technology. Trump publicly stated the campaign is "going great" and framed it as "creating a new Middle East."</p>
+  <div class="story-expanded" id="story-1">
+    <p>Iran notified the IAEA of a strike in the Bushehr nuclear plant area — the most alarming single development. While the IAEA reports no reactor damage or radiation release, the strike on or near a nuclear facility represents a significant escalation threshold that could trigger Iranian nuclear posture decisions. Markets are in freefall, reflecting extreme fear (CNN Fear &amp; Greed Index: 12/100) as the conflict broadens into a potential regional war. USS Abraham Lincoln (CVN-72) remains in the Arabian Sea; USS Gerald R. Ford (CVN-78) is in Souda Bay, Crete, potentially available for eastern Mediterranean contingencies.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://app.sitdeck.com/briefing/aa6541ca-7ea4-4385-88d2-9bc89e34b5cc" target="_blank">app.sitdeck.com &rarr;</a></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>At Least 10 US Service Members Wounded in Iranian Missile Attack on Saudi Base</h3>
+  <p class="story-summary">At least 10 US service members were wounded by an Iranian missile attack at Prince Sultan Air Base in Saudi Arabia, which was also struck earlier in the month. OSINT sources had previously reported medevacs from the base on March 23, suggesting earlier casualties.</p>
+  <div class="story-expanded" id="story-2">
+    <p>The confirmed casualties at PSAB add domestic political pressure to the US response. The base has been struck multiple times during Operation Epic Fury, highlighting the vulnerability of US forward-deployed forces in the Gulf region to Iranian ballistic missile capabilities.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Houthis Declare "Fingers on the Trigger" as Iran Conflict Widens</h3>
+  <p class="story-summary">Yemen's Houthis declared readiness for military intervention as the US-Israeli campaign against Iran continues. Houthi naval threats compound Red Sea shipping risks, already at CRITICAL levels with 201 incidents in the trailing year per NGA piracy data.</p>
+  <div class="story-expanded" id="story-3">
+    <p>If Houthis re-engage Red Sea shipping aggressively or Strait of Hormuz threat rhetoric escalates, analysts expect WTI crude to test $110–115 and equities to see an additional 3–5% downside. The Bab el-Mandeb corridor remains one of the world's most vulnerable chokepoints.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Ukraine Drone Strike Sets Russia's 5th-Largest Oil Refinery Ablaze</h3>
+  <p class="story-summary">Ukrainian attack drones struck Russia's Yaroslavl oil refinery — its 5th largest — setting it ablaze. The strike continues Ukraine's systematic campaign against Russian energy infrastructure and contributes to upward oil price pressure alongside the Iran conflict.</p>
+  <div class="story-expanded" id="story-4">
+    <p>Russian Shahed drones also struck Odesa, hitting residential buildings. Meanwhile, a Russian parliamentary delegation visited Washington in what Russian lawmakers described as a "historic" restart of a relations workgroup after a long hiatus. North Korean leader Kim Jong-un's visit to Russia remains "on the agenda" per Russian diplomatic sources.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>House Leaders Reject Senate Compromise, Likely Prolonging DHS Shutdown</h3>
+  <p class="story-summary">The Senate passed a bill funding most of the Department of Homeland Security — except ICE and Border Patrol — but House Republican leaders said they wouldn't bring it up for a vote, instead backing a short-term measure for all of DHS. The partial government shutdown is likely to extend.</p>
+  <div class="story-expanded" id="story-5">
+    <p>With senators already on a two-week recess, the Senate probably won't approve the House version even after they return. However, airport chaos could ease sooner — DHS says TSA employees will start getting paid as soon as Monday under the president's executive order. The funding fight comes at an especially fraught time, potentially affecting domestic emergency management capacity during a period of heightened threat from the Iran conflict.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-5', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Trump Signals Cuba as "Next US Target"</h3>
+  <p class="story-summary">TASS reports Trump stated Cuba "will be the next US target," though without elaboration. The statement comes alongside ongoing NATO friction over the lack of allied support for the Iran campaign, signaling a potential widening of US military objectives.</p>
+  <div class="story-expanded" id="story-6">
+    <p>Combined with NATO friction over Iran war, any military posture toward Cuba would be a significant Western Hemisphere escalation. Analysts are watching for whether this is rhetorical signaling or operational foreshadowing.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-6', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Market Expects the Fed to Raise Rates as Iran War Drives Oil Higher</h3>
+  <p class="story-summary">A month ago, traders expected the Fed to cut interest rates, but with oil prices surging amid the Iran war — stoking inflation fears — many now predict an increase. Futures traders put the probability of a rate hike this year at 52%, while odds of a rate raise by September jumped to 20% — versus 90% odds for a cut just last month.</p>
+  <div class="story-expanded" id="story-7">
+    <p>The dramatic reversal in rate expectations underscores how quickly the Iran conflict has reshuffled economic forecasts. Rising energy costs threaten to reignite inflation, leaving the Fed in a difficult position between supporting growth and controlling prices.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-7', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Trump's Signature to Appear on US Currency</strong> — First sitting president to have his signature on paper money, announced for America's 250th anniversary. The Treasury is also planning a controversial commemorative coin featuring Trump's image, despite federal law prohibiting living presidents on US money. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>3,000+ "No Kings" Protests Planned Across US Today</strong> — Organizers are planning demonstrations in cities nationwide. <span class="source-badge">Morning Brew</span> <span class="source-badge">SitDeck</span></li>
+  <li><strong>SAVE Student Loan Plan Ending</strong> — After years of legal limbo, 7 million borrowers who participated in the program have begun receiving notices that they will need to choose a different repayment option. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>CISA Cyber Advisory Tempo Elevated</strong> — CISA added exploited vulnerabilities to its catalog on consecutive days (March 25–27), including a high-severity ICS/OT advisory on WAGO industrial switches. Elevated tempo during active conflict warrants attention. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Japan M6.5 Earthquake</strong> — Seismic activity near Japan's coast with 1.6M people in affected zone; green alert issued, no tsunami warning. <span class="source-badge">SitDeck</span></li>
+  <li><strong>Oklahoma Wildfire Emergency</strong> — Multiple active fires under emergency declarations. Freeze warnings across Midwest and Appalachia. <span class="source-badge">SitDeck</span></li>
+  <li><strong>DRC Security Deteriorating</strong> — Conditions worsen despite ceasefire, per UNSC briefing. Internet outages detected in Central African Republic and Cameroon. Ethiopia flood/landslide response ongoing (96 deaths). <span class="source-badge">SitDeck</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BUSINESS & MARKETS -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-business">Business &amp; Markets</span>
+  <span class="section-name">Markets, deals, and corporate news</span>
+</div>
+
+<article class="lead-story">
+  <h2>Nasdaq Enters Correction Territory After Worst Week in Nearly a Year</h2>
+  <p class="story-summary">Tech behemoths have fueled a bull market for three years on AI promises, but investors are growing skeptical amid the Iran war. The Nasdaq is down 11% since its October peak with 10 weekly losses over the past 11 weeks. The Dow also fell into correction territory from its Feb. 11 record high after dropping nearly 800 points Friday.</p>
+  <div class="story-expanded" id="story-8">
+    <p>Two of the biggest drains since late October are two of the biggest AI spenders — Microsoft (down 34%) and Meta (down 29%). Even Nvidia is down nearly 20% from its October high. As a group, Magnificent Seven shares are down 8%. Microsoft is having its worst quarter since the 2008 global financial crisis as shareholders recoil from continued AI infrastructure spending, with fears that startups like OpenAI and Anthropic will create agents that can replace Microsoft products. Crude prices soared to $110/barrel, stoking inflation fears. Analysts note the "TACO trade" (Trump Always Chickens Out) is losing weight — Trump extended the Iran peace deadline by 10 days, but markets didn't rebound as they had in similar prior situations.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <span class="source-badge">SitDeck</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-8', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Disney CEO D'Amaro's First Week Hit by AI and Gaming Setbacks</h3>
+  <p class="story-summary">New Disney CEO Josh D'Amaro has faced a trifecta of setbacks in his first 10 days: OpenAI suddenly pulled Sora — ending a planned $1 billion partnership — Epic Games cut 1,000+ jobs amid falling Fortnite engagement, and a domestic violence scandal derailed The Bachelorette's new season on ABC.</p>
+  <div class="story-expanded" id="story-9">
+    <p>The Epic Games development is particularly painful for D'Amaro, who led the $1.5 billion investment in the gaming company when he was chairman of Disney Experiences in 2024. While Disney can always find another AI video partner, the collapse of both the OpenAI and Epic relationships undermines D'Amaro's vision of a more interactive, immersive Disney experience.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-9', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Bank of America Pays $72.5 Million to Epstein Victims</h3>
+  <p class="story-summary">Bank of America agreed to pay $72.5 million to victims of Jeffrey Epstein to settle a federal class-action lawsuit that claimed the bank facilitated Epstein's sex-trafficking operation. Separately, Google and the Trump administration were hit by a lawsuit from an Epstein victim over published identifying information.</p>
+  <div class="story-expanded" id="story-10">
+    <p>The settlement adds to the growing financial toll on institutions linked to Epstein. The separate lawsuit against Google and the Trump administration focuses on the republishing of identifying information contained in the Epstein files.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-10', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Sony Raising PlayStation 5 Prices</strong> — Sony cited "pressures in the global economic landscape" for the price increase. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Costco Launches Kirkland Energy Drink</strong> — A new Kirkland-brand energy drink is a few dollars cheaper per 24-pack than Celsius, coming for the brand's crown. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- AI & TECHNOLOGY -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+  <span class="section-name">Latest in artificial intelligence</span>
+</div>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>College Professors Increasingly Switching to Oral Exams Due to AI Cheating</h3>
+  <p class="story-summary">Professors are increasingly opting for oral exams over essays and take-home assignments after noticing that students were turning in perfect work but couldn't explain their thinking — seemingly because they used AI to complete assignments.</p>
+  <div class="story-expanded" id="story-11">
+    <p>The shift represents one of the most tangible institutional responses to widespread AI use in education. Oral exams test genuine understanding rather than the ability to generate polished text, though they require significantly more faculty time to administer.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-11', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- ENTERTAINMENT & CULTURE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-culture">Entertainment &amp; Culture</span>
+  <span class="section-name">What the world is watching and talking about</span>
+</div>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3>Tiger Woods Arrested on Suspicion of DUI After Rolling His Car</h3>
+  <p class="story-summary">Tiger Woods was arrested on suspicion of DUI after a car crash in which he rolled his vehicle yesterday, Florida authorities said. The incident echoes his previous vehicle-related troubles.</p>
+  <div class="story-expanded" id="story-12">
+    <p>Details of the crash remain limited, with Florida authorities confirming the arrest but providing few specifics beyond the rollover and DUI suspicion.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-12', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3>Savannah Guthrie Sets Date to Return to Today Show</h3>
+  <p class="story-summary">Savannah Guthrie has announced a return date for the Today show after pausing her hosting role amid her mother's disappearance.</p>
+  <div class="story-expanded" id="story-13">
+    <p>Guthrie's absence from the long-running morning show had drawn considerable public attention and well-wishes as she dealt with the family crisis.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Morning Brew</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-13', this)">Read More &#9662;</button>
+    <span class="story-url"><span class="no-url">no url</span></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Luke Murray Named Boston College Basketball Coach</strong> — Bill Murray's son, who has been an assistant coach at UConn for five seasons, takes over as head coach. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Australian Woman Fined for Googly Eyes on Sculpture</strong> — Pleaded guilty to graffiti charges after putting googly eyes on a public sculpture while under the influence of MDMA. She must pay a $1,400 fine and complete 60 hours of community service. <span class="source-badge">Morning Brew</span></li>
+  <li><strong>Northern Ireland Island Free of Invasive Ferrets</strong> — After a five-year eradication effort, an island in Northern Ireland is officially free of the invasive ferrets that threatened local bird populations. <span class="source-badge">Morning Brew</span></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- SCIENCE -->
+<!-- ============================================================ -->
+<div class="section-header">
+  <span class="section-tag section-tag-science">Science</span>
+  <span class="section-name">Research and discovery</span>
+</div>
+
+<div class="stories-grid">
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmPwddxc14M4hZI6ACWCdTnKEdlfGP3h1F5kqVoU3U5uI5CkTKxHs8lVUh61pPK2CLqxqGv5yMH1HrQY74WsOm_iELcsnGMT2UVXCxQlovU96xG5mDmtAcVuZNneIC1eHiOR8AytQ5MZVMKKZTCX4MyfdaiJGYwxJOpxbNoB-DsLlj&s=4a71441685b5f4aa" target="_blank">Japan's Giant Caldera Volcano Is Refilling 7,300 Years Later</a></h3>
+  <p class="story-summary">Scientists have discovered that a massive Japanese caldera volcano is actively refilling with magma thousands of years after its last catastrophic eruption, raising questions about long-term volcanic monitoring.</p>
+  <div class="story-expanded" id="story-14">
+    <p>The caldera, formed by a devastating eruption 7,300 years ago, is showing signs of renewed magma accumulation — a finding with implications for volcanic hazard assessment in Japan and globally.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-14', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmPwddxc14M4hZI6ACWCdTnKEdlfGP3h1F5kqVoU3U5uI5CkTKxHs8lVUh61pPK2CLqxqGv5yMH1HrQY74WsOm_iELcsnGMT2UVXCxQlovU96xG5mDmtAcVuZNneIC1eHiOR8AytQ5MZVMKKZTCX4MyfdaiJGYwxJOpxbNoB-DsLlj&s=4a71441685b5f4aa" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmPAtdyMI7IIBaIbECSy5eiqkOl6XU3ARK802K4Fqc5PkgAV6JwTowmBYloEJXeUqMqTCHs4zDEkO6So3gWsX07idAWNDOCjmEXCShQgYjUpmtA9KpjdwuReZJiu1W1u62MQdEyNp4OpZUKKBbXjRDyvxcxe_MzTxH9UeSrA2GrKtnVh-S&s=da9f1a28b115484f" target="_blank">Implantable 'Living Pharmacy' Produces Multiple Drugs Inside the Body</a></h3>
+  <p class="story-summary">Researchers have developed an implantable device that can produce multiple therapeutic drugs directly inside the body, potentially revolutionizing how chronic conditions are treated.</p>
+  <div class="story-expanded" id="story-15">
+    <p>The "living pharmacy" approach uses engineered cells to manufacture medications on-demand within the patient, eliminating the need for repeated dosing and improving drug delivery precision.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-15', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmPAtdyMI7IIBaIbECSy5eiqkOl6XU3ARK802K4Fqc5PkgAV6JwTowmBYloEJXeUqMqTCHs4zDEkO6So3gWsX07idAWNDOCjmEXCShQgYjUpmtA9KpjdwuReZJiu1W1u62MQdEyNp4OpZUKKBbXjRDyvxcxe_MzTxH9UeSrA2GrKtnVh-S&s=da9f1a28b115484f" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmJgVEwc0hPZJMPvlcWCdRlq0Bk_GN1BJO6UuW41jIreYsFVnB0Tw7lEtgtkpVI16MrEGcqJTdTlPzSaX_UMTy6DBbQ9PPMCCVXT_yWk8rYJWhC52plIwUS-ZNlqpKxe3UNgdA1MI8M48FKbVGVz8SlrMDkaiN1ANatRzJvQyE_MY0FE7Mg2djzRh_5B0N&s=fe625a1de4160bb9" target="_blank">Mysterious Structure Discovered Beneath Ancient Egyptian City</a></h3>
+  <p class="story-summary">Scientists testing new scanning technology have discovered a mysterious structure buried beneath an ancient Egyptian city, demonstrating the potential of advanced ground-penetrating techniques for archaeological discovery.</p>
+  <div class="story-expanded" id="story-16">
+    <p>The discovery was made using novel scanning methods that can image structures far deeper underground than conventional techniques, opening up possibilities for finding hidden chambers and buildings at known archaeological sites.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-16', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmJgVEwc0hPZJMPvlcWCdRlq0Bk_GN1BJO6UuW41jIreYsFVnB0Tw7lEtgtkpVI16MrEGcqJTdTlPzSaX_UMTy6DBbQ9PPMCCVXT_yWk8rYJWhC52plIwUS-ZNlqpKxe3UNgdA1MI8M48FKbVGVz8SlrMDkaiN1ANatRzJvQyE_MY0FE7Mg2djzRh_5B0N&s=fe625a1de4160bb9" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+<article class="story-card">
+  <h3><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmPxFe0I4xMYJZKbFcFitGi7AKhqXUwhBS8laUolfF7edqE1nJ_CY7lEousRJVMVOdsBuRrt_EBUvYSZ_oVsTttjALTM3PcyGVVRK3TlY2XpGjAcm4mNgdX6pKjeBaxfTuJxofnJBkZ9REALVdWC4fyvND1O7Jg0c&s=fd52f82dea9ea79a" target="_blank">JWST Solves Decades-Long Mystery About Saturn's Apparent Spin Changes</a></h3>
+  <p class="story-summary">The James Webb Space Telescope has resolved a long-standing puzzle about why Saturn appears to change its rotational speed, providing new insights into the gas giant's atmospheric dynamics.</p>
+  <div class="story-expanded" id="story-17">
+    <p>For decades, scientists have been baffled by measurements suggesting Saturn's spin rate was changing — something that should be impossible for a planet. JWST data reveals the explanation lies in Saturn's complex atmospheric and magnetic field interactions.</p>
+  </div>
+  <div class="story-meta">
+    <span class="source-badge">Science X</span>
+    <button class="read-more-btn" onclick="toggleExpand('story-17', this)">Read More &#9662;</button>
+    <span class="story-url"><a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmPxFe0I4xMYJZKbFcFitGi7AKhqXUwhBS8laUolfF7edqE1nJ_CY7lEousRJVMVOdsBuRrt_EBUvYSZ_oVsTttjALTM3PcyGVVRK3TlY2XpGjAcm4mNgdX6pKjeBaxfTuJxofnJBkZ9REALVdWC4fyvND1O7Jg0c&s=fd52f82dea9ea79a" target="_blank">sciencex.com &rarr;</a></span>
+  </div>
+</article>
+
+</div>
+
+<ul class="bullet-stories">
+  <li><strong>Piezoelectric Materials Enable New Approach to Searching for Axions</strong> — A novel detection method using piezoelectric materials could help physicists hunt for the elusive dark matter particle candidates. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmJQ9I3swwOIRbOaZGWGtSmbAKhrWY3QIL4kqb7lPUreolFl_LwjY8zFk1vUBVNRGQsAKY44zFHHn0S4_-XNS95SIKSNDXMCbHTTm5cFYjW5GxAsm5lNAYSqFRjuFg0uHmJQdEw81oMIBRIa0CVTFTnbAbka6Fg0kVthfP8HLQ8ug9Rh-Tj3Vm0Qp7&s=4b908dc2a238b253" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Major Volcanic Eruptions Might Be Driven by Gas Dissolving Back Into Magma</strong> — New research challenges conventional thinking about what triggers massive eruptions. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmOAdHy9F4Io5ULrVBUiUSnbYahKiQ3h9VqkCI5UnU7qYyB16KyyE5jQc4oEJkNVCNtgyR4ZfGHUPzUJ_-GcT05goLSMDKIDncXSC1RldgSoypMJe9lMEQT-BKx-he2OzyeAhayMYhIIRKMeYXCHcMzbgila6a2VEUsAjavg-Dtg&s=40d9c04c115fe991" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>How Lifetime Stress Drives Abnormal Behaviors in Lab Monkeys</strong> — Research reveals the biological mechanisms linking chronic stress to behavioral changes. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmOQ9Lwdc8OYQVPqBdXjVM1aUNmrOL3BBKqkaf5F7H6eQnFQDIwjd6iUwguBBOMlKntwCBrprUTEjwSJ_4S9TyrSASQPvOMDCITSDpSlYnVpTiGoCxptIQS_dFk-BGnO78OQNZ0MYnKNMAfuUcDjpymbYMnPzLhl0GtRTIug&s=c37fcd7418e3b16e" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Wild Squirrels Consistently Climb Higher for Better Snacks</strong> — Researchers find squirrels make strategic decisions about how high to climb based on food quality. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmIg9BwI4mJZRRP6ZKVzUSm6gGmb7U2RhB70GIoUzf4eg-FQPM1zg43k05uXBIKUqKpwrJso7dFFLzQYiqSsXt1DgDSc3WOGmEVSy9Qx0zS5WbDJWxidAYQekZnu1W3fmmOxFBwdchMZNEf-wcCnUKhIkOhr-RkUMRqwTIvA2H&s=74e1fc774ce3b460" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Treating Disease at Birth: Testosterone Spike Sets Trajectory for Later Disease</strong> — A brief spike in testosterone at birth may set the course for diseases that appear decades later. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVKb1cXidMnekNna6N2VxV902R6RLF5fghCV7Qxic7j11goF1aLFqbsACGpdfZBUvrG4_4Uu7z5CAUTsGeOyONXTmgSklgSoypMJm5ndgES7pBl-1W3ab-IQtyx8I4JIBRKroSXydWlL1CmquV1AVS4laGvgeCsbhgGmDF0TY8wQp6-A8Jdg3O&s=f69cda6eeef8409c" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Some Birds Flip Breeding Season in Response to Climate Change</strong> — First study to show tropical birds can reverse their breeding timing as climate patterns shift. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmIRRC1Mo2NY0VL71dXzUSnqgGhPGK1BBV6ErX_lrC8OQ7FUiKyyE5jQc4oEJkNVCNtgyR4ZfGHUPzUJ_-GcT05goLSMDKIDncXSC1RldgSoypMJe9lMEQT-BKx-he2OzyeAhayMYhIIRKMeYXCHcMzbgila6a2VEUsAjavg-Dtg&s=b28800be4dba3fcb" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>New Tool Rates Diet Misinformation by Harm Potential</strong> — Rather than a simple true/false classification, the tool assesses the potential for harm from dietary misinformation. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVKqFbFjZNkakKh_GJ0AVO6EOf4lbSregwCkHXjicxkkgiulxSJFOd6geAsZWOBFLqe4njSsPj7mgIWsjGISCESmuhW1YZUp2gBoGxxNQcR-5I3PlL3N_oNAtdxcoyOtxcLL1DQmtRj6gKgKicww0UvxfLvwrNzeonBUWEkWJ4wQp95hk&s=6035c1bad0e2ec0b" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Gut 'Primes' Pathogenic T Cells in Multiple Sclerosis</strong> — Research finds the gut plays a key role in activating immune cells responsible for neuroinflammation in MS. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2K5Sl8vXJmoF4SunMICCORLl6NR1Pf4elQdlpV4ZNIVKqFbFjZNkakKh_GJ0AVO6EOf4lbSregwCkHXjicxkkgiulxSJFOd6geAsZWOBFLqe4njSsPj7mgIWsjGISCESmuhW1YZUp2gBoGxxNQcR-5I3PlL3N_oNAtdxcoyOtxcLL1DQmtRj6gKgKicww0UvxfLvwrNzeonBUWEkWJ4wQp95hk&s=6035c1bad0e2ec0b" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Understanding Protein Motion Could Aid New Drug Design</strong> — Insights into how proteins move and flex could open new avenues for pharmaceutical development. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmJRRC0MY8OsxVIqBGVCgSn7YKlaiVyFxH7kDX6E3E56U9EkDInCAgjGc-u1pJJVrFqhiYuY3FFFShUY7hYNzl7zwTQJnGODWIVGuhW1YZXJmpH5W1nt9MQuZNlvUS3_fnMBJZwdEpZtkLfOcaRwteiqcH1O7OnVEUtxbM&s=204d44defbea5a76" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>How Neanderthals Used a German Lakeshore to Hunt and Survive</strong> — Archaeological evidence reveals how Neanderthals strategically used lakeside locations for hunting and butchering prey. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmOwNMyscwJpVQLLhcFipek6EcnLOL1FxB4laX7VHIrekgEk7Mxid5kk0_okZNIxGQsAKY44zFHHn0S4_-XNS95SIKSNDXMCbHTTm5cFYjW5GxAsm5lNAYSqFRjuFg0uHmJQdEw81oMIBRIa0CVTFTnbAbka6Fg0kVthfP8HLQ8ug9Rh-Tj3Vm0Qp7&s=31dc8202653984c0" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+  <li><strong>Tiny LED Design Could Power Next-Generation Technology</strong> — A miniaturized LED design shows promise for future display and communication technologies. <a href="https://sciencex.com/cl/?t=RdDXJSfbF2KkR0I1EZe2CNuynMYCCbUUyLoSgbOmIQ9D3Y4lO5ZdP_lIXihaiqUbnbOXnAVD5EyU41Pe5_J7DlnJz2ohlVUSp0BONFyd-QGDsJzFBUP1Ao_4Uu7t7jEPWMmeMDmAUSHyWk8rYJulAoS9kNYfG-NFk-BGnO78OQNZ0MYnKNMAfuUcDjpymbYMnPzLhl0GtRTIug&s=252fa2b886c87119" target="_blank">Science X &rarr;</a> <span class="source-badge">Science X</span></li>
+</ul>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Morning Brew</span>
+      <span>SitDeck</span>
+      <span>Science X</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Saturday, March 28, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More \u25BE';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse \u25B4';
+  }
+}
+</script>
+</body>
+</html>
