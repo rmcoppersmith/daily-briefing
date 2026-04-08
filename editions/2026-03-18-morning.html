@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Briefing — Wednesday, March 18, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --wsj-black: #111;
+    --wsj-dark: #222;
+    --wsj-gray: #666;
+    --wsj-light-gray: #ccc;
+    --wsj-bg: #faf9f6;
+    --wsj-white: #fff;
+    --wsj-accent: #0274b6;
+    --wsj-rule: #333;
+    --wsj-light-rule: #ddd;
+    --section-ai: #0274b6;
+    --section-business: #1a6b3c;
+    --section-world: #8b1a1a;
+    --section-culture: #6b3fa0;
+    --section-science: #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--wsj-bg);
+    color: var(--wsj-black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    padding: 20px 20px 0;
+    border-bottom: 4px double var(--wsj-rule);
+    background: var(--wsj-white);
+  }
+  .masthead-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--wsj-black);
+    line-height: 1.1;
+  }
+  .masthead-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 6px 0 12px;
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid var(--wsj-light-rule);
+    flex-wrap: wrap;
+  }
+  .masthead-nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--wsj-gray);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .masthead-nav a:hover, .masthead-nav a.active {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+  }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--wsj-black);
+    color: var(--wsj-white);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .ticker-item { display: flex; align-items: center; gap: 6px; }
+  .ticker-label { color: #aaa; }
+  .ticker-value { font-weight: 600; }
+  .ticker-change { font-weight: 600; }
+  .ticker-down { color: #ef4444; }
+  .ticker-up { color: #22c55e; }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--wsj-rule);
+  }
+  .section-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    color: var(--wsj-white);
+    border-radius: 2px;
+  }
+  .section-tag-ai { background: var(--section-ai); }
+  .section-tag-business { background: var(--section-business); }
+  .section-tag-world { background: var(--section-world); }
+  .section-tag-culture { background: var(--section-culture); }
+  .section-tag-science { background: var(--section-science); }
+  .section-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  /* LEAD STORY */
+  .lead-story {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .lead-story h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .lead-story h2 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .lead-story h2 a:hover { color: var(--wsj-accent); }
+
+  /* STORY CARDS */
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .story-card {
+    border-bottom: 1px solid var(--wsj-light-rule);
+    padding-bottom: 20px;
+  }
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .story-card h3 a {
+    color: var(--wsj-black);
+    text-decoration: none;
+  }
+  .story-card h3 a:hover { color: var(--wsj-accent); }
+
+  .story-summary {
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.55;
+  }
+  .story-expanded {
+    display: none;
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--wsj-dark);
+    line-height: 1.65;
+    padding-left: 12px;
+    border-left: 2px solid var(--wsj-light-rule);
+  }
+  .story-expanded.open { display: block; }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    flex-wrap: wrap;
+  }
+  .source-badge {
+    background: #f0f0f0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .read-more-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wsj-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .read-more-btn:hover { text-decoration: underline; }
+  .story-url {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .story-url a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .story-url a:hover { text-decoration: underline; }
+  .story-url .no-url {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* SIDEBAR STYLE BULLETS */
+  .bullet-stories {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-stories li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wsj-light-rule);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .bullet-stories li:last-child { border-bottom: none; }
+  .bullet-stories li strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+  }
+  .bullet-stories li a {
+    color: var(--wsj-accent);
+    text-decoration: none;
+  }
+  .bullet-stories li a:hover { text-decoration: underline; }
+
+  /* NEWSLETTER SOURCES FOOTER */
+  .sources-footer {
+    margin: 40px 0 20px;
+    padding: 20px 0;
+    border-top: 4px double var(--wsj-rule);
+    text-align: center;
+  }
+  .sources-footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wsj-gray);
+    margin-bottom: 10px;
+  }
+  .sources-list {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--wsj-gray);
+  }
+  .sources-list span {
+    padding: 3px 8px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  .edition-footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--wsj-gray);
+    border-top: 1px solid var(--wsj-light-rule);
+  }
+
+  @media (max-width: 600px) {
+    .stories-grid { grid-template-columns: 1fr; }
+    .ticker-bar { gap: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-date">Wednesday, March 18, 2026</div>
+  <h1 class="masthead-title">The Daily Briefing</h1>
+  <div class="masthead-subtitle">Your Newsletter Intelligence Report — Morning Brief — Curated &amp; Deduplicated</div>
+  <nav class="masthead-nav" id="editionNav">
+    <a href="../index.html">← All Editions</a>
+    <a href="../sources.html">Sources</a>
+  </nav>
+</header>
+
+<!-- MARKET TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-item"><span class="ticker-label">S&amp;P 500</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Nasdaq</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Dow</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">Brent</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">BTC</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+  <div class="ticker-item"><span class="ticker-label">VIX</span><span class="ticker-value">—</span><span class="ticker-change">—</span></div>
+</div>
+
+<main class="container">
+
+  <!-- GEOPOLITICS & WORLD SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-world">Geopolitics &amp; World</span>
+      <h2 class="section-name">Geopolitics &amp; World</h2>
+    </div>
+    
+    <article class="lead-story">
+      <h2><a href="no url" target="_blank">U.S.-Israeli Military Campaign Against Iran Enters New, Volatile Phase Following Key Figure's Death</a></h2>
+      <p class="story-summary">The U.S.-Israeli military campaign against Iran (Operation Epic Fury) has escalated significantly following the confirmed killing of Iran's Supreme National Security Council chief Ali Larijani in overnight airstrikes on Tehran. Iran is retaliating with ballistic missile strikes on Israel and drone attacks on U.S. interests across the region, including a strike on the U.S. Embassy in Baghdad's Green Zone. The Trump administration's top counterterrorism official resigned in protest.</p>
+      <div class="story-meta">
+        <span class="source-badge">SitDeck</span>
+        <span class="story-url"><span class="no-url">no url</span></span>
+      </div>
+    </article>
+  </section>
+
+  <!-- AI & TECHNOLOGY SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-ai">AI &amp; Technology</span>
+      <h2 class="section-name">AI &amp; Technology</h2>
+    </div>
+    
+    <div class="stories-grid">
+      <article class="story-card">
+        <h3><a href="no url" target="_blank">OpenAI Plans Adult Mode for ChatGPT, Faces Advisory Council Concerns</a></h3>
+        <p class="story-summary">OpenAI is pushing forward with "adult mode" for ChatGPT despite objections from its advisory council. The feature will allow for sexy chats, though critics worry about unhealthy emotional dependence and minor access despite safeguards. The company has delayed the release but still plans to launch it later this year.</p>
+        <div class="story-meta">
+          <span class="source-badge">Morning Brew</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-1', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+        <div class="story-expanded" id="story-1">
+          <p>One expert warned that adding a seductive tone to ChatGPT may turn the bot into a "sexy suicide coach." Meta's bot can engage in romantic roleplay and xAI's Grok chatbot has a scantily clad avatar named Ani. OpenAI has positioned this as "smut, not pornography" and argues that AI erotica will be a major revenue source. However, privacy advocates and parents express serious concerns about the long-term psychological impacts.</p>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="no url" target="_blank">OpenAI Refocuses on Enterprise After Claude Code's Dominance Creates "Code Red"</a></h3>
+        <p class="story-summary">OpenAI's CEO of Applications, Fidji Simo, told staff that Anthropic's Claude Code and Cowork represent a "wake-up call." The company plans to deprioritize "side quests" (Sora, Atlas browser, hardware) and focus on coding tools and enterprise customers. Codex has quadrupled weekly users to 2M+ since January, and a new GPT-5.4 model targets business workflows.</p>
+        <div class="story-meta">
+          <span class="source-badge">The Rundown AI</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-2', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+        <div class="story-expanded" id="story-2">
+          <p>OpenAI's 2025 launches (Sora, Atlas, e-commerce features) led to confusion and constant compute shuffling. The company is now treating the gap to Claude Code as "code red." Simo's public statement signals serious internal concern about market share erosion in enterprise AI, where Anthropic has gained significant traction with developer-friendly tooling and workflow automation.</p>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="no url" target="_blank">OpenAI Releases GPT-5.4 Mini and Nano for Faster, Cheaper AI Workflows</a></h3>
+        <p class="story-summary">OpenAI launched GPT-5.4 mini and nano, purpose-built "subagents" for high-volume, latency-sensitive tasks. Mini runs 30% of Codex's quota for roughly 3x throughput and is 2x faster than GPT-5 mini. Nano costs just $0.20 per million input tokens and is API-only. Both models are live in the API, Codex, and ChatGPT (free users get mini through Thinking mode).</p>
+        <div class="story-meta">
+          <span class="source-badge">The Neuron</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-3', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+        <div class="story-expanded" id="story-3">
+          <p>Mini matches GPT-5.4 on many benchmarks at a fraction of the cost. Benchmarks show 54.4% on SWE-Bench Pro (nearly matching full GPT-5.4's 57%) and 72.1% on OSWorld (computer-use tasks). This positions OpenAI's small models at a competitive price point against Anthropic's Claude Haiku and Google's Gemini Flash, though some argue other models offer better performance-to-cost ratios.</p>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <h3><a href="no url" target="_blank">Mistral Launches Forge: Enterprise Model Training Without Data Exposure</a></h3>
+        <p class="story-summary">Mistral launched Forge, a platform that gives enterprises Mistral's own model training recipes and infrastructure for building custom models on proprietary data without ever sharing it with Mistral. Early partners include ASML, Ericsson, and the European Space Agency. Use cases range from legacy code migration to ancient manuscript restoration.</p>
+        <div class="story-meta">
+          <span class="source-badge">The Rundown AI</span>
+          <button class="read-more-btn" onclick="toggleExpand('story-4', this)">Read More ▾</button>
+          <span class="story-url"><span class="no-url">no url</span></span>
+        </div>
+        <div class="story-expanded" id="story-4">
+          <p>Forge offers full pre-training, post-training, and reinforcement learning pipelines mirroring Mistral's internal processes. Training runs entirely on company servers with zero data exposure to Mistral, a hard requirement for defense, finance, and government buyers. This positions Mistral as a vendor for organizations that need proprietary model development but lack in-house expertise.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SCIENCE SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-science">Science</span>
+      <h2 class="section-name">Science</h2>
+    </div>
+    
+    <ul class="bullet-stories">
+      <li><strong>Bull Sharks Form Social Relationships:</strong> New research reveals that bull sharks form social relationships with specific individuals, challenging assumptions about shark sociability. <span class="source-badge">Science X</span></li>
+      <li><strong>Solar Energy Transforms Plastic Waste:</strong> Scientists demonstrate that solar energy can transform polystyrene waste into valuable chemicals using sulfur, offering a sustainable solution to plastic pollution. <span class="source-badge">Science X</span></li>
+      <li><strong>Memory Encoding and Brain Rhythms:</strong> Research shows that episodic memory encoding fluctuates with the brain's theta rhythms, revealing why some moments endure while others fade. <span class="source-badge">Science X</span></li>
+      <li><strong>Nanoengineered Spintronic Device:</strong> A new nanoengineered device can store data in four different ways, advancing storage technology with spintronic innovations. <span class="source-badge">Science X</span></li>
+      <li><strong>Earth's Toughest Microbes:</strong> Extremophile microbes that thrive in Earth's harshest environments could help us find life on other worlds and solve environmental challenges. <span class="source-badge">Science X</span></li>
+    </ul>
+  </section>
+
+  <!-- BUSINESS & MARKETS SECTION -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag section-tag-business">Business &amp; Markets</span>
+      <h2 class="section-name">Business &amp; Markets</h2>
+    </div>
+    
+    <ul class="bullet-stories">
+      <li><strong>Kraft Heinz Launches PowerMac:</strong> Kraft Heinz announced PowerMac, a new high-protein mac and cheese version with more than double the original protein, aimed at recapturing market share from health-conscious competitors. <span class="source-badge">Morning Brew</span></li>
+      <li><strong>Service Retail Surpasses Goods Retail:</strong> Service-based businesses (gyms, salons) now account for more than 50% of retail space in the U.S. for the first time, eclipsing traditional stores as e-commerce continues to grow. <span class="source-badge">Morning Brew</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<!-- SOURCES FOOTER -->
+<div class="container">
+  <div class="sources-footer">
+    <h4>Today's Sources</h4>
+    <div class="sources-list">
+      <span>Science X</span>
+      <span>SitDeck</span>
+      <span>Morning Brew</span>
+      <span>The Rundown AI</span>
+      <span>The Neuron</span>
+    </div>
+  </div>
+</div>
+
+<footer class="edition-footer">
+  The Daily Briefing — Auto-generated from newsletter subscriptions — Wednesday, March 18, 2026 — Morning Brief
+</footer>
+
+<script>
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    btn.textContent = 'Read More ▾';
+  } else {
+    el.classList.add('open');
+    btn.textContent = 'Collapse ▴';
+  }
+}
+</script>
+</body>
+</html>
